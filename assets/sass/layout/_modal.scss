@@ -1,0 +1,123 @@
+@charset "UTF-8";
+
+@include b(Modal) {
+	//@include flexbox();
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+    height: auto;
+    max-width: 500px;
+	min-width: 370px;
+	z-index: 2000;
+	visibility: hidden;
+	backface-visibility: hidden;
+	transform: translateX(-50%) translateY(-50%);
+	@include e(content)
+	{
+		color: $colorBrown;
+        //background: $colorWhiteGray;
+        position: relative;
+        border-radius: $dialogRadius;
+        background: $colorWhite;
+        margin: 0;
+        padding: 30px 50px;
+        @include m(row)
+        {
+        	@include flexbox();
+        	@include justify-content(space-around);
+        }
+        @include m(bg)
+	    {
+            background-position: right;
+            background-size: contain;
+            background-repeat: no-repeat;
+	    }
+	}
+	@include e(content-left)
+	{
+		color: $colorBrown;
+        position: relative;
+        //margin: 0 auto;
+        padding: 30px 20px;
+        width: 100%
+	}
+	@include e(content-right)
+	{
+		color: $colorBrown;
+        position: relative;
+        //width: 20%;
+        //min-width: 110px;
+	}
+	@include e(content-heading)
+    {
+    	@include flexbox();
+    	@include justify-content(center);
+    	font-size: $fontSize-h1;
+    }
+    @include e(content-subheading)
+    {
+    	@include flexbox();
+    	@include justify-content(center);
+    	font-size: $fontSize-h4;
+    }
+    @include e(content-btn)
+    {
+    	@include flexbox();
+    	@include justify-content(space-between);
+    	width: 100%;
+    	margin-top:20px;
+        @include m(left)
+        {
+            max-width: 390px;
+        }
+    }
+    @include e(btn)
+    {
+    	max-width: 190px;
+    }
+    @include e(input-group)
+    {
+        padding: 5px 0;
+    }
+    @include m(left)
+	{
+		@include justify-content(flex-start);
+	}
+	@include m(big)
+	{
+		max-width: 700px;
+	}
+	@include m(effect)
+	{
+		transform: translateX(-50%);
+        transition: all 0.3s;
+        opacity: 0;
+	}
+	@include m(show)
+	{
+		visibility: visible;
+		transform: translateX(-50%) translateY(-50%);
+		//transform: translateY(0);
+        opacity: 1;
+		&~ .Overlay{
+            opacity: $overlayOpacity;
+            visibility: visible;
+        }
+
+	}
+}
+
+@include b(Overlay)
+{
+	position: fixed;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    z-index: $overlayZIndex;
+    opacity: 0;
+    background: $overlayBackground;
+    transition: $baseTransition;
+}

@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+@include b(Main) {
+    @include flexbox();
+    @include justify-content(flex-end);
+    @include align-items(stretch);
+    @include flex-wrap(no-wrap);
+
+    @include m(no-sidenav) {
+        @include e(side) {
+          margin-left:-$sideNavWidth;
+        }
+        @include e(wrapper) {
+          padding-left:0px !important;
+        }
+    }
+    @include e(side) {
+        position:fixed;
+
+        width:$sideNavWidth;
+        height:100% !important;
+
+        @include transition(all .25s ease-in-out);
+    }
+    @include e(wrapper) {
+        padding-left:$sideNavWidth;
+
+        @include flex(1);
+        @include transition(all .25s ease-in-out);
+    }
+}
+
+
+@include b(Section) {
+    padding:$sectionPadding;
+    background-color:$sectionWhite;
+
+    @include m(header) {
+        padding:$sectionHeaderPadding;
+    }
+
+    @include m(white) {
+        background-color:$sectionWhite;
+    }
+
+    @include m(gray) {
+        background-color:$sectionGray;
+        border-top:1px solid darken($colorWhite, 5%);
+        border-bottom:1px solid darken($colorWhite, 5%);
+    }
+
+    @include m(profile-page) {
+        padding:0px;
+        height: 100%;
+        @include e(area) {
+
+        }
+    }
+
+    @include m(consultation-room) {
+        padding: 0 !important;
+        height:100% !important;
+        max-height:100% !important;
+        overflow: hidden;
+        border:1px solid red;
+
+        @include e(area) {
+
+        }
+    }
+}

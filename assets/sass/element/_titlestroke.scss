@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+@include b(TitleStroke) {
+    text-align: center;
+    position: relative;
+    z-index: 0;
+    display:block;
+    font-size:$fontSizeBase;
+    color:$colorDarkGray;
+    width:100% !important;
+
+    &:before {
+        border-top: 1px solid $colorGray;
+        content:"";
+        margin: 0 auto;
+        position: absolute;
+        top: 50%; left: 0; right: 0; bottom: 0;
+        width: 100%;
+        z-index: -1;
+    }
+
+    & > span {
+        background: $colorWhite;
+        padding: 0 20px;
+    }
+
+    /* Modifier */
+    @include m(small) {
+        font-size:$fontSizeSmall;
+    }
+
+    @include m(medium) {
+        font-size:$fontSizeBase;
+    }
+
+    @include m(big) {
+        font-size:$fontSizeLarge;
+    }
+}

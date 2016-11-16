@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+@include b(Home) {
+
+    @include e(filter) {
+        margin-bottom:30px;
+    }
+
+    @include e(card) {
+        @include flexbox();
+        @include flex-wrap(wrap);
+        width:100%;
+        max-width: 100%;
+
+        & > div.Card {
+            width: calc(96% / 3);
+            margin-right: 2%;
+            margin-bottom: 30px;
+            &:nth-child(3n+0) {
+                margin-right:0;
+            }
+        }
+
+        & > div.Loader {
+            width:100% !important;
+        }
+    }
+
+    /* Modifier */
+    @include m(blank) {
+
+        @include e(card) {
+            @include flex-direction(column);
+            @include align-items(center);
+        }
+
+        @include e(image) {
+            margin-top:50px;
+            width:160px;
+            height:auto;
+        }
+
+        @include e(text) {
+            margin-top:20px;
+            font-size: $fontSize-h3;
+            color:$colorGray;
+        }
+    }
+}
+
+// @include b(Home) {
+//   padding:30px 50px;
+//
+//   @include e(description) {
+//   	font-size:$fontSize-h1;
+//   	font-weight:600;
+//   }
+//
+//   @include e(search) {
+//   	@include flexbox();
+//     @include align-items(flex-end);
+//   	padding-top:30px;
+//   	padding-bottom:20px;
+//   }
+//
+//   @include e(input) {
+//   	@include flex-basis(50%);
+//   	margin-right:25px;
+//
+//   	@include m(cat) {
+//   	  @include flex-basis(40%);
+//   	}
+//   	@include m(filter) {
+//   	  @include flex-basis(60px);
+//   	}
+//     @include m(button) {
+//       @include flex-basis(20%);
+//       margin-bottom:10px;
+//     }
+//   }
+// }

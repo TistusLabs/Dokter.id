@@ -1,0 +1,617 @@
+@charset "UTF-8";
+
+// BUTTON
+@include b(Button) {
+	@include flexbox();
+	@include justify-content(center);
+	@include align-items(center);
+	@include flex(0 1 auto);
+	@include border-radius($buttonBaseRadius);
+	@include transition($baseTransition);
+	font-family: $fontFamilyBase;
+	font-weight:$fontWeightBase;
+	padding:$buttonBasePadding;
+	border:$buttonBorderWeight solid $colorBlue;
+	color:$colorWhite;
+	background-color:$colorBlue;
+	cursor:pointer;
+	line-height:1;
+	position:relative;
+
+	&:hover,
+	&:active,
+	&:focus{
+		color:$colorBlue;
+		background-color:$colorWhite;
+	}
+	&:disabled {
+		cursor: not-allowed;
+	    opacity: 0.75;
+		padding-right:70px;
+		&:hover,
+		&:active,
+		&:focus {
+			color:$colorWhite;
+			background-color:$colorBlue;
+	    }
+
+		&::after {
+			position:absolute;
+			right:20px;
+			line-height: 0;
+			top:50%;
+			margin-top:calc(-9px/2);
+			content:url(../img/loader/dots-white.svg);
+		}
+	}
+
+	// ELEMENT
+	@include e(text) {
+		margin-left:10px !important;
+	}
+
+	// ICON TEXT
+	@include m(icon-text-red) {
+		border:$buttonBorderWeight solid $colorRed;
+		color:$colorRed;
+		background-color:$colorWhite;
+		&:hover,
+		&:active,
+		&:focus{
+			color:lighten($colorRed, 10%);
+			border-color:lighten($colorRed, 10%);
+		}
+	}
+
+	@include m(icon-text-blue) {
+		border:$buttonBorderWeight solid $colorBlue;
+		color:$colorBlue;
+		background-color:$colorWhite;
+		&:hover,
+		&:active,
+		&:focus{
+			color:lighten($colorBlue, 10%);
+			border-color:lighten($colorBlue, 10%);
+		}
+	}
+
+	// FULL COLOR
+	@include m(blue) {
+		color:$colorWhite;
+		background-color:$colorBlue;
+		border:$buttonBorderWeight solid $colorBlue;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorBlue;
+			background-color:$colorWhite;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorWhite;
+				background-color:$colorBlue;
+		    }
+		}
+	}
+
+	@include m(green) {
+		color:$colorWhite;
+		background-color:$colorGreen;
+		border:$buttonBorderWeight solid $colorGreen;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorGreen;
+			background-color:$colorWhite;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorWhite;
+				background-color:$colorGreen;
+		    }
+		}
+	}
+
+	@include m(gray) {
+		color:$colorWhite;
+		background-color:$colorDarkGray;
+		border:$buttonBorderWeight solid $colorDarkGray;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorDarkGray;
+			background-color:$colorWhite;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorWhite;
+				background-color:$colorDarkGray;
+		    }
+		}
+	}
+
+	@include m(orange) {
+		color:$colorWhite;
+		background-color:$colorOrange;
+		border:$buttonBorderWeight solid $colorOrange;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorOrange;
+			background-color:$colorWhite;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorWhite;
+				background-color:$colorOrange;
+		    }
+		}
+	}
+
+	@include m(red) {
+		color:$colorWhite;
+		background-color:$colorRed;
+		border:$buttonBorderWeight solid $colorRed;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorRed;
+			background-color:$colorWhite;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorWhite;
+				background-color:$colorRed;
+		    }
+		}
+	}
+
+	@include m(pink) {
+		color:$colorWhite;
+		background-color:$colorPink;
+		border:$buttonBorderWeight solid $colorPink;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorPink;
+			background-color:$colorWhite;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorWhite;
+				background-color:$colorPink;
+		    }
+		}
+	}
+
+	@include m(yellow) {
+		color:$colorWhite;
+		background-color:$colorYellow;
+		border:$buttonBorderWeight solid $colorYellow;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorYellow;
+			background-color:$colorWhite;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorWhite;
+				background-color:$colorYellow;
+		    }
+		}
+	}
+
+	// OUTLINE
+	@include m(outline) {
+		color:$colorBlue;
+		background-color:$colorWhite;
+		border:$buttonBorderWeight solid $colorBlue;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorWhite;
+			background-color:$colorBlue;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorBlue;
+				background-color:$colorWhite;
+		    }
+			&::after {
+				position:absolute;
+				right:20px;
+				line-height: 0;
+				top:50%;
+				margin-top:calc(-9px/2);
+				content:url(../img/loader/dots-blue.svg);
+			}
+		}
+	}
+
+	@include m(outline-blue) {
+		color:$colorBlue;
+		background-color:$colorWhite;
+		border:$buttonBorderWeight solid $colorBlue;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorWhite;
+			background-color:$colorBlue;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorBlue;
+				background-color:$colorWhite;
+		    }
+			&::after {
+				position:absolute;
+				right:20px;
+				line-height: 0;
+				top:50%;
+				margin-top:calc(-9px/2);
+				content:url(../img/loader/dots-blue.svg);
+			}
+		}
+	}
+
+	@include m(outline-green) {
+		color:$colorGreen;
+		background-color:$colorWhite;
+		border:$buttonBorderWeight solid $colorGreen;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorWhite;
+			background-color:$colorGreen;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorGreen;
+				background-color:$colorWhite;
+		    }
+			&::after {
+				position:absolute;
+				right:20px;
+				line-height: 0;
+				top:50%;
+				margin-top:calc(-9px/2);
+				content:url(../img/loader/dots-green.svg);
+			}
+		}
+	}
+
+	@include m(outline-gray) {
+		color:$colorDarkGray;
+		background-color:$colorWhite;
+		border:$buttonBorderWeight solid $colorDarkGray;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorWhite;
+			background-color:$colorDarkGray;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorDarkGray;
+				background-color:$colorWhite;
+		    }
+			&::after {
+				position:absolute;
+				right:20px;
+				line-height: 0;
+				top:50%;
+				margin-top:calc(-9px/2);
+				content:url(../img/loader/dots-gray.svg);
+			}
+		}
+	}
+
+	@include m(outline-orange) {
+		color:$colorOrange;
+		background-color:$colorWhite;
+		border:$buttonBorderWeight solid $colorOrange;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorWhite;
+			background-color:$colorOrange;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorOrange;
+				background-color:$colorWhite;
+		    }
+			&::after {
+				position:absolute;
+				right:20px;
+				line-height: 0;
+				top:50%;
+				margin-top:calc(-9px/2);
+				content:url(../img/loader/dots-orange.svg);
+			}
+		}
+	}
+
+	@include m(outline-red) {
+		color:$colorRed;
+		background-color:$colorWhite;
+		border:$buttonBorderWeight solid $colorRed;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorWhite;
+			background-color:$colorRed;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorRed;
+				background-color:$colorWhite;
+		    }
+			&::after {
+				position:absolute;
+				right:20px;
+				line-height: 0;
+				top:50%;
+				margin-top:calc(-9px/2);
+				content:url(../img/loader/dots-red.svg);
+			}
+		}
+	}
+
+	@include m(outline-pink) {
+		color:$colorPink;
+		background-color:$colorWhite;
+		border:$buttonBorderWeight solid $colorPink;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorWhite;
+			background-color:$colorPink;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorPink;
+				background-color:$colorWhite;
+		    }
+			&::after {
+				position:absolute;
+				right:20px;
+				line-height: 0;
+				top:50%;
+				margin-top:calc(-9px/2);
+				content:url(../img/loader/dots-pink.svg);
+			}
+		}
+	}
+
+	@include m(outline-yellow) {
+		color:$colorYellow;
+		background-color:$colorWhite;
+		border:$buttonBorderWeight solid $colorYellow;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorWhite;
+			background-color:$colorYellow;
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				color:$colorYellow;
+				background-color:$colorWhite;
+		    }
+			&::after {
+				position:absolute;
+				right:20px;
+				line-height: 0;
+				top:50%;
+				margin-top:calc(-9px/2);
+				content:url(../img/loader/dots-yellow.svg);
+			}
+		}
+	}
+
+	// ROUNDED
+	@include m(rounded) {
+		@include border-radius($buttonRoundedRadius);
+	}
+
+	// SIZE
+	@include m(small) {
+		padding: $buttonSmallPadding;
+		font-size: $fontSizeSmall;
+		border-width: 1px;
+	}
+
+	@include m(big) {
+		padding: $buttonBigPadding;
+		font-size: $fontSizeLarge;
+	}
+
+	@include m(register) {
+		padding: $buttonRegisterPadding;
+		font-size: $fontSize-h3;
+	}
+
+	// REGISTER BUTTON
+	@include m(register-pink) {
+		color:$colorWhite;
+		background-color:$colorPink;
+		border:$buttonBorderWeight solid $colorPink;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorWhite;
+			background-color:darken($colorPink, 5%);
+			border-color:darken($colorPink, 5%);
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				background-color:darken($colorPink, 5%);
+				border-color:darken($colorPink, 5%);
+		    }
+		}
+	}
+
+	@include m(register-orange) {
+		color:$colorWhite;
+		background-color:$colorYellow;
+		border:$buttonBorderWeight solid $colorYellow;
+		&:hover,
+		&:active,
+		&:focus{
+			color:$colorWhite;
+			background-color:darken($colorYellow, 5%);
+			border-color:darken($colorYellow, 5%);
+		}
+		&:disabled {
+			&:hover,
+			&:active,
+			&:focus {
+				background-color:darken($colorYellow, 5%);
+				border-color:darken($colorYellow, 5%);
+		    }
+		}
+	}
+}
+
+// CALL BUTTON
+@include b(CallButton) {
+	@include flexbox();
+	@include justify-content(center);
+	@include align-items(center);
+	@include border-radius($buttonRoundedRadius);
+	@include transition($baseTransition);
+	border:none;
+	background-color:$colorGreen;
+	width:$buttonIconWidth;
+	height:$buttonIconHeight;
+	line-height:1;
+
+	&:hover,
+	&:active,
+	&:focus{
+		background-color:darken($colorGreen, 5%);
+	}
+	&:disabled {
+		cursor: not-allowed;
+	    opacity: 0.5;
+		&:hover,
+		&:active,
+		&:focus {
+			background-color:darken($colorGreen, 5%);
+	    }
+	}
+
+	@include e(image) {
+		margin:0 auto !important;
+
+		@include m(accept) {
+			width:22px !important;
+		}
+
+		@include m(reject) {
+			width:30px !important;
+		}
+
+		@include m(video) {
+			width:35px !important;
+		}
+
+		@include m(voice) {
+			width:30px !important;
+		}
+	}
+
+	@include m(green) {
+		background-color:$colorGreen;
+		&:hover,
+		&:active,
+		&:focus{
+			background-color:darken($colorGreen, 5%);
+		}
+		&:disabled {
+			cursor: not-allowed;
+		    opacity: 0.5;
+			&:hover,
+			&:active,
+			&:focus {
+				background-color:darken($colorGreen, 5%);
+		    }
+		}
+	}
+
+	@include m(red) {
+		background-color:$colorRed;
+		&:hover,
+		&:active,
+		&:focus{
+			background-color:darken($colorRed, 5%);
+		}
+		&:disabled {
+			cursor: not-allowed;
+		    opacity: 0.5;
+			&:hover,
+			&:active,
+			&:focus {
+				background-color:darken($colorRed, 5%);
+		    }
+		}
+	}
+
+	@include m(brown) {
+		background-color:$colorBrown;
+		&:hover,
+		&:active,
+		&:focus{
+			background-color:lighten($colorBrown, 5%);
+		}
+		&:disabled {
+			cursor: not-allowed;
+		    opacity: 0.5;
+			&:hover,
+			&:active,
+			&:focus {
+				background-color:lighten($colorBrown, 5%);
+		    }
+		}
+	}
+
+	@include m(circle) {
+		@include border-radius(50%);
+		height: $buttonCircleHeight;
+		width: $buttonCircleWidth;
+	}
+}

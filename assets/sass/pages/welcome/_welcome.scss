@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+.Wrapper {
+  @include flexbox();
+  @include justify-content(flex-start);
+  @include align-items(stretch);
+  width:100% !important;
+  height:100% !important;
+  max-width:100% !important;
+  max-height:100% !important;
+  background-color:$colorWhite;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  @include e(why-us) {
+    @include flex(55%);
+    @include background-image(url('../img/welcome/bg-left.png'));
+    color:$colorWhite;
+    max-height:100%;
+    background-color:darken($colorBlue, 10%);
+  }
+
+  @include e(form-wrapper) {
+    @include flex(45%);
+    @include background-image(url('../img/welcome/bg-right.png'));
+    color:$colorWhite;
+    background-color:$colorBlue;
+    max-height:100%;
+
+    @include m(center) {
+        @include flexbox();
+        @include justify-content(center);
+        @include align-items(center);
+        @include flex-direction(column);
+    }
+  }
+}
+
+.Intro {
+  position:relative;
+  padding-left:50px;
+  padding-top:50px;
+  padding-right:20%;
+
+  @include e(person) {
+    position:absolute;
+    height:auto;
+    width:50%;
+    bottom:0;
+    right:-75px;
+    z-index: 10;
+  }
+
+  @include e(logo) {
+    width:70%;
+    max-width:70%;
+    margin-bottom:10px;
+  }
+
+  @include e(title) {
+    font-family: $fontFamilySemibold;
+    font-weight:$fontWeightSemibold;
+    font-size:$fontSize-h1;
+    margin-bottom:10px;
+  }
+
+  @include e(subtitle) {
+    margin-bottom:30px;
+    font-size:$fontSize-h4;
+  }
+}
+
+.Feature{
+  @include e(item) {
+    @include flexbox();
+    @include justify-content(flex-start);
+    @include align-items(center);
+    margin:15px 0;
+  }
+
+  @include e(icon) {
+    width:55px;
+    height:55px;
+    margin-right:25px;
+  }
+
+  @include e(text) {
+    font-size:$fontSize-h3;
+    font-weight: $fontWeightSemibold;
+  }
+}
+
+.Box {
+  @include flexbox();
+  @include justify-content(center);
+  @include align-items(center);
+  @include flex-direction(column);
+  padding:100px 150px;
+  box-sizing: border-box;
+  text-align: center;
+
+  @include e(title) {
+    font-family: $fontFamilySemibold;
+    font-weight:$fontWeightSemibold;
+    font-size:$fontSize-h2;
+
+    @include m(success) {
+        font-size:$fontSize-h1;
+        margin-top:10px;
+    }
+  }
+
+  @include e(subtitle) {
+    font-size:$fontSize-h5;
+    margin-bottom:20px;
+
+    @include m(success) {
+        margin-top:20px;
+        font-size:$fontSize-h3;
+    }
+  }
+
+  @include e(form) {
+    margin:30px 0;
+  }
+
+  @include e(bottom-link) {
+    font-size:$fontSize-h4;
+    > a {
+      color: $colorWhite;
+      font-weight: $fontWeightSemibold;
+      text-decoration: underline;
+
+      &:hover,
+      &:active,
+      &:focus {
+          color:$colorWhite;
+      }
+    }
+  }
+}
+
+@include b(Form) {
+    padding:0 !important;
+    display:block;
+    width:100% !important;
+
+    @include e(group) {
+        margin: 10px 0 15px;
+        display: block;
+        width:100%;
+        > input {
+            color: $colorDarkGray;
+        }
+    }
+
+    @include e(control) {
+        width:100%;
+        display:block;
+        padding:20px;
+        border:none;
+        font-size:$fontSize-h4;
+
+        @include m(button) {
+            font-weight:$fontWeightSemibold;
+            font-size:$fontSize-h3;
+        }
+    }
+
+    @include e(label) {
+        color:$colorWhite;
+        font-size:$fontSizeBase;
+        font-weight: $fontWeightLight;
+        margin-bottom: 5px;
+    }
+
+    @include e(message) {
+        color:$colorRed;
+    }
+
+    @include e(link) {
+        color:$colorWhite;
+        font-size:$fontSize-h4;
+        text-decoration: underline;
+
+        &:hover,
+        &:active,
+        &:focus {
+            color:$colorWhite;
+        }
+    }
+}

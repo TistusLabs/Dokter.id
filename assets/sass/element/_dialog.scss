@@ -1,0 +1,224 @@
+@charset "UTF-8";
+
+@include b(Dialog) {
+	@include border-radius($dialogRadius);
+	@include box-shadow($dialogShadow);
+	border:1px solid $colorGray;
+	background-color: $colorWhite;
+	padding:$dialogPadding;
+	min-width:$dialogMinimumWidth;
+	max-width:$dialogMaximumWidth;
+	text-align: center;
+	position:relative;
+
+	@include e(title) {
+		font-size: $fontSize-h2;
+		margin-bottom:10px;
+	}
+
+	@include e(subtitle) {
+		color:$colorDarkGray;
+		margin-bottom:20px;
+	}
+
+	@include e(action) {
+		@include flexbox();
+		@include justify-content(center);
+		@include align-items(center);
+		@include transition($baseTransition);
+		margin-top:20px;
+	}
+
+	@include e(text-red) {
+		color:$colorRed;
+	}
+
+	@include e(text-gray) {
+		color:$colorGray;
+		&:hover {
+			color:darken($colorGray, 25%);
+		}
+	}
+
+	// MODIFIER
+	@include m(action-to-doctor) {
+		text-align:left;
+		padding:40px 190px 40px 50px;
+
+		@include e(image) {
+			position:absolute;
+			right:50px;top:40px;
+			height:100px;
+			width:100px;
+			@include border-radius($imageRadius);
+		}
+
+		@include e(action) {
+			@include justify-content(flex-start);
+		}
+	}
+
+	@include m(information) {
+		text-align:left;
+		max-width:720px !important;
+		padding:40px 320px 40px 50px;
+		@include e(action) {
+			@include justify-content(flex-start);
+		}
+	}
+
+	@include m(information-welcome) {
+		background:url(../img/dialog/welcome.png) no-repeat center right;
+		@include background-size(contain);
+	}
+
+	@include m(information-thank-you) {
+		background:url(../img/dialog/thank-you.png) no-repeat center right;
+		@include background-size(contain);
+	}
+}
+
+@include b(DialogOverlay) {
+	position: fixed;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    z-index: $overlayZIndex;
+    opacity: 0;
+    background: $overlayBackground;
+    transition: $baseTransition;
+}
+
+//
+//
+// @include b(ModalDialog)
+// {
+// 	display: block; /* Hidden by default */
+//     position: fixed; /* Stay in place */
+//     z-index: 1; /* Sit on top */
+//     left: 0;
+//     top: 0;
+//     width: 100%; /* Full width */
+//     height: 100%; /* Full height */
+//     overflow: auto; /* Enable scroll if needed */
+//     background-color: grey;
+//     @include e(content)
+//     {
+//     	@include flexbox;
+//     	background-color: #fefefe;
+//         margin: 15% auto; /* 15% from the top and centered */
+//         padding: 20px;
+//         width: 100%; /* Could be more or less, depending on screen size */
+//         max-width: 460px;
+//         text-align: center;
+//         border-radius: 15px;
+//         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+//         @include e(left)
+//         {
+//         	h1{
+//         		text-transform: uppercase;
+//         	}
+//         	img{
+//         		min-width:85px;width:100%;
+//         	}
+//         }
+//         @include e(right)
+//         {
+//         	margin-left: auto;
+//         	img{
+//         		max-width:160px;
+//         		width: 100%;
+//         		height: auto;
+//         	}
+//         }
+//     }
+// }
+//
+// @include b(Status)
+// {
+//   @include flexbox;
+//   @include align-items(center);
+//   //@include justify-content(center);
+//   width:100%;
+//   max-width: 300px;
+//
+//   @include e(icon){
+//     width:40px;
+//     margin-right: 15px;
+//   }
+//   @include e(text)
+//   {
+//     font-weight: bold;
+//     text-transform: uppercase;
+//     font-size:$fontSizeLarge;
+//   }
+//   @include e(desc)
+//   {
+//     font-size:$fontSizeSmall;
+//   }
+// }
+// @include b(Dropdown)
+// {
+//   margin:0 -15px;
+//   position:relative;
+//   display:none;
+// 	&:before{
+//     position: absolute;
+//     left: 15%;
+//     top: -7px;
+//     width: 0;
+//     height: 0;
+//     content: '';
+//     border-style: solid;
+//     border-color: transparent transparent #fff;
+//     border-width: 0 7.5px 7.5px;
+//   }
+//   @include m(open){
+//     display:block;
+//   }
+//   @include e(content)
+//   {
+//     box-shadow: 0px 2px 16px 0px rgba(0,0,0,0.2);
+//     border-radius: 8px;
+//     margin-top:10px;
+//   }
+//     @include e(option){
+//     color: black;
+//     padding: 12px 16px;
+//     text-decoration: none;
+//     &:hover{
+//       cursor:pointer;
+//       background-color:$colorGray;
+//       border-radius:8px;
+//     }
+//   }
+// }
+//
+// @include b(Message){
+//   @include flexbox();
+//   color:$colorDarkGray;
+//   padding-top:30px;
+//   @include e(image-container){
+//     @include flex-shrink(0);
+//   }
+//   @include e(image){
+//     width:75px;
+//     border-radius:50%;
+//   }
+//   @include e(message-container){
+//     padding-top:10px;
+//     padding-left:20px;
+//   }
+//   @include e(name){
+//     font-weight:$fontWeightSemibold;
+//     color:$colorBlack;
+//     padding-right:15px;
+//   }
+//   @include e(message){
+//     @include m(typing){
+//       color:$colorGreen;
+//     }
+//   }
+// }

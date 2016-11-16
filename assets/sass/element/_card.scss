@@ -1,0 +1,643 @@
+@charset "UTF-8";
+
+// @include b(Card) {
+// 	@include flexbox();
+// 	@include flex-wrap(wrap);
+// }
+//
+// @include b(CardNoResult) {
+// 	@include flex-basis(100%);
+// 	text-align:center;
+// 	padding-top:100px;
+//
+// 	@include e(icon) {
+// 		width:160px;
+// 		padding-bottom:20px;
+// 	}
+//
+// 	@include e(text) {
+// 		font-size:$fontSize-h3;
+// 		@include m(big) {
+// 			font-size:$fontSize-h1;
+// 		}
+// 		@include m(link) {
+// 			color:$colorBlue;
+// 			text-decoration:none;
+// 		}
+// 	}
+// }
+//
+// @include b(CardHome) {
+// 	@include flexbox();
+// 	@include flex-basis(50%);
+// 	//@include flex-grow(1);
+// 	padding-top:20px;
+// 	padding-bottom:25px;
+//
+// 	@include e(image-container) {
+// 		@include flex-shrink(0);
+// 		height:130px;
+// 		padding-left:15px;
+// 		padding-right:15px;
+// 		position:relative;
+//
+// 		@include m(small) {
+// 			height:100px;
+// 		}
+// 	}
+//
+// 	@include e(image) {
+// 		width:130px;
+// 		height:130px;
+// 		border-radius:imageRadius;
+//
+// 		@include m(small) {
+// 			width:100px;
+// 			height:100px;
+// 		}
+// 	}
+//
+// 	@include e(status) {
+// 		position:absolute;
+// 		width:30px;
+// 		bottom:0;
+// 		right:25px;
+// 	}
+//
+// 	@include e(description) {
+// 		@include flex-grow(1);
+// 		color:$colorDarkGray;
+// 	}
+//
+// 	@include e(name) {
+// 		color:$colorBlack;
+// 		font-weight:$fontWeightSemibold;
+// 		font-size:$fontSize-h3;
+// 		padding-top:5px;
+// 		padding-bottom:5px;
+//
+// 		@include m(small) {
+// 			font-size:$fontSizeLarge;
+// 		}
+// 	}
+//
+// 	@include e(stat) {
+// 		@include flexbox();
+// 		@include align-items(center);
+// 		height:40px;
+// 	}
+//
+// 	@include e(icon) {
+// 		width:25px;
+// 		margin-right:10px;
+// 	}
+//
+// 	@include e(price) {
+// 		font-weight:$fontWeightSemibold;
+// 		color:$colorGreen;
+// 		font-size:$fontSizeLarge;
+// 	}
+//
+// 	@include e(text) {
+// 		@include m(bold) {
+// 			font-weight: $fontWeightSemibold;
+// 		}
+//
+// 		@include m(green) {
+// 			color: $colorGreen;
+// 		}
+// 	}
+//
+// 	@include e(button-container) {
+// 		@include flexbox();
+// 		padding-top:15px;
+// 		padding-bottom:10px;
+// 	}
+//
+// 	@include e(button) {
+// 		padding-right:20px;
+// 		@include flex-grow(1);
+// 	}
+// }
+//
+//
+//
+// @include b(PastConsultation) {
+// 	@include flexbox();
+// 	@include flex-basis(50%);
+// 	min-width:500px;
+// 	padding-top:15px;
+// 	padding-bottom:20px;
+//
+// 	@include m(full) {
+// 		@include flex-basis(100%);
+// 	}
+//
+// 	@include e(image-container) {
+// 		@include flex-shrink(0);
+// 		width:80px;
+// 		padding-left:40px;
+// 		padding-top:15px;
+// 		position:relative;
+// 	}
+//
+// 	@include e(image) {
+// 		position:absolute;
+// 		width:80px;
+// 		height:80px;
+// 		border-radius:imageRadius;
+// 	}
+//
+// 	@include e(description) {
+// 		@include flexbox();
+// 		@include flex-wrap(wrap);
+// 		border:1px solid $colorDarkGray;
+// 		border-radius:10px;
+// 		color:$colorDarkGray;
+// 		padding-top:20px;
+// 		padding-bottom:10px;
+// 		padding-left:75px;
+// 		font-size:$fontSizeSmall;
+// 	}
+// }
+//
+// @include b(CardProfile) {
+//
+// 	@include e(schedule) {
+// 		color:$colorGreen;
+// 		padding-top:30px;
+// 		padding-bottom:30px;
+// 		font-weight:$fontWeightSemibold;
+// 	}
+//
+// 	@include e(image-container) {
+// 		@include flex-shrink(0);
+// 		height:130px;
+// 		width:160px;
+// 		padding-left:15px;
+// 		padding-right:15px;
+// 		margin:auto;
+// 		position:relative;
+// 	}
+//
+// 	@include e(image) {
+// 		width:130px;
+// 		height:130px;
+// 		border-radius:imageRadius;
+// 	}
+//
+// 	@include e(status) {
+// 		position:absolute;
+// 		width:30px;
+// 		bottom:0;
+// 		right:25px;
+// 	}
+//
+// 	@include e(description) {
+// 		width:250px;
+// 		padding-top:30px;
+// 		color:$colorDarkGray;
+//
+// 		@include m(center) {
+// 		  text-align:center;
+// 		}
+// 	}
+//
+// 	@include e(name) {
+// 		color:$colorBlack;
+// 		font-weight:$fontWeightSemibold;
+// 		font-size:$fontSize-h3;
+// 		padding-bottom:5px;
+// 	}
+//
+// 	@include e(stat) {
+// 		@include flexbox();
+// 		@include align-items(center);
+// 		height:40px;
+// 	}
+//
+// 	@include e(icon) {
+// 		width:25px;
+// 		margin-right:10px;
+// 	}
+//
+// 	@include e(price) {
+// 		font-weight:$fontWeightSemibold;
+// 		color:$colorBlack;
+// 		font-size:$fontSizeLarge;
+// 		padding-top:5px;
+// 	}
+//
+// 	@include e(button-container) {
+// 		padding-top:20px;
+// 		text-align:center;
+// 		width: 200px;
+// 		margin: auto;
+// 	}
+//
+// 	@include e(avaibility) {
+// 		@include flexbox();
+// 		@include align-items(center);
+// 		@include justify-content(space-between);
+// 		font-size:$fontSize-h1;
+// 		font-weight:$fontWeightSemibold;
+// 		color:$colorBlack;
+// 		cursor:pointer;
+// 	}
+//
+// 	@include e(arrow) {
+// 		margin-left: 10px;
+// 		border-style: solid;
+// 		height: 0;
+// 		width: 0;
+// 		border-color: $colorBlack transparent transparent;
+// 		border-width: 7.5px 7.5px 0;
+// 		@include m(up) {
+// 		  border-color: transparent transparent $colorBlack;
+// 		  border-width: 0 7.5px 7.5px;
+// 		}
+// 	}
+// }
+//
+// @include b(CardBook) {
+// 	@include flexbox();
+// 	@include flex-grow(1);
+// 	padding:20px 0 50px;
+// 	border-bottom:1px solid $colorGray;
+//
+// 	@include e(image-container) {
+// 		@include flex-shrink(0);
+// 		height:120px;
+// 		padding-left:15px;
+// 		padding-right:15px;
+// 		position:relative;
+// 	}
+//
+// 	@include e(image) {
+// 		width:120px;
+// 		height:120px;
+// 		border-radius:imageRadius;
+// 	}
+//
+// 	@include e(status) {
+// 		position:absolute;
+// 		width:30px;
+// 		bottom:0;
+// 		right:25px;
+// 	}
+//
+// 	@include e(description) {
+// 		@include flex-grow(1);
+// 		color:$colorDarkGray;
+// 	}
+//
+// 	@include e(name) {
+// 		color:$colorBlack;
+// 		font-weight:$fontWeightSemibold;
+// 		font-size:$fontSize-h3;
+// 		padding-bottom:5px;
+// 	}
+//
+// 	@include e(text) {
+// 		color:$colorBlack;
+//
+// 		@include m(bold) {
+// 		  font-weight:$fontWeightSemibold;
+// 		}
+// 	}
+// }
+//
+// @include b(CardLine) {
+// 	text-align:center;
+// 	border-bottom:1px solid $colorGray;
+// 	margin:0 50px 25px;
+//
+// 	@include e(text) {
+// 		color:$colorDarkGray;
+// 		padding:0 15px;
+// 		background-color:#fff;
+// 		position: relative;
+// 		top: 12px;
+// 		display: inline;
+//
+// 		@include m(bold) {
+// 		  color:$colorBlack;
+// 		  font-weight:$fontWeightSemibold;
+// 		}
+// 	}
+// }
+
+@include b(Card) {
+	@include flexbox();
+	@include justify-content(flex-start);
+	@include align-items(flex-start);
+	@include flex(0 1 auto);
+	@include transition($baseTransition);
+
+	// ELEMENT
+	@include e(schedule) {
+		color:$colorGreen;
+	}
+
+	@include e(image) {
+	}
+
+	@include e(information) {
+		margin-left:20px;
+	}
+
+	@include e(name) {
+		font-weight:$fontWeightSemibold;
+		font-size:$fontSize-h3;
+		color:$colorBrown;
+	}
+
+	@include e(speciality) {
+		color:$colorDarkGray;
+		font-size:$fontSizeSmall;
+		margin-bottom:10px;
+	}
+
+	@include e(credential) {
+		color:$colorDarkGray;
+		font-size:$fontSizeSmall;
+	}
+
+	@include e(location) {
+		color:$colorDarkGray;
+		margin-bottom:10px;
+	}
+
+	@include e(rate) {
+		margin-bottom:10px;
+	}
+
+	@include e(action) {
+		@include flexbox();
+		@include justify-content(flex-start);
+		@include align-items(center);
+		@include flex(0 1 auto);
+		margin-top:10px;
+
+		& > button {
+			margin-right:10px;
+
+			&:last-child {
+				margin-right:0;
+			}
+		}
+	}
+
+	// MODIFIER
+	@include m(simple) {
+		@include align-items(flex-start);
+
+		@include e(schedule) {
+			color:$colorPink;
+			margin:5px 0 0;
+		}
+
+		@include e(last-consultation) {
+			color:$colorGreen;
+		}
+
+		@include e(not-accepted) {
+			color:$colorPink;
+		}
+
+		@include e(accepted) {
+			color:$colorGreen;
+		}
+	}
+
+	@include m(profile) {
+		@include flex-wrap(wrap);
+		@include flex-direction(column);
+		text-align: center;
+
+		@include e(schedule) {
+			color:$colorGreen;
+			text-align: center;
+			margin:0 auto;
+			margin-bottom:20px;
+		}
+
+		@include e(image) {
+			margin:0 auto;
+			margin-bottom:20px;
+		}
+
+		@include e(information) {
+			margin:0 auto;
+		}
+
+		@include e(rate) {
+			@include justify-content(center);
+		}
+
+		@include e(price) {
+			margin-bottom:10px;
+		}
+
+		@include e(action) {
+			margin-top:20px;
+			@include justify-content(center);
+		}
+	}
+
+	@include m(message) {
+		width:100%;
+
+		@include e(name) {
+			margin-bottom:5px;
+			font-weight:$fontWeightSemibold;
+			font-size:$fontSize-h4;
+			color:$colorBrown;
+		}
+
+		@include e(timestamp) {
+			font-weight:$fontWeightLight;
+			font-size:$fontSize-h6;
+			color:$colorDarkGray;
+		}
+
+	}
+}
+
+@include b(CardBilling) {
+	@include flexbox();
+	@include justify-content(flex-start);
+	@include align-items(center);
+	@include align-content(center);
+	@include flex(0 1 auto);
+	@include transition($baseTransition);
+
+	@include e(image) {
+		width:80px !important;
+		height:80px !important;
+		margin-right:-40px;
+	}
+
+	@include e(information) {
+		@include flexbox();
+	    @include flex-wrap(wrap);
+		border:1px solid $colorGray;
+		border-radius:$dialogRadius;
+		width:100%;
+		padding:20px;
+		padding-left:55px;
+	}
+
+	@include e(label) {
+		color:$colorDarkGray;
+		font-size:$fontSizeSmall;
+	}
+
+	@include e(value) {
+		color:$colorBrown;
+
+		@include m(name) {
+			font-weight:$fontWeightSemibold;
+			font-size:$fontSize-h4;
+		}
+
+		@include m(price) {
+			font-weight:$fontWeightSemibold;
+			font-size:$fontSize-h4;
+		}
+	}
+
+	@include e(info-container) {
+    	@include flex-grow(1);
+    	@include flex-basis(50%);
+		margin-bottom:10px;
+    	@include m(half) {
+  	  		@include flex-basis(25%);
+    	}
+
+		@include m(no-margin) {
+			margin:0;
+		}
+    }
+
+    @include e(text) {
+    	font-size:$fontSizeLarge;
+    	font-weight:$fontWeightSemibold;
+    	color:$colorBlack;
+    	padding-right:15px;
+    	padding-bottom:15px;
+    	@include m(green){
+    	  color:$colorGreen;
+    	}
+    }
+}
+
+@include b(Rate) {
+	@include flexbox();
+	@include justify-content(left);
+	@include align-items(center);
+	cursor:pointer;
+
+	@include e(image) {
+		height:20px !important;
+	}
+
+	@include e(type) {
+		@include flexbox();
+		@include justify-content(left);
+		@include align-items(center);
+		margin-right:10px;
+
+		&:last-child {
+			margin-right:0;
+		}
+	}
+
+	@include e(text) {
+		margin-left:5px;
+		color:$colorRed;
+	}
+
+	@include m(love) {
+		@include e(text) {
+			color:$colorRed;
+		}
+	}
+
+	@include m(thumb) {
+		@include e(text) {
+			color:$colorBlue;
+		}
+	}
+}
+
+@include b(Price) {
+	color:$colorGreen;
+	font-size:$fontSize-h4;
+	font-weight:$fontWeightSemibold;
+}
+
+@include b(ProfileImage) {
+	position:relative;
+	max-width:120px !important;
+	min-width: 80px !important;
+	max-height:120px !important;
+	min-height: 80px !important;
+	z-index: 5px;
+
+	@include e(image) {
+		@include border-radius($imageRadius);
+		width:100%;
+		height:100%;
+	}
+
+	@include e(status) {
+		z-index: 10px;
+		position:absolute;
+		width:40px;
+		bottom:0px;
+		right:0px;
+	}
+
+	/* Modifier */
+	@include m(message) {
+		max-width:80px !important;
+		max-height:80px !important;
+	}
+
+	@include m(available) {
+		&::before {
+			position:absolute;
+			content: url(../img/status/available.png);
+			z-index: 1;
+			width:40px;
+			height:40px;
+			bottom:0;
+			right:0;
+		}
+	}
+
+	@include m(unavailable) {
+		&::before {
+			position:absolute;
+			content: url(../img/status/unavailable.png);
+			z-index: 1;
+			width:40px;
+			height:40px;
+			bottom:0;
+			right:0;
+		}
+	}
+
+	@include m(maybe) {
+		&::before {
+			position:absolute;
+			content: url(../img/status/maybe.png);
+			z-index: 1;
+			width:40px;
+			height:40px;
+			bottom:0;
+			right:0;
+		}
+	}
+}

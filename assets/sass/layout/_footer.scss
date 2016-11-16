@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.Footer {
+    margin: 20px 0;
+    font-size: $fontSizeSmall;
+    text-align: center;
+    color: $colorGray;
+}
+.FooterLink {
+    @include flexbox();
+    @include justify-content(center);
+    @include e(item) {
+        margin: 0 3px;
+        &:after {
+            margin-left: 5px;
+            content: "•";
+        }
+        &:last-child:after {
+            margin-left: 0;
+            content: "";
+        }
+    }
+    @include e(link) {
+        color: $colorGray;
+        &:hover {
+            color: shade($colorGray, 15%);
+        }
+    }
+}
+.SocialMedia {
+    @include flexbox();
+    @include justify-content(center);
+    @include align-items(center);
+    margin: 10px 0 5px;
+    @include e(item) {
+        margin: 0 7px;
+    }
+}

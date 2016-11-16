@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+@include b(Header) {
+    @include padding(10px 40px 10px 40px);
+    @include flexbox();
+    @include justify-content(flex-start);
+    @include align-items(center);
+    @include filter-gradient(#0991ff, #4d7bd1, vertical); // IE6-9
+    @include background-image(linear-gradient(45deg, #0991ff, #4d7bd1));
+    background-color: #0991ff; // Old browsers
+    color: $colorWhite;
+}
+
+@include b(Logo) {
+  max-height:50px !important;
+}
+
+@include b(TopNavigation) {
+  @include flex(1);
+  @include flexbox();
+  @include justify-content(flex-end);
+  @include align-items(center);
+  position:relative;
+
+  @include e(balance) {
+    margin-right:30px;
+  }
+
+  @include e(amount) {
+    font-size:$fontSize-h3;
+    font-weight: $fontWeightBold;
+  }
+
+  @include e(profile) {
+    @include flexbox();
+    @include align-items(center);
+    height:40px !important;
+    cursor: pointer;
+  }
+
+  @include e(avatar) {
+    width:40px;height:40px;
+    @include border-radius($imageRadius);
+  }
+
+  @include e(profile-arrow) {
+    margin-left:10px;
+    @include triangle(down, $colorWhite, 15px);
+  }
+
+  @include m(arrow-up) {
+    @include triangle(up, $colorWhite, 15px);
+  }
+
+  @include m(arrow-down) {
+    @include triangle(down, $colorWhite, 15px);
+  }
+}

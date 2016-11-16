@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+@import "header";
+@import "footer";
+@import "main";
+@import "nav";
+@import "modal";
+
+@include b(Wrapper) {
+    width:100% !important;
+    height:100% !important;
+    box-sizing: border-box;
+    background-color:$colorWhite;
+
+    @include m(no-header) {
+        @include e(header) {
+            margin-top:-$headerHeight;
+        }
+
+        @include e(main) {
+            position:relative;
+            padding-top:0px;
+        }
+    }
+
+    @include e(header) {
+        @include transition(all .25s ease-in-out);
+        position: fixed;
+        width:100% !important;
+        height: $headerHeight;
+        z-index:1000 !important;
+    }
+
+    @include e(main) {
+        @include transition(all .25s ease-in-out);
+        height:100%;
+        padding-top:$headerHeight;
+        background-color:$colorWhite;
+    }
+}

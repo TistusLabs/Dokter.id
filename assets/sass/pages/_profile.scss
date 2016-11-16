@@ -1,0 +1,316 @@
+@charset "UTF-8";
+
+// @include b(Profile){
+//   @include flexbox();
+//   height:100vh;
+//   margin-top:-$headerHeight;
+//   padding-top:$headerHeight;
+//   @include m(no-header){
+//     margin-top:0;
+//     padding-top:0;
+//   }
+// }
+//
+// @include b(ProfileLeft){
+//   @include flexbox();
+//   @include justify-content(center);
+//   @include flex-basis(340px);
+//   @include flex-shrink(0);
+//   @include m(call){
+//     @include flex-basis(50%);
+//     background-color: #727272;
+//   }
+// }
+//
+// @include b(ProfileRight){
+//   @include flexbox();
+//   @include flex-direction(column);
+//   @include flex-basis(100%);
+//   border-left:1px solid $colorGray;
+//   height:100%;
+// }
+//
+// @include b(ProfileCall){
+//   @include justify-content(space-around);
+//   @include flexbox();
+//   align-items: flex-end;
+//   width: 100%;
+//   max-width:425px;
+//   padding-bottom: 45px;
+//   @include e(menu)
+//   {
+//     @include flexbox();
+//     @include justify-content(space-around);
+//     @include align-items(center);
+//     color:$colorWhite;
+//     width: 100%;
+//   }
+//   @include e(img)
+//   {
+//       width: 25px;
+//   }
+//   @include e(img-close)
+//   {
+//       width: 75px;
+//       padding: 0px 18px;
+//   }
+//   @include e(avatar){
+//     width:80px;
+//     border-radius:50%;
+//   }
+// }
+//
+// @include b(ProfileNav){
+//   @include flexbox();
+//   @include flex-shrink(0);
+//   border-bottom:1px solid $colorGray;
+//   color:$colorDarkGray;
+//   font-weight:$fontWeightSemibold;
+//   @include e(nav){
+//     @include flexbox();
+//     @include align-items(center);
+//     @include transition(all .25s ease-in-out);
+//     margin-left:50px;
+//     margin-right:10px;
+//     padding:25px 10px;
+//     cursor:pointer;
+//     border-bottom:3px solid transparent;
+//     @include m(active){
+//       color:$colorBlue;
+//       border-bottom:3px solid $colorBlue;
+//       .ProfileNav__icon{
+//         @include filter(grayscale(0%));
+//       }
+//     }
+//   }
+//   @include e(icon){
+//     @include filter(grayscale(100%));
+//     margin-right:15px;
+//     width:30px;
+//     @include m(original){
+//       @include filter(grayscale(0%));
+//     }
+//   }
+//   @include e(nav-content){
+//     @include transition(all .25s ease-in-out);
+//     padding:0 50px;
+//     display:none;
+//     @include m(active){
+//       @include flexbox();
+//       @include flex-direction(column);
+//     }
+//   }
+//   @include e(button-container)
+//   {
+//     @include flexbox();
+//     @include flex-grow(1);
+//     @include justify-content(flex-end);
+//     @include align-items(center);
+//     padding-right:30px;
+//   }
+//   @include e(button)
+//   {
+//     @include flexbox();
+//     @include justify-content(space-around);
+//     @include align-items(center);
+//     width:200px;
+//     padding: 13px 18px;
+//   }
+// }
+//
+// @include b(ProfileOverview){
+//   padding-bottom:40px;
+//   overflow:auto;
+//   font-size:$fontSize-h4;
+//   line-height:1.8;
+//   @include e(title){
+//     font-size:$fontSize-h3;
+//     font-weight:$fontWeightSemibold;
+//     padding-top:40px;
+//     @include flex-shrink(0);
+//   }
+// }
+//
+// @include b(ProfileMessage){
+//   @include flex-basis(100%);
+//   @include justify-content(space-between);
+//   padding:0;
+//   @include e(message){
+//     overflow:auto;
+//     padding:0 50px 30px;
+//   }
+//   @include e(form){
+//     margin:0;
+//   }
+//   @include e(input){
+//     position:relative;
+//     width:100%;
+//   }
+//   @include e(button){
+//     position:absolute;
+//     right:10px;
+//     top:12px;
+//     width:100px;
+//   }
+// }
+//
+// @include b(ProfilePrevious){
+//   padding-top:40px;
+//   padding-left:20px;
+// }
+//
+// @include b(ProfileNoMessage){
+//   padding-top:50px;
+//   text-align:center;
+//   font-weight:$fontWeightSemibold;
+//   @include e(icon){
+//     width:150px;
+//     margin-bottom:30px;
+//   }
+// }
+//
+// @include b(ProfileBook){
+//   padding-top:30px;
+//   margin:0 50px;
+//   @include e(form){
+//
+//   }
+//   @include e(question){
+//     padding-top:30px;
+//     font-weight:$fontWeightSemibold;
+//   }
+//   @include e(button-container){
+//     width: 300px;
+//     padding-top: 30px;
+//   }
+// }
+//
+// @include b(ProfilePatients){
+//   padding:100px 50px 0;
+//   @include e(complete){
+//     border:1px solid $colorGray;
+//     border-radius:10px;
+//     margin:80px;
+//     padding:50px 0;
+//     font-weight:$fontWeightSemibold;
+//     text-align:center;
+//   }
+//   @include e(button-container){
+//     padding-top:50px;
+//     width:300px;
+//     margin:auto;
+//   }
+// }
+
+$profileTabHeight   : 70px;
+
+@include b(Profile) {
+    height: 100% !important;
+    @include flexbox();
+    @include justify-content(flex-start);
+    @include align-items(flex-start);
+    @include align-content(flex-start);
+    @include flex(0 1 auto);
+    @include transition($baseTransition);
+
+    @include e(left-panel) {
+        height:100%;
+        padding:40px 20px 0;
+        text-align: center !important;
+        @include flex-basis(340px);
+    }
+
+    @include e(right-panel) {
+        height:100%;
+        border-left:1px solid $colorGray;
+        @include flex(1);
+    }
+}
+
+@include b(ProfileTab) {
+    height:$profileTabHeight;
+    width:100%;
+    border-bottom:1px solid $colorGray;
+    @include flexbox();
+    @include justify-content(flex-start);
+    @include align-items(center);
+    @include align-content(center);
+    @include flex(0 1 auto);
+    @include transition($baseTransition);
+
+    @include e(item) {
+        cursor: pointer;
+        padding:0 30px;
+        line-height: 0;
+        height:$profileTabHeight;
+        font-size:$fontSize-h4;
+        font-family: $fontFamilyBase;
+        color:$colorDarkGray;
+
+        @include flexbox();
+        @include justify-content(flex-start);
+        @include align-items(center);
+        @include align-content(center);
+        @include flex(0 1 auto);
+        @include transition($baseTransition);
+
+        img {
+            height:25px;
+            width:auto;
+            margin-right:15px;
+        }
+
+        @include m(active) {
+            border-bottom:2px solid $colorBlue;
+            color:$colorBlue;
+        }
+    }
+
+    @include m(input-message) {
+        border:none;
+        border-top:1px solid $colorGray;
+    }
+}
+
+@include b(ProfileTabContent) {
+    height: calc(100% - calc(2 * #{$profileTabHeight}));
+    overflow-y: auto;
+
+    @include m(can-scroll) {
+        padding:25px 40px;
+        overflow: hidden;
+    }
+
+    @include m(hidden) {
+        display:none;
+    }
+}
+
+@include b(Overview) {
+
+    @include e(info) {
+        margin-bottom: 25px;
+
+        &:last-child{
+            margin-bottom:0;
+        }
+    }
+
+    @include e(title) {
+        font-size:$fontSizeLarge;
+        font-weight: $fontWeightSemibold;
+    }
+
+    @include e(value) {
+        margin-top:3px;
+    }
+
+    @include e(list) {
+        list-style: circle;
+        margin-left:14px;
+
+        > li {
+            margin-bottom:3px;
+        }
+    }
+}

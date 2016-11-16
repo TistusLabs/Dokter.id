@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+// Welcome Login
+
+@include b(PageMain) {
+	@include flexbox();
+	height:100vh;
+}
+
+@include b(MainLeft) {
+	@include flex-basis(57%);
+	background-color: #027EE2;
+	background-image:url('../images/bg.png');
+	background-size: cover;
+	position:relative;
+
+	@include e(logo) {
+		padding:40px 60px;
+		color: $colorWhiteGray;
+
+		@include media('>desktop') {
+			width : 550px;
+		}
+		@include media('<desktop') {
+			width : 350px;
+		}
+
+	}
+
+	@include e(head) {
+		padding:10px 60px;
+		font-size:$fontSize-h1;
+		font-family:$fontFamilySemibold;
+		color: $colorWhiteGray;
+	}
+
+	@include e(row) {
+		@include flexbox();
+		@include align-items(center);
+		padding:10px 60px;
+		img {
+			height:40px;
+		}
+		@include m(label) {
+			padding:2px 30px;
+			margin-top: 13px;
+			color: $colorWhiteGray;
+			font-size:$fontSize-h3;
+			font-family:$fontFamilySemibold;
+		}
+	}
+
+	@include e(imgdoctor) {
+		height: 96vh;
+		display:block;
+		position: absolute;
+		bottom: 0px;
+		right: -10vh;
+	}
+}
+
+@include b(MainRight) {
+	@include flex-basis(43%);
+	@include justify-content(center);
+	text-align:center;
+	background-color:#0991FF;
+	background-image:url('../images/bg.png');
+	background-size: cover;
+
+	@include e(head) {
+		font-size:$fontSize-h1;
+		font-family:$fontFamilySemibold;
+		color: $colorWhiteGray;
+		padding-top: 60px;
+		//padding:50px 0px;
+	}
+
+	@include e(head--join) {
+		font-size:$fontSize-h1;
+		font-family:$fontFamilySemibold;
+		color: $colorWhiteGray;
+		padding-top: 60px;
+		padding-bottom:60px;
+	}
+
+	@include e(btn) {
+		width:300px;
+		margin:auto;
+		height: 75px;
+	}
+
+	@include e(note) {
+		color: $colorWhiteGray;
+		span {
+			text-transform: uppercase;
+		}
+		@include m(create) {
+			padding: 20px 0px;
+		}
+	}
+
+	@include e(row) {
+		margin:auto;
+		width:200px;
+		padding-top: 19px;
+
+		@include media('>desktop') {
+			width:300px;
+		}
+
+		@include m(lbl) {
+			color: $colorWhiteGray;
+		}
+		@include m(small) {
+			width:150px;
+			@include media('>desktop') {
+				width:200px;
+			}
+		}
+	}
+
+	@include e(validation) {
+		top: 35%;
+		position: relative;
+		color: $colorWhite;
+		font-size: $fontSizeBase;
+
+		@include m(logo) {
+			width: 180px;
+			padding-bottom: 10px;
+		}
+	}
+}
+
+@include b(MainImg) {
+	max-width: 680px;
+	display:block;
+	margin-left: 500px;;
+	margin-top: -955px;
+}

@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+@include b(Consultation) {
+
+    @include e(filter) {
+        margin-bottom:30px;
+    }
+
+    @include e(title) {
+        color:$colorDarkGray;
+        margin-bottom:30px;
+    }
+
+    @include e(card) {
+        @include flexbox();
+        @include flex-wrap(wrap);
+        width:100%;
+        max-width: 100%;
+
+        & > div.Card,
+        & > div.CardBilling {
+            width: calc(96% / 3);
+            margin-right: 2%;
+            margin-bottom: 30px;
+
+            &:nth-child(3n+0) {
+                margin-right:0;
+            }
+        }
+    }
+
+    /* Modifier */
+    @include m(two-col) {
+        @include e(card) {
+            & > div.Card,
+            & > div.CardBilling {
+                width: calc(94% / 2);
+                margin-right: 3%;
+                margin-bottom: 30px;
+
+                &:nth-child(2n+0) {
+                    margin-right:0;
+                }
+            }
+        }
+    }
+
+    @include m(blank) {
+        text-align: center;
+
+        @include e(image) {
+            margin-top:50px;
+            width:160px;
+            height:auto;
+        }
+
+        @include e(text) {
+            margin-top:20px;
+            font-size: $fontSize-h3;
+            color:$colorGray;
+        }
+    }
+}
+
+@include b(ConsultationRoom) {
+
+}

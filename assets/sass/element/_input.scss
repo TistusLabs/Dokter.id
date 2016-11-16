@@ -1,0 +1,245 @@
+@charset "UTF-8";
+
+@include b(Form){
+  padding-top:30px;
+  padding-bottom:40px;
+  padding-left:60px;
+  padding-right:40px;
+  @include e(title){
+    font-size:$fontSize-h1;
+    font-weight:600;
+  }
+  @include e(form){
+    @include flexbox();
+    padding-top:30px;
+  }
+  @include e(flex-container){
+    @include flexbox();
+  }
+  @include e(flex-basis){
+    @include flex-basis(100%);
+  }
+  @include e(input){
+    @include flex-basis(100%);
+    padding:0 15px;
+    @include m(half){
+      @include flex-basis(50%);
+    }
+  }
+  @include e(button-container){
+    @include flexbox();
+    @include justify-content(flex-end);
+    padding-top:20px;
+  }
+  @include e(button){
+    @include flex-basis(20%);
+    margin-right:15px;
+  }
+  @include e(image){
+    border-radius:50%;
+    width:100px;
+    height:100px;
+    display:block;
+    margin:0 auto 20px;
+    cursor:pointer;
+  }
+  @include e(label){
+    color:$colorDarkGray;
+    font-size:$fontSizeSmall;
+    margin-bottom:10px;
+    @include m(error){
+      color:$colorRed;
+    }
+    @include m(white){
+      color:$colorWhite;
+    }
+    @include m(absolute){
+      position:absolute;
+    }
+    @include m(border){
+      padding:10px 25px;
+      margin:10px -20px;
+      border-radius:$inputRadius;
+    }
+    @include m(border-error){
+      background-color:$colorRed;
+      color:$colorWhite;
+    }
+    @include m(hidden){
+      display:none;
+    }
+  }
+  @include m(background){
+    background-color:$colorWhite;
+  }
+}
+
+@include b(Input){
+  background-color:$colorWhite;
+  border: 1px solid $colorGray;
+  border-radius:$inputRadius;
+  line-height:1.2;
+  width:100%;
+  padding:15px;
+  margin-top:10px;
+  margin-bottom:10px;
+  resize:none;
+  overflow:hidden;
+  //@include appearance(none);
+  &:focus{
+  border: 1px solid $colorBlue;
+  border-radius:$inputRadius;
+  outline:none;
+  box-shadow:0px 0px 10px $colorBlue;
+  }
+  @include m(focus){
+  border: 1px solid $colorBlue;
+  border-radius:$inputRadius;
+  outline:none;
+  box-shadow:0px 0px 10px $colorBlue;
+  }
+  @include m(clickable){
+    cursor:default;
+    font-weight:normal;
+  }
+  @include m(center){
+    text-align:center;
+  }
+  @include m(icon){
+    padding-left:60px;
+  }
+  @include m(right-icon){
+    padding-right:60px;
+  }
+  @include m(error){
+    //&:focus{
+    border-color:$colorRed;
+    box-shadow:0px 0px 10px $colorRed;
+    //}
+  }
+  @include m(wide){
+    padding-top:20px !important;
+    padding-bottom:20px !important;
+  }
+  @include m(hidden){
+    display:none;
+  }
+  @include e(placeholder){
+    color:darken($colorGray, 15%);
+  }
+}
+
+@include b(InputIcon){
+  position:relative;
+  @include e(container){
+    position:absolute;
+    height:100%;
+    left:15px;
+    right:auto;
+    @include flexbox();
+    @include align-items(center);
+    @include m(right){
+      @include flex-direction(row-reverse);
+      left:auto;
+      right:15px;
+    }
+  }
+  @include e(icon){
+    width:30px;
+    //height:30px;
+    @include m(small){
+      width:15px;
+    }
+  }
+}
+
+@include b(InputSelect){
+  position:absolute;
+  z-index:1;
+  width:100%;
+  border:1px solid $colorGray;
+  margin-top:-10px;
+  box-shadow:0px 0px 10px $colorBlue;
+  display:none;
+  @include e(option){
+    padding:10px 15px;
+    background-color:#fff;
+    &:hover{
+      background-color:$colorBlue;
+    }
+    &[value=""]{
+      display:none;
+    }
+  }
+  @include m(open){
+    display:block;
+  }
+}
+
+@include b(InputRadio){
+  @include flexbox();
+  @include align-items(center);
+  font-weight:normal;
+  margin-bottom:15px;
+  @include e(radio){
+    border: 1px solid $colorGray;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    margin-right:10px;
+    display:inline-block;
+  }
+  &:hover &__radio{
+    border:6px solid $colorBlue;
+  }
+  @include e(input){
+    display:none;
+    &:checked ~ .InputRadio__radio{
+      border:6px solid $colorBlue;
+    }
+  }
+}
+
+@include b(InputMessage){
+  //width:100%;
+  border-left:none;
+  border-right:none;
+  border-color:$colorGray;
+  border-radius:0;
+  margin:0;
+  padding:25px 40px;
+}
+
+.select2-container--default .select2-selection--single {
+  background-color:$colorWhite;
+  border: 1px solid $colorGray;
+  border-radius:$inputRadius;
+}
+
+.select2-container .select2-selection--single {
+  @include flexbox();
+  height: auto;
+  padding:15px;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: $colorBlack;
+  line-height: 1.2;
+  padding-left:0;
+  padding-right:15px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 46px;
+  margin-top: 10px;
+}
+
+.select2-container--open .select2-dropdown--below {
+  margin-top:-10px;
+}
+
+.select2-container--open .select2-dropdown--above {
+  margin-top:10px;
+}

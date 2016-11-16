@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+@include b(Title) {
+    display: block;
+    @include e(text) {
+        font-size: $fontSize-h1;
+        font-family: "proxima-nova-semibold";
+    }
+    @include e(subtitle) {
+        font-size: $fontSize-h5;
+        color: $colorDarkGray;
+    }
+}

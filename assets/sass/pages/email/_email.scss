@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+@include b(Email) {
+	@include flexbox();
+	@include flex-direction(column);
+	max-width:600px;
+	margin:auto;
+	font-size:$fontSizeSmall;
+	//font-family:$fontFamilySemibold;
+	font-family:Verdana, Geneva, sans-serif;
+}
+
+@include b(EmailHeader) {
+	@include flexbox();
+	@include justify-content(center);
+	@include align-items(center);
+	background-color:darken($colorBlue, 10%);
+	background-image:url("../img/welcome/bg-left.png");
+	background-repeat:no-repeat;
+	background-size:cover;
+	height:130px;
+	padding-bottom:30px;
+	@include e(logo){
+		width:180px;
+	}
+}
+
+@include b(EmailContent) {
+	background-color:$colorWhiteGray;
+	padding-left:20px;
+	padding-right:20px;
+	font-size:$fontSizeBase;
+	//font-family:$fontFamilyBase;
+	font-weight:600;
+	@include e(container) {
+		margin-top:-30px;
+		padding:20px 20px 30px;
+		background-color:$colorWhite;
+	}
+	@include e(message) {
+		padding-top:20px;
+		padding-bottom:25px;
+	}
+	@include e(feature) {
+		padding:10px;
+	}
+	@include e(feature-item) {
+		@include flexbox();
+		padding-top:25px;
+		@include media('<=500px') {
+			@include flex-wrap(wrap);
+		}
+	}
+	@include e(feature-icon) {
+		@include flex-basis(20%);
+		@include flex-grow(0);
+		@include flex-shrink(0);
+		//min-width:60px;
+		@include media('<=500px') {
+			@include flexbox();
+			@include justify-content(center);
+			@include flex-basis(100%);
+		}
+	}
+	@include e(feature-content) {
+		@include flex-basis(100%);
+		padding-left:25px;
+		@include media('<=500px') {
+			text-align:center;
+			padding-left:0;
+			padding-top:10px;
+			padding-bottom:10px;
+		}
+	}
+	@include e(feature-title) {
+		font-size:$fontSize-h3;
+		line-height:1.8;
+		color:$colorBlue;
+		@include m(orange){
+			color:$colorOrange;
+		}
+		@include m(yellow){
+			color:$colorYellow;
+		}
+		@include m(green){
+			color:$colorGreen;
+		}
+		@include m(red){
+			color:$colorRed;
+		}
+	}
+	@include e(circle) {
+		border-radius:50%;
+		padding:20px;
+		background-color:$colorBlue;
+		width:100px;
+		@include m(orange) {
+			background-color:$colorOrange;
+		}
+		@include m(yellow) {
+			background-color:$colorYellow;
+		}
+		@include m(green) {
+			background-color:$colorGreen;
+		}
+		@include m(red) {
+			background-color:$colorRed;
+		}
+	}
+	@include e(button-container) {
+		@include flexbox();
+		@include justify-content(center);
+		margin:50px 0;
+	}
+	@include e(button) {
+		color:$colorWhite;
+		background-color:$colorYellow;
+		padding:15px 30px;
+		border-radius:$buttonBaseRadius;
+		&:hover {
+			background-color:darken($colorYellow, 10%);
+		}
+	}
+	@include e(social) {
+		@include flexbox();
+		@include justify-content(center);
+	}
+	@include e(social-item) {
+		padding:5px;
+		margin:10px;
+		margin-top:30px;
+		border-radius:8px;
+		@include m(facebook) {
+			background-color:#46639e;
+		}
+		@include m(twitter) {
+			background-color:#55acee;;
+		}
+		@include m(instagram) {
+			background-color:#88513f;
+		}
+	}
+}
+
+@include b(EmailFooter) {
+	text-align:center;
+	background-color:darken($colorBlue, 35%);
+	color:$colorGray;
+	padding-bottom:30px;
+	@include e(text) {
+		padding-top:20px;
+		line-height:1.4;
+	}
+	& a {
+		color:$colorGray;
+		text-decoration:underline;
+		font-weight:600;
+	}
+}

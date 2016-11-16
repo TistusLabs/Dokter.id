@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+@include b(Invite) {
+    height:100%;
+    width:100%;
+
+    @include e(box) {
+        border:2px dashed $colorGray;
+        color:$colorDarkGray;
+        font-size:$fontSize-h3;
+        cursor:pointer;
+        height:100%;
+        width:100%;
+        
+        @include border-radius($buttonBaseRadius);
+        @include flexbox();
+        @include justify-content(center);
+        @include align-items(center);
+
+        &:hover {
+            border-color:$colorDarkGray;
+        }
+
+        img {
+            margin-right:15px;
+        }
+    }
+
+}

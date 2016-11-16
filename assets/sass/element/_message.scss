@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+@include b(Message) {
+
+    @include e(item) {
+        margin-bottom: 25px;
+    }
+
+    @include e(icon) {
+        margin:25px 0 20px;
+    }
+
+    @include e(title) {
+        font-size: $fontSize-h3;
+        font-weight: $fontWeightSemibold;
+    }
+
+    @include e(subtitle) {
+        font-size: $fontSizeBase;
+    }
+
+    @include e(button) {
+        margin-top:15px;
+        @include flexbox();
+        @include justify-content(center);
+    }
+
+    @include m(no-chat) {
+        color: $colorDarkGray;
+        text-align: center;
+        font-size: $fontSizeBase;
+        margin:50px 0;
+        @include flexbox();
+        @include justify-content(center);
+        @include align-items(center);
+        @include flex-direction(column);
+    }
+}

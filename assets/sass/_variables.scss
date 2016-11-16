@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+//== COLORS
+$colorBlue:         #0991FF !default;
+$colorRed:          #D8000C !default;
+$colorPink:         #EA1D63 !default;
+$colorGreen:        #27AE60 !default;
+$colorOrange:       #EF4426 !default;
+$colorYellow:       #F39C12 !default;
+
+$colorBlack:        #000000 !default;
+$colorBrown:        #2B2B2B !default;
+$colorDarkGray:     #8F8F8F !default;
+$colorGray:         #CECECE !default;
+$colorWhiteGray:    #F5F4F4 !default;
+$colorWhite:        #FFFFFF !default;
+
+$brandPrimary:      $colorBlue;
+$brandSuccess:      $colorGreen;
+$brandInfo:         #5BC0DE !default;
+$brandWarning:      $colorYellow;
+$brandError:        $colorOrange;
+
+//== FONTS
+$fontFamilyLight:         "proxima-nova-light" !default;
+$fontWeightLight:         200 !default;
+$fontFamilyBase:          "proxima-nova-regular" !default;
+$fontWeightBase:          400 !default;
+$fontFamilySemibold:      "proxima-nova-semibold" !default;
+$fontWeightSemibold:      600 !default;
+$fontFamilyBold:          "proxima-nova-bold" !default;
+$fontWeightBold:          700 !default;
+
+$fontSizeBase:      14px !default;
+$fontSizeLarge:     ceil(($fontSizeBase * 1.20)) !default; // ~17px
+$fontSizeSmall:     ceil(($fontSizeBase * 0.85)) !default; // ~12px
+
+$fontSize-h1:       floor(($fontSizeBase * 2.60)) !default; // ~36px
+$fontSize-h2:       floor(($fontSizeBase * 2.15)) !default; // ~30px
+$fontSize-h3:       ceil(($fontSizeBase * 1.55)) !default; // ~21px
+$fontSize-h4:       ceil(($fontSizeBase * 1.20)) !default; // ~17px
+$fontSize-h5:       $fontSizeBase !default;
+$fontSize-h6:       ceil(($fontSizeBase * 0.85)) !default; // ~12px
+
+//== HEADER HEIGHT & SIDENAV WIDTH
+$headerHeight:          80px !default;
+$sideNavWidth:          160px !default;
+
+//== GLOBAL STYLES ==//
+//== FOR BODY
+$mainBackground:          $colorWhite !default;
+$textColor:               $colorBrown;
+$baseTransition:          all .3s ease-in-out !default;
+
+//== FOR LINK
+$linkColor:               $colorBrown;
+$linkHoverColor:          darken($colorBrown, 15%) !default;
+$linkHoverDecoration:     underline !default;
+
+//== SECTION
+$sectionWhite:            $colorWhite;
+$sectionGray:             $colorWhiteGray;
+$sectionPadding:          20px 50px;
+$sectionHeaderPadding:    40px 50px;
+
+//== BUTTON
+$buttonFontFamily:          $fontFamilyBase;
+
+$buttonBaseRadius:          8px !default;
+$buttonRoundedRadius:       40px !default;
+
+$buttonBorderWeight:        1px !default;
+
+$buttonBasePadding:         10px 20px !default;
+$buttonSmallPadding:        6px 12px !default;
+$buttonBigPadding:          15px 40px !default;
+$buttonRegisterPadding:     25px 50px !default;
+
+//== CALL BUTTON
+$buttonIconPadding:         10px 50px !default;
+$buttonIconWidth:           100px !default;
+$buttonIconHeight:          50px !default;
+
+$buttonCircleWidth:         85px !default;
+$buttonCircleHeight:        85px !default;
+
+//== CARD
+$cardImageRadius:           50% !default;
+
+
+//== INPUT
+$inputRadius:               10px !default;
+
+//== MODALS DIALOG
+$dialogShadow:            0 0 15px rgba(0,0,0,.15);
+$dialogPadding:           40px 50px !default;
+$dialogActionPadding:     10px 10px !default;
+$dialogInformationPadding:10px 10px !default;
+$dialogRadius:            15px !default;
+$dialogMinimumWidth:      450px !default;
+$dialogMaximumWidth:      650px !default;
+
+$overlayOpacity:            0.8 !default;
+$overlayZIndex:             999 !default;
+$overlayBackground:         $colorGray !default;
+
+//== IMAGE
+$imageRadius:             50% !default;
+
+//== MEDIA QUERIES BREAKPOINT

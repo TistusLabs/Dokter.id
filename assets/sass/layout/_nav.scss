@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+@include b(TopMenu) {
+    position: absolute;
+    z-index: 10;
+    top: 100%;
+    right: 0;
+    width: 250px;
+    height: auto;
+    margin-top: 12px;
+    color: $colorBrown;
+    border: 1px solid $colorGray;
+    @include box-shadow($dialogShadow);
+    @include m(is-hidden) {
+        display: none;
+    }
+    @include e(wrapper) {
+        position: relative;
+    }
+    @include e(arrow) {
+        position: absolute;
+        top: 0;
+        right: 9px;
+        margin-top: -12px;
+        @include triangle(up, lighten($colorWhiteGray, 50%), 20px, 12px);
+    }
+    @include e(item) {
+        text-align: right;
+        border-bottom: 1px solid lighten($colorDarkGray, 30%);
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+    @include e(link) {
+        padding: 10px 20px;
+        color: $colorDarkGray;
+        background-color: lighten($colorWhiteGray, 50%);
+        @include flexbox();
+        @include justify-content(flex-end);
+        @include align-items(center);
+        @include transition(all .15s ease-in-out);
+        &:hover,
+        &:active,
+        &:focus {
+            padding-right: 25px;
+            color: darken($colorDarkGray, 15%);
+            background-color: $colorWhiteGray;
+        }
+    }
+    @include e(text) {
+         @include flex(1);
+    }
+    @include e(icon) {
+        width: 18px;
+        height: 18px;
+        margin-left: 10px;
+        @include flex-basis(15px);
+    }
+}
+
+@include b(SideNav) {
+    width:$sideNavWidth;
+    list-style: none;
+    background-color: lighten($colorBrown, 5%);
+	padding: 0;
+	margin: 0;
+    z-index: 999;
+
+    @include e(item) {
+        border-bottom: 1px solid lighten($colorBrown, 15%);
+        @include transition(all .25s ease-in-out);
+
+        &:hover {
+            background-color: $colorBrown;
+        }
+
+        @include m(footer) {
+            cursor:default;
+            &:hover {
+                background: lighten($colorBrown, 5%);
+            }
+        }
+    }
+
+    @include e(link) {
+        @include flexbox();
+        @include justify-content(center);
+        @include align-items(center);
+        @include flex-direction(column);
+        height: 110px;
+    	overflow: hidden;
+        font-family: $fontFamilySemibold;
+    	text-decoration: none;
+    	color: $colorWhite;
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $colorWhite;
+        }
+    }
+
+    @include e(icon) {
+        width: 40px !important;
+    }
+
+    @include e(text) {
+        margin-top:5px;
+    }
+}
+
+// MULTILEVEL PUSH MENU
+.multilevelpushmenu_wrapper {
+	/*position: absolute;*/
+	overflow: hidden;
+	min-width: 100%;
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+    box-sizing: border-box;
+    padding-top:$headerHeight;
+    z-index:-2;
+}
+
+.multilevelpushmenu_wrapper .levelHolderClass {
+	position: absolute;
+	overflow: hidden;
+	top: 0;
+	background: lighten($colorBrown, 5%);
+	width: auto;
+	min-height: 100%;
+	zoom: 1;
+}
+
+.multilevelpushmenu_wrapper .ltr {
+	margin-left: -100%;
+	left: 0;
+}
+
+.multilevelpushmenu_wrapper .rtl {
+	margin-right: -100%;
+	right: 0;
+}
+
+.multilevelpushmenu_wrapper .multilevelpushmenu_inactive {
+	background: lighten($colorBrown, 5%);
+}
+
+.multilevelpushmenu_wrapper .backItemClass {
+	display: block;
+    padding: 15px;
+    border-bottom: 1px solid lighten($colorBrown, 15%);
+}
+.multilevelpushmenu_wrapper .backItemClass a {
+    font-family: $fontFamilySemibold;
+    color: $colorGray;
+    display:block;
+    height:auto;
+}
+
+.multilevelpushmenu_wrapper .backItemClass a::after{
+    content:url(../img/navigation/side/arrow-right.png);
+    float:right;
+    margin-top:2px;
+    text-align: right;
+    margin-left:10px;
+}
+
+.multilevelpushmenu_wrapper .floatRight {
+	float: right;
+}
+
+.multilevelpushmenu_wrapper .floatLeft {
+	float: left;
+}
+
+.multilevelpushmenu_wrapper .cursorPointer {
+	cursor: pointer;
+}
