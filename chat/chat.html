@@ -1,0 +1,30 @@
+<div id="chat">
+    <h1>Chat with {{partner.name}}</h1>
+    <img height="100px" width="100px" ng-src="{{'http://www.gravatar.com/avatar/'+partner.profileimage}}"/>
+    <h4>Status: {{$root.connectionStatus}}</h4>
+    <form name="chatsend" onsubmit="sendMsg(message)">
+        <div id="chatMessages" style="width:600px;min-height:200px;background-color:lightgrey;">
+            <!--<div class="chatbubble" ng-repeat="msg in messagesList">
+        <b>{{msg.by}}</b> &#0062;&#0062; {{msg.message}}
+    </div>-->
+        </div>
+        <div>
+            <textarea id="messagebox" ng-model="message" style="width:450px;"></textarea>
+            <input type="button" value="Send" ng-click="sendMsg(message)" />
+            <input id="call" type="button" value="Video Call" ng-click="call()" />
+            <input id="endcall" type="button" value="End Call" ng-click="endCall()" style="display:none;" />
+        </div>
+    </form>
+</div>
+
+<div id="box" style="background: #fff; font-size: 18px;padding:40px 30px; text-align: center;">
+    Drag file here to send to active connections.
+</div>
+
+<div id="video">
+    <h1 id="videoheadding">{{videochatText}}</h1>
+    <div style="padding:25px;">
+        <video id="theirvideo" autoplay></video>
+        <video id="myvideo" muted="true" autoplay></video>
+    </div>
+</div>

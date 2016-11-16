@@ -1,0 +1,22 @@
+<h1>User login</h1>
+<div layout="column" style="max-width:450px">
+    <div layout="row">
+        <md-input-container flex>
+            <label>Email</label>
+            <input type="text" ng-model="username">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Password</label>
+            <input type="password" ng-model="password">
+        </md-input-container>
+    </div>
+    <div layout="row">
+        <md-button flex ng-click="authenticateUser(username,password)" class="md-raised md-primary">Enter Account</md-button>
+        <md-button flex ng-click="" class="md-raised">Forgot Password</md-button>
+    </div>
+</div>
+<br>
+<br>
+<div>
+    <p>New User? <a href="#/signup">Sign up now!</a></p>
+</div>

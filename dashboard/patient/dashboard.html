@@ -1,0 +1,55 @@
+<h1>Doctors Information</h1>
+<p>Click on the doctor who you want to contact.</p>
+<md-content>
+    <div layout="row">
+        <md-input-container>
+            <label>Search for symptoms, conditions,doctor, etc.</label>
+            <input ng-model="searchquery">
+        </md-input-container>
+        <span>or</span>
+        <md-input-container>
+            <label>Browse medical categories</label>
+            <md-select ng-model="selectedCategories" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+                multiple>
+                <md-select-header class="demo-select-header">
+                    <input ng-model="searchTerm" type="search" placeholder="Search for a category.." class="demo-header-searchbox md-text">
+                </md-select-header>
+                <md-optgroup label="Categories">
+                    <md-option ng-value="category" ng-repeat="doctor in doctors |
+              filter:searchTerm">{{doctor.speciality}}</md-option>
+                </md-optgroup>
+            </md-select>
+        </md-input-container>
+    </div>
+
+    <md-list>
+        <md-list-item class="md-3-line doctor" ng-repeat="doctor in doctors | filter:searchquery | filter:selectedcategories">
+            <img ng-src="{{'http://www.gravatar.com/avatar/'+doctor.profileimage}}" class="md-avatar" alt="{{doctor.name}}">
+            <div class="md-list-item-text" layout="column">
+                <h3><b>{{doctor.name}}</b></h3>
+                <h4><small>{{doctor.speciality}}</small></h4>
+                <p>Speciality note</p>
+                <div ng-if="doctor.status == 'Online'"><small>Status: <span style="color:green;">{{doctor.status}}</span></small></div>
+                <div ng-if="doctor.status == 'Offline'"><small>Status: <span style="color:red;">{{doctor.status}}</span></small></div>
+            </div>
+            <div layout="column">
+                    <md-button ng-click="openDoctorDetails(doctor.id)">More Info</md-button>
+                    <md-button ng=click="scheduleCall()">Schedule Call</md-button>
+                </div>
+        </md-list-item>
+    </md-list>
+</md-content>
+<!--<div>
+    <div>
+
+        <section ng-repeat="doctor in doctors" class="doctor" ng-click="openDoctorDetails(doctor.id);">
+            <img width="100px" height="100px" ng-src="{{'http://www.gravatar.com/avatar/'+doctor.profileimage}}" alt="Profile picture">
+            <div>
+                <div><b>{{doctor.name}}</b></div>
+                <div><small>{{doctor.speciality}}</small></div>
+                <div ng-if="doctor.status == 'Online'"><small>Status: <span style="color:green;">{{doctor.status}}</span></small></div>
+                <div ng-if="doctor.status == 'Offline'"><small>Status: <span style="color:red;">{{doctor.status}}</span></small></div>
+            </div>
+        </section>
+    </div>
+</div>-->

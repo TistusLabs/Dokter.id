@@ -1,0 +1,57 @@
+
+<div layout="row">
+    <div layout="column">
+        <h1>{{doctor.name}}</h1>
+        <p>{{doctor.otherdata.rate}} | {{doctor.otherdata.speciality}} | {{doctor.city}}, {{doctor.country}}</p>
+    </div>
+    <div layout="column">
+        <img ng-src="{{'http://www.gravatar.com/avatar/'+doctor.profileimage}}" class="md-avatar" alt="{{doctor.name}}">
+    </div>
+</div>
+
+<div style="padding:25px;">
+    <input type="button" value="Contact Doctor Now" ng-click="openChatWindow(doctor)"/>
+    <input type="button" value="Schedule Call"/>
+    <br>
+    <input type="button" value="Back to Dashboard" ng-click="backtoDashboard()" />
+</div>
+
+<md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="overview">
+        <md-content class="md-padding">
+          <h3>Professioncal Statement</h3>
+          <p>{{doctor.otherdata.shortbiography}}</p>
+          <br>
+          <h3>Languages Spoken</h3>
+          <p>{{arrayToString(doctor.languages)}}</p>
+        </md-content>
+      </md-tab>
+      <md-tab label="medical experience">
+        <md-content class="md-padding">
+          <h3>Conditions Treated</h3>
+          <p></p>
+          <h3>Procedures performed</h3>
+          <p></p>
+          <h3>Awards</h3>
+          <p></p>
+        </md-content>
+      </md-tab>
+      <md-tab label="education">
+        <md-content class="md-padding">
+          <h3>Awards</h3>
+          <p></p>
+        </md-content>
+      </md-tab>
+      <!--<md-tab label="messages">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Tab Three</h1>
+          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+        </md-content>
+      </md-tab>-->
+       <md-tab label="past consultations">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Tab Three</h1>
+          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+        </md-content>
+      </md-tab>
+    </md-tabs>

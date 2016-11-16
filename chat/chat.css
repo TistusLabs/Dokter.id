@@ -1,0 +1,32 @@
+.chatbubble{
+    background-color: lightyellow;
+    margin: 5px;
+}
+
+.filebubble{
+    background-color: lightsalmon;
+    margin: 5px;
+}
+
+#video{
+    /*display: none;*/
+}
+
+#theirvideo{
+    margin: 15px;
+	min-width: 450px;
+	background-color: lightgray;
+    border: 1px solid gray;
+}
+
+#video{
+    padding:25px;
+    text-align: center;
+}
+
+#myvideo{
+    width: 50%;
+	height: 75%;
+	max-height: 480px;
+	background-color: #eee;
+}

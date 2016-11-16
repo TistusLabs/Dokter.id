@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="myApp">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Dokter.id</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="chat/chat.css">
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.css">
+
+</head>
+
+<body ng-controller="mainController" ng-cloak layout="column">
+
+  <div id="BusyIndicator" ng-show="$root.isBusy" layout="column">
+    <div layout-align="center center">
+      <div layout="row">
+        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="50px" height="50px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+      <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+        <animateTransform attributeType="xml"
+          attributeName="transform"
+          type="rotate"
+          from="0 25 25"
+          to="360 25 25"
+          dur="0.6s"
+          repeatCount="indefinite"/>
+        </path>
+      </svg>
+      </div>
+      <div layout="row">
+        <p>{{$root.bcmessage}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div layout="row">
+    <md-toolbar class="md-theme-indigo" layout="row" flex>
+      <div flex>
+        <h1 class="md-toolbar-tools">Logo</h1>
+      </div>
+      <div ng-if="$root.validSession" layout="row">
+        <div layout="column" layout-align="center center">
+          <small>My Payment</small>
+          <span>Rp.100</span>
+        </div>
+        <md-menu md-position-mode="target-right target">
+          <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
+            <i style="font-size:24px;" class="icon ion-person"></i>
+          </md-button>
+          <md-menu-content width="4">
+            <div layout-padding layout="row">
+              <img height="50px" width="50px" ng-src="{{'http://www.gravatar.com/avatar/'+$root.userObject.profileimage}}" />
+              <h4>{{$root.userObject.username}}</h4>
+            </div>
+            <md-menu-item ng-repeat="menu in $root.submenu">
+              <md-button ng-click="">
+                {{menu.caption}}
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
+    </md-toolbar>
+
+  </div>
+  <section layout="row" flex>
+    <md-sidenav layout="column" class="mainmenu md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+      <md-content layout-padding class="mainmenu">
+        <md-list>
+          <md-list-item layout="column" ng-repeat="link in $root.menu" ng-click="openWidow(link.route)">
+            <div layout="column" layout-align="center center">
+              <div>
+                <i style="font-size:24px;" class="icon {{link.icon}}"></i>
+              </div>
+              <span>{{link.caption}}</span>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </md-sidenav>
+
+    <md-content layout="column" flex="" layout-padding="">
+      <div layout="column" ng-view></div>
+      <footer layout="row" layout-padding="">
+        <div flex></div>
+        <div>Welcome <b>{{$root.username}}</b> | Version <span app-version></span></div>
+      </footer>
+    </md-content>
+  </section>
+
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="app.js"></script>
+  <!--script src="https://cdn.peerjs.com/0.3.14/peer.js"></script-->
+  <script src="peer0.3.15.js"></script>
+  <script src="view1/view1.js"></script>
+  <script src="view2/view2.js"></script>
+  <script src="login/login.js"></script>
+  <script src="signup/signup.js"></script>
+  <script src="signup/signup.patient.js"></script>
+  <script src="signup/signup.doctor.js"></script>
+  <script src="dashboard/doctor/dashboard.js"></script>
+  <script src="dashboard/patient/dashboard.js"></script>
+  <script src="dashboard/patient/doctorinfo/doctor.js"></script>
+  <script src="chat/chat.js"></script>
+  <script src="services/services.js"></script>
+  <script src="logout/logout.js"></script>
+  <script src="myprofile/doctor/myprofile.js"></script>
+  <script src="pagenotfound/pagenotfound.js"></script>
+  <script src="mypatients/mypatients.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+  <script src="https://prepaid.topas.tv:4001/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="downloadfile.js"></script>
+  <script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
+</body>
+
+</html>

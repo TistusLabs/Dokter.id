@@ -1,0 +1,33 @@
+<div layout="row">
+    <div layout="column" class="md-padding" layout-align="start center">
+        <img width="200px" height="200px" ng-src="{{'http://www.gravatar.com/avatar/'+$root.userObject.profileimage}}" class="md-avatar" alt="{{$root.userObject.name}}">
+        <h1>{{$root.userObject.name}}</h1>
+        <p>{{$root.userObject.otherdata.speciality}} | {{$root.userObject.city}}, {{$root.userObject.country}}</p>
+        <h1>{{$root.userObject.otherdata.rate}}</h1>
+        <span><i class="icon ion-heart"></i> Helped 124 People</span>
+        <span><i class="icon ion-thumbsup"></i> Recieved 104 Thanks</span>
+    </div>
+    <div flex>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Overview">
+                <md-content class="md-padding">
+                    <h3>Professioncal Statement</h3>
+                    <p>"My motto of like, Do the best and let God do the rest"</p>
+                    <h3>Languages Spoken</h3>
+                    <p>English,German</p>
+                    <h3>Conditions Treated</h3>
+                    <p>Headache</p>
+                    <h3>Procedures performed</h3>
+                    <p>Surgery</p>
+                    <h3>Awards</h3>
+                    <p>Award number one</p>
+                </md-content>
+            </md-tab>
+            <md-tab label="Messages">
+                <md-content class="md-padding">
+                    messages comes here
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </div>
+</div>

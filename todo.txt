@@ -1,0 +1,3 @@
+DB Side
+- Updte DB when doctor changes Status
+- load all msgs relavent to doctor on doctor profile page

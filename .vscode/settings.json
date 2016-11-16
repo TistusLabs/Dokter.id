@@ -1,0 +1,8 @@
+{
+    "go.formatTool": "gofmt",
+    "go.buildOnSave": false,
+    "go.gopath": "D:/V6/WF-GO/",
+    "go.goroot": "C:/Go/",
+    "go.gocodeAutoBuild": false,
+    "files.autoSave": "off"
+}
