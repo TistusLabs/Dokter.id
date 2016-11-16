@@ -22,82 +22,180 @@
 
 <body ng-controller="mainController" ng-cloak layout="column">
 
-  <div id="BusyIndicator" ng-show="$root.isBusy" layout="column">
-    <div layout-align="center center">
-      <div layout="row">
-        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-          width="50px" height="50px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-      <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
-        <animateTransform attributeType="xml"
-          attributeName="transform"
-          type="rotate"
-          from="0 25 25"
-          to="360 25 25"
-          dur="0.6s"
-          repeatCount="indefinite"/>
-        </path>
-      </svg>
-      </div>
-      <div layout="row">
-        <p>{{$root.bcmessage}}</p>
-      </div>
-    </div>
-  </div>
 
-  <div layout="row">
-    <md-toolbar class="md-theme-indigo" layout="row" flex>
-      <div flex>
-        <h1 class="md-toolbar-tools">Logo</h1>
-      </div>
-      <div ng-if="$root.validSession" layout="row">
-        <div layout="column" layout-align="center center">
-          <small>My Payment</small>
-          <span>Rp.100</span>
+  <div class="Wrapper">
+    <!-- HEADER -->
+    <header class="Wrapper__header Header">
+      <!-- LOGO -->
+      <img class="Logo" src="build/img/logo-full.png" title="Dokter.ID Telemedicine" alt="Dokter.ID Telemedicine" />
+      <!-- TOP NAVIGATION -->
+      <nav class="TopNavigation">
+        <!-- TOP MENU // Hidden Menu Modifier (TopMenu--is-hidden)-->
+        <div class="TopNavigation__menu-wrapper TopMenu">
+          <div class="TopMenu__wrapper">
+            <div class="TopMenu__arrow"></div>
+            <ul class="TopMenu__menu">
+              <li class="TopMenu__item">
+                <a href="user-setting.html" class="TopMenu__link">
+                  <div class="TopMenu__text">Settings</div>
+                  <img class="TopMenu__icon" src="build/img/navigation/top/setting.png" alt="Settings" title="Settings" width="18" height="18"
+                  />
+                </a>
+              </li>
+              <li class="TopMenu__item">
+                <a href="consultation-manage.html" class="TopMenu__link">
+                  <div class="TopMenu__text">Manage Consultation</div>
+                  <img class="TopMenu__icon" src="build/img/navigation/top/consultation.png" alt="Manage Consultation" title="Manage Consultation"
+                    width="18" height="18" />
+                </a>
+              </li>
+              <li class="TopMenu__item">
+                <a href="billing-topup.html" class="TopMenu__link">
+                  <div class="TopMenu__text">Top Up Credit</div>
+                  <img class="TopMenu__icon" src="build/img/navigation/top/topup.png" alt="Top Up Credit" title="Top Up Credit" width="18"
+                    height="18" />
+                </a>
+              </li>
+              <li class="TopMenu__item">
+                <a href="billing-manage.html" class="TopMenu__link">
+                  <div class="TopMenu__text">Manage Billing</div>
+                  <img class="TopMenu__icon" src="build/img/navigation/top/billing.png" alt="Manage Billing" title="Manage Billing" width="18"
+                    height="18" />
+                </a>
+              </li>
+              <li class="TopMenu__item">
+                <a href="#" class="TopMenu__link">
+                  <div class="TopMenu__text">Sign Out</div>
+                  <img class="TopMenu__icon" src="build/img/navigation/top/signout.png" alt="Sign Out" title="Sign Out" width="18" height="18"
+                  />
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <md-menu md-position-mode="target-right target">
-          <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
-            <i style="font-size:24px;" class="icon ion-person"></i>
-          </md-button>
-          <md-menu-content width="4">
-            <div layout-padding layout="row">
-              <img height="50px" width="50px" ng-src="{{'http://www.gravatar.com/avatar/'+$root.userObject.profileimage}}" />
-              <h4>{{$root.userObject.username}}</h4>
-            </div>
-            <md-menu-item ng-repeat="menu in $root.submenu">
-              <md-button ng-click="">
-                {{menu.caption}}
-              </md-button>
-            </md-menu-item>
-          </md-menu-content>
-        </md-menu>
-      </div>
-    </md-toolbar>
+        <div class="TopNavigation__balance">
+          <div class="TopNavigation__credit-label">Credit</div>
+          <div class="TopNavigation__amount">IDR 1.000.000</div>
+        </div>
+        <div class="TopNavigation__profile">
+          <img class="TopNavigation__avatar" src="build/img/sample/avatar.png" alt="{{fullname}}" title="{{fullname}}" />
+          <!--<div class="TopNavigation__profile-arrow TopNavigation&#45;&#45;arrow-up"></div>-->
+        </div>
+      </nav>
+    </header>
 
+    <!-- CONTENT  -->
+    <!-- // Hidden SideNav (Main--no-sidenav) -->
+    <main class="Wrapper__main Main">
+      <!-- SIDE NAVIGATION -->
+      <aside class="Main__side" id="menu">
+        <nav>
+          <ul class="SideNav">
+            <li class="SideNav__item">
+              <a href="home.html" class="SideNav__link">
+                <img class="SideNav__icon" src="build/img/navigation/side/home.png" alt="Home" title="Home" />
+                <span class="SideNav__text">Home</span>
+              </a>
+            </li>
+            <li class="SideNav__item">
+              <a href="dashboard.html" class="SideNav__link">
+                <img class="SideNav__icon" src="build/img/navigation/side/dashboard.png" alt="Dashboard" title="Dashboard" />
+                <span class="SideNav__text">Dashboard</span>
+              </a>
+            </li>
+            <li class="SideNav__item">
+              <a href="javascript:void(0)" class="SideNav__link">
+                <img class="SideNav__icon" src="build/img/navigation/side/consultation.png" alt="Consultation" title="Consultation" />
+                <span class="SideNav__text">Consultation</span>
+              </a>
+              <ul class="SideNav">
+                <li class="SideNav__item">
+                  <a href="consultation-active.html" class="SideNav__link">
+                    <img class="SideNav__icon" src="build/img/navigation/side/active-consultation.png" alt="Active Consultation" title="Active Consultation"
+                    />
+                    <span class="SideNav__text">Active Consultation</span>
+                  </a>
+                </li>
+                <li class="SideNav__item">
+                  <a href="consultation-past.html" class="SideNav__link">
+                    <img class="SideNav__icon" src="build/img/navigation/side/past-consultation.png" alt="Past Consultation" title="Past Consultation"
+                    />
+                    <span class="SideNav__text">Past Consultation</span>
+                  </a>
+                </li>
+                <li class="SideNav__item">
+                  <a href="consultation-manage.html" class="SideNav__link">
+                    <img class="SideNav__icon" src="build/img/navigation/side/manage-consultation.png" alt="Manage Consultation" title="Manage Consultation"
+                    />
+                    <span class="SideNav__text">Manage Consultation</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="SideNav__item">
+              <a href="javascript:void(0)" class="SideNav__link">
+                <img class="SideNav__icon" src="build/img/navigation/side/billing.png" alt="Billing" title="Billing" />
+                <span class="SideNav__text">Billing</span>
+              </a>
+              <ul class="SideNav">
+                <li class="SideNav__item">
+                  <a href="billing-topup.html" class="SideNav__link">
+                    <img class="SideNav__icon" src="build/img/navigation/side/billing-topup.png" alt="Add Credit" title="Add Credit" />
+                    <span class="SideNav__text">Add Credit</span>
+                  </a>
+                </li>
+                <li class="SideNav__item">
+                  <a href="billing-manage" class="SideNav__link">
+                    <img class="SideNav__icon" src="build/img/navigation/side/manage-billing.png" alt="Manage Billing" title="Manage Billing"
+                    />
+                    <span class="SideNav__text">Manage Billing</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="SideNav__item SideNav__item--footer">
+              <!-- FOOTER -->
+              <footer class="Footer">
+                <ul class="FooterLink">
+                  <li class="FooterLink__item">
+                    <a class="FooterLink__link" href="support.html">Support</a>
+                  </li>
+                  <li class="FooterLink__item">
+                    <a class="FooterLink__link" href="tutorial.html">Tutorial</a>
+                  </li>
+                </ul>
+                <ul class="SocialMedia">
+                  <li class="SocialMedia__item">
+                    <a href="https://www.facebook.com/PilihDokter" target="_blank">
+                      <img src="build/img/social/facebook.png" alt="Facebook Dokter.ID" title="Facebook Dokter.ID" width="24" height="24" />
+                    </a>
+                  </li>
+                  <li class="SocialMedia__item">
+                    <a href="https://twitter.com/dokter_indo" target="_blank">
+                      <img src="build/img/social/twitter.png" alt="Twitter Dokter.ID" title="Twitter Dokter.ID" width="24" height="24" />
+                    </a>
+                  </li>
+                  <li class="SocialMedia__item">
+                    <a href="https://www.instagram.com/dokterid" target="_blank">
+                      <img src="build/img/social/instagram.png" alt="Instagram Dokter.ID" title="Instagram Dokter.ID" width="24" height="24" />
+                    </a>
+                  </li>
+                </ul>
+                <div class="Footer__copy">Copyright &copy; ARE GEE, Inc</div>
+              </footer>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- SECTION -->
+      <section class="Main__wrapper">
+        <div ng-view></div>
+      </section>
+    </main>
   </div>
-  <section layout="row" flex>
-    <md-sidenav layout="column" class="mainmenu md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-      <md-content layout-padding class="mainmenu">
-        <md-list>
-          <md-list-item layout="column" ng-repeat="link in $root.menu" ng-click="openWidow(link.route)">
-            <div layout="column" layout-align="center center">
-              <div>
-                <i style="font-size:24px;" class="icon {{link.icon}}"></i>
-              </div>
-              <span>{{link.caption}}</span>
-            </div>
-          </md-list-item>
-        </md-list>
-      </md-content>
-    </md-sidenav>
 
-    <md-content layout="column" flex="" layout-padding="">
-      <div layout="column" ng-view></div>
-      <footer layout="row" layout-padding="">
-        <div flex></div>
-        <div>Welcome <b>{{$root.username}}</b> | Version <span app-version></span></div>
-      </footer>
-    </md-content>
-  </section>
+  
 
 
   <!-- In production use:
@@ -106,7 +204,7 @@
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
-  
+
   <script src="view1/view1.js"></script>
   <script src="view2/view2.js"></script>
   <script src="signup/signup.js"></script>
@@ -126,7 +224,7 @@
   <script src="https://prepaid.topas.tv:4001/socket.io/socket.io.js"></script>
   <script type="text/javascript" src="downloadfile.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/core-min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/md5-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/md5-min.js"></script>
   <script src="bower_components/angular-material/angular-material.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-aria/angular-aria.js"></script>

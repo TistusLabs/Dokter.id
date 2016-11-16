@@ -57,7 +57,7 @@ angular.module('myApp.patient.dashboard', ['ngRoute'])
             });
         }
 
-        var peer = $rootScope.getPeer();
+        /*var peer = $rootScope.getPeer();
         peer.on('connection', function (c) {
             c.on('open', function () {
                 console.log(c.label +" request is recived.");
@@ -69,6 +69,6 @@ angular.module('myApp.patient.dashboard', ['ngRoute'])
         });
         peer.on('error', function (err) {
             alert(err);
-        })
+        })*/
 
     }]);
