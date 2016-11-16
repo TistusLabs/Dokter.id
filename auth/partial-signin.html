@@ -1,0 +1,69 @@
+<div class="Wrapper">
+    <div class="Wrapper__why-us Intro">
+        <img class="Intro__person" src="../build/img/welcome/doctor.png" alt="Dokter.ID" title="Dokter.ID" />
+        <div class="Intro__explanation">
+            <div class="Intro__logo">
+                <img class="Logo" src="../build/img/logo-full.png" alt="Dokter.ID" title="Dokter.ID" />
+            </div>
+            <div class="Intro__title">Reshaping the Future of Healthcare</div>
+            <div class="Intro__subtitle">We presents a telemedicine platform that connected peoples with healthcare providers anytime and anywhere</div>
+            <ul class="Intro__feature Feature">
+                <li class="Feature__item">
+                    <img class="Feature__icon" src="../build/img/welcome/feature/video-consultation.png" alt="Live Video Consultation" title="Live Video Consultation"
+                        width="80" height="80" />
+                    <span class="Feature__text">Live Video Consultation</span>
+                </li>
+                <li class="Feature__item">
+                    <img class="Feature__icon" src="../build/img/welcome/feature/schedule-consultation.png" alt="Schedule Consultation" title="Schedule Consultation"
+                        width="80" height="80" />
+                    <span class="Feature__text">Schedule Consultation</span>
+                </li>
+                <li class="Feature__item">
+                    <img class="Feature__icon" src="../build/img/welcome/feature/privacy.png" alt="Privacy &amp; Security" title="Privacy &amp; Security"
+                        width="80" height="80" />
+                    <span class="Feature__text">Privacy &amp; Security</span>
+                </li>
+                <li class="Feature__item">
+                    <img class="Feature__icon" src="../build/img/welcome/feature/file-sharing.png" alt="Easy File Sharing" title="Easy File Sharing"
+                        width="80" height="80" />
+                    <span class="Feature__text">Easy File Sharing</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="Wrapper__form-wrapper">
+        <div class="Box">
+            <div class="Box__title">Sign In</div>
+            <!-- <div class="Box__subtitle">Please enter your email to help us identify you</div> -->
+            <form name="loginform" class="Box__form Form">
+                <div class="Form__group">
+                    <label for="email" class="Form__label">Email</label>
+                    <input id="email" required ng-model="username" type="text" class="Form__control" placeholder="Email" />
+                    <div ng-if="loginform.email.$invalid && loginform.email.$invalid" class="Form__message">
+                        Please Enter Your Email
+                    </div>
+                    <div ng-messages>
+                        <div ng-message="required" ng-if="loginform.email.$invalid && loginform.email.$invalid">Workflow name is required.</div>
+                    </div>
+                </div>
+                <div class="Form__group">
+                    <label for="password" class="Form__label">Password</label>
+                    <input id="password" required ng-model="password" type="password" class="Form__control" placeholder="Password" />
+                    <div class="Form__message">
+                        Please Enter Your Password
+                    </div>
+                </div>
+                <div class="Form__group">
+                    <a href="welcome-forgot-password.html" class="Form__link">Forgot Your Password ?</a>
+                    <br /><br /><br />
+                    <button ng-disabled="loginform.$invalid" ng-click="authenticateUser(username,password)" class="Form__control Form__control--button Button Button--big Button--register-orange">
+                            Enter Account
+                        </button>
+                </div>
+            </form>
+            <div class="Box__bottom-link">
+                Don't have an Account? <a href="welcome-signup-1.html">Create Account</a> here
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,13 +11,11 @@ angular.module('myApp', [
     'myApp.signup',
     'myApp.signup.patient',
     'myApp.signup.doctor',
-    'myApp.login',
     'myApp.patient.dashboard',
     'myApp.doctor.dashboard',
     'myApp.dashboard.doctorinfo',
     'myApp.chat',
     'myApp.Services',
-    'myApp.logout',
     'myApp.myprofile.doctor',
     'myApp.pagenotfound',
     'myApp.mypatients'
