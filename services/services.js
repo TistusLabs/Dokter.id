@@ -12,14 +12,14 @@ angular.module('myApp.Services', []).
                 {
                     id: "1",
                     name: "Dr. Shehan Tis",
-                    username: 'shehan',
+                    username: 'shehan@gmail.com',
                     password: 'shehan',
                     status: "Unavailable",
                     type: "doctor",
                     country: "Sri Lanka",
                     city: "Colombo",
                     languages: ["English", "Indonesian"],
-                    profileimage: "9aca9154b8867a228b8a395a36cd3150",
+                    profileimage: "",
                     peer: {},
                     otherdata: {
                         speciality: "Specialist in Angular",
@@ -33,7 +33,7 @@ angular.module('myApp.Services', []).
                 {
                     id: "2",
                     name: "Dr. Danushka Adikari",
-                    username: 'danushka',
+                    username: 'danushka@gmail.com',
                     password: 'danushka',
                     status: "Unavailable",
                     type: "doctor",
