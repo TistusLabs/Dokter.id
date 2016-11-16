@@ -10,7 +10,7 @@ angular.module('myApp.patient.dashboard', ['ngRoute'])
     }])
 
     .controller('dashboardControll', ['$scope', '$rootScope', '$location', 'User','AppURLs', function ($scope, $rootScope, $location, User,AppURLs) {
-        $rootScope.checkSession();
+        /*$rootScope.checkSession();
         $scope.setUserOnline = function(username){
             angular.forEach($scope.doctors, function (doctor, index) {
                 if(doctor.username == username){
@@ -24,10 +24,14 @@ angular.module('myApp.patient.dashboard', ['ngRoute'])
         socket.on('useronline', function (username) {
             //make a service call and update the user on DB
             $scope.setUserOnline(username);
-        });
+        });*/
 
         var client = User.getClient();
         client.onComplete(function (data) {
+            angular.forEach(data, function (doc) {
+                var passhash = CryptoJS.MD5(doc.username);
+                doc.profileimage = "http://www.gravatar.com/avatar/" + passhash;
+            });
             $scope.doctors = data;
         });
         client.onError(function (data) {
