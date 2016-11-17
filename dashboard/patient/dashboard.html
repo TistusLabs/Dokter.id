@@ -10,17 +10,19 @@
         <div class="Home__filter">
         </div>
         <div class="Home__card">
-            <div class="Card Card--search-doctor">
-                <div class="Card__image ProfileImage ProfileImage--available">
+
+            <!-- doctor card -->
+            <div class="Card Card--search-doctor" ng-repeat="doctor in doctors | filter:searchquery | filter:selectedcategories">
+                <div class="Card__image ProfileImage ProfileImage--{{doctor.status}}">
                     <a href="doctor-detail-overview.html">
-                        <img class="ProfileImage__image" src="../build/img/sample/doctor3.png" alt="Dokter / Member Name" title="Dokter / Member Name"
+                        <img class="ProfileImage__image" ng-src="{{doctor.profileimage}}?s=250&d=monsterid" alt="{{doctor.name}}" title="{{doctor.name}}"
                         />
                     </a>
                 </div>
                 <div class="Card__information">
                     <a href="doctor-detail-overview.html">
-                        <div class="Card__name">dr. Cindy Annathasshia</div>
-                        <div class="Card__speciality">General Practitioner</div>
+                        <div class="Card__name">Dr. {{doctor.name}}</div>
+                        <div class="Card__speciality">{{doctor.otherdata.speciality}}</div>
                         <div class="Card__rate Rate">
                             <div class="Rate__type Rate--love">
                                 <img class="Rate__image" src="build/img/form/love.png" alt="Love" title="Love" />
@@ -32,261 +34,19 @@
                             </div>
                         </div>
                         <div class="Card__price Price">
-                            <span class="Price__currency">IDR</span>
-                            <span class="Price__amount">100.000</span>
+                            <span class="Price__currency">{{doctor.otherdata.currency}}</span>
+                            <span class="Price__amount">{{doctor.otherdata.rate}}</span>
                         </div>
                     </a>
                     <div class="Card__action">
-                        <button type="button" name="button" class="Button Button--outline-green">CALL NOW</button>
+                        <button ng-if="doctor.status == 'available'" type="button" name="button" class="Button Button--outline-green">CALL NOW</button>
+                        <button ng-if="doctor.status == 'maybe'" type="button" name="button" class="Button Button--outline-green">SCHEDULE</button>
                         <button type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
                     </div>
                 </div>
             </div>
 
-            <div class="Card Card--search-doctor">
-                <div class="Card__image ProfileImage ProfileImage--unavailable">
-                    <a href="doctor-detail-overview.html">
-                        <img class="ProfileImage__image" src="build/img/sample/doctor1.png" alt="Dokter / Member Name" title="Dokter / Member Name"
-                        />
-                    </a>
-                </div>
-                <div class="Card__information">
-                    <a href="doctor-detail-overview.html">
-                        <div class="Card__name">dr. Achmad Zaki, Sp. OT</div>
-                        <div class="Card__speciality">Orthopedic Surgeon</div>
-                        <div class="Card__rate Rate">
-                            <img class="Rate__image" src="build/img/form/love.png" alt="Love" title="Love" />
-                            <span class="Rate__text">2 People</span>
-                        </div>
-                        <div class="Card__price Price">
-                            <span class="Price__currency">IDR</span>
-                            <span class="Price__amount">150.000</span>
-                        </div>
-                    </a>
-                    <div class="Card__action">
-                        <!-- <button type="button" name="button" class="Button Button--outline-green">CALL NOW</button> -->
-                        <button type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Card Card--search-doctor">
-                <div class="Card__image ProfileImage ProfileImage--maybe">
-                    <a href="doctor-detail-overview.html">
-                        <img class="ProfileImage__image" src="build/img/sample/doctor5.png" alt="Dokter / Member Name" title="Dokter / Member Name"
-                        />
-                    </a>
-                </div>
-                <div class="Card__information">
-                    <a href="doctor-detail-overview.html">
-                        <div class="Card__name">dr. Roeslan Yusni Hasan, Sp.BS</div>
-                        <div class="Card__speciality">Neurologist</div>
-                        <div class="Card__rate Rate">
-                            <img class="Rate__image" src="build/img/form/love.png" alt="Love" title="Love" />
-                            <span class="Rate__text">110 People</span>
-                        </div>
-                        <div class="Card__price Price">
-                            <span class="Price__currency">IDR</span>
-                            <span class="Price__amount">500.000</span>
-                        </div>
-                    </a>
-                    <div class="Card__action">
-                        <button type="button" name="button" class="Button Button--outline-green">SCHEDULE</button>
-                        <button type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Card Card--search-doctor">
-                <div class="Card__image ProfileImage ProfileImage--maybe">
-                    <a href="doctor-detail-overview.html">
-                        <img class="ProfileImage__image" src="build/img/sample/doctor4.png" alt="Dokter / Member Name" title="Dokter / Member Name"
-                        />
-                    </a>
-                </div>
-                <div class="Card__information">
-                    <a href="doctor-detail-overview.html" class="Card__link">
-                        <div class="Card__name">dr. Amalia Evianti, Sp. Rad</div>
-                        <div class="Card__speciality">Radiologist</div>
-                        <div class="Card__rate Rate">
-                            <img class="Rate__image" src="build/img/form/love.png" alt="Love" title="Love" />
-                            <span class="Rate__text">110 People</span>
-                        </div>
-                        <div class="Card__price Price">
-                            <span class="Price__currency">IDR</span>
-                            <span class="Price__amount">300.000</span>
-                        </div>
-                    </a>
-                    <div class="Card__action">
-                        <button type="button" name="button" class="Button Button--outline-green">SCHEDULE</button>
-                        <button type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Card Card--search-doctor">
-                <div class="Card__image ProfileImage ProfileImage--available">
-                    <a href="doctor-detail-overview.html">
-                        <img class="ProfileImage__image" src="build/img/sample/doctor4.png" alt="Dokter / Member Name" title="Dokter / Member Name"
-                        />
-                    </a>
-                </div>
-                <div class="Card__information">
-                    <a href="doctor-detail-overview.html">
-                        <div class="Card__name">dr. Ika Dhanudibroto, Sp. JP</div>
-                        <div class="Card__speciality">Cardiologist</div>
-                        <div class="Card__rate Rate">
-                            <img class="Rate__image" src="build/img/form/love.png" alt="Love" title="Love" />
-                            <span class="Rate__text">110 People</span>
-                        </div>
-                        <div class="Card__price Price">
-                            <span class="Price__currency">IDR</span>
-                            <span class="Price__amount">180.000</span>
-                        </div>
-                    </a>
-                    <div class="Card__action">
-                        <button type="button" name="button" class="Button Button--outline-green">CALL NOW</button>
-                        <button type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Card Card--search-doctor">
-                <div class="Card__image ProfileImage ProfileImage--available">
-                    <a href="doctor-detail-overview.html">
-                        <img class="ProfileImage__image" src="build/img/sample/doctor2.png" alt="Dokter / Member Name" title="Dokter / Member Name"
-                        />
-                    </a>
-                </div>
-                <div class="Card__information">
-                    <a href="doctor-detail-overview.html">
-                        <div class="Card__name">dr. Yuslam Edi Fidianto, Sp. OG</div>
-                        <div class="Card__speciality">Obstetrics &amp; Gynecologist</div>
-                        <div class="Card__rate Rate">
-                            <img class="Rate__image" src="build/img/form/love.png" alt="Love" title="Love" />
-                            <span class="Rate__text">0 People</span>
-                        </div>
-                        <div class="Card__price Price">
-                            <span class="Price__currency">IDR</span>
-                            <span class="Price__amount">200.000</span>
-                        </div>
-                    </a>
-                    <div class="Card__action">
-                        <button type="button" name="button" class="Button Button--outline-green">CALL NOW</button>
-                        <button type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Card Card--search-doctor">
-                <div class="Card__image ProfileImage ProfileImage--available">
-                    <a href="doctor-detail-overview.html">
-                        <img class="ProfileImage__image" src="build/img/sample/doctor5.png" alt="Dokter / Member Name" title="Dokter / Member Name"
-                        />
-                    </a>
-                </div>
-                <div class="Card__information">
-                    <a href="doctor-detail-overview.html">
-                        <div class="Card__name">dr. Taslim Poniman, Sp. B, KBD</div>
-                        <div class="Card__speciality">Digestive Surgeon</div>
-                        <div class="Card__rate Rate">
-                            <img class="Rate__image" src="build/img/form/love.png" alt="Love" title="Love" />
-                            <span class="Rate__text">110 People</span>
-                        </div>
-                        <div class="Card__price Price">
-                            <span class="Price__currency">IDR</span>
-                            <span class="Price__amount">150.000</span>
-                        </div>
-                    </a>
-                    <div class="Card__action">
-                        <button type="button" name="button" class="Button Button--outline-green">CALL NOW</button>
-                        <button type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Card Card--search-doctor">
-                <div class="Card__image ProfileImage ProfileImage--maybe">
-                    <a href="doctor-detail-overview.html">
-                        <img class="ProfileImage__image" src="build/img/sample/doctor4.png" alt="Dokter / Member Name" title="Dokter / Member Name"
-                        />
-                    </a>
-                </div>
-                <div class="Card__information">
-                    <a href="doctor-detail-overview.html">
-                        <div class="Card__name">dr. Henny Hassan</div>
-                        <div class="Card__speciality">General Practitioner</div>
-                        <div class="Card__rate Rate">
-                            <img class="Rate__image" src="build/img/form/love.png" alt="Love" title="Love" />
-                            <span class="Rate__text">110 People</span>
-                        </div>
-                        <div class="Card__price Price">
-                            <span class="Price__currency">IDR</span>
-                            <span class="Price__amount">75.000</span>
-                        </div>
-                    </a>
-                    <div class="Card__action">
-                        <button type="button" name="button" class="Button Button--outline-green">SCHEDULE</button>
-                        <button type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Card Card--search-doctor">
-                <div class="Card__image ProfileImage ProfileImage--maybe">
-                    <a href="doctor-detail-overview.html">
-                        <img class="ProfileImage__image" src="build/img/sample/doctor4.png" alt="Dokter / Member Name" title="Dokter / Member Name"
-                        />
-                    </a>
-                </div>
-                <div class="Card__information">
-                    <a href="doctor-detail-overview.html">
-                        <div class="Card__name">dr. Henny Hassan</div>
-                        <div class="Card__speciality">General Practitioner</div>
-                        <div class="Card__rate Rate">
-                            <img class="Rate__image" src="build/img/form/love.png" alt="Love" title="Love" />
-                            <span class="Rate__text">110 People</span>
-                        </div>
-                        <div class="Card__price Price">
-                            <span class="Price__currency">IDR</span>
-                            <span class="Price__amount">75.000</span>
-                        </div>
-                    </a>
-                    <div class="Card__action">
-                        <button type="button" name="button" class="Button Button--outline-green">SCHEDULE</button>
-                        <button type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Card Card--search-doctor">
-                <div class="Card__image ProfileImage ProfileImage--maybe">
-                    <a href="doctor-detail-overview.html">
-                        <img class="ProfileImage__image" src="build/img/sample/doctor4.png" alt="Dokter / Member Name" title="Dokter / Member Name"
-                        />
-                    </a>
-                </div>
-                <div class="Card__information">
-                    <a href="doctor-detail-overview.html">
-                        <div class="Card__name">dr. Henny Hassan</div>
-                        <div class="Card__speciality">General Practitioner</div>
-                        <div class="Card__rate Rate">
-                            <img class="Rate__image" src="build/img/form/love.png" alt="Love" title="Love" />
-                            <span class="Rate__text">110 People</span>
-                        </div>
-                        <div class="Card__price Price">
-                            <span class="Price__currency">IDR</span>
-                            <span class="Price__amount">75.000</span>
-                        </div>
-                    </a>
-                    <div class="Card__action">
-                        <button type="button" name="button" class="Button Button--outline-green">SCHEDULE</button>
-                        <button type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Loader">
+            <div class="Loader" ng-show="isLoading" >
                 <img src="build/img/loader/puff.svg" />
             </div>
         </div>
