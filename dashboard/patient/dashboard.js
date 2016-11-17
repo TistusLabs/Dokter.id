@@ -11,11 +11,12 @@ angular.module('myApp.patient.dashboard', ['ngRoute'])
 
     .controller('dashboardControll', ['$scope', '$rootScope', '$location', 'User','AppURLs', function ($scope, $rootScope, $location, User,AppURLs) {
         /*$rootScope.checkSession();
+        */
         $scope.setUserOnline = function(username){
             angular.forEach($scope.doctors, function (doctor, index) {
                 if(doctor.username == username){
                     $scope.$apply(function(){
-                        doctor.status = "Online";
+                        doctor.status = "available";
                     });
                 }
             });
@@ -24,7 +25,7 @@ angular.module('myApp.patient.dashboard', ['ngRoute'])
         socket.on('useronline', function (username) {
             //make a service call and update the user on DB
             $scope.setUserOnline(username);
-        });*/
+        });
 
         $scope.isLoading = true;
 
