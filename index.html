@@ -145,13 +145,13 @@
       <aside class="Main__side" id="menu">
         <nav>
           <ul class="SideNav">
-            <li class="SideNav__item">
-              <a href="home.html" class="SideNav__link">
-                <img class="SideNav__icon" src="build/img/navigation/side/home.png" alt="Home" title="Home" />
-                <span class="SideNav__text">Home</span>
+            <li class="SideNav__item" ng-repeat="menuitem in $root.menu">
+              <a href="#{{menuitem.route}}" class="SideNav__link">
+                <img class="SideNav__icon" ng-src="{{menuitem.icon}}" alt="{{menuitem.caption}}" title="{{menuitem.caption}}" />
+                <span class="SideNav__text">{{menuitem.caption}}</span>
               </a>
             </li>
-            <li class="SideNav__item">
+            <!--<li class="SideNav__item">
               <a href="dashboard.html" class="SideNav__link">
                 <img class="SideNav__icon" src="build/img/navigation/side/dashboard.png" alt="Dashboard" title="Dashboard" />
                 <span class="SideNav__text">Dashboard</span>
@@ -206,7 +206,7 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li>-->
             <li class="SideNav__item SideNav__item--footer">
               <!-- FOOTER -->
               <footer class="Footer">

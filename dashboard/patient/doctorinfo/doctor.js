@@ -10,11 +10,13 @@ angular.module('myApp.dashboard.doctorinfo', ['ngRoute'])
     }])
 
     .controller('doctorControl', ['$scope', '$rootScope', '$routeParams', 'User', '$location', function ($scope, $rootScope, $routeParams, User, $location) {
-        $rootScope.checkSession();
+        //$rootScope.checkSession();
         console.log("Recieved id:", $routeParams.doctorID);
 
         var client = User.getClient();
         client.onComplete(function (data) {
+            var passhash = CryptoJS.MD5(data.object.username);
+            data.object.profileimage = "http://www.gravatar.com/avatar/" + passhash;
             $scope.doctor = data.object;
         });
         client.GetUserID($routeParams.doctorID);

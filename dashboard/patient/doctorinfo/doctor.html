@@ -1,5 +1,312 @@
+<div class="Section Section--profile-page">
+                    <div class="Profile">
+                        <div class="Profile__left-panel">
 
-<div layout="row">
+                            <!-- USER / DOCTOR PROFILE -->
+                            <div class="Card Card--profile">
+                                <div class="Card__image ProfileImage">
+                                    <img class="ProfileImage__image" ng-src="{{doctor.profileimage}}?s=250&d=monsterid" alt="{{doctor.name}}" title="{{doctor.name}}" />
+                                    <img ng-if="doctor.status == 'maybe'" class="ProfileImage__status" src="build/img/status/maybe.png" alt="{{doctor.status}}" title="{{doctor.status}}" />
+                                    <img ng-if="doctor.status == 'available'" class="ProfileImage__status" src="build/img/status/available.png" alt="{{doctor.status}}" title="{{doctor.status}}" />
+                                    <img ng-if="doctor.status == 'unavailable'" class="ProfileImage__status" src="build/img/status/unavailable.png" alt="{{doctor.status}}" title="{{doctor.status}}" />
+                                </div>
+                                <div class="Card__information">
+                                    <div class="Card__name">Dr. {{doctor.name}}</div>
+                                    <div class="Card__speciality">{{doctor.otherdata.speciality}}</div>
+                                    <div class="Card__price Price">
+                                        <span class="Price__currency">{{doctor.otherdata.currency}}</span>
+                                        <span class="Price__amount">{{doctor.otherdata.rate}}</span>
+                                    </div>
+                                    <div class="Card__rate Rate">
+                                        <div class="Rate__type Rate--love">
+                                            <img class="Rate__image" src="build/img/form/love-active.png" alt="Love" title="Love" />
+                                            <span class="Rate__text">110 People</span>
+                                        </div>
+                                        <div class="Rate__type Rate--thumb">
+                                            <img class="Rate__image" src="build/img/form/thumb-active.png" alt="Thumb" title="Thumb" />
+                                            <span class="Rate__text">110 Thanks</span>
+                                        </div>
+                                    </div>
+                                    <div class="Card__action">
+                                        <button type="button" name="button" class="Button Button--outline-green">CALL NOW</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="Profile__right-panel">
+                            <div class="ProfileTab">
+                                <div class="ProfileTab__item ProfileTab__item--active" clickID="#tabOverview">
+                                    <img src="build/img/form/tab-overview-active.png" alt="{}" title="{}" />
+                                    <span>Overview</span>
+                                </div>
+                                <div class="ProfileTab__item" clickID="#tabMessage">
+                                    <img src="build/img/form/tab-message-off.png" alt="{}" title="{}" />
+                                    <span>Message</span>
+                                </div>
+                                <div class="ProfileTab__item" clickID="#tabConsultationHistory">
+                                    <img src="build/img/form/tab-consultation-off.png" alt="{}" title="{}" />
+                                    <span>Consultation History</span>
+                                </div>
+                            </div>
+
+                            <div class="ProfileTabContent">
+
+                                <div id="tabOverview" class="ProfileTabContent--can-scroll">
+
+                                    <div class="Overview">
+
+                                        <div class="Overview__info">
+                                            <div class="Overview__title">
+                                                Biography
+                                            </div>
+                                            <div class="Overview__value">
+                                                dr. Cindy Annathasshia, is a graduate of George Washington University Medical School. He trained in internal medicine at the University of Oregon Health Sciences (UOHS) and pulmonary critical care medicine at UOHS and the University of Southern California. <br /><br />
+                                                Sample has been practicing since 1976, the last 12 years in Washington, D.C., at the Washington Hospital Center, selected as one of the top 100 hospitals in the United States. Sample's practice specializes in the care of critically ill and injured postoperative patients. Sample's interests also include end-of-life issues, advanced directives, and furthering organ procurement. Sample is also a clinical associate professor of medicine at George Washington University Medical School and is a fellow in the College of Chest Physicians.
+                                            </div>
+                                        </div>
+
+                                        <div class="Overview__info">
+                                            <div class="Overview__title">
+                                                Location
+                                            </div>
+                                            <div class="Overview__value">
+                                                Jakarta, Indonesia 12920
+                                            </div>
+                                        </div>
+
+                                        <div class="Overview__info">
+                                            <div class="Overview__title">
+                                                Registration Number
+                                            </div>
+                                            <div class="Overview__value">
+                                                31.2.1.100.1.12.135602, Konsil Kedokteran Indonesia
+                                            </div>
+                                        </div>
+
+                                        <div class="Overview__info">
+                                            <div class="Overview__title">
+                                                Language
+                                            </div>
+                                            <div class="Overview__value">
+                                                Indonesia, English &amp; Mandarin
+                                            </div>
+                                        </div>
+
+                                        <div class="Overview__info">
+                                            <div class="Overview__title">
+                                                Profesional Statement
+                                            </div>
+                                            <div class="Overview__value">
+                                                Always helping others, that's the value of life.
+                                            </div>
+                                        </div>
+
+                                        <div class="Overview__info">
+                                            <div class="Overview__title">
+                                                Education
+                                            </div>
+                                            <div class="Overview__value">
+                                                <ul class="Overview__list">
+                                                    <li>S.Ked. - Sarjana Kedokteran - Universitas Tarumanagara, 2010</li>
+                                                    <li>dr. - Kedokteran Umum - Universitas Tarumanagara, 2012</li>
+                                                    <li>Dipl. AAAM - American Academy of Aesthetic Medicine Diploma - American Academy of Aesthetic Medicine, 2014</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="Overview__info">
+                                            <div class="Overview__title">
+                                                Achievement
+                                            </div>
+                                            <div class="Overview__value">
+                                                Outstanding Achievement Board Certified Of AAAM
+                                            </div>
+                                        </div>
+
+                                        <div class="Overview__info">
+                                            <div class="Overview__title">
+                                                Working Experience
+                                            </div>
+                                            <div class="Overview__value">
+                                                <ul class="Overview__list">
+                                                    <li>Medical Aesthetic Doctor Manielle Beauty Clinic, 2012 - 2013</li>
+                                                    <li>Medical Director Genese Clinic, Aesthetic/Wellness, 2013 - Sekarang</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div id="tabMessage" class="ProfileTabContent--can-scroll ProfileTabContent--hidden">
+
+                                    <div class="Message">
+                                        <div class="Message__item Loader">
+                                            <div class="Loader">
+                                                <img src="build/img/loader/puff.svg" />
+                                            </div>
+                                        </div>
+
+                                        <div class="Message__item">
+                                            <div class="Card Card--message">
+                                                <div class="Card__image ProfileImage">
+                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/user2.jpg" alt="{{doctor.name}}" title="{{doctor.name}}" />
+                                                </div>
+                                                <div class="Card__information">
+                                                    <div class="Card__name">
+                                                        Ivan Junior <span class="Card__timestamp">15:00 PM</span>
+                                                    </div>
+                                                    <div class="Card__message">
+                                                        Hi doc, i need some help with my health.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="Message__item">
+                                            <div class="TitleStroke TitleStroke--medium">
+                                                <span>August, 31 2016</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="Message__item">
+                                            <div class="Card Card--message">
+                                                <div class="Card__image ProfileImage">
+                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/doctor4.png" alt="{{doctor.name}}" title="{{doctor.name}}" />
+                                                </div>
+                                                <div class="Card__information">
+                                                    <div class="Card__name">
+                                                        dr. Cindy Annathasshia <span class="Card__timestamp"> 14:00 PM</span>
+                                                    </div>
+                                                    <div class="Card__message">
+                                                        What seems to be the problem ?
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="Message__item">
+                                            <div class="Card Card--message">
+                                                <div class="Card__image ProfileImage">
+                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/user2.jpg" alt="{{doctor.name}}" title="{{doctor.name}}" />
+                                                </div>
+                                                <div class="Card__information">
+                                                    <div class="Card__name">
+                                                        Ivan Junior <span class="Card__timestamp">15:00 PM</span>
+                                                    </div>
+                                                    <div class="Card__message">
+                                                        Well, since yesterday I have a really bad cough and a sore throat and I also got a headache.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="Message__item">
+                                            <div class="TitleStroke TitleStroke--medium">
+                                                <span>September, 15 2016</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="Message__item">
+                                            <div class="Card Card--message">
+                                                <div class="Card__image ProfileImage">
+                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/doctor4.png" alt="{{doctor.name}}" title="{{doctor.name}}" />
+                                                </div>
+                                                <div class="Card__information">
+                                                    <div class="Card__name">
+                                                        dr. Cindy Annathasshia <span class="Card__timestamp"> 14:00 PM</span>
+                                                    </div>
+                                                    <div class="Card__message">
+                                                        How long have you been having all these symptoms?
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="Message__item">
+                                            <div class="Card Card--message">
+                                                <div class="Card__image ProfileImage">
+                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/user2.jpg" alt="{{doctor.name}}" title="{{doctor.name}}" />
+                                                </div>
+                                                <div class="Card__information">
+                                                    <div class="Card__name">
+                                                        Ivan Junior <span class="Card__timestamp">15:00 PM</span>
+                                                    </div>
+                                                    <div class="Card__message">
+                                                        I have them about three days now, but since yesterday they have become a lot worse and I am really tired, too as I can’t sleep due to coughing most if the night.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="Message__item">
+                                            <div class="Card Card--message">
+                                                <div class="Card__image ProfileImage">
+                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/doctor4.png" alt="{{doctor.name}}" title="{{doctor.name}}" />
+                                                </div>
+                                                <div class="Card__information">
+                                                    <div class="Card__name">
+                                                        dr. Cindy Annathasshia <span class="Card__timestamp">14:00 PM</span>
+                                                    </div>
+                                                    <div class="Card__message">
+                                                        Well, It sounds to me that you have got flu. You must take 2 aspirin with water every four hours and must have plenty of rest. Also you must drink lots of fluids. If you are still sick next week book another appointment to see me again.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="Message__item">
+                                            <div class="Card Card--message">
+                                                <div class="Card__image ProfileImage">
+                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/user2.jpg" alt="{{doctor.name}}" title="{{doctor.name}}" />
+                                                </div>
+                                                <div class="Card__information">
+                                                    <div class="Card__name">
+                                                        Ivan Junior <span class="Card__timestamp">15:00 PM</span>
+                                                    </div>
+                                                    <div class="Card__message">
+                                                        OK, thank you doctor for you time.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="Message__item">
+                                            <div class="Card Card--message">
+                                                <div class="Card__image ProfileImage">
+                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/doctor4.png" alt="{{doctor.name}}" title="{{doctor.name}}" />
+                                                </div>
+                                                <div class="Card__information">
+                                                    <div class="Card__name">
+                                                        dr. Cindy Annathasshia <span class="Card__timestamp">14:00 PM</span>
+                                                    </div>
+                                                    <div class="Card__message">
+                                                        You’re welcome. Here is your prescription.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div id="tabConsultationHistory" class="ProfileTabContent--can-scroll ProfileTabContent--hidden">
+
+                                </div>
+                            </div>
+
+                            <div class="ProfileTab ProfileTab--input-message">
+                                Message Here
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+<!--div layout="row">
     <div layout="column">
         <h1>{{doctor.name}}</h1>
         <p>{{doctor.otherdata.rate}} | {{doctor.otherdata.speciality}} | {{doctor.city}}, {{doctor.country}}</p>
@@ -42,16 +349,10 @@
           <p></p>
         </md-content>
       </md-tab>
-      <!--<md-tab label="messages">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Tab Three</h1>
-          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-        </md-content>
-      </md-tab>-->
        <md-tab label="past consultations">
         <md-content class="md-padding">
           <h1 class="md-display-2">Tab Three</h1>
           <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
         </md-content>
       </md-tab>
-    </md-tabs>
+    </md-tabs-->

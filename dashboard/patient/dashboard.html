@@ -14,13 +14,13 @@
             <!-- doctor card -->
             <div class="Card Card--search-doctor" ng-repeat="doctor in doctors | filter:searchquery | filter:selectedcategories">
                 <div class="Card__image ProfileImage ProfileImage--{{doctor.status}}">
-                    <a href="doctor-detail-overview.html">
+                    <a href="#/patient/dashboard/doctor/{{doctor.id}}">
                         <img class="ProfileImage__image" ng-src="{{doctor.profileimage}}?s=250&d=monsterid" alt="{{doctor.name}}" title="{{doctor.name}}"
                         />
                     </a>
                 </div>
                 <div class="Card__information">
-                    <a href="doctor-detail-overview.html">
+                    <a href="#/patient/dashboard/doctor/{{doctor.id}}">
                         <div class="Card__name">Dr. {{doctor.name}}</div>
                         <div class="Card__speciality">{{doctor.otherdata.speciality}}</div>
                         <div class="Card__rate Rate">

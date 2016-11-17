@@ -33,7 +33,7 @@ angular.module('myApp.Services', []).
                 },
                 {
                     id: "2",
-                    name: "Danushka Adikari",
+                    name: "Danushka",
                     username: 'danushka@gmail.com',
                     password: 'danushka',
                     status: "unavailable",

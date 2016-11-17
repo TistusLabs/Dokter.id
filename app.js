@@ -34,12 +34,7 @@ angular.module('myApp', [
             $rootScope.isBusy = false;
         };
 
-        $rootScope.menu = [
-            {
-                "caption": "Login Page",
-                "route": "/login"
-            }
-        ];
+        $rootScope.menu = [];
         
         $rootScope.submenu = [
             {
@@ -76,7 +71,7 @@ angular.module('myApp', [
             }
         };
         
-        $scope.openWidow = function(path){
+        $scope.openWindow = function(path){
             $location.path(path);
         };
 
@@ -172,16 +167,19 @@ angular.module('myApp', [
                 case "patient": {
                     $rootScope.menu = [
                         {
-                            "caption": "Dashboard",
-                            "route": "/patient/dashboard/"
+                            caption: "Home",
+                            route: "/patient/dashboard",
+                            icon: "build/img/navigation/side/home.png"
                         },
                         {
-                            "caption": "Logout",
-                            "route": "/logout"
+                            caption: "Billing",
+                            route: "/patient/billing",
+                            icon: "build/img/navigation/side/billing.png"
                         }
                     ];
                     break;
                 }
             };
         };
+        $rootScope.setMenu('patient');
     }]);
