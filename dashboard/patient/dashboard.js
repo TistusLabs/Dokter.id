@@ -23,7 +23,8 @@ angular.module('myApp.patient.dashboard', ['ngRoute'])
         }
         var socket = io.connect(AppURLs.socketServer);
         socket.on('useronline', function (username) {
-            //make a service call and update the user on DB
+            //make a fd service call and update the user on DB
+            debugger
             $scope.setUserOnline(username);
         });
 
@@ -43,11 +44,6 @@ angular.module('myApp.patient.dashboard', ['ngRoute'])
             $scope.isLoading = false;
         });
         client.GetAllDoctors();
-
-
-        $scope.openDoctorDetails = function (doctorid) {
-            $location.path("/patient/dashboard/doctor/" + doctorid);
-        };
         
         $scope.scheduleCall = function(){
             alert("Scheduleing call");

@@ -144,22 +144,17 @@ angular.module('myApp', [
                         {
                             "caption": "Dashboard",
                             "route": "/doctor/dashboard/",
-                            "icon":"ion-grid"
+                            "icon":"build/img/navigation/side/dashboard.png"
                         },
                         {
-                            "caption": "Profile",
-                            "route": "/doctor/profile",
-                            "icon":"ion-person"
-                        },
-                        {
-                            "caption": "My Patients",
-                            "route": "/doctor/patients/",
-                            "icon":"ion-person-stalker"
+                            caption: "Consultation",
+                            route: "/consultation",
+                            icon: "build/img/navigation/side/consultation.png"
                         },
                         {
                             "caption": "Billing",
                             "route": "/billing",
-                            "icon":"ion-card"
+                            "icon":"build/img/navigation/side/billing.png"
                         }
                     ];
                     break;
@@ -181,5 +176,5 @@ angular.module('myApp', [
                 }
             };
         };
-        $rootScope.setMenu('patient');
+        $rootScope.setMenu('doctor');
     }]);
