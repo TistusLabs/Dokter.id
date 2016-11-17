@@ -36,4 +36,32 @@ angular.module('myApp.dashboard.doctorinfo', ['ngRoute'])
             return string.join(", ");
         };
 
+        $scope.tabs = {}
+         $scope.tabs.overview = true;
+                    $scope.tabs.message = false;
+                    $scope.tabs.consultationhistory = false;
+                    
+        $scope.changeTab = function(tabID){
+            switch (tabID) {
+                case "tabOverview":{
+                    $scope.tabs.overview = true;
+                    $scope.tabs.message = false;
+                    $scope.tabs.consultationhistory = false;
+                    break;
+                }
+                case "tabMessage":{
+                    $scope.tabs.overview = false;
+                    $scope.tabs.message = true;
+                    $scope.tabs.consultationhistory = false;
+                    break;
+                }
+                case "tabConsultationHistory":{
+                    $scope.tabs.overview = false;
+                    $scope.tabs.message = false;
+                    $scope.tabs.consultationhistory = true;
+                    break;
+                }
+            }
+        }
+
     }]);

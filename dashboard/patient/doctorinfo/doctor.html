@@ -37,15 +37,15 @@
 
                         <div class="Profile__right-panel">
                             <div class="ProfileTab">
-                                <div class="ProfileTab__item ProfileTab__item--active" clickID="#tabOverview">
+                                <div ng-class="tabs.overview ? 'ProfileTab__item ProfileTab__item--active' : 'ProfileTab__item'" ng-click="changeTab('tabOverview')" clickID="#tabOverview">
                                     <img src="build/img/form/tab-overview-active.png" alt="{}" title="{}" />
                                     <span>Overview</span>
                                 </div>
-                                <div class="ProfileTab__item" clickID="#tabMessage">
+                                <div ng-class="tabs.message ? 'ProfileTab__item ProfileTab__item--active' : 'ProfileTab__item'" ng-click="changeTab('tabMessage')" clickID="#tabMessage">
                                     <img src="build/img/form/tab-message-off.png" alt="{}" title="{}" />
                                     <span>Message</span>
                                 </div>
-                                <div class="ProfileTab__item" clickID="#tabConsultationHistory">
+                                <div ng-class="tabs.consultationhistory ? 'ProfileTab__item ProfileTab__item--active' : 'ProfileTab__item'" ng-click="changeTab('tabConsultationHistory')" clickID="#tabConsultationHistory">
                                     <img src="build/img/form/tab-consultation-off.png" alt="{}" title="{}" />
                                     <span>Consultation History</span>
                                 </div>
@@ -53,7 +53,7 @@
 
                             <div class="ProfileTabContent">
 
-                                <div id="tabOverview" class="ProfileTabContent--can-scroll">
+                                <div id="tabOverview" ng-class="tabs.overview ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
 
                                     <div class="Overview">
 
@@ -141,7 +141,7 @@
 
                                 </div>
 
-                                <div id="tabMessage" class="ProfileTabContent--can-scroll ProfileTabContent--hidden">
+                                <div id="tabMessage" ng-class="tabs.message ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
 
                                     <div class="Message">
                                         <div class="Message__item Loader">
@@ -293,7 +293,7 @@
 
                                 </div>
 
-                                <div id="tabConsultationHistory" class="ProfileTabContent--can-scroll ProfileTabContent--hidden">
+                                <div id="tabConsultationHistory" ng-class="tabs.consultationhistory ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
 
                                 </div>
                             </div>
