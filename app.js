@@ -17,7 +17,7 @@ angular.module('myApp', [
     'myApp.home.doctorinfo',
     'myApp.chat',
     'myApp.Services',
-    'myApp.myprofile.doctor',
+    'myApp.profile',
     'myApp.pagenotfound',
     'myApp.mypatients'
 ]).
@@ -181,7 +181,7 @@ angular.module('myApp', [
                 }
             };
         };
-        $rootScope.setMenu('patient');
+        $rootScope.setMenu('doctor');
         $rootScope.userObject = {
                     id: "1",
                     name: "Shehan Tissera",

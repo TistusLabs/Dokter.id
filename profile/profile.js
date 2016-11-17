@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('myApp.myprofile.doctor', ['ngRoute'])
+angular.module('myApp.profile', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/doctor/profile', {
-            templateUrl: 'myprofile/doctor/myprofile.html',
+        $routeProvider.when('/profile', {
+            templateUrl: 'profile/profile.html',
             controller: 'profileControll'
         });
     }])

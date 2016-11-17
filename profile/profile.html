@@ -1,6 +1,6 @@
 <div layout="row">
     <div layout="column" class="md-padding" layout-align="start center">
-        <img width="200px" height="200px" ng-src="{{'http://www.gravatar.com/avatar/'+$root.userObject.profileimage}}" class="md-avatar" alt="{{$root.userObject.name}}">
+        <img width="200px" height="200px" ng-src="{{$root.userObject.profileimage + '?s=300&d=monsterid'}}" class="md-avatar" alt="{{$root.userObject.name}}">
         <h1>{{$root.userObject.name}}</h1>
         <p>{{$root.userObject.otherdata.speciality}} | {{$root.userObject.city}}, {{$root.userObject.country}}</p>
         <h1>{{$root.userObject.otherdata.rate}}</h1>
