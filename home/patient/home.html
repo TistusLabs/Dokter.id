@@ -1,0 +1,97 @@
+<div class="Section Section--header">
+    <div class="Title">
+        <div class="Title__text">Talk to our doctor online, anytime and anywhere</div>
+        <div class="Title__subtitle">See patients or doctors via live video, audio or text consultations will reach and significantly improves convenience</div>
+    </div>
+</div>
+
+<div class="Section">
+    <div class="Home">
+        <div class="Home__filter">
+        </div>
+        <div class="Home__card">
+
+            <!-- doctor card -->
+            <div class="Card Card--search-doctor" ng-repeat="doctor in doctors | filter:searchquery | filter:selectedcategories">
+                <div class="Card__image ProfileImage ProfileImage--{{doctor.status}}">
+                    <a href="#/patient/dashboard/doctor/{{doctor.id}}">
+                        <img class="ProfileImage__image" ng-src="{{doctor.profileimage}}?s=250&d=monsterid" alt="{{doctor.name}}" title="{{doctor.name}}"
+                        />
+                    </a>
+                </div>
+                <div class="Card__information">
+                    <a href="#/patient/dashboard/doctor/{{doctor.id}}">
+                        <div class="Card__name">Dr. {{doctor.name}}</div>
+                        <div class="Card__speciality">{{doctor.otherdata.speciality}}</div>
+                        <div class="Card__rate Rate">
+                            <div class="Rate__type Rate--love">
+                                <img class="Rate__image" src="build/img/form/love.png" alt="Love" title="Love" />
+                                <span class="Rate__text">110 People</span>
+                            </div>
+                            <div class="Rate__type Rate--thumb">
+                                <img class="Rate__image" src="build/img/form/thumb.png" alt="Thumb" title="Thumb" />
+                                <span class="Rate__text">110 Thanks</span>
+                            </div>
+                        </div>
+                        <div class="Card__price Price">
+                            <span class="Price__currency">{{doctor.otherdata.currency}}</span>
+                            <span class="Price__amount">{{doctor.otherdata.rate}}</span>
+                        </div>
+                    </a>
+                    <div class="Card__action">
+                        <button ng-if="doctor.status == 'available'" type="button" name="button" class="Button Button--outline-green">CALL NOW</button>
+                        <button ng-if="doctor.status == 'maybe'" type="button" name="button" class="Button Button--outline-green">SCHEDULE</button>
+                        <button type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Loader" ng-show="isLoading" >
+                <img src="build/img/loader/puff.svg" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--h1>Doctors Information</h1>
+<p>Click on the doctor who you want to contact.</p>
+<md-content>
+    <div layout="row">
+        <md-input-container>
+            <label>Search for symptoms, conditions,doctor, etc.</label>
+            <input ng-model="searchquery">
+        </md-input-container>
+        <span>or</span>
+        <md-input-container>
+            <label>Browse medical categories</label>
+            <md-select ng-model="selectedCategories" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+                multiple>
+                <md-select-header class="demo-select-header">
+                    <input ng-model="searchTerm" type="search" placeholder="Search for a category.." class="demo-header-searchbox md-text">
+                </md-select-header>
+                <md-optgroup label="Categories">
+                    <md-option ng-value="category" ng-repeat="doctor in doctors |
+              filter:searchTerm">{{doctor.speciality}}</md-option>
+                </md-optgroup>
+            </md-select>
+        </md-input-container>
+    </div>
+
+    <md-list>
+        <md-list-item class="md-3-line doctor" ng-repeat="doctor in doctors | filter:searchquery | filter:selectedcategories">
+            <img ng-src="{{'http://www.gravatar.com/avatar/'+doctor.profileimage}}" class="md-avatar" alt="{{doctor.name}}">
+            <div class="md-list-item-text" layout="column">
+                <h3><b>{{doctor.name}}</b></h3>
+                <h4><small>{{doctor.speciality}}</small></h4>
+                <p>Speciality note</p>
+                <div ng-if="doctor.status == 'Online'"><small>Status: <span style="color:green;">{{doctor.status}}</span></small></div>
+                <div ng-if="doctor.status == 'Offline'"><small>Status: <span style="color:red;">{{doctor.status}}</span></small></div>
+            </div>
+            <div layout="column">
+                    <md-button ng-click="openDoctorDetails(doctor.id)">More Info</md-button>
+                    <md-button ng=click="scheduleCall()">Schedule Call</md-button>
+                </div>
+        </md-list-item>
+    </md-list>
+</md-content-->

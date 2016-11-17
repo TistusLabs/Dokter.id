@@ -11,9 +11,10 @@ angular.module('myApp', [
     'myApp.signup',
     'myApp.signup.patient',
     'myApp.signup.doctor',
-    'myApp.patient.dashboard',
     'myApp.doctor.dashboard',
-    'myApp.dashboard.doctorinfo',
+    'myApp.patient.home',
+    'myApp.doctor.home',
+    'myApp.home.doctorinfo',
     'myApp.chat',
     'myApp.Services',
     'myApp.myprofile.doctor',
@@ -142,8 +143,12 @@ angular.module('myApp', [
                 case "doctor": {
                     $rootScope.menu = [
                         {
+                            caption: "Home",
+                            route: "/doctor/home",
+                            icon: "build/img/navigation/side/home.png"
+                        },{
                             "caption": "Dashboard",
-                            "route": "/doctor/dashboard/",
+                            "route": "/doctor/dashboard",
                             "icon":"build/img/navigation/side/dashboard.png"
                         },
                         {
@@ -163,7 +168,7 @@ angular.module('myApp', [
                     $rootScope.menu = [
                         {
                             caption: "Home",
-                            route: "/patient/dashboard",
+                            route: "/patient/home",
                             icon: "build/img/navigation/side/home.png"
                         },
                         {
@@ -176,5 +181,27 @@ angular.module('myApp', [
                 }
             };
         };
-        $rootScope.setMenu('doctor');
+        $rootScope.setMenu('patient');
+        $rootScope.userObject = {
+                    id: "1",
+                    name: "Shehan Tissera",
+                    username: 'shehan@gmail.com',
+                    password: 'shehan',
+                    status: "available",
+                    type: "doctor",
+                    country: "Sri Lanka",
+                    city: "Colombo",
+                    languages: ["English", "Indonesian"],
+                    profileimage: "http://www.gravatar.com/avatar/7272996f825bd268885d6b20484d325c",
+                    peer: {},
+                    otherdata: {
+                        speciality: "Specialist in Angular",
+                        currency:"USD",
+                        rate: "50",
+                        shortbiography: "Pationate in whatever the task is.",
+                        awards: "1st place in all places",
+                        graduateschool: "Cardif Metropolitan",
+                        residenceplace: "Colombo"
+                    }
+                };
     }]);

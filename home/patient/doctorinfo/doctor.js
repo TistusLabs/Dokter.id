@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('myApp.dashboard.doctorinfo', ['ngRoute'])
+angular.module('myApp.home.doctorinfo', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/patient/dashboard/doctor/:doctorID', {
-            templateUrl: 'dashboard/patient/doctorinfo/doctor.html',
+        $routeProvider.when('/patient/home/doctor/:doctorID', {
+            templateUrl: 'home/patient/doctorinfo/doctor.html',
             controller: 'doctorControl'
         });
     }])

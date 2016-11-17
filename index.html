@@ -132,7 +132,7 @@
           <div class="TopNavigation__amount">IDR 1.000.000</div>
         </div>
         <div class="TopNavigation__profile">
-          <img class="TopNavigation__avatar" src="build/img/sample/avatar.png" alt="{{fullname}}" title="{{fullname}}" />
+          <img class="TopNavigation__avatar" ng-src="{{$root.userObject.profileimage}}?s=100&d=monsterid" alt="{{$root.userObject.name}}" title="{{$root.userObject.name}}" />
           <!--<div class="TopNavigation__profile-arrow TopNavigation&#45;&#45;arrow-up"></div>-->
         </div>
       </nav>
@@ -265,8 +265,9 @@
   <script src="signup/signup.patient.js"></script>
   <script src="signup/signup.doctor.js"></script>
   <script src="dashboard/doctor/dashboard.js"></script>
-  <script src="dashboard/patient/dashboard.js"></script>
-  <script src="dashboard/patient/doctorinfo/doctor.js"></script>
+  <script src="home/doctor/home.js"></script>
+  <script src="home/patient/home.js"></script>
+  <script src="home/patient/doctorinfo/doctor.js"></script>
   <script src="chat/chat.js"></script>
   <script src="services/services.js"></script>
   <script src="myprofile/doctor/myprofile.js"></script>

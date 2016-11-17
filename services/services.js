@@ -19,7 +19,7 @@ angular.module('myApp.Services', []).
                     country: "Sri Lanka",
                     city: "Colombo",
                     languages: ["English", "Indonesian"],
-                    profileimage: "",
+                    profileimage: "http://www.gravatar.com/avatar/7272996f825bd268885d6b20484d325c",
                     peer: {},
                     otherdata: {
                         speciality: "Specialist in Angular",
@@ -103,7 +103,7 @@ angular.module('myApp.Services', []).
                     username: 'john',
                     password: 'john',
                     speciality: "",
-                    status: "Unavailable",
+                    status: "unavailable",
                     type: "patient",
                     country: "Sri Lanka",
                     city: "Kelaniya",
@@ -142,7 +142,7 @@ angular.module('myApp.Services', []).
 
                                     userObject.peer = peer;
                                     currentUser = userObject;
-                                    userObject.status = "Available";
+                                    userObject.status = "available";
                                     $rootScope.username = username;
                                     $rootScope.userObject = userObject;
                                     $rootScope.setPeer(peer);
