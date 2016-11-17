@@ -26,6 +26,8 @@ angular.module('myApp.patient.dashboard', ['ngRoute'])
             $scope.setUserOnline(username);
         });*/
 
+        $scope.isLoading = true;
+
         var client = User.getClient();
         client.onComplete(function (data) {
             angular.forEach(data, function (doc) {
@@ -33,9 +35,11 @@ angular.module('myApp.patient.dashboard', ['ngRoute'])
                 doc.profileimage = "http://www.gravatar.com/avatar/" + passhash;
             });
             $scope.doctors = data;
+            $scope.isLoading = false;
         });
         client.onError(function (data) {
             alert(data.message);
+            $scope.isLoading = false;
         });
         client.GetAllDoctors();
 
