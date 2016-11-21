@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('loginApp.signin', ['ngRoute'])
+angular.module('loginApp.forgot', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/signin', {
+        $routeProvider.when('/forgot', {
             templateUrl: 'partial-signin.html',
             controller: 'signinControl'
         });
