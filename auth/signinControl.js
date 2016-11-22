@@ -9,6 +9,12 @@ angular.module('loginApp.signin', ['ngRoute'])
         }).when('/join', {
             templateUrl: 'partial-join.html',
             controller: 'signinControl'
+        }).when('/join/patient', {
+            templateUrl: 'partial-join-patient.html',
+            controller: 'signinControl'
+        }).when('/join/doctor', {
+            templateUrl: 'partial-join-doctor.html',
+            controller: 'signinControl'
         });
     }])
 
@@ -42,6 +48,10 @@ angular.module('loginApp.signin', ['ngRoute'])
         };
 
         $scope.navigateURL = function(URL){
-            $location.path(URL);
+            $location.path("join/"+URL);
+        };
+
+        $scope.signupUser = function(flag){
+            alert("siginup users:"+flag);
         };
     }]);
