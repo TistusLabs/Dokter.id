@@ -4,12 +4,12 @@ angular.module('loginApp.forgot', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/forgot', {
-            templateUrl: 'partial-signin.html',
-            controller: 'signinControl'
+            templateUrl: 'partial-forgot.html',
+            controller: 'forgotControl'
         });
     }])
 
-    .controller('signinControl', ['$scope', '$rootScope', '$location', 'User', function($scope, $rootScope, $location, User) {
+    .controller('forgotControl', ['$scope', '$rootScope', '$location', 'User', function($scope, $rootScope, $location, User) {
 
         $scope.processing = false;
         $scope.authenticateUser = function(username, password) {

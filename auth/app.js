@@ -5,6 +5,7 @@ angular.module('loginApp', [
     'ngMaterial',
     'ngMessages',
     'loginApp.signin',
+    'loginApp.forgot',
     'myApp.Services'
 ]).
     config(['$routeProvider', function ($routeProvider) {

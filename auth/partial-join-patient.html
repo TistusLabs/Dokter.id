@@ -29,24 +29,22 @@
         </div>
         <div class="Wrapper__form-wrapper">
             <div class="Box">
-                <div class="Box__title">Forgot Your Password ?</div>
-                <div class="Box__subtitle">Please enter your email to help us identify you</div>
-                <form name="forgotForm" class="Box__form Form">
+                <div class="Box__title">Join and be part of the future of healthcare</div>
+                <!-- <div class="Box__subtitle">Please enter your email to help us identify you</div> -->
+                <form class="Box__form Form">
                     <div class="Form__group">
-                        <label for="email" class="Form__label">Email</label>
-                        <input required id="email" name="email" type="text" class="Form__control" placeholder="Email" />
-                        <div ng-if="forgotForm.email.$invalid" class="Form__message">
-                            Please Enter Your Email
-                        </div>
+                        <button ng-click="navigateURL('#/join/patient')" class="Button--rounded Button--register Button--register-pink">
+                            SIGN UP AS PATIENT
+                        </button>
                     </div>
                     <div class="Form__group">
-                        <button class="Form__control Form__control--button Button Button--big Button--register-orange">
-                            Restore Password
+                        <button ng-click="navigateURL('#/join/doctor') " class="Button--rounded Button--register Button--register-orange">
+                            SIGN UP AS DOCTOR
                         </button>
                     </div>
                 </form>
                 <div class="Box__bottom-link">
-                    Return to <a href="#/signin">SIGN IN</a>
+                    Already User? <a href="#/signin">SIGN IN</a> here
                 </div>
             </div>
         </div>

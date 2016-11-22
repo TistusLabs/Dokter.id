@@ -2,23 +2,26 @@
 
 angular.module('loginApp.signin', ['ngRoute'])
 
-    .config(['$routeProvider', function($routeProvider) {
+    .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/signin', {
             templateUrl: 'partial-signin.html',
+            controller: 'signinControl'
+        }).when('/join', {
+            templateUrl: 'partial-join.html',
             controller: 'signinControl'
         });
     }])
 
-    .controller('signinControl', ['$scope', '$rootScope', '$location', 'User', function($scope, $rootScope, $location, User) {
+    .controller('signinControl', ['$scope', '$rootScope', '$location', 'User', function ($scope, $rootScope, $location, User) {
 
         $scope.processing = false;
-        $scope.authenticateUser = function(username, password) {
+        $scope.authenticateUser = function (username, password) {
             $rootScope.ShowBusyContainer("Signing into the system...");
             $scope.processing = true;
             var client = User.getClient();
-            client.onComplete(function(data) {
+            client.onComplete(function (data) {
                 if (data.status) {
-                    $scope.$apply(function() {
+                    $scope.$apply(function () {
                         if (data.user.type == "patient") {
                             $location.path("/patient/dashboard");
                             $rootScope.setMenu('patient');
@@ -31,10 +34,14 @@ angular.module('loginApp.signin', ['ngRoute'])
                 }
                 $scope.processing = false;
             });
-            client.onError(function(data) {
+            client.onError(function (data) {
                 alert(data.message);
                 $scope.processing = false;
             });
             client.AuthenticateUser(username, password);
+        };
+
+        $scope.navigateURL = function(URL){
+            $location.path(URL);
         };
     }]);
