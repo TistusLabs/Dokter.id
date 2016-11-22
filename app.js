@@ -5,8 +5,6 @@ angular.module('myApp', [
     'ngRoute',
     'ngMaterial',
     'ngMessages',
-    'myApp.view1',
-    'myApp.view2',
     'myApp.version',
     'myApp.signup',
     'myApp.signup.patient',
@@ -181,10 +179,10 @@ angular.module('myApp', [
                 }
             };
         };
-        $rootScope.setMenu('doctor');
+        $rootScope.setMenu('patient');
         $rootScope.userObject = {
                     id: "1",
-                    name: "Shehan Tissera",
+                    name: "Shehan Tis",
                     username: 'shehan@gmail.com',
                     password: 'shehan',
                     status: "available",
