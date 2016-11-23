@@ -30,16 +30,14 @@ angular.module('loginApp.signin', ['ngRoute'])
             var client = User.getClient();
             client.onComplete(function (data) {
                 if (data.status) {
-                    $scope.$apply(function () {
-                        if (data.user.type == "patient") {
-                            $location.path("/patient/home");
-                            $rootScope.setMenu('patient');
-                        } else if (data.user.type == "doctor") {
-                            $location.path("/doctor/home");
-                            $rootScope.setMenu('doctor');
-                        }
-                        $rootScope.HideBusyContainer();
-                    });
+                    if (data.user.type == "patient") {
+                        $location.path("/patient/home");
+                        $rootScope.setMenu('patient');
+                    } else if (data.user.type == "doctor") {
+                        $location.path("/doctor/home");
+                        $rootScope.setMenu('doctor');
+                    }
+                    $rootScope.HideBusyContainer();
                 }
                 $scope.processing = false;
             });
@@ -50,11 +48,11 @@ angular.module('loginApp.signin', ['ngRoute'])
             client.AuthenticateUser(username, password);
         };
 
-        $scope.navigateURL = function(URL){
-            $location.path("join/"+URL);
+        $scope.navigateURL = function (URL) {
+            $location.path("join/" + URL);
         };
 
-        $scope.signupUser = function(flag){
-            alert("siginup users:"+flag);
+        $scope.signupUser = function (flag) {
+            alert("siginup users:" + flag);
         };
     }]);
