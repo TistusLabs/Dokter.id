@@ -30,13 +30,7 @@ angular.module('loginApp.signin', ['ngRoute'])
             var client = User.getClient();
             client.onComplete(function (data) {
                 if (data.status) {
-                    if (data.user.type == "patient") {
-                        $location.path("/patient/home");
-                        $rootScope.setMenu('patient');
-                    } else if (data.user.type == "doctor") {
-                        $location.path("/doctor/home");
-                        $rootScope.setMenu('doctor');
-                    }
+                    $location.path("../");
                     $rootScope.HideBusyContainer();
                 }
                 $scope.processing = false;
