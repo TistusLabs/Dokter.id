@@ -84,11 +84,11 @@ angular.module('myApp', [
             $mdOpenMenu(ev);
         };
 
-        $rootScope.setPeer = function (peer) {
-            $rootScope.peerObj = peer;
+        $rootScope.setTokSession = function (obj) {
+            $rootScope.toksessionObj = obj;
         };
-        $rootScope.getPeer = function () {
-            return $rootScope.peerObj;
+        $rootScope.getTokSession = function () {
+            return $rootScope.toksessionObj;
         };
         $rootScope.setPartnerPeerID = function (peer) {
             $rootScope.peerPartnerID = peer;

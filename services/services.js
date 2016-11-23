@@ -224,7 +224,7 @@ angular.module('myApp.Services', []).
                                     userObject.status = "available";
                                     $rootScope.username = username;
                                     $rootScope.userObject = userObject;
-                                    $rootScope.setsession(session);
+                                    $rootScope.setTokSession(session);
                                     ResultObj = {
                                         status: resultFound,
                                         message: "Login successful",
@@ -405,7 +405,8 @@ angular.module('myApp.Services', []).
                             sessionId: sessionId,
                             token: token
                         }
-                        initializeSession(apiKey,sessionId,data);
+                        if (onComplete) onComplete(data);
+                        //initializeSession(apiKey,sessionId,data);
                     }).
                     error(function (data, status, headers, config) {
                         if (onError) onError(data);
@@ -443,7 +444,6 @@ angular.module('myApp.Services', []).
                         console.log('There was an error connecting to the session: ', error.code, error.message);
                     }
                 });
-                if (onComplete) onComplete(data);
             }
 
             return {
