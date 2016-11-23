@@ -74,12 +74,20 @@ angular.module('myApp.Services', []).
                 return sessionInfo;
             }
 
+            function setsession(securityToken,authData) {
+                _cookMan.set("securityToken", securityToken, 1);
+                _cookMan.set("authData", JSON.stringify(authData), 1);
+            }
+
             return {
                 checkSession: function () {
                     return checksession();
                 },
                 getSession: function () {
                     return getsession();
+                },
+                setSession: function (securityToken,authData) {
+                    return setsession(securityToken,authData);
                 }
             };
         }
@@ -236,6 +244,9 @@ angular.module('myApp.Services', []).
                                     socket.on('connect', function (data) {
                                         socket.emit('online', userObject.username);
                                     });
+
+                                    AuthClient.setSession(session.sessionId,userObject);
+
                                     if (onComplete) onComplete(ResultObj);
                                 });
                                 tokClient.onError(function (data) {
