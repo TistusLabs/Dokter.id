@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.Services', []).
-    factory('User', ['$rootScope', 'ConnectionStorage', 'AppURLs', 'PeerService', function ($rootScope, ConnectionStorage, AppURLs, PeerService) {
+    factory('User', ['$rootScope', 'ConnectionStorage', 'AppURLs', 'TokboxService', function ($rootScope, ConnectionStorage, AppURLs, TokboxService) {
 
         function AuthClient() {
 
@@ -207,8 +207,8 @@ angular.module('myApp.Services', []).
                                 resultFound = true;
                                 var conclient = ConnectionStorage.getClient();
 
-                                var peerClient = PeerService.getClient();
-                                peerClient.onComplete(function (peer) {
+                                var tokClient = TokboxService.getClient();
+                                tokClient.onComplete(function (peer) {
                                     console.log("Success: " + peer);
                                     conclient.onComplete(function (data) {
                                         console.log(data);
@@ -239,7 +239,7 @@ angular.module('myApp.Services', []).
                                     });
                                     if (onComplete) onComplete(ResultObj);
                                 });
-                                peerClient.onError(function (data) {
+                                tokClient.onError(function (data) {
                                     console.log("Error: " + data);
                                     ResultObj = {
                                         status: resultFound,
@@ -248,7 +248,7 @@ angular.module('myApp.Services', []).
                                     };
                                     if (onError) onError(ResultObj)
                                 });
-                                peerClient.GeneratePeer();
+                                tokClient.GenerateSession();
                             }
                             count++;
                             if (doctors.length == count) {
@@ -383,53 +383,39 @@ angular.module('myApp.Services', []).
         }
 
     }]).
-    factory('PeerService', ['$rootScope', '$http', 'IDService', function ($rootScope, $http, IDService) {
-        function PeerClient(params) {
+    factory('TokboxService', ['$rootScope', '$http', 'IDService', function ($rootScope, $http, IDService) {
+        function TokboxClient(params) {
             var onComplete;
             var onError;
 
-            function genPeer() {
-                var URL = "https://service.xirsys.com/ice";
-                var body = {
-                    ident: "tistuslabs",
-                    secret: "1fa0fdd8-09f0-11e6-97f8-4b76c213acdb",
-                    domain: "prepaid.topas.tv",
-                    application: "default",
-                    room: "default",
-                    secure: 1
-                };
-                $http.post(URL, body).
+            var apiKey,
+                sessionId,
+                token;
+
+            function genSession() {
+                var URL = SERVER_BASE_URL + '/session';
+                $http.get(URL).
                     success(function (data, status, headers, config) {
                         var id = IDService.generateID();
-                        var peer = new Peer(id, {
-                            host: 'prepaid.topas.tv',
-                            port: 9000,
-                            path: '/peerjs',
-                            secure: true,
-                            debug: 3,
-                            logFunction: function () {
-                                var copy = Array.prototype.slice.call(arguments).join(' ');
-                                console.log(copy);
-                            },
-                            config: data.d
-                        });
-                        // when the peer is connected successfully
-                        peer.on('open', function (id) {
-                            if (onComplete) onComplete(peer);
-                        });
-                        peer.on('error', function (err) {
-                            if (onError) onError(peer)
-                        })
+                        apiKey = data.apiKey;
+                        sessionId = data.sessionId;
+                        token = data.token;
+
+                        var data = {
+                            apiKey : apiKey,
+                            sessionId : sessionId,
+                            token : token
+                        }
+                        if (onComplete) onComplete(data);
                     }).
                     error(function (data, status, headers, config) {
                         if (onError) onError(data);
                     });
-
             }
 
             return {
-                GeneratePeer: function () {
-                    genPeer();
+                GenerateSession: function () {
+                    genSession();
                     return this;
                 },
                 onComplete: function (func) {
@@ -444,7 +430,7 @@ angular.module('myApp.Services', []).
         }
         return {
             getClient: function () {
-                var req = new PeerClient();
+                var req = new TokboxClient();
                 return req;
             }
         }
