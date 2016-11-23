@@ -204,7 +204,6 @@ angular.module('myApp.Services', []).
                         angular.forEach(doctors, function (userObject, index) {
                             if (userObject.username == username && userObject.password == password) {
 
-
                                 resultFound = true;
                                 var conclient = ConnectionStorage.getClient();
 
