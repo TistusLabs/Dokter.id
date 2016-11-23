@@ -3,6 +3,87 @@
 angular.module('myApp.Services', []).
     factory('User', ['$rootScope', 'ConnectionStorage', 'AppURLs', 'PeerService', function ($rootScope, ConnectionStorage, AppURLs, PeerService) {
 
+        function AuthClient() {
+
+            var sessionInfo;
+            var userName;
+            var securityToken;
+
+            var _cookMan = (function () {
+                function createCookie(name, value, days) {
+                    if (days) {
+                        var date = new Date();
+                        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                        var expires = "; expires=" + date.toGMTString();
+                    } else var expires = "";
+                    document.cookie = name + "=" + value + expires;
+                }
+
+                return {
+                    set: function (name, value, days) {
+                        createCookie(name, value, days);
+                    },
+                    get: function (name) {
+                        var nameEQ = name + "=";
+                        var ca = document.cookie.split(';');
+                        for (var i = 0; i < ca.length; i++) {
+                            var c = ca[i];
+                            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+                        }
+                        return null;
+                    },
+                    delete: function (name) {
+                        createCookie(name, "", -1);
+                    }
+                };
+            })();
+
+            function checksession() {
+                securityToken = _cookMan.get("securityToken");
+                sessionInfo = _cookMan.get("authData");
+
+                if (sessionInfo) {
+                    sessionInfo = JSON.parse(decodeURIComponent(sessionInfo));
+                    userName = sessionInfo.username;
+                }
+
+                console.log("DEBUG : CheckSession - " + securityToken);
+                console.log("DEBUG : sessionInfo - " + sessionInfo);
+                console.log("DEBUG : userName - " + userName);
+
+                if (securityToken == null) {
+                    var nagivateUrl = "";
+                    if (location.host == "localhost") {
+                        nagivateUrl = "/dokter.id/auth";
+                    } else {
+                        nagivateUrl = "../auth";
+                    }
+                    location.href = nagivateUrl;
+                }
+
+                return securityToken;
+            }
+
+            function getsession() {
+                sessionInfo = _cookMan.get("authData");
+                if (sessionInfo) {
+                    sessionInfo = JSON.parse(decodeURIComponent(sessionInfo));
+                    userName = sessionInfo.Username;
+                }
+                return sessionInfo;
+            }
+
+            return {
+                checkSession: function () {
+                    return checksession();
+                },
+                getSession: function () {
+                    return getsession();
+                }
+            };
+        }
+
         function UserClient() {
             var onComplete;
             var onError;
@@ -23,7 +104,7 @@ angular.module('myApp.Services', []).
                     peer: {},
                     otherdata: {
                         speciality: "Specialist in Angular",
-                        currency:"USD",
+                        currency: "USD",
                         rate: "50",
                         shortbiography: "Pationate in whatever the task is.",
                         awards: "1st place in all places",
@@ -45,7 +126,7 @@ angular.module('myApp.Services', []).
                     peer: {},
                     otherdata: {
                         speciality: "Specialist in Nuro",
-                        currency:"IDR",
+                        currency: "IDR",
                         rate: "1700",
                         shortbiography: "Pationate in whatever the task is.",
                         awards: "1st place in all places",
@@ -67,7 +148,7 @@ angular.module('myApp.Services', []).
                     peer: {},
                     otherdata: {
                         speciality: "Specialist in Nuro",
-                        currency:"IDR",
+                        currency: "IDR",
                         rate: "8970",
                         shortbiography: "Pationate in whatever the task is.",
                         awards: "1st place in all places",
@@ -89,7 +170,7 @@ angular.module('myApp.Services', []).
                     peer: {},
                     otherdata: {
                         speciality: "Specialist in Nuro",
-                        currency:"IDR",
+                        currency: "IDR",
                         rate: "8970",
                         shortbiography: "Pationate in whatever the task is.",
                         awards: "1st place in all places",
@@ -100,7 +181,7 @@ angular.module('myApp.Services', []).
                 {
                     id: "4",
                     name: "John Cena",
-                    username: 'john',
+                    username: 'john@gmail.com',
                     password: 'john',
                     speciality: "",
                     status: "unavailable",
@@ -295,11 +376,15 @@ angular.module('myApp.Services', []).
             getClient: function () {
                 var req = new UserClient();
                 return req;
-            }
+            },
+            getAuthClient: function () {
+                var req = new AuthClient();
+                return req;
+            },
         }
 
     }]).
-    factory('PeerService', ['$rootScope', '$http','IDService', function ($rootScope, $http,IDService) {
+    factory('PeerService', ['$rootScope', '$http', 'IDService', function ($rootScope, $http, IDService) {
         function PeerClient(params) {
             var onComplete;
             var onError;

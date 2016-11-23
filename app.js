@@ -24,6 +24,12 @@ angular.module('myApp', [
     }])
 
     .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', function ($scope, $rootScope, $location, User, $mdDialog) {
+
+        var client = User.getAuthClient();
+        var securityToken = client.checkSession();
+        console.log("Logged in securityToken: " + securityToken);
+        var session = client.getSession();
+
         $rootScope.ShowBusyContainer = function (message) {
             $rootScope.isBusy = true;
             $rootScope.bcmessage = message;
@@ -34,7 +40,7 @@ angular.module('myApp', [
         };
 
         $rootScope.menu = [];
-        
+
         $rootScope.submenu = [
             {
                 "caption": "Account Settings",
@@ -69,8 +75,8 @@ angular.module('myApp', [
                 $rootScope.validSession = true;
             }
         };
-        
-        $scope.openWindow = function(path){
+
+        $scope.openWindow = function (path) {
             $location.path(path);
         };
 
@@ -144,10 +150,10 @@ angular.module('myApp', [
                             caption: "Home",
                             route: "/doctor/home",
                             icon: "build/img/navigation/side/home.png"
-                        },{
+                        }, {
                             "caption": "Dashboard",
                             "route": "/doctor/dashboard",
-                            "icon":"build/img/navigation/side/dashboard.png"
+                            "icon": "build/img/navigation/side/dashboard.png"
                         },
                         {
                             caption: "Consultation",
@@ -157,7 +163,7 @@ angular.module('myApp', [
                         {
                             "caption": "Billing",
                             "route": "/billing",
-                            "icon":"build/img/navigation/side/billing.png"
+                            "icon": "build/img/navigation/side/billing.png"
                         }
                     ];
                     break;
@@ -179,27 +185,17 @@ angular.module('myApp', [
                 }
             };
         };
-        $rootScope.setMenu('patient');
-        $rootScope.userObject = {
-                    id: "1",
-                    name: "Shehan Tis",
-                    username: 'shehan@gmail.com',
-                    password: 'shehan',
-                    status: "available",
-                    type: "doctor",
-                    country: "Sri Lanka",
-                    city: "Colombo",
-                    languages: ["English", "Indonesian"],
-                    profileimage: "http://www.gravatar.com/avatar/7272996f825bd268885d6b20484d325c",
-                    peer: {},
-                    otherdata: {
-                        speciality: "Specialist in Angular",
-                        currency:"USD",
-                        rate: "50",
-                        shortbiography: "Pationate in whatever the task is.",
-                        awards: "1st place in all places",
-                        graduateschool: "Cardif Metropolitan",
-                        residenceplace: "Colombo"
-                    }
-                };
+
+        // temporary cuz login is not yet functioning
+        if (session.type == "doctor") {
+            $location.path("/doctor/home");
+        } else {
+            $location.path("/patient/home");
+        }
+        $rootScope.setMenu(session.type);
+        if (session.profileimage == "") {
+            var passhash = CryptoJS.MD5(session.username);
+            session.profileimage = "http://www.gravatar.com/avatar/" + passhash;
+        }
+        $rootScope.userObject = session;
     }]);

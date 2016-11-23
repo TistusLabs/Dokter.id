@@ -32,10 +32,10 @@ angular.module('loginApp.signin', ['ngRoute'])
                 if (data.status) {
                     $scope.$apply(function () {
                         if (data.user.type == "patient") {
-                            $location.path("/patient/dashboard");
+                            $location.path("/patient/home");
                             $rootScope.setMenu('patient');
                         } else if (data.user.type == "doctor") {
-                            $location.path("/doctor/dashboard");
+                            $location.path("/doctor/home");
                             $rootScope.setMenu('doctor');
                         }
                         $rootScope.HideBusyContainer();
