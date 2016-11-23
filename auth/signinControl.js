@@ -15,6 +15,9 @@ angular.module('loginApp.signin', ['ngRoute'])
         }).when('/join/doctor', {
             templateUrl: 'partial-join-doctor.html',
             controller: 'signinControl'
+        }).when('/done', {
+            templateUrl: 'partial-done.html',
+            controller: 'signinControl'
         });
     }])
 
