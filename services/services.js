@@ -245,7 +245,8 @@ angular.module('myApp.Services', []).
                                         socket.emit('online', userObject.username);
                                     });
 
-                                    AuthClient.setSession(session.sessionId,userObject);
+                                    var client = new AuthClient();
+                                    client.setSession(session.sessionId,userObject);
 
                                     if (onComplete) onComplete(ResultObj);
                                 });
