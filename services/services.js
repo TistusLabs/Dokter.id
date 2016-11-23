@@ -208,8 +208,8 @@ angular.module('myApp.Services', []).
                                 var conclient = ConnectionStorage.getClient();
 
                                 var tokClient = TokboxService.getClient();
-                                tokClient.onComplete(function (peer) {
-                                    console.log("Success: " + peer);
+                                tokClient.onComplete(function (session) {
+                                    console.log("Success: " + session);
                                     conclient.onComplete(function (data) {
                                         console.log(data);
                                     });
@@ -217,21 +217,20 @@ angular.module('myApp.Services', []).
                                         console.log(data);
                                     });
                                     console.log('Key:', userObject.id);
-                                    console.log('Value:', peer.id);
-                                    conclient.SetConnection(userObject.id, peer.id);
+                                    console.log('Value:', session.sessionId);
+                                    conclient.SetConnection(userObject.id, session.sessionId);
 
-                                    userObject.peer = peer;
                                     currentUser = userObject;
                                     userObject.status = "available";
                                     $rootScope.username = username;
                                     $rootScope.userObject = userObject;
-                                    $rootScope.setPeer(peer);
+                                    $rootScope.setsession(session);
                                     ResultObj = {
                                         status: resultFound,
                                         message: "Login successful",
                                         user: userObject
                                     };
-                                    console.log("My ID: ", peer.id);
+                                    console.log("My ID: ", session.sessionId);
                                     // testing socket.io functionality
                                     var socket = io.connect(AppURLs.socketServer, { secure: true, port: 4000 });
                                     socket.on('connect', function (data) {
