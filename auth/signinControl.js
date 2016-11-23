@@ -21,7 +21,7 @@ angular.module('loginApp.signin', ['ngRoute'])
         });
     }])
 
-    .controller('signinControl', ['$scope', '$rootScope', '$location', 'User', function ($scope, $rootScope, $location, User) {
+    .controller('signinControl', ['$scope', '$rootScope', '$location', 'User','$window', function ($scope, $rootScope, $location, User,$window) {
 
         $scope.processing = false;
         $scope.authenticateUser = function (username, password) {
@@ -30,7 +30,7 @@ angular.module('loginApp.signin', ['ngRoute'])
             var client = User.getClient();
             client.onComplete(function (data) {
                 if (data.status) {
-                    $location.path("../");
+                    $window.location.href = "../";
                     $rootScope.HideBusyContainer();
                 }
                 $scope.processing = false;
