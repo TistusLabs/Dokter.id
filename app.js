@@ -186,6 +186,10 @@ angular.module('myApp', [
             };
         };
 
+        $scope.navigateToProfile = function(){
+            $location.path("/profile");
+        }
+
         // temporary cuz login is not yet functioning
         if (session.type == "doctor") {
             $location.path("/doctor/home");

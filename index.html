@@ -132,7 +132,7 @@
           <div class="TopNavigation__amount">IDR 1.000.000</div>
         </div>
         <div class="TopNavigation__profile">
-          <img class="TopNavigation__avatar" ng-src="{{$root.userObject.profileimage}}?s=100&d=monsterid" alt="{{$root.userObject.name}}" title="{{$root.userObject.name}}" />
+          <img ng-click="navigateToProfile()" class="TopNavigation__avatar" ng-src="{{$root.userObject.profileimage}}?s=100&d=monsterid" alt="{{$root.userObject.name}}" title="{{$root.userObject.name}}" />
           <!--<div class="TopNavigation__profile-arrow TopNavigation&#45;&#45;arrow-up"></div>-->
         </div>
       </nav>
