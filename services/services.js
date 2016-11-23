@@ -224,7 +224,7 @@ angular.module('myApp.Services', []).
                                     userObject.status = "available";
                                     $rootScope.username = username;
                                     $rootScope.userObject = userObject;
-                                    $rootScope.setTokSession(session);
+                                    //$rootScope.setTokSession(session);
                                     ResultObj = {
                                         status: resultFound,
                                         message: "Login successful",
