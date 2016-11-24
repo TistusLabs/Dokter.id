@@ -25,7 +25,7 @@ angular.module('myApp.patient.home', ['ngRoute'])
 
         $scope.setUserStatus = function(data){
             angular.forEach($scope.doctors, function (doctor, index) {
-                if(doctor.username == data.username){
+                if(doctor.username == data.user){
                     debugger;
                     $scope.$apply(function(){
                         doctor.status = data.status;
