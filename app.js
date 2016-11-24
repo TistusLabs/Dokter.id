@@ -17,7 +17,9 @@ angular.module('myApp', [
     'myApp.Services',
     'myApp.profile',
     'myApp.pagenotfound',
-    'myApp.mypatients'
+    'myApp.mypatients',
+    'myApp.billing',
+    'myApp.topup'
 ]).
     config(['$routeProvider', function($routeProvider) {
         $routeProvider.otherwise({ redirectTo: '/pagenotfound' });
@@ -165,7 +167,7 @@ angular.module('myApp', [
                         },
                         {
                             "caption": "Top Up Credit",
-                            "route": "",
+                            "route": "/topup",
                             "icon": "build/img/navigation/top/topup.png"
                         },
                         {
@@ -202,7 +204,7 @@ angular.module('myApp', [
                         },
                         {
                             "caption": "Top Up Credit",
-                            "route": "",
+                            "route": "/topup",
                             "icon": "build/img/navigation/top/topup.png"
                         },
                         {
