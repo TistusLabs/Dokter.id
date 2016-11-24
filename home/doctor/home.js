@@ -9,7 +9,7 @@ angular.module('myApp.doctor.home', ['ngRoute'])
         });
     }])
 
-    .controller('dochomeControll', ['$scope', '$rootScope', '$location', 'User', function ($scope, $rootScope, $location, User) {
+    .controller('dochomeControll', ['$scope', '$rootScope', '$location', 'User','AppURLs', function ($scope, $rootScope, $location, User,AppURLs) {
         //$rootScope.checkSession();
 
         /*var client = User.getClient();
