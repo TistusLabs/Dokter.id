@@ -85,17 +85,27 @@
       <!-- TOP NAVIGATION -->
       <nav class="TopNavigation">
         <!-- TOP MENU // Hidden Menu Modifier (TopMenu--is-hidden)-->
-        <div class="TopNavigation__menu-wrapper TopMenu">
+        <div class="TopNavigation__menu-wrapper TopMenu{{contextMenu}}">
           <div class="TopMenu__wrapper">
             <div class="TopMenu__arrow"></div>
             <ul class="TopMenu__menu">
-              <li class="TopMenu__item">
-                <a href="#/profile" class="TopMenu__link">
-                  <div class="TopMenu__text">Settings</div>
-                  <img class="TopMenu__icon" src="build/img/navigation/top/setting.png" alt="Settings" title="Settings" width="18" height="18"
+
+              <li ng-repeat="context in contextmenuitems" class="TopMenu__item">
+                <a ng-click="contextMenyClick(context.route,$event)" class="TopMenu__link">
+                  <div class="TopMenu__text">{{context.caption}}</div>
+                  <img class="TopMenu__icon" ng-src="{{context.icon}}" alt="{{context.caption}}" title="{{context.caption}}" width="18" height="18"
                   />
                 </a>
               </li>
+
+              <!--<li class="TopMenu__item">
+                <a href="#/profile" class="TopMenu__link">
+                  <div class="TopMenu__text">Settings</div>
+                  <img class="TopMenu__icon" ng-src="build/img/navigation/top/setting.png" alt="Settings" title="Settings" width="18" height="18"
+                  />
+                </a>
+              </li>
+
               <li class="TopMenu__item">
                 <a href="consultation-manage.html" class="TopMenu__link">
                   <div class="TopMenu__text">Manage Consultation</div>
@@ -103,6 +113,7 @@
                     width="18" height="18" />
                 </a>
               </li>
+
               <li class="TopMenu__item">
                 <a href="billing-topup.html" class="TopMenu__link">
                   <div class="TopMenu__text">Top Up Credit</div>
@@ -110,6 +121,7 @@
                     height="18" />
                 </a>
               </li>
+
               <li class="TopMenu__item">
                 <a href="billing-manage.html" class="TopMenu__link">
                   <div class="TopMenu__text">Manage Billing</div>
@@ -117,13 +129,15 @@
                     height="18" />
                 </a>
               </li>
+
               <li class="TopMenu__item" ng-click="logoutUser($event)">
                 <a href="#" class="TopMenu__link">
                   <div class="TopMenu__text">Sign Out</div>
                   <img class="TopMenu__icon" src="build/img/navigation/top/signout.png" alt="Sign Out" title="Sign Out" width="18" height="18"
                   />
                 </a>
-              </li>
+              </li>-->
+
             </ul>
           </div>
         </div>
@@ -132,7 +146,7 @@
           <div class="TopNavigation__amount">IDR 1.000.000</div>
         </div>
         <div class="TopNavigation__profile">
-          <img ng-click="navigateToProfile()" class="TopNavigation__avatar" ng-src="{{$root.userObject.profileimage}}?s=100&d=monsterid" alt="{{$root.userObject.name}}" title="{{$root.userObject.name}}" />
+          <img ng-click="popSettings()" class="TopNavigation__avatar" ng-src="{{$root.userObject.profileimage}}?s=100&d=monsterid" alt="{{$root.userObject.name}}" title="{{$root.userObject.name}}" />
           <!--<div class="TopNavigation__profile-arrow TopNavigation&#45;&#45;arrow-up"></div>-->
         </div>
       </nav>

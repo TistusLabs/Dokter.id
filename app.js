@@ -23,12 +23,15 @@ angular.module('myApp', [
         $routeProvider.otherwise({ redirectTo: '/pagenotfound' });
     }])
 
-    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog','$window', function($scope, $rootScope, $location, User, $mdDialog,$window) {
+    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', '$window', function($scope, $rootScope, $location, User, $mdDialog, $window) {
 
         var client = User.getAuthClient();
         var securityToken = client.checkSession();
         console.log("Logged in securityToken: " + securityToken);
         var session = client.getSession();
+
+        // default values
+        $scope.contextMenu = "--is-hidden";
 
         $rootScope.ShowBusyContainer = function(message) {
             $rootScope.isBusy = true;
@@ -41,24 +44,7 @@ angular.module('myApp', [
 
         $rootScope.menu = [];
 
-        $rootScope.submenu = [
-            {
-                "caption": "Account Settings",
-                "code": "settings"
-            },
-            {
-                "caption": "Dashboard",
-                "code": "dashboard"
-            },
-            {
-                "caption": "Manage Patients",
-                "code": "managepatients"
-            },
-            {
-                "caption": "Sign Out",
-                "code": "signout"
-            }
-        ];
+        $rootScope.contextmenuitems = [];
 
         $rootScope.peerObj = null;
         $rootScope.peerPartnerID = "";
@@ -166,6 +152,33 @@ angular.module('myApp', [
                             "icon": "build/img/navigation/side/billing.png"
                         }
                     ];
+                    $rootScope.contextmenuitems = [
+                        {
+                            "caption": "Settings",
+                            "route": "/profile",
+                            "icon": "build/img/navigation/top/setting.png"
+                        },
+                        {
+                            "caption": "Manage Consultation",
+                            "route": "",
+                            "icon": "build/img/navigation/top/consultation.png"
+                        },
+                        {
+                            "caption": "Top Up Credit",
+                            "route": "",
+                            "icon": "build/img/navigation/top/topup.png"
+                        },
+                        {
+                            "caption": "Manage Billing",
+                            "route": "/billing",
+                            "icon": "build/img/navigation/top/billing.png"
+                        },
+                        {
+                            "caption": "Sign Out",
+                            "route": "/signout",
+                            "icon": "build/img/navigation/top/signout.png"
+                        }
+                    ];
                     break;
                 }
                 case "patient": {
@@ -177,8 +190,30 @@ angular.module('myApp', [
                         },
                         {
                             caption: "Billing",
-                            route: "/patient/billing",
+                            route: "/billing",
                             icon: "build/img/navigation/side/billing.png"
+                        }
+                    ];
+                    $rootScope.contextmenuitems = [
+                        {
+                            "caption": "Settings",
+                            "route": "/profile",
+                            "icon": "build/img/navigation/top/setting.png"
+                        },
+                        {
+                            "caption": "Top Up Credit",
+                            "route": "",
+                            "icon": "build/img/navigation/top/topup.png"
+                        },
+                        {
+                            "caption": "Manage Billing",
+                            "route": "/billing",
+                            "icon": "build/img/navigation/top/billing.png"
+                        },
+                        {
+                            "caption": "Sign Out",
+                            "route": "/signout",
+                            "icon": "build/img/navigation/top/signout.png"
                         }
                     ];
                     break;
@@ -186,9 +221,21 @@ angular.module('myApp', [
             };
         };
 
-        $scope.navigateToProfile = function() {
-            $location.path("/profile");
+        $scope.popSettings = function() {
+            if ($scope.contextMenu == "") {
+                $scope.contextMenu = "--is-hidden";
+            } else {
+                $scope.contextMenu = "";
+            }
         }
+
+        $scope.contextMenyClick = function(route,event) {
+            if(route == "/signout"){
+                $scope.logoutUser(event);
+            }else{
+                $location.path(route);
+            }
+        };
 
         $scope.logoutUser = function(ev) {
             // Appending dialog to document.body to cover sidenav in docs app
