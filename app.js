@@ -34,7 +34,7 @@ angular.module('myApp', [
 
         debugger;
         var socket = io.connect(AppURLs.socketServer);
-        socket.emit('useronline', userObject.username);
+        socket.emit('useronline', session.username);
 
         // default values
         $scope.contextMenu = "--is-hidden";
