@@ -25,7 +25,7 @@ angular.module('myApp', [
         $routeProvider.otherwise({ redirectTo: '/pagenotfound' });
     }])
 
-    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', '$window', function($scope, $rootScope, $location, User, $mdDialog, $window) {
+    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', '$window','AppURLs', function($scope, $rootScope, $location, User, $mdDialog, $window,AppURLs) {
 
         var client = User.getAuthClient();
         var securityToken = client.checkSession();
