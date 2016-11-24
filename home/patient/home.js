@@ -15,6 +15,7 @@ angular.module('myApp.patient.home', ['ngRoute'])
         $scope.setUserOnline = function(username){
             angular.forEach($scope.doctors, function (doctor, index) {
                 if(doctor.username == username){
+                    debugger;
                     $scope.$apply(function(){
                         doctor.status = "available";
                     });
