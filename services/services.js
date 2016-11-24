@@ -250,9 +250,6 @@ angular.module('myApp.Services', []).
                                     console.log("My ID: ", session.sessionId);
                                     // testing socket.io functionality
                                     //var socket = io.connect(AppURLs.socketServer, { secure: true, port: 4001 });
-                                    debugger;
-                                    var socket = io.connect(AppURLs.socketServer);
-                                    socket.emit('useronline', userObject.username);
 
                                     var client = new AuthClient();
                                     client.setSession(session.sessionId,userObject);

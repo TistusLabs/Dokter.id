@@ -32,6 +32,10 @@ angular.module('myApp', [
         console.log("Logged in securityToken: " + securityToken);
         var session = client.getSession();
 
+        debugger;
+        var socket = io.connect(AppURLs.socketServer);
+        socket.emit('useronline', userObject.username);
+
         // default values
         $scope.contextMenu = "--is-hidden";
 
@@ -231,10 +235,10 @@ angular.module('myApp', [
             }
         }
 
-        $scope.contextMenyClick = function(route,event) {
-            if(route == "/signout"){
+        $scope.contextMenyClick = function(route, event) {
+            if (route == "/signout") {
                 $scope.logoutUser(event);
-            }else{
+            } else {
                 $location.path(route);
             }
         };
