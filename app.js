@@ -19,23 +19,23 @@ angular.module('myApp', [
     'myApp.pagenotfound',
     'myApp.mypatients'
 ]).
-    config(['$routeProvider', function ($routeProvider) {
+    config(['$routeProvider', function($routeProvider) {
         $routeProvider.otherwise({ redirectTo: '/pagenotfound' });
     }])
 
-    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', function ($scope, $rootScope, $location, User, $mdDialog) {
+    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog','$window', function($scope, $rootScope, $location, User, $mdDialog,$window) {
 
         var client = User.getAuthClient();
         var securityToken = client.checkSession();
         console.log("Logged in securityToken: " + securityToken);
         var session = client.getSession();
 
-        $rootScope.ShowBusyContainer = function (message) {
+        $rootScope.ShowBusyContainer = function(message) {
             $rootScope.isBusy = true;
             $rootScope.bcmessage = message;
         };
 
-        $rootScope.HideBusyContainer = function () {
+        $rootScope.HideBusyContainer = function() {
             $rootScope.isBusy = false;
         };
 
@@ -65,7 +65,7 @@ angular.module('myApp', [
         $rootScope.chatdataConnection = null;
         $rootScope.filedataConnection = null;
         $rootScope.validSession = false;
-        $rootScope.checkSession = function () {
+        $rootScope.checkSession = function() {
             if (!angular.isDefined($rootScope.username) || $rootScope.username == null) {
                 // can check for a cookies if its available instead of rootScope variable
                 $location.path('/login');
@@ -76,39 +76,39 @@ angular.module('myApp', [
             }
         };
 
-        $scope.openWindow = function (path) {
+        $scope.openWindow = function(path) {
             $location.path(path);
         };
 
-        $scope.openMenu = function ($mdOpenMenu, ev) {
+        $scope.openMenu = function($mdOpenMenu, ev) {
             $mdOpenMenu(ev);
         };
 
-        $rootScope.setTokSession = function (obj) {
+        $rootScope.setTokSession = function(obj) {
             $rootScope.toksessionObj = obj;
         };
-        $rootScope.getTokSession = function () {
+        $rootScope.getTokSession = function() {
             return $rootScope.toksessionObj;
         };
-        $rootScope.setPartnerPeerID = function (peer) {
+        $rootScope.setPartnerPeerID = function(peer) {
             $rootScope.peerPartnerID = peer;
         };
-        $rootScope.getPartnerPeerID = function (peer) {
+        $rootScope.getPartnerPeerID = function(peer) {
             return $rootScope.peerPartnerID;
         };
-        $rootScope.setChatDataConnection = function (data) {
+        $rootScope.setChatDataConnection = function(data) {
             $rootScope.chatdataConnection = data;
         };
-        $rootScope.getChatDataConnection = function () {
+        $rootScope.getChatDataConnection = function() {
             return $rootScope.chatdataConnection;
         };
-        $rootScope.setFileDataConnection = function (data) {
+        $rootScope.setFileDataConnection = function(data) {
             $rootScope.filedataConnection = data;
         };
-        $rootScope.getFileDataConnection = function () {
+        $rootScope.getFileDataConnection = function() {
             return $rootScope.filedataConnection;
         };
-        $rootScope.setMenu = function (type) {
+        $rootScope.setMenu = function(type) {
             switch (type) {
                 case "login": {
                     $rootScope.menu = [
@@ -186,9 +186,29 @@ angular.module('myApp', [
             };
         };
 
-        $scope.navigateToProfile = function(){
+        $scope.navigateToProfile = function() {
             $location.path("/profile");
         }
+
+        $scope.logoutUser = function(ev) {
+            // Appending dialog to document.body to cover sidenav in docs app
+            var confirm = $mdDialog.confirm()
+                .title('Are you sure?')
+                .textContent('Do you really want to signout?')
+                .ariaLabel('Lucky day')
+                .targetEvent(ev)
+                .ok('Sign Out')
+                .cancel('No');
+
+            $mdDialog.show(confirm).then(function() {
+                // signout 
+                var client = new User.getAuthClient();
+                client.signOut();
+                $window.location.href = "/dokter.id/auth";
+            }, function() {
+                // will do nothing.
+            });
+        };
 
         // temporary cuz login is not yet functioning
         if (session.type == "doctor") {

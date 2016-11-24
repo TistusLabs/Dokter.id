@@ -75,6 +75,11 @@ angular.module('myApp.Services', []).
                 return sessionInfo;
             }
 
+            function signout() {
+                _cookMan.delete("securityToken");
+                _cookMan.delete("authData");
+            }
+
             function setsession(securityToken,authData) {
                 _cookMan.set("securityToken", securityToken, 1);
                 _cookMan.set("authData", JSON.stringify(authData), 1);
@@ -89,6 +94,9 @@ angular.module('myApp.Services', []).
                 },
                 setSession: function (securityToken,authData) {
                     return setsession(securityToken,authData);
+                },
+                signOut: function(){
+                    return signout();
                 }
             };
         }
