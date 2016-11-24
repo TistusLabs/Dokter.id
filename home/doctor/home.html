@@ -18,6 +18,10 @@
 
 <md-divider></md-divider>
 <p>0 PATIENTS IN YOUR WAITING ROOM</p>
+<hr>
+<button ng-click="setStatus('available')">Set Available</button>
+<button ng-click="setStatus('unavailable')">Set UnAvailable</button>
+<button ng-click="setStatus('maybe')">Set maybe</button>
 <!--<hr>
 <h3>Your ID is : {{currentPeerID}}</h3>
 <input type="button" value="Call John Cena" ng-click="gotoChatRoom()" />-->

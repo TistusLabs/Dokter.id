@@ -26,13 +26,13 @@ angular.module('myApp.doctor.home', ['ngRoute'])
             $rootScope.setChatDataConnection(c);
             $rootScope.setPartnerPeerID(c.peer);
             $scope.$apply(function () {
-                console.log("Redirecting page for '"+c.label +"' request...");
+                console.log("Redirecting page for '" + c.label + "' request...");
                 $rootScope.connectionStatus = "Connecting...";
                 $location.path("/chat/" + c.metadata + "/to");
             });
         }
-        
-        $scope.onlinestatuses = ['available','unavailable','maybe'];
+
+        $scope.onlinestatuses = ['available', 'unavailable', 'maybe'];
 
         /*var user = $rootScope.userObject;
         $scope.doctor = user;
@@ -56,9 +56,13 @@ angular.module('myApp.doctor.home', ['ngRoute'])
             $location.path("/chat/4/from");
         }
 
-         $scope.pingserver = function(){
-            peer.socket.send({type: 'ping'});
+        $scope.pingserver = function () {
+            peer.socket.send({ type: 'ping' });
         }
 
+        $scope.setStatus = function(code){
+            var socket = io.connect(AppURLs.socketServer);
+            socket.emit('change', code);
+        }
 
     }]);
