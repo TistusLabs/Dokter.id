@@ -62,7 +62,11 @@ angular.module('myApp.doctor.home', ['ngRoute'])
 
         $scope.setStatus = function(code){
             var socket = io.connect(AppURLs.socketServer);
-            socket.emit('change', code);
+            var obj = {
+                user:$rootScope.userObject.username,
+                status:code
+            }
+            socket.emit('statuschange', obj);
         }
 
     }]);

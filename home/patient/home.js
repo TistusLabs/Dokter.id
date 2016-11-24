@@ -22,11 +22,27 @@ angular.module('myApp.patient.home', ['ngRoute'])
                 }
             });
         }
+
+        $scope.setUserStatus = function(data){
+            angular.forEach($scope.doctors, function (doctor, index) {
+                if(doctor.username == data.username){
+                    debugger;
+                    $scope.$apply(function(){
+                        doctor.status = data.status;
+                    });
+                }
+            });
+        }
         var socket = io.connect(AppURLs.socketServer);
         socket.on('useronline', function (username) {
             //make a fd service call and update the user on DB
             debugger
             $scope.setUserOnline(username);
+        });
+
+        socket.on('statuschange', function (obj) {
+            //make a fd service call and update the user on DB
+            $scope.setUserStatus(obj);
         });
 
         $scope.isLoading = true;
