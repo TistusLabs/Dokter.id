@@ -78,7 +78,6 @@ angular.module('myApp.patient.home', ['ngRoute'])
         }
 
         $scope.showCallingWindow = function (data, ev) {
-            $scope.callingDoctor = data;
             $mdDialog.show({
                 controller: 'callingWindowController',
                 templateUrl: 'partials/patient-calling.html',
@@ -105,5 +104,9 @@ angular.module('myApp.patient.home', ['ngRoute'])
         }
 
         var socket = io.connect(AppURLs.socketServer);
-        socket.emit('call', $scope.doctor.username);
+        var broadcast = {
+            from : $rootScope.userObject,
+            to : $scope.doctor
+        }
+        socket.emit('call', broadcast);
     }]);

@@ -39,10 +39,9 @@ angular.module('myApp', [
         var socket = io.connect(AppURLs.socketServer);
         socket.emit('useronline', session.username);
 
-        socket.on('call', function (username) {
-            if(username == session.username){
-                // display call receving model
-                alert("incoming call");
+        socket.on('call', function(broadcast) {
+            if (broadcast.to.username == session.username) {
+                $scope.showIncomingWindow(broadcast.from, null)
             }
         });
 
@@ -280,6 +279,28 @@ angular.module('myApp', [
             });
         };
 
+        $scope.showIncomingWindow = function(data, ev) {
+            $mdDialog.show({
+                controller: 'incomingWindowController',
+                templateUrl: 'partials/doctor-answering.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: false,
+                fullscreen: false,
+                locals: {
+                    data: data
+                },
+                closeTo: {
+                    bottom: 0
+                }
+            })
+                .then(function(answer) {
+                    console.log("buhaha");
+                }, function() {
+                    console.log("OOps");
+                });
+        };
+
         // temporary cuz login is not yet functioning
         if (session.type == "doctor") {
             $location.path("/doctor/home");
@@ -292,4 +313,8 @@ angular.module('myApp', [
             session.profileimage = "http://www.gravatar.com/avatar/" + passhash;
         }
         $rootScope.userObject = session;
+    }]).controller('incomingWindowController', ['$scope', '$rootScope', 'data', '$mdDialog', 'AppURLs', function($scope, $rootScope, data, $mdDialog, AppURLs) {
+
+        $scope.patient = data;
+
     }]);
