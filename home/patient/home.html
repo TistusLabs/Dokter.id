@@ -40,8 +40,8 @@
                     </a>
                     <div class="Card__action">
                         <button ng-if="doctor.status == 'available'" type="button" name="button" class="Button Button--outline-green">CALL NOW</button>
-                        <button ng-if="doctor.status == 'maybe'" type="button" name="button" class="Button Button--outline-green">SCHEDULE</button>
-                        <button type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
+                        <!--button ng-if="doctor.status == 'maybe'" type="button" name="button" class="Button Button--outline-green">SCHEDULE</button-->
+                        <button ng-if="doctor.status != 'unavailable'" type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
                     </div>
                 </div>
             </div>

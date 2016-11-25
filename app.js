@@ -25,7 +25,7 @@ angular.module('myApp', [
         $routeProvider.otherwise({ redirectTo: '/pagenotfound' });
     }])
 
-    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', '$window','AppURLs', function($scope, $rootScope, $location, User, $mdDialog, $window,AppURLs) {
+    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', '$window', 'AppURLs', function($scope, $rootScope, $location, User, $mdDialog, $window, AppURLs) {
 
         var client = User.getAuthClient();
         var securityToken = client.checkSession();
@@ -255,6 +255,12 @@ angular.module('myApp', [
 
             $mdDialog.show(confirm).then(function() {
                 // signout 
+                var socket = io.connect(AppURLs.socketServer);
+                var obj = {
+                    user: $rootScope.userObject.username,
+                    status: "unavailable"
+                }
+                socket.emit('statuschange', obj);
                 var client = new User.getAuthClient();
                 client.signOut();
                 $window.location.href = "/dokter.id/auth";
