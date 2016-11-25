@@ -261,9 +261,13 @@ angular.module('myApp', [
                     status: "unavailable"
                 }
                 socket.emit('statuschange', obj);
-                var client = new User.getAuthClient();
-                client.signOut();
-                $window.location.href = "/dokter.id/auth";
+                socket.on('statuschange', function(obj) {
+                    if (obj.user == $rootScope.userObject.username && obj.status == "unavailable") {
+                        var client = new User.getAuthClient();
+                        client.signOut();
+                        $window.location.href = "/dokter.id/auth";
+                    }
+                });
             }, function() {
                 // will do nothing.
             });
