@@ -32,12 +32,19 @@ angular.module('myApp', [
         console.log("Logged in securityToken: " + securityToken);
         var session = client.getSession();
 
+        // default values
+        $scope.contextMenu = "--is-hidden";
+
         debugger;
         var socket = io.connect(AppURLs.socketServer);
         socket.emit('useronline', session.username);
 
-        // default values
-        $scope.contextMenu = "--is-hidden";
+        socket.on('call', function (username) {
+            if(username == session.username){
+                // display call receving model
+                alert("incoming call");
+            }
+        });
 
         $rootScope.ShowBusyContainer = function(message) {
             $rootScope.isBusy = true;

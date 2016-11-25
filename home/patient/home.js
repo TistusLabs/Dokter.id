@@ -9,25 +9,25 @@ angular.module('myApp.patient.home', ['ngRoute'])
         });
     }])
 
-    .controller('patientHomeControll', ['$scope', '$rootScope', '$location', 'User','AppURLs', function ($scope, $rootScope, $location, User,AppURLs) {
+    .controller('patientHomeControll', ['$scope', '$rootScope', '$location', 'User', 'AppURLs', '$mdDialog', function ($scope, $rootScope, $location, User, AppURLs, $mdDialog) {
         /*$rootScope.checkSession();
         */
-        $scope.setUserOnline = function(username){
+        $scope.setUserOnline = function (username) {
             angular.forEach($scope.doctors, function (doctor, index) {
-                if(doctor.username == username){
+                if (doctor.username == username) {
                     debugger;
-                    $scope.$apply(function(){
+                    $scope.$apply(function () {
                         doctor.status = "available";
                     });
                 }
             });
         }
 
-        $scope.setUserStatus = function(data){
+        $scope.setUserStatus = function (data) {
             angular.forEach($scope.doctors, function (doctor, index) {
-                if(doctor.username == data.user){
+                if (doctor.username == data.user) {
                     debugger;
-                    $scope.$apply(function(){
+                    $scope.$apply(function () {
                         doctor.status = data.status;
                     });
                 }
@@ -50,7 +50,7 @@ angular.module('myApp.patient.home', ['ngRoute'])
         var client = User.getClient();
         client.onComplete(function (data) {
             angular.forEach(data, function (doc) {
-                if(doc.profileimage==""){
+                if (doc.profileimage == "") {
                     var passhash = CryptoJS.MD5(doc.username);
                     doc.profileimage = "http://www.gravatar.com/avatar/" + passhash;
                 }
@@ -63,32 +63,47 @@ angular.module('myApp.patient.home', ['ngRoute'])
             $scope.isLoading = false;
         });
         client.GetAllDoctors();
-        
-        $scope.scheduleCall = function(){
+
+        $scope.scheduleCall = function () {
             alert("Scheduleing call");
         }
 
         $scope.redirect = function (c) {
             $rootScope.setChatDataConnection(c);
             $scope.$apply(function () {
-                console.log("Redirecting page for '"+c.label +"' request...");
+                console.log("Redirecting page for '" + c.label + "' request...");
                 $rootScope.connectionStatus = "Connecting...";
                 $location.path("/chat/" + c.metadata + "/to");
             });
         }
 
-        /*var peer = $rootScope.getPeer();
-        peer.on('connection', function (c) {
-            c.on('open', function () {
-                console.log(c.label +" request is recived.");
-                if(c.label == "chat"){
-                    $rootScope.setPeer(peer);
-                    $scope.redirect(c);
+        $scope.showCallingWindow = function (data, ev) {
+            $scope.callingDoctor = data;
+            $mdDialog.show({
+                controller: 'callingWindowController',
+                templateUrl: 'partials/patient-calling.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: false,
+                fullscreen: false,
+                locals: {
+                    data: data
                 }
-            });
-        });
-        peer.on('error', function (err) {
-            alert(err);
-        })*/
+            })
+                .then(function (answer) {
+                    console.log("buhaha");
+                }, function () {
+                    console.log("OOps");
+                });
+        };
 
+    }]).controller('callingWindowController', ['$scope', '$rootScope', 'data', '$mdDialog','AppURLs', function ($scope, $rootScope, data, $mdDialog,AppURLs) {
+        $scope.doctor = data;
+
+        $scope.closeWindow = function () {
+            $mdDialog.hide();
+        }
+
+        var socket = io.connect(AppURLs.socketServer);
+        socket.emit('call', $scope.doctor.username);
     }]);

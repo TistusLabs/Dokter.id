@@ -1,0 +1,15 @@
+<div class="Dialog Dialog--action-to-doctor">
+    <img class="Dialog__image" ng-src="{{doctor.profileimage}}?s=250&d=monsterid" alt="{{doctor.name}}" title="{{doctor.name}}"
+    />
+    <div class="Dialog__title">
+        Calling dr. {{doctor.name}}
+    </div>
+    <div class="Dialog__subtitle">
+        Please wait, we're connecting you to our doctor
+    </div>
+    <div class="Dialog__action">
+        <button ng-click="closeWindow()" class="CallButton CallButton--red">
+                        <img class="CallButton__image CallButton__image--reject" src="build/img/call/reject.png" alt="Reject Call" title="Reject Call" />
+                    </button>
+    </div>
+</div>
