@@ -1,7 +1,7 @@
 <div class="Dialog Dialog--action-to-doctor">
-    <img class="Dialog__image" src="build/img/sample/user2.jpg" alt="{{ Doctor Name }}" title="{{ Doctor Name }}" />
+    <img class="Dialog__image" ng-src="{{patient.profileimage}}?s=250&d=monsterid" alt="{{patient.name}}" title="{{patient.name}}" />
     <div class="Dialog__title">
-        Incoming call from Ivan Junior
+        Incoming call from {{patient.name}}
     </div>
     <div class="Dialog__subtitle">
         One patient is calling you, please response it
