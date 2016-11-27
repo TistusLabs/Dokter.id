@@ -21,11 +21,11 @@ angular.module('myApp', [
     'myApp.billing',
     'myApp.topup'
 ]).
-    config(['$routeProvider', function($routeProvider) {
+    config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({ redirectTo: '/pagenotfound' });
     }])
 
-    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', '$window', 'AppURLs', function($scope, $rootScope, $location, User, $mdDialog, $window, AppURLs) {
+    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', '$window', 'AppURLs', function ($scope, $rootScope, $location, User, $mdDialog, $window, AppURLs) {
 
         var client = User.getAuthClient();
         var securityToken = client.checkSession();
@@ -39,18 +39,18 @@ angular.module('myApp', [
         var socket = io.connect(AppURLs.socketServer);
         socket.emit('useronline', session.username);
 
-        socket.on('call', function(broadcast) {
+        socket.on('call', function (broadcast) {
             if (broadcast.to.username == session.username) {
                 $scope.showIncomingWindow(broadcast.from, null)
             }
         });
 
-        $rootScope.ShowBusyContainer = function(message) {
+        $rootScope.ShowBusyContainer = function (message) {
             $rootScope.isBusy = true;
             $rootScope.bcmessage = message;
         };
 
-        $rootScope.HideBusyContainer = function() {
+        $rootScope.HideBusyContainer = function () {
             $rootScope.isBusy = false;
         };
 
@@ -63,7 +63,7 @@ angular.module('myApp', [
         $rootScope.chatdataConnection = null;
         $rootScope.filedataConnection = null;
         $rootScope.validSession = false;
-        $rootScope.checkSession = function() {
+        $rootScope.checkSession = function () {
             if (!angular.isDefined($rootScope.username) || $rootScope.username == null) {
                 // can check for a cookies if its available instead of rootScope variable
                 $location.path('/login');
@@ -74,39 +74,39 @@ angular.module('myApp', [
             }
         };
 
-        $scope.openWindow = function(path) {
+        $scope.openWindow = function (path) {
             $location.path(path);
         };
 
-        $scope.openMenu = function($mdOpenMenu, ev) {
+        $scope.openMenu = function ($mdOpenMenu, ev) {
             $mdOpenMenu(ev);
         };
 
-        $rootScope.setTokSession = function(obj) {
+        $rootScope.setTokSession = function (obj) {
             $rootScope.toksessionObj = obj;
         };
-        $rootScope.getTokSession = function() {
+        $rootScope.getTokSession = function () {
             return $rootScope.toksessionObj;
         };
-        $rootScope.setPartnerPeerID = function(peer) {
+        $rootScope.setPartnerPeerID = function (peer) {
             $rootScope.peerPartnerID = peer;
         };
-        $rootScope.getPartnerPeerID = function(peer) {
+        $rootScope.getPartnerPeerID = function (peer) {
             return $rootScope.peerPartnerID;
         };
-        $rootScope.setChatDataConnection = function(data) {
+        $rootScope.setChatDataConnection = function (data) {
             $rootScope.chatdataConnection = data;
         };
-        $rootScope.getChatDataConnection = function() {
+        $rootScope.getChatDataConnection = function () {
             return $rootScope.chatdataConnection;
         };
-        $rootScope.setFileDataConnection = function(data) {
+        $rootScope.setFileDataConnection = function (data) {
             $rootScope.filedataConnection = data;
         };
-        $rootScope.getFileDataConnection = function() {
+        $rootScope.getFileDataConnection = function () {
             return $rootScope.filedataConnection;
         };
-        $rootScope.setMenu = function(type) {
+        $rootScope.setMenu = function (type) {
             switch (type) {
                 case "login": {
                     $rootScope.menu = [
@@ -233,7 +233,7 @@ angular.module('myApp', [
             };
         };
 
-        $scope.popSettings = function() {
+        $scope.popSettings = function () {
             if ($scope.contextMenu == "") {
                 $scope.contextMenu = "--is-hidden";
             } else {
@@ -241,7 +241,7 @@ angular.module('myApp', [
             }
         }
 
-        $scope.contextMenyClick = function(route, event) {
+        $scope.contextMenyClick = function (route, event) {
             if (route == "/signout") {
                 $scope.logoutUser(event);
             } else {
@@ -249,7 +249,7 @@ angular.module('myApp', [
             }
         };
 
-        $scope.logoutUser = function(ev) {
+        $scope.logoutUser = function (ev) {
             // Appending dialog to document.body to cover sidenav in docs app
             var confirm = $mdDialog.confirm()
                 .title('Are you sure?')
@@ -259,7 +259,7 @@ angular.module('myApp', [
                 .ok('Sign Out')
                 .cancel('No');
 
-            $mdDialog.show(confirm).then(function() {
+            $mdDialog.show(confirm).then(function () {
                 // signout 
                 var socket = io.connect(AppURLs.socketServer);
                 var obj = {
@@ -267,19 +267,19 @@ angular.module('myApp', [
                     status: "unavailable"
                 }
                 socket.emit('statuschange', obj);
-                socket.on('statuschange', function(obj) {
+                socket.on('statuschange', function (obj) {
                     if (obj.user == $rootScope.userObject.username && obj.status == "unavailable") {
                         var client = new User.getAuthClient();
                         client.signOut();
                         $window.location.href = "/dokter.id/auth";
                     }
                 });
-            }, function() {
+            }, function () {
                 // will do nothing.
             });
         };
 
-        $scope.showIncomingWindow = function(data, ev) {
+        $scope.showIncomingWindow = function (data, ev) {
             $mdDialog.show({
                 controller: 'incomingWindowController',
                 templateUrl: 'partials/doctor-answering.html',
@@ -294,11 +294,38 @@ angular.module('myApp', [
                     bottom: 0
                 }
             })
-                .then(function(answer) {
-                    console.log("buhaha");
-                }, function() {
+                .then(function (patient) {
+                    if (!$rootScope.isNullOrEmptyOrUndefined(patient.username)) {
+                        $scope.showCallRejectedWindow(patient, ev)
+                    }else{
+                        socket.emit('answercall', data);
+                        // accepting the call. navigate to the call page
+                    }
+                }, function () {
                     console.log("OOps");
                 });
+        };
+
+        $scope.showCallRejectedWindow = function (data, ev) {
+            $mdDialog.show({
+                controller: 'callrejectedWindowController',
+                templateUrl: 'partials/doctor-callrejected.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: false,
+                fullscreen: false,
+                locals: {
+                    data: data
+                }
+            })
+                .then(function () {
+
+                }, function () {
+                    console.log("OOps");
+                });
+        };
+        $rootScope.isNullOrEmptyOrUndefined = function (value) {
+            return !value;
         };
 
         // temporary cuz login is not yet functioning
@@ -313,17 +340,27 @@ angular.module('myApp', [
             session.profileimage = "http://www.gravatar.com/avatar/" + passhash;
         }
         $rootScope.userObject = session;
-    }]).controller('incomingWindowController', ['$scope', '$rootScope', 'data', '$mdDialog', 'AppURLs', function($scope, $rootScope, data, $mdDialog, AppURLs) {
+    }]).controller('incomingWindowController', ['$scope', '$rootScope', 'data', '$mdDialog', 'AppURLs', function ($scope, $rootScope, data, $mdDialog, AppURLs) {
 
         $scope.patient = data;
+        var socket = io.connect(AppURLs.socketServer);
 
-        $scope.rejectCall = function() {
-            var socket = io.connect(AppURLs.socketServer);
+        $scope.rejectCall = function () {
             socket.emit('callrejected', $scope.patient);
             $mdDialog.hide();
         }
 
-        $scope.acceptCall = function() {
-            $mdDialog.hide();
+        socket.on('callrejected', function (broadcast) {
+            debugger;
+            if (broadcast.username == $scope.patient.username) {
+                $mdDialog.hide($scope.patient);
+            }
+        });
+
+        $scope.acceptCall = function () {
+            var obj = {
+                "mode":"accept"
+            } 
+            $mdDialog.hide(obj);
         }
     }]);

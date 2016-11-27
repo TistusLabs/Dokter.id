@@ -15,7 +15,6 @@ angular.module('myApp.patient.home', ['ngRoute'])
         $scope.setUserOnline = function (username) {
             angular.forEach($scope.doctors, function (doctor, index) {
                 if (doctor.username == username) {
-                    debugger;
                     $scope.$apply(function () {
                         doctor.status = "available";
                     });
@@ -36,7 +35,6 @@ angular.module('myApp.patient.home', ['ngRoute'])
         var socket = io.connect(AppURLs.socketServer);
         socket.on('useronline', function (username) {
             //make a fd service call and update the user on DB
-            debugger
             $scope.setUserOnline(username);
         });
 
@@ -120,10 +118,6 @@ angular.module('myApp.patient.home', ['ngRoute'])
     }]).controller('callingWindowController', ['$scope', '$rootScope', 'data', '$mdDialog','AppURLs', function ($scope, $rootScope, data, $mdDialog,AppURLs) {
         $scope.doctor = data;
 
-        $scope.closeWindow = function () {
-            $mdDialog.hide();
-        }
-
         var socket = io.connect(AppURLs.socketServer);
         var broadcast = {
             from : $rootScope.userObject,
@@ -135,6 +129,16 @@ angular.module('myApp.patient.home', ['ngRoute'])
                 $mdDialog.hide($scope.doctor);
             }
         });
+        socket.on('answercall', function(broadcast) {
+            if (broadcast.username == $rootScope.userObject.username) {
+                // answer the call.. navigate to the call page
+            }
+        });
+
+        $scope.closeWindow = function () {
+            socket.emit('callrejected', $rootScope.userObject);
+            $mdDialog.hide();
+        }
     }]).controller('callrejectedWindowController', ['$scope', '$rootScope', 'data', '$mdDialog','AppURLs', function ($scope, $rootScope, data, $mdDialog,AppURLs) {
         $scope.doctor = data;
 

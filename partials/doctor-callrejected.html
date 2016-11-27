@@ -5,7 +5,7 @@
         Call rejected
     </div>
     <div class="Dialog__subtitle">
-        <span class="Dialog__text-red">dr. {{doctor.name}}</span> has rejected your call.
+        <span class="Dialog__text-red"><span ng-if="doctor.type == 'doctor'">dr.</span> {{doctor.name}}</span> has rejected <span ng-if="doctor.type == 'doctor'">your</span><span ng-if="doctor.type == 'patient'">the</span> call.
     </div>
     <div class="Dialog__action">
         <button ng-click="closeWindow()" class="Button Button--outline-gray">OKAY</button>
