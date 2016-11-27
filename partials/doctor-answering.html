@@ -1,5 +1,5 @@
 <div class="Dialog Dialog--action-to-doctor">
-    <img class="Dialog__image" ng-src="{{patient.profileimage}}?s=250&d=monsterid" alt="{{patient.name}}" title="{{patient.name}}" />
+    <img class="Dialog__image" ng-src="{{patient.profileimage}}?s=300&d=monsterid" alt="{{patient.name}}" title="{{patient.name}}" />
     <div class="Dialog__title">
         Incoming call from {{patient.name}}
     </div>
@@ -7,10 +7,10 @@
         One patient is calling you, please response it
     </div>
     <div class="Dialog__action">
-        <button class="CallButton CallButton--green">
+        <button ng-click="acceptCall()" class="CallButton CallButton--green">
                         <img class="CallButton__image CallButton__image--accept" src="build/img/call/call.png" alt="Accept Call" title="Accept Call" />
                     </button>
-        <button class="CallButton CallButton--red">
+        <button ng-click="rejectCall()" class="CallButton CallButton--red">
                         <img class="CallButton__image CallButton__image--reject" src="build/img/call/reject.png" alt="Reject Call" title="Reject Call" />
                     </button>
     </div>

@@ -35,7 +35,7 @@ angular.module('myApp', [
         // default values
         $scope.contextMenu = "--is-hidden";
 
-        debugger;
+
         var socket = io.connect(AppURLs.socketServer);
         socket.emit('useronline', session.username);
 
@@ -317,4 +317,13 @@ angular.module('myApp', [
 
         $scope.patient = data;
 
+        $scope.rejectCall = function() {
+            var socket = io.connect(AppURLs.socketServer);
+            socket.emit('callrejected', $scope.patient);
+            $mdDialog.hide();
+        }
+
+        $scope.acceptCall = function() {
+            $mdDialog.hide();
+        }
     }]);

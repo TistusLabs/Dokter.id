@@ -89,6 +89,27 @@ angular.module('myApp.patient.home', ['ngRoute'])
                     data: data
                 }
             })
+                .then(function (doctor) {
+                    if(doctor){
+                        $scope.showCallRejectedWindow(doctor,ev)
+                    }
+                }, function () {
+                    
+                });
+        };
+
+        $scope.showCallRejectedWindow = function (data, ev) {
+            $mdDialog.show({
+                controller: 'callrejectedWindowController',
+                templateUrl: 'partials/doctor-callrejected.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: false,
+                fullscreen: false,
+                locals: {
+                    data: data
+                }
+            })
                 .then(function (answer) {
                     console.log("buhaha");
                 }, function () {
@@ -109,4 +130,15 @@ angular.module('myApp.patient.home', ['ngRoute'])
             to : $scope.doctor
         }
         socket.emit('call', broadcast);
+        socket.on('callrejected', function(broadcast) {
+            if (broadcast.username == $rootScope.userObject.username) {
+                $mdDialog.hide($scope.doctor);
+            }
+        });
+    }]).controller('callrejectedWindowController', ['$scope', '$rootScope', 'data', '$mdDialog','AppURLs', function ($scope, $rootScope, data, $mdDialog,AppURLs) {
+        $scope.doctor = data;
+
+        $scope.closeWindow = function () {
+            $mdDialog.hide();
+        }
     }]);
