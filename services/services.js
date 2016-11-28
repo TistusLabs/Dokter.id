@@ -49,9 +49,9 @@ angular.module('myApp.Services', []).
                     userName = sessionInfo.username;
                 }
 
-                console.log("DEBUG : CheckSession - " + securityToken);
-                console.log("DEBUG : sessionInfo - " + sessionInfo);
-                console.log("DEBUG : userName - " + userName);
+                console.log("CheckSession - " + securityToken);
+                console.log("sessionInfo - " + sessionInfo);
+                console.log("userName - " + userName);
 
                 if (securityToken == null) {
                     var nagivateUrl = "";
