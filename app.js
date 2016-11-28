@@ -13,7 +13,6 @@ angular.module('myApp', [
     'myApp.patient.home',
     'myApp.doctor.home',
     'myApp.home.doctorinfo',
-    'myApp.chat',
     'myApp.Services',
     'myApp.profile',
     'myApp.pagenotfound',
@@ -297,9 +296,9 @@ angular.module('myApp', [
                 .then(function (patient) {
                     if (!$rootScope.isNullOrEmptyOrUndefined(patient.username)) {
                         $scope.showCallRejectedWindow(patient, ev)
-                    }else{
+                    } else {
                         socket.emit('answercall', data);
-                        // accepting the call. navigate to the call page
+                        location.href = "/dokter.id/conference";
                     }
                 }, function () {
                     console.log("OOps");
@@ -359,8 +358,8 @@ angular.module('myApp', [
 
         $scope.acceptCall = function () {
             var obj = {
-                "mode":"accept"
-            } 
+                "mode": "accept"
+            }
             $mdDialog.hide(obj);
         }
     }]);

@@ -75,14 +75,28 @@ angular.module('myApp.Services', []).
                 return sessionInfo;
             }
 
+            function getTokboxsession() {
+                var sessionInfo = {};
+                sessionInfo.apiKey = _cookMan.get("apiKey");
+                sessionInfo.sessionId = _cookMan.get("sessionId");
+                sessionInfo.token = _cookMan.get("token");
+                return sessionInfo;
+            }
+
             function signout() {
                 _cookMan.delete("securityToken");
                 _cookMan.delete("authData");
+                _cookMan.delete("apiKey");
+                _cookMan.delete("sessionId");
+                _cookMan.delete("token");
             }
 
-            function setsession(securityToken,authData) {
+            function setsession(securityToken,authData,session) {
                 _cookMan.set("securityToken", securityToken, 1);
                 _cookMan.set("authData", JSON.stringify(authData), 1);
+                _cookMan.set("apiKey", session.apiKey, 1);
+                _cookMan.set("sessionId", session.sessionId, 1);
+                _cookMan.set("token", session.token, 1);
             }
 
             return {
@@ -92,8 +106,11 @@ angular.module('myApp.Services', []).
                 getSession: function () {
                     return getsession();
                 },
-                setSession: function (securityToken,authData) {
-                    return setsession(securityToken,authData);
+                getTokSession: function () {
+                    return getTokboxsession();
+                },
+                setSession: function (securityToken,authData,apiKey,sessionId,token) {
+                    return setsession(securityToken,authData,apiKey,sessionId,token);
                 },
                 signOut: function(){
                     return signout();
@@ -252,7 +269,7 @@ angular.module('myApp.Services', []).
                                     //var socket = io.connect(AppURLs.socketServer, { secure: true, port: 4001 });
 
                                     var client = new AuthClient();
-                                    client.setSession(session.sessionId,userObject);
+                                    client.setSession(session.sessionId,userObject,session);
 
                                     if (onComplete) onComplete(ResultObj);
                                 });

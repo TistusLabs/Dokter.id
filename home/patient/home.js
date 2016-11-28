@@ -25,7 +25,6 @@ angular.module('myApp.patient.home', ['ngRoute'])
         $scope.setUserStatus = function (data) {
             angular.forEach($scope.doctors, function (doctor, index) {
                 if (doctor.username == data.user) {
-                    debugger;
                     $scope.$apply(function () {
                         doctor.status = data.status;
                     });
@@ -88,11 +87,11 @@ angular.module('myApp.patient.home', ['ngRoute'])
                 }
             })
                 .then(function (doctor) {
-                    if(doctor){
-                        $scope.showCallRejectedWindow(doctor,ev)
+                    if (doctor) {
+                        $scope.showCallRejectedWindow(doctor, ev)
                     }
                 }, function () {
-                    
+
                 });
         };
 
@@ -115,23 +114,23 @@ angular.module('myApp.patient.home', ['ngRoute'])
                 });
         };
 
-    }]).controller('callingWindowController', ['$scope', '$rootScope', 'data', '$mdDialog','AppURLs', function ($scope, $rootScope, data, $mdDialog,AppURLs) {
+    }]).controller('callingWindowController', ['$scope', '$rootScope', 'data', '$mdDialog', 'AppURLs', function ($scope, $rootScope, data, $mdDialog, AppURLs) {
         $scope.doctor = data;
 
         var socket = io.connect(AppURLs.socketServer);
         var broadcast = {
-            from : $rootScope.userObject,
-            to : $scope.doctor
+            from: $rootScope.userObject,
+            to: $scope.doctor
         }
         socket.emit('call', broadcast);
-        socket.on('callrejected', function(broadcast) {
+        socket.on('callrejected', function (broadcast) {
             if (broadcast.username == $rootScope.userObject.username) {
                 $mdDialog.hide($scope.doctor);
             }
         });
-        socket.on('answercall', function(broadcast) {
+        socket.on('answercall', function (broadcast) {
             if (broadcast.username == $rootScope.userObject.username) {
-                // answer the call.. navigate to the call page
+                location.href = "/dokter.id/conference";
             }
         });
 
@@ -139,7 +138,7 @@ angular.module('myApp.patient.home', ['ngRoute'])
             socket.emit('callrejected', $rootScope.userObject);
             $mdDialog.hide();
         }
-    }]).controller('callrejectedWindowController', ['$scope', '$rootScope', 'data', '$mdDialog','AppURLs', function ($scope, $rootScope, data, $mdDialog,AppURLs) {
+    }]).controller('callrejectedWindowController', ['$scope', '$rootScope', 'data', '$mdDialog', 'AppURLs', function ($scope, $rootScope, data, $mdDialog, AppURLs) {
         $scope.doctor = data;
 
         $scope.closeWindow = function () {

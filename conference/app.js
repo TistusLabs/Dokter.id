@@ -7,20 +7,23 @@ angular.module('conferenceApp', [
     'myApp.Services'
 ]).
     config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/call/:apikey/:sessionId/:token', {
+        $routeProvider.when('/call', {
             templateUrl: 'index.html',
             controller: 'mainController'
         });
     }])
 
-    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog','$routeParams','$route', function ($scope, $rootScope, $location, User, $mdDialog,$routeParams,$route) {
+    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', '$routeParams', '$route', function ($scope, $rootScope, $location, User, $mdDialog, $routeParams, $route) {
+
+        var client = User.getAuthClient();
+        var securityToken = client.checkSession();
 
         debugger;
-        $scope.apiKey = $routeParams.apikey;
-        $scope.sessionId = $routeParams.sessionId;
-        $scope.token = $routeParams.token;
-
-        $route.current;
+        var tokboxSession = client.getTokSession();
+        
+        $scope.apiKey = tokboxSession.apiKey;
+        $scope.sessionId = tokboxSession.sessionId;
+        $scope.token = tokboxSession.token;
 
         $rootScope.ShowBusyContainer = function (message) {
             $rootScope.isBusy = true;
@@ -31,7 +34,7 @@ angular.module('conferenceApp', [
             $rootScope.isBusy = false;
         };
 
-        $scope.initializeSession = function() {
+        $scope.initializeSession = function () {
             var session = OT.initSession($scope.apiKey, $scope.sessionId);
 
             // Subscribe to a newly created stream
