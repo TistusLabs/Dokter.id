@@ -1,29 +1,48 @@
 body, html {
-    background-color: gray;
     height: 100%;
+    margin: 0;
 }
 #videos {
-    position: relative;
-    width: 100%;
+    position: block;
+    width: 50%;
     height: 100%;
     margin-left: auto;
     margin-right: auto;
+    float: left;
+}
+#chat {
+    position: block;
+    width: 50%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    float: right;
+    background-color: lightgray;
 }
 #subscriber {
     position: absolute;
     left: 0;
     top: 0;
-    width: 100%;
+    width: 50%;
     height: 100%;
     z-index: 10;
+    background-color: gray;
 }
 #publisher {
     position: absolute;
-    width: 360px;
-    height: 240px;
+    width: 250px;
+    height: 150px;
     bottom: 10px;
     left: 10px;
     z-index: 100;
     border: 3px solid white;
     border-radius: 3px;
+}
+#controls{
+    position: absolute;
+    width: 500px;
+    /* height: 150px; */
+    bottom: 10px;
+    left: 10px;
+    z-index: 100;
 }

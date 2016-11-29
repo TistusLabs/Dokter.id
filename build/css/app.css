@@ -990,7 +990,8 @@ html {
       .CallButton--red:disabled:hover, .CallButton--red:disabled:active, .CallButton--red:disabled:focus {
         background-color: #bf000b; }
   .CallButton--brown {
-    background-color: #2B2B2B; }
+    background-color: #2B2B2B;
+    }
     .CallButton--brown:hover, .CallButton--brown:active, .CallButton--brown:focus {
       background-color: #383838; }
     .CallButton--brown:disabled {
@@ -1005,7 +1006,8 @@ html {
     -o-border-radius: 50%;
     border-radius: 50%;
     height: 85px;
-    width: 85px; }
+    width: 85px;
+    }
 
 .Card {
   display: -webkit-box;

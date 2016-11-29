@@ -18,7 +18,6 @@ angular.module('conferenceApp', [
         var client = User.getAuthClient();
         var securityToken = client.checkSession();
 
-        debugger;
         var tokboxSession = client.getTokSession();
         
         $scope.apiKey = tokboxSession.apiKey;

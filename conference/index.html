@@ -6,16 +6,36 @@
   <title>Conference Call | Dokter.ID Telemedicine</title>
 
   <link rel="shortcut icon" type="image/png" href="../build/img/favicon.png" sizes="32x32" />
+  <link rel="stylesheet" type="text/css" href="../build/css/app.css" />
   <link rel="stylesheet" href="app.css">
 
 </head>
 
 <body ng-controller="mainController" layout="row" layout-fill flex ng-cloak>
 
-  <div id="videos" layout="row">
-    <div id="subscriber"></div>
-    <div id="publisher"></div>
+  <div layout="row">
+    <div id="videos" layout="row" flex>
+      <div id="subscriber"></div>
+      <div id="publisher"></div>
+      <div id="controls"  layout="column">
+        <button class="CallButton CallButton--circle CallButton--brown">
+                <img class="CallButton__image CallButton__image--voice" src="../build/img/call/voice.png" alt="Voice Call" title="Voice Call" />
+            </button>
+
+        <button class="CallButton CallButton--circle CallButton--brown">
+                <img class="CallButton__image CallButton__image--video" src="../build/img/call/video.png" alt="Video Call" title="Video Call" />
+            </button>
+
+        <button class="CallButton CallButton--red">
+                <img class="CallButton__image CallButton__image--reject" src="../build/img/call/reject.png" alt="Reject Call" title="Reject Call" />
+            </button>
+      </div>
+    </div>
+    <div id="chat" flex>
+      the chat area
+    </div>
   </div>
+
 
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/angular-route/angular-route.js"></script>
