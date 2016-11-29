@@ -196,7 +196,7 @@ angular.module('myApp.Services', []).
                     username: 'eash@gmail.com',
                     password: 'eash',
                     status: "unavailable",
-                    type: "doctor",
+                    type: "patient",
                     country: "Sri Lanka",
                     city: "Mombai",
                     languages: ["English", "Indonesian"],
