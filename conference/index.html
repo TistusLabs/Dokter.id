@@ -13,28 +13,8 @@
 
 <body ng-controller="mainController" layout="row" layout-fill flex ng-cloak>
 
-  <div layout="row">
-    <div id="videos" layout="row" flex>
-      <div id="subscriber"></div>
-      <div id="publisher"></div>
-      <div id="controls"  layout="column">
-        <button class="CallButton CallButton--circle CallButton--brown">
-                <img class="CallButton__image CallButton__image--voice" src="../build/img/call/voice.png" alt="Voice Call" title="Voice Call" />
-            </button>
 
-        <button class="CallButton CallButton--circle CallButton--brown">
-                <img class="CallButton__image CallButton__image--video" src="../build/img/call/video.png" alt="Video Call" title="Video Call" />
-            </button>
-
-        <button class="CallButton CallButton--red">
-                <img class="CallButton__image CallButton__image--reject" src="../build/img/call/reject.png" alt="Reject Call" title="Reject Call" />
-            </button>
-      </div>
-    </div>
-    <div id="chat" flex>
-      the chat area
-    </div>
-  </div>
+  <div ng-view></div>
 
 
   <script src="../bower_components/angular/angular.js"></script>
@@ -48,6 +28,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="../services/config.js"></script>
   <script src="../services/services.js"></script>
+  <script src="callController.js"></script>
   <script src="app.js"></script>
 </body>
 

@@ -213,13 +213,15 @@ textarea {
   font: inherit;
   /* 2 */
   margin: 0;
-  /* 3 */ }
+  /* 3 */
+  }
 
 /**
  * Address `overflow` set to `hidden` in IE 8/9/10/11.
  */
 button {
-  overflow: visible; }
+  overflow: visible;
+  }
 
 /**
  * Address inconsistent `text-transform` inheritance for `button` and `select`.
@@ -229,7 +231,8 @@ button {
  */
 button,
 select {
-  text-transform: none; }
+  text-transform: none;
+  }
 
 /**
  * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
@@ -391,7 +394,8 @@ button, [type='button'], [type='reset'], [type='submit'] {
   transition: background-color 150ms ease;
   user-select: none;
   vertical-align: middle;
-  white-space: nowrap; }
+  white-space: nowrap;
+  }
   button:hover, button:focus, [type='button']:hover, [type='button']:focus, [type='reset']:hover, [type='reset']:focus, [type='submit']:hover, [type='submit']:focus {
     background-color: #0774cc;
     color: #fff; }
@@ -531,7 +535,8 @@ body {
   color: #000000;
   font-family: "proxima-nova-regular";
   font-size: 14px;
-  line-height: 1.4; }
+  line-height: 1.4;
+  }
 
 h1,
 h2,
@@ -953,7 +958,9 @@ html {
   background-color: #27AE60;
   width: 100px;
   height: 50px;
-  line-height: 1; }
+  /* line-height: 1; */
+  /* padding: 20px; */
+  }
   .CallButton:hover, .CallButton:active, .CallButton:focus {
     background-color: #229955; }
   .CallButton:disabled {
@@ -991,6 +998,7 @@ html {
         background-color: #bf000b; }
   .CallButton--brown {
     background-color: #2B2B2B;
+    margin-right: 20px;
     }
     .CallButton--brown:hover, .CallButton--brown:active, .CallButton--brown:focus {
       background-color: #383838; }
