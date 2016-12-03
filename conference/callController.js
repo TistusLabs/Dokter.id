@@ -2,19 +2,25 @@
 
 angular.module('conferenceApp.call', ['ngRoute'])
 
-    .config(['$routeProvider', function ($routeProvider) {
+    .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/call', {
             templateUrl: 'call-partial.html',
             controller: 'callController'
         });
     }])
 
-    .controller('callController', ['$scope', '$rootScope', '$location', 'User', '$window', '$mdDialog','AppURLs', function ($scope, $rootScope, $location, User, $window, $mdDialog,AppURLs) {
+    .controller('callController', ['$scope', '$rootScope', '$location', 'User', '$window', '$mdDialog', 'AppURLs', function($scope, $rootScope, $location, User, $window, $mdDialog, AppURLs) {
 
         var client = User.getAuthClient();
-        //var securityToken = client.checkSession();
-        var session = client.getSession();
-        $rootScope.userObject = session;
+
+        $scope.msgHistory = [];
+
+        /*$scope.msgHistory.push({
+            message: "Hey doc wht's up?",
+            name: $rootScope.userObject.name,
+            time: new Date(),
+            image: $rootScope.userObject.profileimage
+        });*/
 
         var tokboxSession = client.getTokSession();
 
@@ -23,17 +29,18 @@ angular.module('conferenceApp.call', ['ngRoute'])
         $scope.token = tokboxSession.token;
 
         var socket = io.connect(AppURLs.socketServer);
-        socket.on('callended', function (broadcast) {
+        socket.on('callended', function(broadcast) {
             if (broadcast == $scope.sessionId) {
                 location.href = "/dokter.id/conference";
             }
         });
 
-        $scope.initializeSession = function () {
-            var session = OT.initSession($scope.apiKey, $scope.sessionId);
+        var session = OT.initSession($scope.apiKey, $scope.sessionId);
+
+        $scope.initializeSession = function() {
 
             // Subscribe to a newly created stream
-            session.on('streamCreated', function (event) {
+            session.on('streamCreated', function(event) {
                 session.subscribe(event.stream, 'subscriber', {
                     insertMode: 'append',
                     width: '100%',
@@ -41,12 +48,12 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 });
             });
 
-            session.on('sessionDisconnected', function (event) {
+            session.on('sessionDisconnected', function(event) {
                 console.log('You were disconnected from the session.', event.reason);
             });
 
             // Connect to the session
-            session.connect($scope.token, function (error) {
+            session.connect($scope.token, function(error) {
                 // If the connection is successful, initialize a publisher and publish to the session
                 if (!error) {
                     var publisher = OT.initPublisher('publisher', {
@@ -60,10 +67,15 @@ angular.module('conferenceApp.call', ['ngRoute'])
                     console.log('There was an error connecting to the session: ', error.code, error.message);
                 }
             });
+
+            // Receive a message and append it to the history
+            session.on('signal:msg', function(event) {
+                $scope.msgHistory.push(event.data);
+            });
         };
         $scope.initializeSession();
 
-        $scope.endCall = function (ev) {
+        $scope.endCall = function(ev) {
             console.log("opening window");
             $mdDialog.show({
                 controller: 'callcancelling',
@@ -73,23 +85,43 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 clickOutsideToClose: false,
                 fullscreen: false
             })
-                .then(function (result) {
-                    if(result){
+                .then(function(result) {
+                    if (result) {
                         socket.emit('callended', $scope.sessionId);
                         location.href = "/dokter.id/";
                     }
-                }, function () {
+                }, function() {
                     console.log("OOps");
                 });
         };
 
-    }]).controller('callcancelling', ['$scope', '$rootScope', '$mdDialog', 'AppURLs', function ($scope, $rootScope, $mdDialog, AppURLs) {
+        $scope.sendMessage = function() {
+            //debugger;
 
-        $scope.closeCall = function () {
+            var msg = {
+                message: $scope.txtMessage,
+                name: $rootScope.userObject.name,
+                time: new Date(),
+                image: $rootScope.userObject.profileimage
+            };
+            $scope.txtMessage = "";
+            session.signal({
+                type: 'msg',
+                data: msg
+            }, function(error) {
+                if (error == undefined) {
+                    // handle the error if there is an error
+                }
+            });
+        };
+
+    }]).controller('callcancelling', ['$scope', '$rootScope', '$mdDialog', 'AppURLs', function($scope, $rootScope, $mdDialog, AppURLs) {
+
+        $scope.closeCall = function() {
             $mdDialog.hide(true);
         };
 
-        $scope.cancelWindow = function(){
+        $scope.cancelWindow = function() {
             $mdDialog.hide(false);
         };
     }]);

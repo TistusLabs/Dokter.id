@@ -13,7 +13,18 @@ angular.module('conferenceApp', [
 
     .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', '$routeParams', '$route', function ($scope, $rootScope, $location, User, $mdDialog, $routeParams, $route) {
 
+        $rootScope.isNullOrEmptyOrUndefined = function (value) {
+            return !value;
+        };
+        var client = User.getAuthClient();
+        var securityToken = client.checkSession();
+        var session = client.getSession();
         
+        if ($rootScope.isNullOrEmptyOrUndefined(session.profileimage)) {
+            var passhash = CryptoJS.MD5(session.username);
+            session.profileimage = "http://www.gravatar.com/avatar/" + passhash;
+        }
+        $rootScope.userObject = session;
 
         $rootScope.ShowBusyContainer = function (message) {
             $rootScope.isBusy = true;
@@ -24,6 +35,6 @@ angular.module('conferenceApp', [
             $rootScope.isBusy = false;
         };
 
-        
+
 
     }]);

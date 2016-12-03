@@ -1,1 +1,1 @@
-var SERVER_BASE_URL = 'https://tistuslabs-chatapp.herokuapp.com';
+var SERVER_BASE_URL = 'https://tistuslabs-doc.herokuapp.com';

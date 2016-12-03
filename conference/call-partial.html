@@ -18,50 +18,24 @@
     <div id="chat" flex layout="column" layout-align="none">
        <div>HEADER <hr></div>
        <div layout="column" layout-align="start none">
-           <div class="Card Card--message">
+           <div ng-repeat="message in msgHistory" class="Card Card--message">
                 <div class="Card__image ProfileImage">
-                    <img class="ProfileImage__image ProfileImage--message" src="../build/img/sample/user2.jpg" alt="Doctor Name" title="Doctor Name" />
+                    <img class="ProfileImage__image ProfileImage--message" ng-src="{{message.image}}" alt="{{message.name}}" title="{{message.name}}" />
                 </div>
                 <div class="Card__information">
                     <div class="Card__name">
-                        Ivan Junior <span class="Card__timestamp">15:00 PM</span>
+                        {{message.name}} <span class="Card__timestamp">{{message.time}}</span>
                     </div>
                     <div class="Card__message">
-                        This aligns a flex container's lines within when there is extra space in the cross-axis, similar to how justify-content aligns individual items within the main-axis.
-                    </div>
-                </div>
-            </div>
-            <div class="Card Card--message">
-                <div class="Card__image ProfileImage">
-                    <img class="ProfileImage__image ProfileImage--message" src="../build/img/sample/user2.jpg" alt="Doctor Name" title="Doctor Name" />
-                </div>
-                <div class="Card__information">
-                    <div class="Card__name">
-                        Ivan Junior <span class="Card__timestamp">15:00 PM</span>
-                    </div>
-                    <div class="Card__message">
-                        This aligns a flex container's lines within when there is extra space in the cross-axis, similar to how justify-content aligns individual items within the main-axis.
-                    </div>
-                </div>
-            </div>
-            <div class="Card Card--message">
-                <div class="Card__image ProfileImage">
-                    <img class="ProfileImage__image ProfileImage--message" src="../build/img/sample/user2.jpg" alt="Doctor Name" title="Doctor Name" />
-                </div>
-                <div class="Card__information">
-                    <div class="Card__name">
-                        Ivan Junior <span class="Card__timestamp">15:00 PM</span>
-                    </div>
-                    <div class="Card__message">
-                        This aligns a flex container's lines within when there is extra space in the cross-axis, similar to how justify-content aligns individual items within the main-axis.
+                        {{message.message}}
                     </div>
                 </div>
             </div>
        </div>
        <div>
            <hr>
-           <input type="text" />
-           <input type="button" value="Send Message" />
+           <input type="text" ng-model="txtMessage" />
+           <input ng-click="sendMessage()"  type="button" value="Send Message" />
        </div>
     </div>
 </div>
