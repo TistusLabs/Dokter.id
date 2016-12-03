@@ -70,7 +70,9 @@ angular.module('conferenceApp.call', ['ngRoute'])
 
             // Receive a message and append it to the history
             session.on('signal:msg', function(event) {
-                $scope.msgHistory.push(event.data);
+                $scope.$apply(function() {
+                    $scope.msgHistory.push(event.data);
+                });
             });
         };
         $scope.initializeSession();
@@ -110,7 +112,9 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 data: msg
             }, function(error) {
                 if (error == undefined) {
-                    // handle the error if there is an error
+                    $scope.$apply(function() {
+//                        $scope.msgHistory.push(event.data);
+                    });
                 }
             });
         };
