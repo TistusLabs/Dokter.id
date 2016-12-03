@@ -1,26 +1,26 @@
 <div id="videos" layout="row" flex>
     <div id="subscriber"></div>
     <div id="publisher"></div>
-    <div id="controls" layout="column" layout-align="space-around center">
+    <div id="controls" layout="row" layout-align="space-around center">
 
-        <button class="CallButton CallButton--circle CallButton--brown">
+        <button ng-disabled="true" class="CallButton CallButton--circle CallButton--brown">
                 <img class="CallButton__image CallButton__image--voice" src="../build/img/call/voice.png" alt="Voice Call" title="Voice Call" />
             </button>
 
-        <button class="CallButton CallButton--circle CallButton--brown">
+        <button ng-disabled="true" class="CallButton CallButton--circle CallButton--brown">
                 <img class="CallButton__image CallButton__image--video" src="../build/img/call/video.png" alt="Video Call" title="Video Call" />
             </button>
 
-        <button ng-click="showAlert($event)" class="CallButton CallButton--red" style="margin-top: 17px;">
+        <button ng-click="endCall($event)" class="CallButton CallButton--red">
                 <img class="CallButton__image CallButton__image--reject" src="../build/img/call/reject.png" alt="Reject Call" title="Reject Call" />
             </button>
     </div>
     <div id="chat" flex layout="column" layout-align="none">
        <div>HEADER <hr></div>
-       <div layout="row">
+       <div layout="column" layout-align="start none">
            <div class="Card Card--message">
                 <div class="Card__image ProfileImage">
-                    <img class="ProfileImage__image ProfileImage--message" src="../build/img/sample/user2.jpg" alt="{{ Dokter / Member Name }}" title="{{ Dokter / Member Name }}" />
+                    <img class="ProfileImage__image ProfileImage--message" src="../build/img/sample/user2.jpg" alt="Doctor Name" title="Doctor Name" />
                 </div>
                 <div class="Card__information">
                     <div class="Card__name">
@@ -33,7 +33,7 @@
             </div>
             <div class="Card Card--message">
                 <div class="Card__image ProfileImage">
-                    <img class="ProfileImage__image ProfileImage--message" src="../build/img/sample/user2.jpg" alt="{{ Dokter / Member Name }}" title="{{ Dokter / Member Name }}" />
+                    <img class="ProfileImage__image ProfileImage--message" src="../build/img/sample/user2.jpg" alt="Doctor Name" title="Doctor Name" />
                 </div>
                 <div class="Card__information">
                     <div class="Card__name">
@@ -46,7 +46,7 @@
             </div>
             <div class="Card Card--message">
                 <div class="Card__image ProfileImage">
-                    <img class="ProfileImage__image ProfileImage--message" src="../build/img/sample/user2.jpg" alt="{{ Dokter / Member Name }}" title="{{ Dokter / Member Name }}" />
+                    <img class="ProfileImage__image ProfileImage--message" src="../build/img/sample/user2.jpg" alt="Doctor Name" title="Doctor Name" />
                 </div>
                 <div class="Card__information">
                     <div class="Card__name">

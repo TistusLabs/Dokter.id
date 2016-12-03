@@ -9,16 +9,25 @@ angular.module('conferenceApp.call', ['ngRoute'])
         });
     }])
 
-    .controller('callController', ['$scope', '$rootScope', '$location', 'User', '$window', '$mdDialog', function ($scope, $rootScope, $location, User, $window, $mdDialog) {
+    .controller('callController', ['$scope', '$rootScope', '$location', 'User', '$window', '$mdDialog','AppURLs', function ($scope, $rootScope, $location, User, $window, $mdDialog,AppURLs) {
 
         var client = User.getAuthClient();
-        var securityToken = client.checkSession();
+        //var securityToken = client.checkSession();
+        var session = client.getSession();
+        $rootScope.userObject = session;
 
         var tokboxSession = client.getTokSession();
 
         $scope.apiKey = tokboxSession.apiKey;
         $scope.sessionId = tokboxSession.sessionId;
         $scope.token = tokboxSession.token;
+
+        var socket = io.connect(AppURLs.socketServer);
+        socket.on('callended', function (broadcast) {
+            if (broadcast == $scope.sessionId) {
+                location.href = "/dokter.id/conference";
+            }
+        });
 
         $scope.initializeSession = function () {
             var session = OT.initSession($scope.apiKey, $scope.sessionId);
@@ -64,31 +73,23 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 clickOutsideToClose: false,
                 fullscreen: false
             })
-                .then(function (answer) {
-                    console.log("buhaha");
+                .then(function (result) {
+                    if(result){
+                        socket.emit('callended', $scope.sessionId);
+                        location.href = "/dokter.id/";
+                    }
                 }, function () {
                     console.log("OOps");
                 });
         };
 
-        $scope.showAlert = function (ev) {
-            // Appending dialog to document.body to cover sidenav in docs app
-            // Modal dialogs should fully cover application
-            // to prevent interaction outside of dialog
-            $mdDialog.show(
-                $mdDialog.alert()
-                    .parent(angular.element(document.body))
-                    .clickOutsideToClose(true)
-                    .title('This is an alert title')
-                    .textContent('You can specify some description text in here.')
-                    .ariaLabel('Alert Dialog Demo')
-                    .ok('Got it!')
-                    .targetEvent(ev)
-            );
-        };
     }]).controller('callcancelling', ['$scope', '$rootScope', '$mdDialog', 'AppURLs', function ($scope, $rootScope, $mdDialog, AppURLs) {
 
-        $scope.closeWindow = function () {
-            $mdDialog.hide();
-        }
+        $scope.closeCall = function () {
+            $mdDialog.hide(true);
+        };
+
+        $scope.cancelWindow = function(){
+            $mdDialog.hide(false);
+        };
     }]);
