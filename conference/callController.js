@@ -41,6 +41,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
 
             // Subscribe to a newly created stream
             session.on('streamCreated', function(event) {
+                debugger
                 session.subscribe(event.stream, 'subscriber', {
                     insertMode: 'append',
                     width: '100%',
