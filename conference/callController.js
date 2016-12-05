@@ -36,13 +36,14 @@ angular.module('conferenceApp.call', ['ngRoute'])
         });
 
         var session = OT.initSession($scope.apiKey, $scope.sessionId);
+        var subsciber = new Object();
 
         $scope.initializeSession = function() {
 
             // Subscribe to a newly created stream
             session.on('streamCreated', function(event) {
                 debugger
-                session.subscribe(event.stream, 'subscriber', {
+                subsciber = session.subscribe(event.stream, 'subscriber', {
                     insertMode: 'append',
                     width: '100%',
                     height: '100%',
@@ -92,9 +93,9 @@ angular.module('conferenceApp.call', ['ngRoute'])
         $scope.muteAudio = function() {
             //debugger
             if ($scope.isAudioMuted) {
-                session.subscribeToAudio(true);
+                subsciber.subscribeToAudio(true);
             } else {
-                session.subscribeToAudio(false);
+                subsciber.subscribeToAudio(false);
             }
             $scope.isAudioMuted = !$scope.isAudioMuted;
         };
@@ -103,9 +104,9 @@ angular.module('conferenceApp.call', ['ngRoute'])
         $scope.muteVideo = function() {
             //debugger
             if ($scope.isVideoMuted) {
-                session.subscribeToVideo(true);
+                subsciber.subscribeToVideo(true);
             } else {
-                session.subscribeToVideo(true);
+                subsciber.subscribeToVideo(true);
             }
             $scope.isVideoMuted = !$scope.isVideoMuted;
         };
