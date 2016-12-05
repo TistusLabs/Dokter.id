@@ -134,7 +134,7 @@ angular.module('myApp.Services', []).
                     country: "Sri Lanka",
                     city: "Colombo",
                     languages: ["English", "Indonesian"],
-                    profileimage: "http://www.gravatar.com/avatar/7272996f825bd268885d6b20484d325c",
+                    profileimage: "https://www.gravatar.com/avatar/7272996f825bd268885d6b20484d325c",
                     peer: {},
                     otherdata: {
                         speciality: "Specialist in Angular",
