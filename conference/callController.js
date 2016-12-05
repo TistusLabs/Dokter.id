@@ -44,7 +44,12 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 session.subscribe(event.stream, 'subscriber', {
                     insertMode: 'append',
                     width: '100%',
-                    height: '100%'
+                    height: '100%',
+                    name: $rootScope.userObject.name,
+                    style: {
+                        nameDisplayMode: "on",
+                        buttonDisplayMode: "off"
+                    }
                 });
             });
 
@@ -59,7 +64,12 @@ angular.module('conferenceApp.call', ['ngRoute'])
                     var publisher = OT.initPublisher('publisher', {
                         insertMode: 'append',
                         width: '100%',
-                        height: '100%'
+                        height: '100%',
+                        name: $rootScope.userObject.name,
+                        style: {
+                            nameDisplayMode: "on",
+                            buttonDisplayMode: "off"
+                        }
                     });
 
                     session.publish(publisher);
@@ -80,9 +90,9 @@ angular.module('conferenceApp.call', ['ngRoute'])
         $scope.isAudioMuted = false;
         $scope.muteAudio = function() {
             //debugger
-            if($scope.isAudioMuted){
+            if ($scope.isAudioMuted) {
                 session.subscribeToAudio(true);
-            }else{
+            } else {
                 session.subscribeToAudio(false);
             }
             $scope.isAudioMuted = !$scope.isAudioMuted;
@@ -91,9 +101,9 @@ angular.module('conferenceApp.call', ['ngRoute'])
         $scope.isVideoMuted = false;
         $scope.muteVideo = function() {
             //debugger
-            if($scope.isVideoMuted){
+            if ($scope.isVideoMuted) {
                 session.subscribeToVideo(true);
-            }else{
+            } else {
                 session.subscribeToVideo(true);
             }
             $scope.isVideoMuted = !$scope.isVideoMuted;
