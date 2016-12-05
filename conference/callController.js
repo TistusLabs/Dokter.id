@@ -46,7 +46,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
                     insertMode: 'append',
                     width: '100%',
                     height: '100%',
-                    name: $rootScope.userObject.name,
+                    name: event.stream.name,
                     style: {
                         nameDisplayMode: "on",
                         buttonDisplayMode: "off"
