@@ -22,7 +22,7 @@ angular.module('conferenceApp', [
         
         if ($rootScope.isNullOrEmptyOrUndefined(session.profileimage)) {
             var passhash = CryptoJS.MD5(session.username);
-            session.profileimage = "http://www.gravatar.com/avatar/" + passhash;
+            session.profileimage = "https://www.gravatar.com/avatar/" + passhash;
         }
         $rootScope.userObject = session;
 

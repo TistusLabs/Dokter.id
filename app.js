@@ -336,7 +336,7 @@ angular.module('myApp', [
         $rootScope.setMenu(session.type);
         if (session.profileimage == "") {
             var passhash = CryptoJS.MD5(session.username);
-            session.profileimage = "http://www.gravatar.com/avatar/" + passhash;
+            session.profileimage = "https://www.gravatar.com/avatar/" + passhash;
         }
         $rootScope.userObject = session;
     }]).controller('incomingWindowController', ['$scope', '$rootScope', 'data', '$mdDialog', 'AppURLs', function ($scope, $rootScope, data, $mdDialog, AppURLs) {
