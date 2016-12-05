@@ -3,12 +3,14 @@
     <div id="publisher"></div>
     <div id="controls" layout="row" layout-align="space-around center">
 
-        <button ng-disabled="true" class="CallButton CallButton--circle CallButton--brown">
-                <img class="CallButton__image CallButton__image--voice" src="../build/img/call/voice.png" alt="Voice Call" title="Voice Call" />
+        <button ng-click="muteAudio()" class="CallButton CallButton--circle CallButton--brown">
+                <img ng-if="isAudioMuted == true" class="CallButton__image CallButton__image--voice" src="../build/img/call/voice.png" alt="Voice Call" title="Voice Call" />
+                <img ng-if="isAudioMuted != true" class="CallButton__image CallButton__image--voice" src="../build/img/call/voice-mute.png" alt="Voice Call" title="Voice Call" />
             </button>
 
-        <button ng-disabled="true" class="CallButton CallButton--circle CallButton--brown">
-                <img class="CallButton__image CallButton__image--video" src="../build/img/call/video.png" alt="Video Call" title="Video Call" />
+        <button ng-click="muteVideo()" class="CallButton CallButton--circle CallButton--brown">
+                <img ng-if="isVideoMuted == true" class="CallButton__image CallButton__image--video" src="../build/img/call/video.png" alt="Video Call" title="Video Call" />
+                <img ng-if="isVideoMuted != true" class="CallButton__image CallButton__image--video" src="../build/img/call/video-mute.png" alt="Video Call" title="Video Call" />
             </button>
 
         <button ng-click="endCall($event)" class="CallButton CallButton--red">
@@ -16,11 +18,14 @@
             </button>
     </div>
     <div id="chat" flex layout="column" layout-align="none">
-       <div>HEADER <hr></div>
-       <div layout="column" layout-align="start none">
-           <div ng-repeat="message in msgHistory" class="Card Card--message">
+        <div>HEADER
+            <hr>
+        </div>
+        <div layout="column" layout-align="start none">
+            <div ng-repeat="message in msgHistory" class="Card Card--message">
                 <div class="Card__image ProfileImage">
-                    <img class="ProfileImage__image ProfileImage--message" ng-src="{{message.image}}" alt="{{message.name}}" title="{{message.name}}" />
+                    <img class="ProfileImage__image ProfileImage--message" ng-src="{{message.image}}" alt="{{message.name}}" title="{{message.name}}"
+                    />
                 </div>
                 <div class="Card__information">
                     <div class="Card__name">
@@ -31,11 +36,11 @@
                     </div>
                 </div>
             </div>
-       </div>
-       <div>
-           <hr>
-           <input type="text" ng-model="txtMessage" />
-           <input ng-click="sendMessage()"  type="button" value="Send Message" />
-       </div>
+        </div>
+        <div>
+            <hr>
+            <input type="text" ng-model="txtMessage" />
+            <input ng-click="sendMessage()" type="button" value="Send Message" />
+        </div>
     </div>
 </div>

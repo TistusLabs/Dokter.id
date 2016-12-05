@@ -77,6 +77,28 @@ angular.module('conferenceApp.call', ['ngRoute'])
         };
         $scope.initializeSession();
 
+        $scope.isAudioMuted = false;
+        $scope.muteAudio = function() {
+            //debugger
+            if($scope.isAudioMuted){
+                session.subscribeToAudio(true);
+            }else{
+                session.subscribeToAudio(false);
+            }
+            $scope.isAudioMuted = !$scope.isAudioMuted;
+        };
+
+        $scope.isVideoMuted = false;
+        $scope.muteVideo = function() {
+            //debugger
+            if($scope.isVideoMuted){
+                session.subscribeToVideo(true);
+            }else{
+                session.subscribeToVideo(true);
+            }
+            $scope.isVideoMuted = !$scope.isVideoMuted;
+        };
+
         $scope.endCall = function(ev) {
             console.log("opening window");
             $mdDialog.show({
@@ -113,7 +135,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
             }, function(error) {
                 if (error == undefined) {
                     $scope.$apply(function() {
-//                        $scope.msgHistory.push(event.data);
+                        //                        $scope.msgHistory.push(event.data);
                     });
                 }
             });
