@@ -135,7 +135,6 @@ angular.module('myApp.Services', []).
                     city: "Colombo",
                     languages: ["English", "Indonesian"],
                     profileimage: "https://www.gravatar.com/avatar/7272996f825bd268885d6b20484d325c",
-                    peer: {},
                     otherdata: {
                         speciality: "Specialist in Angular",
                         currency: "USD",
@@ -235,6 +234,10 @@ angular.module('myApp.Services', []).
                 var count = 0;
                 if (angular.isDefined(username) && angular.isDefined(password)) {
                     if (username != "" && password != "") {
+
+                        // make HTTP request
+
+                        
                         angular.forEach(doctors, function (userObject, index) {
                             if (userObject.username == username && userObject.password == password) {
 
