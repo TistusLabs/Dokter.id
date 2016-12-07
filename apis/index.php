@@ -47,7 +47,6 @@ function authenticate_user($email,$password){
             }
         }
     }
-    var_dump($response); exit();
     return $response;
 }
 
