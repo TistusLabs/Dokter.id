@@ -43,7 +43,8 @@ function authenticate_user($email,$password){
     if(!empty($list)){
         foreach ($list as $profile) {
             if($email == $profile->username && $password == $profile->password){
-                $response = '{"IsSuccess":true,"Message":"Correct user credentials."}';
+                unset($profile->password);
+                $response = '{"IsSuccess":true,"Message":"Correct user credentials.","Data":'.json_encode($profile).'}';
             }
         }
     }

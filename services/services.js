@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.Services', []).
-    factory('User', ['$rootScope', 'ConnectionStorage', 'AppURLs', 'TokboxService','$http', function ($rootScope, ConnectionStorage, AppURLs, TokboxService,$http) {
+    factory('User', ['$rootScope', 'ConnectionStorage', 'AppURLs', 'TokboxService', '$http', function($rootScope, ConnectionStorage, AppURLs, TokboxService, $http) {
 
         function AuthClient() {
 
@@ -9,7 +9,7 @@ angular.module('myApp.Services', []).
             var userName;
             var securityToken;
 
-            var _cookMan = (function () {
+            var _cookMan = (function() {
                 function createCookie(name, value, days) {
                     if (days) {
                         var date = new Date();
@@ -21,10 +21,10 @@ angular.module('myApp.Services', []).
                 }
 
                 return {
-                    set: function (name, value, days) {
+                    set: function(name, value, days) {
                         createCookie(name, value, days);
                     },
-                    get: function (name) {
+                    get: function(name) {
                         var nameEQ = name + "=";
                         var ca = document.cookie.split(';');
                         for (var i = 0; i < ca.length; i++) {
@@ -34,7 +34,7 @@ angular.module('myApp.Services', []).
                         }
                         return null;
                     },
-                    delete: function (name) {
+                    delete: function(name) {
                         createCookie(name, "", -1);
                     }
                 };
@@ -100,19 +100,19 @@ angular.module('myApp.Services', []).
             }
 
             return {
-                checkSession: function () {
+                checkSession: function() {
                     return checksession();
                 },
-                getSession: function () {
+                getSession: function() {
                     return getsession();
                 },
-                getTokSession: function () {
+                getTokSession: function() {
                     return getTokboxsession();
                 },
-                setSession: function (securityToken, authData, apiKey, sessionId, token) {
+                setSession: function(securityToken, authData, apiKey, sessionId, token) {
                     return setsession(securityToken, authData, apiKey, sessionId, token);
                 },
-                signOut: function () {
+                signOut: function() {
                     return signout();
                 }
             };
@@ -259,61 +259,61 @@ angular.module('myApp.Services', []).
                 if (angular.isDefined(username) && angular.isDefined(password)) {
                     if (username != "" && password != "") {
 
-                        // make HTTP request
+                        var URL = "../apis/?action=authenticate_user&email=" + username + "&password=" + password;
+                        $http.get(URL).
+                            success(function(data, status, headers, config) {
+                                debugger;
+                                if (data.IsSuccess) {
 
+                                    var userObject = data.Data;
 
-                        angular.forEach(doctors, function (userObject, index) {
-                            if (userObject.username == username && userObject.password == password) {
+                                    resultFound = true;
+                                    var conclient = ConnectionStorage.getClient();
 
-                                resultFound = true;
-                                var conclient = ConnectionStorage.getClient();
+                                    var tokClient = TokboxService.getClient();
+                                    tokClient.onComplete(function(session) {
+                                        console.log("Success: " + session);
+                                        conclient.onComplete(function(data) {
+                                            console.log(data);
+                                        });
+                                        conclient.onError(function(data) {
+                                            console.log(data);
+                                        });
+                                        console.log('Key:', userObject._id);
+                                        console.log('Value:', session.sessionId);
+                                        conclient.SetConnection(userObject._id, session.sessionId);
 
-                                var tokClient = TokboxService.getClient();
-                                tokClient.onComplete(function (session) {
-                                    console.log("Success: " + session);
-                                    conclient.onComplete(function (data) {
-                                        console.log(data);
+                                        currentUser = userObject;
+                                        userObject.status = "available";
+                                        $rootScope.username = username;
+                                        $rootScope.userObject = userObject;
+                                        //$rootScope.setTokSession(session);
+                                        ResultObj = {
+                                            status: resultFound,
+                                            message: "Login successful",
+                                            user: userObject
+                                        };
+                                        console.log("My ID: ", session.sessionId);
+                                        // testing socket.io functionality
+                                        //var socket = io.connect(AppURLs.socketServer, { secure: true, port: 4001 });
+
+                                        var client = new AuthClient();
+                                        client.setSession(session.sessionId, userObject, session);
+
+                                        if (onComplete) onComplete(ResultObj);
                                     });
-                                    conclient.onError(function (data) {
-                                        console.log(data);
+                                    tokClient.onError(function(data) {
+                                        console.log("Error: " + data);
+                                        ResultObj = {
+                                            status: resultFound,
+                                            message: data,
+                                            user: {}
+                                        };
+                                        if (onError) onError(ResultObj)
                                     });
-                                    console.log('Key:', userObject.id);
-                                    console.log('Value:', session.sessionId);
-                                    conclient.SetConnection(userObject.id, session.sessionId);
+                                    tokClient.GenerateSession();
 
-                                    currentUser = userObject;
-                                    userObject.status = "available";
-                                    $rootScope.username = username;
-                                    $rootScope.userObject = userObject;
-                                    //$rootScope.setTokSession(session);
-                                    ResultObj = {
-                                        status: resultFound,
-                                        message: "Login successful",
-                                        user: userObject
-                                    };
-                                    console.log("My ID: ", session.sessionId);
-                                    // testing socket.io functionality
-                                    //var socket = io.connect(AppURLs.socketServer, { secure: true, port: 4001 });
-
-                                    var client = new AuthClient();
-                                    client.setSession(session.sessionId, userObject, session);
-
-                                    if (onComplete) onComplete(ResultObj);
-                                });
-                                tokClient.onError(function (data) {
-                                    console.log("Error: " + data);
-                                    ResultObj = {
-                                        status: resultFound,
-                                        message: data,
-                                        user: {}
-                                    };
-                                    if (onError) onError(ResultObj)
-                                });
-                                tokClient.GenerateSession();
-                            }
-                            count++;
-                            if (doctors.length == count) {
-                                if (!resultFound) {
+                                } else {
                                     ResultObj = {
                                         status: resultFound,
                                         message: "Invalid username or password. Please try again",
@@ -321,7 +321,23 @@ angular.module('myApp.Services', []).
                                     };
                                     if (onError) onError(ResultObj)
                                 }
+                            }).
+                            error(function(data, status, headers, config) {
+                                ResultObj = {
+                                    status: resultFound,
+                                    message: "Invalid username or password. Please try again",
+                                    user: {}
+                                };
+                                if (onError) onError(ResultObj)
+                            });
+
+
+                        angular.forEach(doctors, function(userObject, index) {
+                            if (userObject.username == username && userObject.password == password) {
+
+
                             }
+
                         });
                     } else {
                         ResultObj = {
@@ -345,7 +361,7 @@ angular.module('myApp.Services', []).
                 var recordFound = false;
                 var doctorObject = {};
                 var message = "";
-                doctors.forEach(function (doctor) {
+                doctors.forEach(function(doctor) {
                     if (doctor.id == id) {
                         doctorObject = doctor;
                         recordFound = true;
@@ -361,7 +377,7 @@ angular.module('myApp.Services', []).
 
             function getalldocs() {
                 var returnList = [];
-                doctors.forEach(function (doctor) {
+                doctors.forEach(function(doctor) {
                     if (doctor.type == "doctor") {
                         returnList.push(doctor);
                     }
@@ -387,12 +403,12 @@ angular.module('myApp.Services', []).
                 profileObject.username = profile.username;
                 profileObject.password = profile.password;
                 profileObject.type = profile.type;
-                
+
                 $http.post(AppURLs.APIUrl + '/users', profileObject)
-                    .success(function (data, status, headers, config) {
+                    .success(function(data, status, headers, config) {
                         if (onComplete) onComplete({ status: true, object: null, message: data });
                     })
-                    .error(function (data, status, header, config) {
+                    .error(function(data, status, header, config) {
                         if (onError) onError({ status: false, object: doctorObject, message: data });
                     });
             }
@@ -403,49 +419,49 @@ angular.module('myApp.Services', []).
             }
 
             return {
-                SetUserOnline: function (user) {
-                    doctors.forEach(function (doctor) {
+                SetUserOnline: function(user) {
+                    doctors.forEach(function(doctor) {
                         if (doctor.username == user) {
                             doctor.status = "Online";
                         }
                     }, this);
                 },
-                SetUserOffline: function (user) {
-                    doctors.forEach(function (doctor) {
+                SetUserOffline: function(user) {
+                    doctors.forEach(function(doctor) {
                         if (doctor.username == user) {
                             doctor.status = "Offine";
                         }
                     }, this);
                 },
-                SetCurrentUser: function (user) {
+                SetCurrentUser: function(user) {
                     setCurrentuser(user)
                     return this;
                 },
-                GetCurrentUser: function () {
+                GetCurrentUser: function() {
                     getCurrentUser();
                     return this;
                 },
-                GetAllDoctors: function () {
+                GetAllDoctors: function() {
                     getalldocs();
                     return this;
                 },
-                GetUserID: function (id) {
+                GetUserID: function(id) {
                     getUserID(id);
                     return this;
                 },
-                AuthenticateUser: function (username, password) {
+                AuthenticateUser: function(username, password) {
                     authUser(username, password)
                     return this;
                 },
-                RegisterUser: function (profile) {
+                RegisterUser: function(profile) {
                     regUser(profile)
                     return this;
                 },
-                onComplete: function (func) {
+                onComplete: function(func) {
                     onComplete = func;
                     return this;
                 },
-                onError: function (func) {
+                onError: function(func) {
                     onError = func;
                     return this;
                 }
@@ -453,18 +469,18 @@ angular.module('myApp.Services', []).
         }
 
         return {
-            getClient: function () {
+            getClient: function() {
                 var req = new UserClient();
                 return req;
             },
-            getAuthClient: function () {
+            getAuthClient: function() {
                 var req = new AuthClient();
                 return req;
             },
         }
 
     }]).
-    factory('TokboxService', ['$rootScope', '$http', 'IDService', function ($rootScope, $http, IDService) {
+    factory('TokboxService', ['$rootScope', '$http', 'IDService', function($rootScope, $http, IDService) {
         function TokboxClient(params) {
             var onComplete;
             var onError;
@@ -476,7 +492,7 @@ angular.module('myApp.Services', []).
             function genSession() {
                 var URL = SERVER_BASE_URL + '/session';
                 $http.get(URL).
-                    success(function (data, status, headers, config) {
+                    success(function(data, status, headers, config) {
                         var id = IDService.generateID();
                         apiKey = data.apiKey;
                         sessionId = data.sessionId;
@@ -490,7 +506,7 @@ angular.module('myApp.Services', []).
                         if (onComplete) onComplete(data);
                         //initializeSession(apiKey,sessionId,data);
                     }).
-                    error(function (data, status, headers, config) {
+                    error(function(data, status, headers, config) {
                         if (onError) onError(data);
                     });
             }
@@ -499,7 +515,7 @@ angular.module('myApp.Services', []).
                 var session = OT.initSession(apiKey, sessionId);
 
                 // Subscribe to a newly created stream
-                session.on('streamCreated', function (event) {
+                session.on('streamCreated', function(event) {
                     session.subscribe(event.stream, 'subscriber', {
                         insertMode: 'append',
                         width: '100%',
@@ -507,12 +523,12 @@ angular.module('myApp.Services', []).
                     });
                 });
 
-                session.on('sessionDisconnected', function (event) {
+                session.on('sessionDisconnected', function(event) {
                     console.log('You were disconnected from the session.', event.reason);
                 });
 
                 // Connect to the session
-                session.connect(token, function (error) {
+                session.connect(token, function(error) {
                     // If the connection is successful, initialize a publisher and publish to the session
                     if (!error) {
                         var publisher = OT.initPublisher('publisher', {
@@ -529,28 +545,28 @@ angular.module('myApp.Services', []).
             }
 
             return {
-                GenerateSession: function () {
+                GenerateSession: function() {
                     genSession();
                     return this;
                 },
-                onComplete: function (func) {
+                onComplete: function(func) {
                     onComplete = func;
                     return this;
                 },
-                onError: function (func) {
+                onError: function(func) {
                     onError = func;
                     return this;
                 }
             }
         }
         return {
-            getClient: function () {
+            getClient: function() {
                 var req = new TokboxClient();
                 return req;
             }
         }
     }]).
-    factory('ConnectionStorage', ['$rootScope', 'AppURLs', '$http', function ($rootScope, AppURLs, $http) {
+    factory('ConnectionStorage', ['$rootScope', 'AppURLs', '$http', function($rootScope, AppURLs, $http) {
         function ConnectionClient() {
             var onComplete;
             var onError;
@@ -563,10 +579,10 @@ angular.module('myApp.Services', []).
                         "Content-Type": "application/json"
                     }
                 }).
-                    success(function (data, status, headers, config) {
+                    success(function(data, status, headers, config) {
                         if (onComplete) onComplete(data);
                     }).
-                    error(function (data, status, headers, config) {
+                    error(function(data, status, headers, config) {
                         if (onError) onError(data);
                     });
             }
@@ -578,40 +594,40 @@ angular.module('myApp.Services', []).
                         "Content-Type": "application/json"
                     }
                 }).
-                    success(function (data, status, headers, config) {
+                    success(function(data, status, headers, config) {
                         if (onComplete) onComplete(data);
                     }).
-                    error(function (data, status, headers, config) {
+                    error(function(data, status, headers, config) {
                         if (onError) onError(data);
                     });
             }
             return {
-                GetConnection: function (key) {
+                GetConnection: function(key) {
                     getConnection(key);
                     return this;
                 },
-                SetConnection: function (key, conn) {
+                SetConnection: function(key, conn) {
                     setConnection(key, conn)
                     return this;
                 },
-                onComplete: function (func) {
+                onComplete: function(func) {
                     onComplete = func;
                     return this;
                 },
-                onError: function (func) {
+                onError: function(func) {
                     onError = func;
                     return this;
                 }
             }
         }
         return {
-            getClient: function () {
+            getClient: function() {
                 var req = new ConnectionClient();
                 return req;
             }
         }
     }]).
-    service('IDService', function ($rootScope) {
+    service('IDService', function($rootScope) {
         function makeid() {
             var text = "";
             var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -622,11 +638,11 @@ angular.module('myApp.Services', []).
             return text;
         }
 
-        this.generateID = function () {
+        this.generateID = function() {
             return makeid();
         };
     }).
-    factory('AppURLs', function ($rootScope) {
+    factory('AppURLs', function($rootScope) {
         //var p = location.protocol;
         var p = "https:";
         return {
