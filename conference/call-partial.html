@@ -24,7 +24,7 @@
         <div layout="column" layout-align="start none">
             <div ng-repeat="message in msgHistory" class="Card Card--message">
                 <div class="Card__image ProfileImage">
-                    <img class="ProfileImage__image ProfileImage--message" ng-src="{{message.image}}" alt="{{message.name}}" title="{{message.name}}"
+                    <img class="ProfileImage__image ProfileImage--message" ng-src="{{message.image}}?s=250&d=monsterid" alt="{{message.name}}" title="{{message.name}}"
                     />
                 </div>
                 <div class="Card__information">
@@ -39,7 +39,7 @@
         </div>
         <div>
             <hr>
-            <input type="text" ng-model="txtMessage" />
+            <input ng-keypress="sendMessageOnEnter($event)" type="text" ng-model="txtMessage" />
             <input ng-click="sendMessage()" type="button" value="Send Message" />
         </div>
     </div>

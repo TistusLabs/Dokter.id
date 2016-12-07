@@ -131,6 +131,12 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 });
         };
 
+        $scope.sendMessageOnEnter = function(event){
+            if(event.code == "Enter"){
+                $scope.sendMessage();
+            }
+        }
+
         $scope.sendMessage = function() {
             //debugger;
 
