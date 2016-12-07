@@ -34,27 +34,27 @@
                 <form name="signup" class="Box__form Form">
                     <div class="Form__group">
                         <label for="name" class="Form__label">Name</label>
-                        <input required name="name" id="name" type="text" class="Form__control" placeholder="Name" />
+                        <input ng-model="name" required name="name" id="name" type="text" class="Form__control" placeholder="Name" />
                         <div ng-if="signup.name.$invalid" class="Form__message">
                             Please Enter Your Name
                         </div>
                     </div>
                     <div class="Form__group">
                         <label for="email" class="Form__label">Email</label>
-                        <input required name="email" id="email" type="email" class="Form__control" placeholder="Email" />
+                        <input ng-model="username" required name="email" id="email" type="email" class="Form__control" placeholder="Email" />
                         <div ng-if="signup.email.$invalid" class="Form__message">
                             Please Enter Your Email
                         </div>
                     </div>
                     <div class="Form__group">
                         <label for="password" class="Form__label">Password</label>
-                        <input required name="password" id="password" type="password" class="Form__control" placeholder="Password" />
+                        <input ng-model="password" required name="password" id="password" type="password" class="Form__control" placeholder="Password" />
                         <div ng-if="signup.password.$invalid" class="Form__message">
                             Please Enter Your Password
                         </div>
                     </div>
                     <div class="Form__group">
-                        <button ng-click="signupUser('patient')" class="Form__control Form__control--button Button Button--big Button--register-orange">
+                        <button ng-click="signupUser('doctor',$event)" class="Form__control Form__control--button Button Button--big Button--register-orange">
                             Create Account
                         </button>
                     </div>

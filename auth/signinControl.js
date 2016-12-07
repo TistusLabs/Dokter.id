@@ -21,7 +21,7 @@ angular.module('loginApp.signin', ['ngRoute'])
         });
     }])
 
-    .controller('signinControl', ['$scope', '$rootScope', '$location', 'User','$window', function ($scope, $rootScope, $location, User,$window) {
+    .controller('signinControl', ['$scope', '$rootScope', '$location', 'User', '$window', function ($scope, $rootScope, $location, User, $window) {
 
         $scope.processing = false;
         $scope.authenticateUser = function (username, password) {
@@ -46,7 +46,26 @@ angular.module('loginApp.signin', ['ngRoute'])
             $location.path("join/" + URL);
         };
 
-        $scope.signupUser = function (flag) {
-            alert("siginup users:" + flag);
+        $scope.signupUser = function (flag,event) {
+            $scope.processing = true;
+            $rootScope.ShowBusyContainer("Signing you up with the system...");
+
+            var profile = {
+                "name":$scope.name,
+                "username":$scope.username,
+                "password":$scope.password,
+                "type":flag
+            }
+
+            var client = User.getClient();
+            client.onComplete(function (data) {
+                $scope.processing = false;
+                $rootScope.displayMessage("Your have been successfully registered","Success!",event);
+            });
+            client.onError(function (data) {
+                $rootScope.displayMessage("Ops. There was an issue","Success!",event);
+                $scope.processing = false;
+            });
+            client.RegisterUser(profile);
         };
     }]);

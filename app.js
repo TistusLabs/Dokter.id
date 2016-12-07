@@ -6,9 +6,6 @@ angular.module('myApp', [
     'ngMaterial',
     'ngMessages',
     'myApp.version',
-    'myApp.signup',
-    'myApp.signup.patient',
-    'myApp.signup.doctor',
     'myApp.doctor.dashboard',
     'myApp.patient.home',
     'myApp.doctor.home',
@@ -16,7 +13,6 @@ angular.module('myApp', [
     'myApp.Services',
     'myApp.profile',
     'myApp.pagenotfound',
-    'myApp.mypatients',
     'myApp.billing',
     'myApp.topup'
 ]).
@@ -79,6 +75,19 @@ angular.module('myApp', [
 
         $scope.openMenu = function ($mdOpenMenu, ev) {
             $mdOpenMenu(ev);
+        };
+
+        $rootScope.displayMessage = function (message,title,ev) {
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .parent(angular.element(document.body))
+                    .clickOutsideToClose(true)
+                    .title(title)
+                    .textContent(message)
+                    .ariaLabel('Alert Dialog Demo')
+                    .ok('Okay')
+                    .targetEvent(ev)
+            );
         };
 
         $rootScope.setTokSession = function (obj) {

@@ -21,4 +21,17 @@ angular.module('loginApp', [
         $rootScope.HideBusyContainer = function () {
             $rootScope.isBusy = false;
         };
+
+        $rootScope.displayMessage = function (message,title,ev) {
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .parent(angular.element(document.body))
+                    .clickOutsideToClose(true)
+                    .title(title)
+                    .textContent(message)
+                    .ariaLabel('Alert Dialog Demo')
+                    .ok('Okay')
+                    .targetEvent(ev)
+            );
+        };
     }]);

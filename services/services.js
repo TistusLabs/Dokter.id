@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.Services', []).
-    factory('User', ['$rootScope', 'ConnectionStorage', 'AppURLs', 'TokboxService', function ($rootScope, ConnectionStorage, AppURLs, TokboxService) {
+    factory('User', ['$rootScope', 'ConnectionStorage', 'AppURLs', 'TokboxService','$http', function ($rootScope, ConnectionStorage, AppURLs, TokboxService,$http) {
 
         function AuthClient() {
 
@@ -91,7 +91,7 @@ angular.module('myApp.Services', []).
                 _cookMan.delete("token");
             }
 
-            function setsession(securityToken,authData,session) {
+            function setsession(securityToken, authData, session) {
                 _cookMan.set("securityToken", securityToken, 1);
                 _cookMan.set("authData", JSON.stringify(authData), 1);
                 _cookMan.set("apiKey", session.apiKey, 1);
@@ -109,10 +109,10 @@ angular.module('myApp.Services', []).
                 getTokSession: function () {
                     return getTokboxsession();
                 },
-                setSession: function (securityToken,authData,apiKey,sessionId,token) {
-                    return setsession(securityToken,authData,apiKey,sessionId,token);
+                setSession: function (securityToken, authData, apiKey, sessionId, token) {
+                    return setsession(securityToken, authData, apiKey, sessionId, token);
                 },
-                signOut: function(){
+                signOut: function () {
                     return signout();
                 }
             };
@@ -228,6 +228,30 @@ angular.module('myApp.Services', []).
                 }
             ];
 
+            function getNewProfile() {
+                var obj = {
+                    name: "",
+                    username: '',
+                    password: '',
+                    status: "unavailable",
+                    type: "",
+                    country: "",
+                    city: "",
+                    languages: [],
+                    profileimage: "",
+                    otherdata: {
+                        speciality: "",
+                        currency: "",
+                        rate: "",
+                        shortbiography: "",
+                        awards: "",
+                        graduateschool: "",
+                        residenceplace: ""
+                    }
+                }
+                return obj;
+            }
+
             function authUser(username, password) {
                 var ResultObj = {};
                 var resultFound = false;
@@ -237,7 +261,7 @@ angular.module('myApp.Services', []).
 
                         // make HTTP request
 
-                        
+
                         angular.forEach(doctors, function (userObject, index) {
                             if (userObject.username == username && userObject.password == password) {
 
@@ -272,7 +296,7 @@ angular.module('myApp.Services', []).
                                     //var socket = io.connect(AppURLs.socketServer, { secure: true, port: 4001 });
 
                                     var client = new AuthClient();
-                                    client.setSession(session.sessionId,userObject,session);
+                                    client.setSession(session.sessionId, userObject, session);
 
                                     if (onComplete) onComplete(ResultObj);
                                 });
@@ -357,6 +381,22 @@ angular.module('myApp.Services', []).
 
             }
 
+            function regUser(profile) {
+                var profileObject = getNewProfile();
+                profileObject.name = profile.name;
+                profileObject.username = profile.username;
+                profileObject.password = profile.password;
+                profileObject.type = profile.type;
+                
+                $http.post(AppURLs.APIUrl + '/users', profileObject)
+                    .success(function (data, status, headers, config) {
+                        if (onComplete) onComplete({ status: true, object: null, message: data });
+                    })
+                    .error(function (data, status, header, config) {
+                        if (onError) onError({ status: false, object: doctorObject, message: data });
+                    });
+            }
+
             function getCurrentUser() {
                 if (onComplete) onComplete(currentUser);
                 if (onError) onComplete(null);
@@ -395,6 +435,10 @@ angular.module('myApp.Services', []).
                 },
                 AuthenticateUser: function (username, password) {
                     authUser(username, password)
+                    return this;
+                },
+                RegisterUser: function (profile) {
+                    regUser(profile)
                     return this;
                 },
                 onComplete: function (func) {
@@ -451,7 +495,7 @@ angular.module('myApp.Services', []).
                     });
             }
 
-            function initializeSession(apiKey,sessionId,data) {
+            function initializeSession(apiKey, sessionId, data) {
                 var session = OT.initSession(apiKey, sessionId);
 
                 // Subscribe to a newly created stream
@@ -588,6 +632,7 @@ angular.module('myApp.Services', []).
         return {
             "connectionStorage": p + "//" + "prepaid.topas.tv" + ":4001",
             "socketServer": p + "//" + "prepaid.topas.tv" + ":4001",
-            "DataStorage": p + "//" + "localhost" + ":3000"
+            "DataStorage": p + "//" + "localhost" + ":3000",
+            "APIUrl": "http://103.242.180.213:3000/api"
         }
     });
