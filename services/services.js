@@ -648,9 +648,9 @@ angular.module('myApp.Services', []).
         //var p = location.protocol;
         var p = "https:";
         return {
-            "connectionStorage": p + "//" + "prepaid.topas.tv" + ":4001",
-            "socketServer": p + "//" + "prepaid.topas.tv" + ":4001",
+            "connectionStorage": p + "//" + "128.199.153.75" + ":4001",
+            "socketServer": p + "//" + "128.199.153.75" + ":4001",
             "DataStorage": p + "//" + "localhost" + ":3000",
-            "APIUrl": "http://103.242.180.213:3000/api"
+            "APIUrl": "http://128.199.153.75:3000/api"
         }
     });
