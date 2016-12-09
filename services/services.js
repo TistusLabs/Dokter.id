@@ -237,6 +237,7 @@ angular.module('myApp.Services', []).
                     type: "",
                     country: "",
                     city: "",
+                    dob:"",
                     languages: [],
                     profileimage: "",
                     otherdata: {
@@ -262,7 +263,7 @@ angular.module('myApp.Services', []).
                         var URL = "../apis/?action=authenticate_user&email=" + username + "&password=" + password;
                         $http.get(URL).
                             success(function (data, status, headers, config) {
-                                debugger;
+                                //debugger;
                                 if (data.IsSuccess) {
 
                                     var userObject = data.Data;
@@ -330,15 +331,6 @@ angular.module('myApp.Services', []).
                                 };
                                 if (onError) onError(ResultObj)
                             });
-
-
-                        angular.forEach(doctors, function (userObject, index) {
-                            if (userObject.username == username && userObject.password == password) {
-
-
-                            }
-
-                        });
                     } else {
                         ResultObj = {
                             status: resultFound,

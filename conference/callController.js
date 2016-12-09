@@ -138,8 +138,6 @@ angular.module('conferenceApp.call', ['ngRoute'])
         }
 
         $scope.sendMessage = function() {
-            //debugger;
-
             var msg = {
                 message: $scope.txtMessage,
                 name: $rootScope.userObject.name,
@@ -153,7 +151,6 @@ angular.module('conferenceApp.call', ['ngRoute'])
             }, function(error) {
                 if (error == undefined) {
                     $scope.$apply(function() {
-                        //                        $scope.msgHistory.push(event.data);
                     });
                 }
             });

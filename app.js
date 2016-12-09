@@ -77,7 +77,7 @@ angular.module('myApp', [
             $mdOpenMenu(ev);
         };
 
-        $rootScope.displayMessage = function (message,title,ev) {
+        $rootScope.displayMessage = function (message, title, ev) {
             $mdDialog.show(
                 $mdDialog.alert()
                     .parent(angular.element(document.body))
@@ -89,6 +89,38 @@ angular.module('myApp', [
                     .targetEvent(ev)
             );
         };
+
+        var onceDisplayed = false;
+        $scope.saveInTimeIntervals = function () {
+            setInterval(function () {
+                if(!onceDisplayed){
+                    $scope.showUpdateProfile(null);
+                    onceDisplayed = true;
+                }
+            }, 1000);
+        };
+
+        $scope.saveInTimeIntervals();
+
+        $scope.showUpdateProfile = function (ev) {
+            $mdDialog.show({
+                controller: 'profileCompleteDialog',
+                templateUrl: 'partials/platform-entry.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: false,
+                fullscreen: true,
+                locals: {
+                    data: $rootScope.userObject
+                }
+            })
+                .then(function (doctor) {
+
+                }, function () {
+
+                });
+        };
+        //$scope.showUpdateProfile(null);
 
         $rootScope.setTokSession = function (obj) {
             $rootScope.toksessionObj = obj;
@@ -370,5 +402,15 @@ angular.module('myApp', [
                 "mode": "accept"
             }
             $mdDialog.hide(obj);
+        }
+    }]).controller('profileCompleteDialog', ['$scope', '$rootScope', 'data', '$mdDialog', 'AppURLs','$location', function ($scope, $rootScope, data, $mdDialog, AppURLs,$location) {
+        $scope.profile = data;
+        $scope.close = function () {
+            $mdDialog.hide();
+        }
+
+        $scope.gotoProfile = function (){
+            $location.path('/profile');
+            $mdDialog.hide();
         }
     }]);
