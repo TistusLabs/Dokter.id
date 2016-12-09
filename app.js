@@ -311,7 +311,7 @@ angular.module('myApp', [
                     if (obj.user == $rootScope.userObject.username && obj.status == "unavailable") {
                         var client = new User.getAuthClient();
                         client.signOut();
-                        $window.location.href = "/dokter.id/auth";
+                        $window.location.href = "/Dokter.id/auth";
                     }
                 });
             }, function () {
@@ -339,7 +339,7 @@ angular.module('myApp', [
                         $scope.showCallRejectedWindow(patient, ev)
                     } else {
                         socket.emit('answercall', data);
-                        location.href = "/dokter.id/conference";
+                        location.href = "/Dokter.id/conference";
                     }
                 }, function () {
                     console.log("OOps");

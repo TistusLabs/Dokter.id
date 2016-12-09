@@ -31,7 +31,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
         var socket = io.connect(AppURLs.socketServer);
         socket.on('callended', function(broadcast) {
             if (broadcast == $scope.sessionId) {
-                location.href = "/dokter.id/";
+                location.href = "/Dokter.id/";
             }
         });
 
@@ -124,7 +124,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 .then(function(result) {
                     if (result) {
                         socket.emit('callended', $scope.sessionId);
-                        location.href = "/dokter.id/";
+                        location.href = "/Dokter.id/";
                     }
                 }, function() {
                     console.log("OOps");

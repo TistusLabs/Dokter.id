@@ -130,7 +130,7 @@ angular.module('myApp.patient.home', ['ngRoute'])
         });
         socket.on('answercall', function (broadcast) {
             if (broadcast.username == $rootScope.userObject.username) {
-                location.href = "/dokter.id/conference";
+                location.href = "/Dokter.id/conference";
             }
         });
 

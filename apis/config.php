@@ -1,4 +1,4 @@
 <?php
-define("SERVER_URL", "103.242.180.213:3000");
+define("SERVER_URL", "128.199.153.75:3000");
 
 ?>

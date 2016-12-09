@@ -56,9 +56,9 @@ angular.module('myApp.Services', []).
                 if (securityToken == null) {
                     var nagivateUrl = "";
                     if (location.host == "localhost") {
-                        nagivateUrl = "/dokter.id/auth";
+                        nagivateUrl = "/Dokter.id/auth";
                     } else {
-                        nagivateUrl = "/dokter.id/auth";
+                        nagivateUrl = "/Dokter.id/auth";
                     }
                     location.href = nagivateUrl;
                 }
