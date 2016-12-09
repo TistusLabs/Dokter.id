@@ -651,6 +651,6 @@ angular.module('myApp.Services', []).
             "connectionStorage": p + "//" + "128.199.153.75" + ":4001",
             "socketServer": p + "//" + "128.199.153.75" + ":4001",
             "DataStorage": p + "//" + "localhost" + ":3000",
-            "APIUrl": "http://128.199.153.75:3000/api"
+            "APIUrl": p + "//" + "128.199.153.75:3001/api"
         }
     });
