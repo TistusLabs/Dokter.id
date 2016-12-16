@@ -1,4 +1,117 @@
-<div layout="row">
+<div class="Section Section--header">
+    <div class="Title">
+        <div class="Title__text">Welcome {{$root.userObject.name}}</div>
+        <div class="Title__subtitle">Complete your account &amp; personal information. We want to know you better, so we can serve you better.</div>
+    </div>
+</div>
+
+<div class="Section">
+    <div class="Title">
+        <div class="Title__text">Account Settings</div>
+        <div layout="row">
+            <div layout="column" class="md-padding" layout-align="start center">
+                <img width="200px" height="200px" ng-src="{{$root.userObject.profileimage + '?s=300&d=monsterid'}}" class="md-avatar" alt="{{$root.userObject.name}}">
+                <h1>{{$root.userObject.name}}</h1>
+                <p>{{$root.userObject.otherdata.speciality}} | {{$root.userObject.city}}, {{$root.userObject.country}}</p>
+                <h1>{{$root.userObject.otherdata.rate}}</h1>
+                <span><i class="icon ion-heart"></i> Helped 124 People</span>
+                <span><i class="icon ion-thumbsup"></i> Recieved 104 Thanks</span>
+            </div>
+            <div flex>
+                <label>Email</label>
+                <input value="{{$root.userObject.username}}" ng-disabled="true" type="email" />
+                <label>Password</label>
+                <input type="password" />
+            </div>
+            <div flex>
+                <label>Username</label>
+                <input type="text" />
+                <label>Confirm Password</label>
+                <input type="password" />
+                <button type="submit">Update Profile</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="Section">
+    <div class="Title">
+        <div class="Title__text">Profile Settings</div>
+        <div layout="column">
+            <label>Name</label>
+            <input type="text" />
+            <div layout="row">
+                <label>Date of Birth</label>
+                <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+                <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+                <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+            </div>
+            <label>Gender</label>
+            <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+            <label>City</label>
+            <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+            <label>Country</label>
+            <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+            <label>Language</label>
+            <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+            <button type="submit">Update Profile</button>
+        </div>
+
+    </div>
+</div>
+
+<div class="Section">
+    <div class="Title">
+        <div class="Title__text">Email Notifications</div>
+        <div class="Title__subtitle">When I get a new message, send me email notifications.</div>
+        <div flex>
+            <input type="radio" name="gender" value="male" checked> Instantly<br>
+            <input type="radio" name="gender" value="female"> Once every 15 minutes<br>
+            <input type="radio" name="gender" value="other"> Once an hour at most<br>
+            <input type="radio" name="gender" value="other"> Never
+        </div>
+
+    </div>
+</div>
+</div>
+
+<!--<div layout="row">
     <div layout="column" class="md-padding" layout-align="start center">
         <img width="200px" height="200px" ng-src="{{$root.userObject.profileimage + '?s=300&d=monsterid'}}" class="md-avatar" alt="{{$root.userObject.name}}">
         <h1>{{$root.userObject.name}}</h1>
@@ -30,4 +143,4 @@
             </md-tab>
         </md-tabs>
     </div>
-</div>
+</div-->
