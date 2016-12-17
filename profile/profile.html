@@ -25,7 +25,7 @@
             </div>
             <div flex>
                 <label>Username</label>
-                <input type="text" />
+                <input value="{{$root.userObject.username}}" ng-disabled="true" type="text" />
                 <label>Confirm Password</label>
                 <input type="password" />
                 <button type="submit">Update Profile</button>
@@ -40,57 +40,39 @@
         <div class="Title__text">Profile Settings</div>
         <div layout="column">
             <label>Name</label>
-            <input type="text" />
+            <input ng-model="$root.userObject.name" type="text" />
             <div layout="row">
                 <label>Date of Birth</label>
-                <select>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select>
-                <select>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select>
-                <select>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select>
+                <select name="day" id="day" ng-model="selectedDay">
+                    <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
+                </select>
+                <select name="month" id="month" ng-model="selectedMonth">
+                    <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
+                </select>
+                <select name="year" id="year" ng-model="selectedYear">
+                    <option ng-repeat="year in years" value="{{year}}">{{year}}</option>
+                </select>
             </div>
             <label>Gender</label>
-            <select>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
+            <select ng-model="$root.userObject.gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
             </select>
             <label>City</label>
-            <select>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select>
+            <input ng-model="$root.userObject.city" type="text" />
             <label>Country</label>
-            <select>
+            <select ng-model="$root.userObject.country">
                 <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
+                <option value="Sri Lanka">Sri Lanka</option>
                 <option value="mercedes">Mercedes</option>
                 <option value="audi">Audi</option>
             </select>
             <label>Language</label>
-            <select>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select>
-            <button type="submit">Update Profile</button>
+            <div flex>
+                <input type="checkbox" name="languages" value="English" checked>English</input>
+                <input type="checkbox" name="languages" value="Indonisian">Indonisian</input>
+            </div>
+            <button ng-disabled="updating" ng-click="updateProfileDetails()">Update Profile</button>
         </div>
 
     </div>

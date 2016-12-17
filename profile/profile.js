@@ -2,13 +2,49 @@
 
 angular.module('myApp.profile', ['ngRoute'])
 
-    .config(['$routeProvider', function($routeProvider) {
+    .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/profile', {
             templateUrl: 'profile/profile.html',
             controller: 'profileControll'
         });
     }])
 
-    .controller('profileControll', ['$scope', '$rootScope', '$location', 'User', function($scope, $rootScope, $location, User) {
+    .controller('profileControll', ['$scope', '$rootScope', '$location', 'User', function ($scope, $rootScope, $location, User) {
+        $scope.days = [
+            "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"
+        ];
 
+        $scope.months = [
+            "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",
+        ]
+
+        $scope.years = [
+            "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960",
+        ]
+
+        $scope.updating = false;
+        $scope.updateProfileDetails = function () {
+
+            debugger;
+
+            // setting date of birth
+
+            if (!$rootScope.isNullOrEmptyOrUndefined($scope.selectedMonth) && !$rootScope.isNullOrEmptyOrUndefined($scope.selectedDay) && !$rootScope.isNullOrEmptyOrUndefined($scope.selectedYear)) {
+                var d = new Date($scope.selectedMonth + " " + $scope.selectedDay + ", " + $scope.selectedYear);
+                var dateofBirth = d.toString();
+                $rootScope.userObject.dob = dateofBirth;
+            }
+
+            $scope.updating = true;
+            var client = User.getClient();
+            client.onComplete(function (data) {
+                $scope.updating = false;
+                $rootScope.displayMessage("Your profile has been successfully updated", "Success!", event);
+            });
+            client.onError(function (data) {
+                $rootScope.displayMessage("Ops. There was an issue", "Error!", event);
+                $scope.updating = false;
+            });
+            client.UpdateUserDetails($rootScope.userObject);
+        };
     }]);

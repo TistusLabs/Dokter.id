@@ -237,7 +237,8 @@ angular.module('myApp.Services', []).
                     type: "",
                     country: "",
                     city: "",
-                    dob:"",
+                    dob: "",
+                    gender: "",
                     languages: [],
                     profileimage: "",
                     otherdata: {
@@ -371,6 +372,26 @@ angular.module('myApp.Services', []).
                     });
             }
 
+            function updateUserDetails(obj) {
+                //debugger;
+                var ID =  $rootScope.userObject._id;
+                var profileObject = angular.copy(obj);
+                delete profileObject._id;
+                delete profileObject.profileimage;
+                delete profileObject.status;
+                delete profileObject.type;
+                delete profileObject.__v;
+                delete profileObject.username;
+
+                $http.put(AppURLs.APIUrl + '/users/' + ID, profileObject)
+                    .success(function (data, status, headers, config) {
+                        if (onComplete) onComplete({ status: true, object: null, message: data });
+                    })
+                    .error(function (data, status, header, config) {
+                        if (onError) onError({ status: false, object: profileObject, message: data });
+                    });
+            }
+
             function getalldocs() {
                 var returnList = [];
                 $http.get(AppURLs.APIUrl + '/users').
@@ -449,6 +470,10 @@ angular.module('myApp.Services', []).
                 },
                 GetUserID: function (id) {
                     getUserID(id);
+                    return this;
+                },
+                UpdateUserDetails: function (obj) {
+                    updateUserDetails(obj);
                     return this;
                 },
                 AuthenticateUser: function (username, password) {
