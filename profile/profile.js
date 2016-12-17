@@ -53,6 +53,22 @@ angular.module('myApp.profile', ['ngRoute'])
             client.UpdateUserDetails($rootScope.userObject);
         };
 
+        $scope.updatingPersonal = false;
+        $scope.updatePersonalDetails = function (event) {
+
+            $scope.updatingPersonal = true;
+            var client = User.getClient();
+            client.onComplete(function (data) {
+                $scope.updatingPersonal = false;
+                $rootScope.displayMessage("Your profile has been successfully updated", "Success!", event);
+            });
+            client.onError(function (data) {
+                $rootScope.displayMessage("Ops. There was an issue", "Error!", event);
+                $scope.updatingPersonal = false;
+            });
+            client.UpdateUserDetails($rootScope.userObject);
+        };
+
         $scope.passUpdating = false;
         $scope.updatePassword = function (event) {
             debugger

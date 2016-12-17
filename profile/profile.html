@@ -78,6 +78,32 @@
     </div>
 </div>
 
+<div ng-if="$root.userObject.type == 'doctor'" class="Section">
+    <div class="Title">
+        <div class="Title__text">Personal Information</div>
+        <div layout="column">
+            <label>Speciality</label>
+            <input ng-model="$root.userObject.otherdata.speciality" type="text" />
+            <label>Currency</label>
+            <input ng-model="$root.userObject.otherdata.currency" type="text" />
+            <label>Rate</label>
+            <input ng-model="$root.userObject.otherdata.rate" type="text" />
+            <label>Short Biography</label>
+            <input ng-model="$root.userObject.otherdata.shortbiography" type="text" />
+            <label>Awards</label>
+            <input ng-model="$root.userObject.otherdata.awards" type="text" />
+            <label>Graduate School</label>
+            <input ng-model="$root.userObject.otherdata.graduateschool" type="text" />
+            <label>Residence Place</label>
+            <input ng-model="$root.userObject.otherdata.residenceplace" type="text" />
+
+
+            <button ng-disabled="updatingPersonal" ng-click="updatePersonalDetails($event)">Update Personal Information</button>
+        </div>
+
+    </div>
+</div>
+
 <div class="Section">
     <div class="Title">
         <div class="Title__text">Email Notifications</div>
