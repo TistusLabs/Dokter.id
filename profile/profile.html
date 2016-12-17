@@ -19,16 +19,16 @@
             </div>
             <div flex>
                 <label>Email</label>
-                <input value="{{$root.userObject.username}}" ng-disabled="true" type="email" />
+                <input ng-model="$root.userObject.username" ng-disabled="true" type="email" />
                 <label>Password</label>
-                <input type="password" />
+                <input ng-model="oldpassword" type="password" />
             </div>
             <div flex>
                 <label>Username</label>
-                <input value="{{$root.userObject.username}}" ng-disabled="true" type="text" />
+                <input ng-model="$root.userObject.username" ng-disabled="true" type="text" />
                 <label>Confirm Password</label>
-                <input type="password" />
-                <button type="submit">Update Profile</button>
+                <input ng-model="newpassword" type="password" />
+                <button ng-disabled="passUpdating" ng-click="updatePassword($event)">Update Password</button>
             </div>
 
         </div>
@@ -72,7 +72,7 @@
                 <input type="checkbox" name="languages" value="English" checked>English</input>
                 <input type="checkbox" name="languages" value="Indonisian">Indonisian</input>
             </div>
-            <button ng-disabled="updating" ng-click="updateProfileDetails()">Update Profile</button>
+            <button ng-disabled="updating" ng-click="updateProfileDetails($event)">Update Profile</button>
         </div>
 
     </div>

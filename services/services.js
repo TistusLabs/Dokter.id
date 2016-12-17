@@ -374,7 +374,7 @@ angular.module('myApp.Services', []).
 
             function updateUserDetails(obj) {
                 //debugger;
-                var ID =  $rootScope.userObject._id;
+                var ID = $rootScope.userObject._id;
                 var profileObject = angular.copy(obj);
                 delete profileObject._id;
                 delete profileObject.profileimage;
@@ -383,6 +383,20 @@ angular.module('myApp.Services', []).
                 delete profileObject.__v;
                 delete profileObject.username;
 
+                $http.put(AppURLs.APIUrl + '/users/' + ID, profileObject)
+                    .success(function (data, status, headers, config) {
+                        if (onComplete) onComplete({ status: true, object: null, message: data });
+                    })
+                    .error(function (data, status, header, config) {
+                        if (onError) onError({ status: false, object: profileObject, message: data });
+                    });
+            }
+
+            function updatePassword(password) {
+                    var ID = $rootScope.userObject._id;
+                var profileObject = {
+                    "password" : password
+                }
                 $http.put(AppURLs.APIUrl + '/users/' + ID, profileObject)
                     .success(function (data, status, headers, config) {
                         if (onComplete) onComplete({ status: true, object: null, message: data });
@@ -474,6 +488,10 @@ angular.module('myApp.Services', []).
                 },
                 UpdateUserDetails: function (obj) {
                     updateUserDetails(obj);
+                    return this;
+                },
+                UpdatePassword: function (pass) {
+                    updatePassword(pass);
                     return this;
                 },
                 AuthenticateUser: function (username, password) {

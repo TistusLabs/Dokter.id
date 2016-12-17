@@ -23,8 +23,8 @@ angular.module('myApp.profile', ['ngRoute'])
         ]
 
         // setting the date of birth if the user already has data
-        if(!$rootScope.isNullOrEmptyOrUndefined($rootScope.userObject.dob)){
-            debugger
+        if (!$rootScope.isNullOrEmptyOrUndefined($rootScope.userObject.dob)) {
+            //debugger
             var d = new Date($rootScope.userObject.dob);
             $scope.selectedDay = d.getDate().toString();
             $scope.selectedMonth = $scope.months[d.getMonth()];
@@ -32,15 +32,10 @@ angular.module('myApp.profile', ['ngRoute'])
         }
 
         $scope.updating = false;
-        $scope.updateProfileDetails = function () {
-
-            //debugger;
-
-            // setting date of birth
+        $scope.updateProfileDetails = function (event) {
 
             if (!$rootScope.isNullOrEmptyOrUndefined($scope.selectedMonth) && !$rootScope.isNullOrEmptyOrUndefined($scope.selectedDay) && !$rootScope.isNullOrEmptyOrUndefined($scope.selectedYear)) {
-                //debugger
-                var d = new Date(parseInt($scope.selectedYear),$scope.months.indexOf($scope.selectedMonth), parseInt($scope.selectedDay));
+                var d = new Date(parseInt($scope.selectedYear), $scope.months.indexOf($scope.selectedMonth), parseInt($scope.selectedDay));
                 var dateofBirth = d.toString();
                 $rootScope.userObject.dob = dateofBirth;
             }
@@ -57,4 +52,30 @@ angular.module('myApp.profile', ['ngRoute'])
             });
             client.UpdateUserDetails($rootScope.userObject);
         };
+
+        $scope.passUpdating = false;
+        $scope.updatePassword = function (event) {
+            debugger
+            if (!$rootScope.isNullOrEmptyOrUndefined($scope.oldpassword) && !$rootScope.isNullOrEmptyOrUndefined($scope.newpassword)) {
+                if ($scope.oldpassword === $scope.newpassword) {
+                    $scope.passUpdating = true;
+                    var client = User.getClient();
+                    client.onComplete(function (data) {
+                        $scope.passUpdating = false;
+                        $rootScope.displayMessage("Your password has been updated. Enter the new password on the next signin.", "Success!", event);
+                    });
+                    client.onError(function (data) {
+                        $rootScope.displayMessage("Ops. There was an issue", "Error!", event);
+                        $scope.passUpdating = false;
+                    });
+                    client.UpdatePassword($scope.newpassword);
+                } else {
+                    $rootScope.displayMessage("Passwords you entered doesn't match.", "Opss!", event);
+                    $scope.passUpdating = false;
+                }
+            } else {
+                $rootScope.displayMessage("You must fill both of the fields to continue.", "Opss!", event);
+                $scope.passUpdating = false;
+            }
+        }
     }]);
