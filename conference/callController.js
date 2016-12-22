@@ -14,6 +14,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
         var client = User.getAuthClient();
 
         $scope.msgHistory = [];
+        $scope.subscriberName = "";
 
         /*$scope.msgHistory.push({
             message: "Hey doc wht's up?",
@@ -44,6 +45,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
             // Subscribe to a newly created stream
             session.on('streamCreated', function(event) {
                 debugger
+                $scope.subscriberName = event.stream.name;
                 subsciber = session.subscribe(event.stream, 'subscriber', {
                     insertMode: 'append',
                     width: '100%',
@@ -91,22 +93,22 @@ angular.module('conferenceApp.call', ['ngRoute'])
         $scope.initializeSession();
 
         socket.on('unmutevoice', function(username) {
-            if ($rootScope.userObject.name == username) {
+            if ($scope.subscriberName == username) {
                 subsciber.subscribeToAudio(true);
             }
         });
         socket.on('mutevoice', function(username) {
-            if ($rootScope.userObject.name == username) {
+            if ($scope.subscriberName == username) {
                 subsciber.subscribeToAudio(false);
             }
         });
         socket.on('unmutevideo', function(username) {
-            if ($rootScope.userObject.name == username) {
+            if ($scope.subscriberName == username) {
                 subsciber.subscribeToVideo(false);
             }
         });
         socket.on('mutevideo', function(username) {
-            if ($rootScope.userObject.name == username) {
+            if ($scope.subscriberName == username) {
                 subsciber.subscribeToVideo(true);
             }
         });
