@@ -9,8 +9,8 @@
             </button>
 
         <button ng-click="muteVideo()" class="CallButton CallButton--circle CallButton--brown">
-                <img ng-if="isVideoMuted != true" class="CallButton__image CallButton__image--video" src="../build/img/call/video.png" alt="Video Call" title="Video Call" />
-                <img ng-if="isVideoMuted == true" class="CallButton__image CallButton__image--video" src="../build/img/call/video-mute.png" alt="Video Call" title="Video Call" />
+                <img ng-if="isVideoMuted == true" class="CallButton__image CallButton__image--video" src="../build/img/call/video.png" alt="Video Call" title="Video Call" />
+                <img ng-if="isVideoMuted != true" class="CallButton__image CallButton__image--video" src="../build/img/call/video-mute.png" alt="Video Call" title="Video Call" />
             </button>
 
         <button ng-click="endCall($event)" class="CallButton CallButton--red">
