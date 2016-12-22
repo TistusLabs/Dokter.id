@@ -64,7 +64,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
             session.connect($scope.token, function(error) {
                 // If the connection is successful, initialize a publisher and publish to the session
                 if (!error) {
-                    publisher = OT.initPublisher('publisher', {
+                    var pub = OT.initPublisher('publisher', {
                         insertMode: 'append',
                         width: '100%',
                         height: '100%',
@@ -75,7 +75,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
                         }
                     });
 
-                    session.publish(publisher);
+                    publisher = session.publish(pub);
                 } else {
                     console.log('There was an error connecting to the session: ', error.code, error.message);
                 }
