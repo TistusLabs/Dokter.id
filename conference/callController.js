@@ -90,13 +90,38 @@ angular.module('conferenceApp.call', ['ngRoute'])
         };
         $scope.initializeSession();
 
+        socket.on('unmutevoice', function(username) {
+            if ($rootScope.userObject.name == username) {
+                subsciber.subscribeToAudio(true);
+            }
+        });
+        socket.on('mutevoice', function(username) {
+            if ($rootScope.userObject.name == username) {
+                subsciber.subscribeToAudio(false);
+            }
+        });
+        socket.on('unmutevideo', function(username) {
+            if ($rootScope.userObject.name == username) {
+                subsciber.subscribeToVideo(false);
+            }
+        });
+        socket.on('mutevideo', function(username) {
+            if ($rootScope.userObject.name == username) {
+                subsciber.subscribeToVideo(true);
+            }
+        });
+
         $scope.isAudioMuted = false;
         $scope.muteAudio = function() {
             //debugger
             if ($scope.isAudioMuted) {
-                publisher.subscribeToAudio(true);
+                //publisher.subscribeToAudio(true);
+                // unmute
+                socket.emit('unmutevoice', $rootScope.userObject.name);
             } else {
-                publisher.subscribeToAudio(false);
+                //publisher.subscribeToAudio(false);
+                // mute voice
+                socket.emit('mutevoice', $rootScope.userObject.name);
             }
             $scope.isAudioMuted = !$scope.isAudioMuted;
         };
@@ -105,9 +130,13 @@ angular.module('conferenceApp.call', ['ngRoute'])
         $scope.muteVideo = function() {
             //debugger
             if ($scope.isVideoMuted) {
-                publisher.subscribeToVideo(false);
+                //publisher.subscribeToVideo(false);
+                // un mute video
+                socket.emit('unmutevideo', $rootScope.userObject.name);
             } else {
-                publisher.subscribeToVideo(true);
+                //publisher.subscribeToVideo(true);
+                // mute video
+                socket.emit('mutevideo', $rootScope.userObject.name);
             }
             $scope.isVideoMuted = !$scope.isVideoMuted;
         };
