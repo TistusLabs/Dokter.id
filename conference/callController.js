@@ -37,6 +37,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
 
         var session = OT.initSession($scope.apiKey, $scope.sessionId);
         var subsciber = new Object();
+        var publisher = new Object();
 
         $scope.initializeSession = function() {
 
@@ -63,7 +64,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
             session.connect($scope.token, function(error) {
                 // If the connection is successful, initialize a publisher and publish to the session
                 if (!error) {
-                    var publisher = OT.initPublisher('publisher', {
+                    publisher = OT.initPublisher('publisher', {
                         insertMode: 'append',
                         width: '100%',
                         height: '100%',
@@ -93,9 +94,9 @@ angular.module('conferenceApp.call', ['ngRoute'])
         $scope.muteAudio = function() {
             //debugger
             if ($scope.isAudioMuted) {
-                subsciber.subscribeToAudio(true);
+                publisher.subscribeToAudio(true);
             } else {
-                subsciber.subscribeToAudio(false);
+                publisher.subscribeToAudio(false);
             }
             $scope.isAudioMuted = !$scope.isAudioMuted;
         };
@@ -104,9 +105,9 @@ angular.module('conferenceApp.call', ['ngRoute'])
         $scope.muteVideo = function() {
             //debugger
             if ($scope.isVideoMuted) {
-                subsciber.subscribeToVideo(true);
+                publisher.subscribeToVideo(false);
             } else {
-                subsciber.subscribeToVideo(true);
+                publisher.subscribeToVideo(true);
             }
             $scope.isVideoMuted = !$scope.isVideoMuted;
         };
