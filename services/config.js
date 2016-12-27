@@ -1,1 +1,2 @@
-var SERVER_BASE_URL = 'https://tistuslabs-doc.herokuapp.com';
+// do not inclde the final / on the URL. Make sure you enter the URL without the /
+var SERVER_BASE_URL = 'https://tokbox-dokter.herokuapp.com';
