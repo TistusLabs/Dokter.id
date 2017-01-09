@@ -62,8 +62,7 @@
                                                 Biography
                                             </div>
                                             <div class="Overview__value">
-                                                dr. Cindy Annathasshia, is a graduate of George Washington University Medical School. He trained in internal medicine at the University of Oregon Health Sciences (UOHS) and pulmonary critical care medicine at UOHS and the University of Southern California. <br /><br />
-                                                Sample has been practicing since 1976, the last 12 years in Washington, D.C., at the Washington Hospital Center, selected as one of the top 100 hospitals in the United States. Sample's practice specializes in the care of critically ill and injured postoperative patients. Sample's interests also include end-of-life issues, advanced directives, and furthering organ procurement. Sample is also a clinical associate professor of medicine at George Washington University Medical School and is a fellow in the College of Chest Physicians.
+                                                {{doctor.otherdata.shortbiography}}
                                             </div>
                                         </div>
 
@@ -72,7 +71,7 @@
                                                 Location
                                             </div>
                                             <div class="Overview__value">
-                                                Jakarta, Indonesia 12920
+                                                {{doctor.city}}, {{doctor.country}}
                                             </div>
                                         </div>
 
@@ -87,10 +86,10 @@
 
                                         <div class="Overview__info">
                                             <div class="Overview__title">
-                                                Language
+                                                Languages
                                             </div>
                                             <div class="Overview__value">
-                                                Indonesia, English &amp; Mandarin
+                                                {{doctor.languages}}
                                             </div>
                                         </div>
 
@@ -108,11 +107,7 @@
                                                 Education
                                             </div>
                                             <div class="Overview__value">
-                                                <ul class="Overview__list">
-                                                    <li>S.Ked. - Sarjana Kedokteran - Universitas Tarumanagara, 2010</li>
-                                                    <li>dr. - Kedokteran Umum - Universitas Tarumanagara, 2012</li>
-                                                    <li>Dipl. AAAM - American Academy of Aesthetic Medicine Diploma - American Academy of Aesthetic Medicine, 2014</li>
-                                                </ul>
+                                                {{doctor.graduateschool}}
                                             </div>
                                         </div>
 
@@ -121,7 +116,7 @@
                                                 Achievement
                                             </div>
                                             <div class="Overview__value">
-                                                Outstanding Achievement Board Certified Of AAAM
+                                                {{doctor.awards}}
                                             </div>
                                         </div>
 
@@ -144,151 +139,29 @@
                                 <div id="tabMessage" ng-class="tabs.message ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
 
                                     <div class="Message">
-                                        <div class="Message__item Loader">
+                                        <div ng-show="loadingchatdata" class="Message__item Loader">
                                             <div class="Loader">
                                                 <img src="build/img/loader/puff.svg" />
                                             </div>
                                         </div>
 
-                                        <div class="Message__item">
+                                        <div class="Message__item" ng-repeat="msg in MessageHistory">
                                             <div class="Card Card--message">
                                                 <div class="Card__image ProfileImage">
-                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/user2.jpg" alt="{{doctor.name}}" title="{{doctor.name}}" />
+                                                    <img class="ProfileImage__image ProfileImage--message" ng-src="{{msg.profileimage}}?d=monsterid" alt="{{msg.fromName}}" title="{{msg.fromName}}" />
                                                 </div>
                                                 <div class="Card__information">
                                                     <div class="Card__name">
-                                                        Ivan Junior <span class="Card__timestamp">15:00 PM</span>
+                                                        {{msg.fromName}} <span class="Card__timestamp">{{msg.datetime | date : "medium"}}</span>
                                                     </div>
                                                     <div class="Card__message">
-                                                        Hi doc, i need some help with my health.
+                                                        {{msg.message}}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="Message__item">
-                                            <div class="TitleStroke TitleStroke--medium">
-                                                <span>August, 31 2016</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="Message__item">
-                                            <div class="Card Card--message">
-                                                <div class="Card__image ProfileImage">
-                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/doctor4.png" alt="{{doctor.name}}" title="{{doctor.name}}" />
-                                                </div>
-                                                <div class="Card__information">
-                                                    <div class="Card__name">
-                                                        dr. Cindy Annathasshia <span class="Card__timestamp"> 14:00 PM</span>
-                                                    </div>
-                                                    <div class="Card__message">
-                                                        What seems to be the problem ?
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="Message__item">
-                                            <div class="Card Card--message">
-                                                <div class="Card__image ProfileImage">
-                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/user2.jpg" alt="{{doctor.name}}" title="{{doctor.name}}" />
-                                                </div>
-                                                <div class="Card__information">
-                                                    <div class="Card__name">
-                                                        Ivan Junior <span class="Card__timestamp">15:00 PM</span>
-                                                    </div>
-                                                    <div class="Card__message">
-                                                        Well, since yesterday I have a really bad cough and a sore throat and I also got a headache.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="Message__item">
-                                            <div class="TitleStroke TitleStroke--medium">
-                                                <span>September, 15 2016</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="Message__item">
-                                            <div class="Card Card--message">
-                                                <div class="Card__image ProfileImage">
-                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/doctor4.png" alt="{{doctor.name}}" title="{{doctor.name}}" />
-                                                </div>
-                                                <div class="Card__information">
-                                                    <div class="Card__name">
-                                                        dr. Cindy Annathasshia <span class="Card__timestamp"> 14:00 PM</span>
-                                                    </div>
-                                                    <div class="Card__message">
-                                                        How long have you been having all these symptoms?
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="Message__item">
-                                            <div class="Card Card--message">
-                                                <div class="Card__image ProfileImage">
-                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/user2.jpg" alt="{{doctor.name}}" title="{{doctor.name}}" />
-                                                </div>
-                                                <div class="Card__information">
-                                                    <div class="Card__name">
-                                                        Ivan Junior <span class="Card__timestamp">15:00 PM</span>
-                                                    </div>
-                                                    <div class="Card__message">
-                                                        I have them about three days now, but since yesterday they have become a lot worse and I am really tired, too as I can’t sleep due to coughing most if the night.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="Message__item">
-                                            <div class="Card Card--message">
-                                                <div class="Card__image ProfileImage">
-                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/doctor4.png" alt="{{doctor.name}}" title="{{doctor.name}}" />
-                                                </div>
-                                                <div class="Card__information">
-                                                    <div class="Card__name">
-                                                        dr. Cindy Annathasshia <span class="Card__timestamp">14:00 PM</span>
-                                                    </div>
-                                                    <div class="Card__message">
-                                                        Well, It sounds to me that you have got flu. You must take 2 aspirin with water every four hours and must have plenty of rest. Also you must drink lots of fluids. If you are still sick next week book another appointment to see me again.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="Message__item">
-                                            <div class="Card Card--message">
-                                                <div class="Card__image ProfileImage">
-                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/user2.jpg" alt="{{doctor.name}}" title="{{doctor.name}}" />
-                                                </div>
-                                                <div class="Card__information">
-                                                    <div class="Card__name">
-                                                        Ivan Junior <span class="Card__timestamp">15:00 PM</span>
-                                                    </div>
-                                                    <div class="Card__message">
-                                                        OK, thank you doctor for you time.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="Message__item">
-                                            <div class="Card Card--message">
-                                                <div class="Card__image ProfileImage">
-                                                    <img class="ProfileImage__image ProfileImage--message" src="build/img/sample/doctor4.png" alt="{{doctor.name}}" title="{{doctor.name}}" />
-                                                </div>
-                                                <div class="Card__information">
-                                                    <div class="Card__name">
-                                                        dr. Cindy Annathasshia <span class="Card__timestamp">14:00 PM</span>
-                                                    </div>
-                                                    <div class="Card__message">
-                                                        You’re welcome. Here is your prescription.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
 
                                 </div>

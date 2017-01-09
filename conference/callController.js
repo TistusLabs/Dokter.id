@@ -2,14 +2,14 @@
 
 angular.module('conferenceApp.call', ['ngRoute'])
 
-    .config(['$routeProvider', function($routeProvider) {
+    .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/call', {
             templateUrl: 'call-partial.html',
             controller: 'callController'
         });
     }])
 
-    .controller('callController', ['$scope', '$rootScope', '$location', 'User', '$window', '$mdDialog', 'AppURLs', function($scope, $rootScope, $location, User, $window, $mdDialog, AppURLs) {
+    .controller('callController', ['$scope', '$rootScope', '$location', 'User', '$window', '$mdDialog', 'AppURLs', function ($scope, $rootScope, $location, User, $window, $mdDialog, AppURLs) {
 
         var client = User.getAuthClient();
 
@@ -30,7 +30,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
         $scope.token = tokboxSession.token;
 
         var socket = io.connect(AppURLs.socketServer);
-        socket.on('callended', function(broadcast) {
+        socket.on('callended', function (broadcast) {
             if (broadcast == $scope.sessionId) {
                 location.href = "/Dokter.id/";
             }
@@ -40,10 +40,9 @@ angular.module('conferenceApp.call', ['ngRoute'])
         var subsciber = new Object();
         var publisher = new Object();
 
-        $scope.initializeSession = function() {
-
-            // Subscribe to a newly created stream
-            session.on('streamCreated', function(event) {
+        $scope.getProfileDetails = function (username, event) {
+            var client = User.getClient();
+            client.onComplete(function (data) {
                 debugger
                 $scope.subscriberName = event.stream.name;
                 subsciber = session.subscribe(event.stream, 'subscriber', {
@@ -52,27 +51,53 @@ angular.module('conferenceApp.call', ['ngRoute'])
                     height: '100%',
                     name: event.stream.name,
                     style: {
-                        nameDisplayMode: "on",
+                        nameDisplayMode: "off",
+                        buttonDisplayMode: "off"
+                    }
+                });
+            });
+            client.onError(function (data) {
+
+            });
+            client.GetUserByUsername(username);
+        };
+
+        $scope.initializeSession = function () {
+
+            // Subscribe to a newly created stream
+            session.on('streamCreated', function (event) {
+                debugger
+                // get profile details
+                // $scope.getProfileDetails(event.stream.name,event);
+                $scope.subscriberName = event.stream.name;
+                $scope.subscriberUsername = event.stream.name;
+                subsciber = session.subscribe(event.stream, 'subscriber', {
+                    insertMode: 'append',
+                    width: '100%',
+                    height: '100%',
+                    name: event.stream.name,
+                    style: {
+                        nameDisplayMode: "off",
                         buttonDisplayMode: "off"
                     }
                 });
             });
 
-            session.on('sessionDisconnected', function(event) {
+            session.on('sessionDisconnected', function (event) {
                 console.log('You were disconnected from the session.', event.reason);
             });
 
             // Connect to the session
-            session.connect($scope.token, function(error) {
+            session.connect($scope.token, function (error) {
                 // If the connection is successful, initialize a publisher and publish to the session
                 if (!error) {
                     var pub = OT.initPublisher('publisher', {
                         insertMode: 'append',
                         width: '100%',
                         height: '100%',
-                        name: $rootScope.userObject.name,
+                        name: $rootScope.userObject.username,
                         style: {
-                            nameDisplayMode: "on",
+                            nameDisplayMode: "off",
                             buttonDisplayMode: "off"
                         }
                     });
@@ -84,37 +109,37 @@ angular.module('conferenceApp.call', ['ngRoute'])
             });
 
             // Receive a message and append it to the history
-            session.on('signal:msg', function(event) {
-                $scope.$apply(function() {
+            session.on('signal:msg', function (event) {
+                $scope.$apply(function () {
                     $scope.msgHistory.push(event.data);
                 });
             });
         };
         $scope.initializeSession();
 
-        socket.on('unmutevoice', function(username) {
+        socket.on('unmutevoice', function (username) {
             if ($scope.subscriberName == username) {
                 subsciber.subscribeToAudio(true);
             }
         });
-        socket.on('mutevoice', function(username) {
+        socket.on('mutevoice', function (username) {
             if ($scope.subscriberName == username) {
                 subsciber.subscribeToAudio(false);
             }
         });
-        socket.on('unmutevideo', function(username) {
+        socket.on('unmutevideo', function (username) {
             if ($scope.subscriberName == username) {
                 subsciber.subscribeToVideo(false);
             }
         });
-        socket.on('mutevideo', function(username) {
+        socket.on('mutevideo', function (username) {
             if ($scope.subscriberName == username) {
                 subsciber.subscribeToVideo(true);
             }
         });
 
         $scope.isAudioMuted = false;
-        $scope.muteAudio = function() {
+        $scope.muteAudio = function () {
             //debugger
             if ($scope.isAudioMuted) {
                 //publisher.subscribeToAudio(true);
@@ -129,7 +154,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
         };
 
         $scope.isVideoMuted = false;
-        $scope.muteVideo = function() {
+        $scope.muteVideo = function () {
             //debugger
             if ($scope.isVideoMuted) {
                 //publisher.subscribeToVideo(false);
@@ -143,7 +168,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
             $scope.isVideoMuted = !$scope.isVideoMuted;
         };
 
-        $scope.endCall = function(ev) {
+        $scope.endCall = function (ev) {
             console.log("opening window");
             $mdDialog.show({
                 controller: 'callcancelling',
@@ -153,48 +178,65 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 clickOutsideToClose: false,
                 fullscreen: false
             })
-                .then(function(result) {
+                .then(function (result) {
                     if (result) {
                         socket.emit('callended', $scope.sessionId);
                         location.href = "/Dokter.id/";
                     }
-                }, function() {
+                }, function () {
                     console.log("OOps");
                 });
         };
 
-        $scope.sendMessageOnEnter = function(event){
-            if(event.code == "Enter"){
+        $scope.sendMessageOnEnter = function (event) {
+            if (event.code == "Enter") {
                 $scope.sendMessage();
             }
         }
 
-        $scope.sendMessage = function() {
+        $scope.sendMessage = function () {
             var msg = {
                 message: $scope.txtMessage,
                 name: $rootScope.userObject.name,
                 time: new Date(),
                 image: $rootScope.userObject.profileimage
             };
+
+            var objtoStore = {
+                message: $scope.txtMessage,
+                fromusername: $rootScope.userObject.username,
+                tousername: $scope.subscriberUsername,
+                datetime: msg.time.toString(),
+            }
             $scope.txtMessage = "";
             session.signal({
                 type: 'msg',
                 data: msg
-            }, function(error) {
+            }, function (error) {
                 if (error == undefined) {
-                    $scope.$apply(function() {
+                    $scope.$apply(function () {
                     });
                 }
             });
+
+            // storing messages
+            var client = User.getClient();
+            client.onComplete(function (data) {
+                console.log("Message stored.");
+            });
+            client.onError(function (data) {
+                console.log("error when Message is stored.");
+            });
+            client.SaveMessage(objtoStore);
         };
 
-    }]).controller('callcancelling', ['$scope', '$rootScope', '$mdDialog', 'AppURLs', function($scope, $rootScope, $mdDialog, AppURLs) {
+    }]).controller('callcancelling', ['$scope', '$rootScope', '$mdDialog', 'AppURLs', function ($scope, $rootScope, $mdDialog, AppURLs) {
 
-        $scope.closeCall = function() {
+        $scope.closeCall = function () {
             $mdDialog.hide(true);
         };
 
-        $scope.cancelWindow = function() {
+        $scope.cancelWindow = function () {
             $mdDialog.hide(false);
         };
     }]);

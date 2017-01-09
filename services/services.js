@@ -372,6 +372,30 @@ angular.module('myApp.Services', []).
                     });
             }
 
+            function getUserByUsername(username) {
+                var recordFound = false;
+                var doctorObject = {};
+                var message = "";
+
+                $http.get(AppURLs.APIUrl + '/users?username=' + username).
+                    success(function (data, status, headers, config) {
+                        debugger
+                        if (data.username == username) {
+                            doctorObject = data;
+                            recordFound = true;
+                            message = "Record found!";
+                            if (onComplete) onComplete({ status: recordFound, object: doctorObject, message: message });
+                        }
+                    }).
+                    error(function (data, status, headers, config) {
+                        if (!recordFound) {
+                            message = "Record not found.";
+                        }
+                        if (onError) onError({ status: recordFound, object: doctorObject, message: message });
+                    });
+            }
+
+
             function updateUserDetails(obj) {
                 //debugger;
                 var ID = $rootScope.userObject._id;
@@ -389,6 +413,16 @@ angular.module('myApp.Services', []).
                     })
                     .error(function (data, status, header, config) {
                         if (onError) onError({ status: false, object: profileObject, message: data });
+                    });
+            }
+
+            function saveMessage(object){
+                $http.post(AppURLs.APIUrl + '/messages', object)
+                    .success(function (data, status, headers, config) {
+                        if (onComplete) onComplete({ status: true, object: null, message: data });
+                    })
+                    .error(function (data, status, header, config) {
+                        if (onError) onError({ status: false, object: doctorObject, message: data });
                     });
             }
 
@@ -486,8 +520,16 @@ angular.module('myApp.Services', []).
                     getUserID(id);
                     return this;
                 },
+                GetUserByUsername: function (username) {
+                    getUserByUsername(username);
+                    return this;
+                },
                 UpdateUserDetails: function (obj) {
                     updateUserDetails(obj);
+                    return this;
+                },
+                SaveMessage: function (obj) {
+                    saveMessage(obj);
                     return this;
                 },
                 UpdatePassword: function (pass) {
