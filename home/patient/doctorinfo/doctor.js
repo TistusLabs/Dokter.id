@@ -9,14 +9,37 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
         });
     }])
 
-    .controller('doctorControl', ['$scope', '$rootScope', '$routeParams', 'User', '$location', function ($scope, $rootScope, $routeParams, User, $location) {
+    .controller('doctorControl', ['$scope', '$rootScope', '$routeParams', 'User', '$location','$http','AppURLs', function ($scope, $rootScope, $routeParams, User, $location,$http,AppURLs) {
         //$rootScope.checkSession();
         console.log("Recieved id:", $routeParams.doctorID);
 
         $scope.loadingchatdata = true;
 
         $scope.getChatHistory = function (doctor) {
-            var msgHistory = [
+            $http.get(AppURLs.APIUrl + '/messages?fromusername__in=ari@gmail.com,eko@gmail.com&tousername__in=eko@gmail.com,ari@gmail.com').
+                success(function (data, status, headers, config) {
+                    var msgHistory = data;
+                    msgHistory.forEach(function (chat) {
+                        if (chat.fromusername == doctor.username) {
+                            chat.fromName = doctor.name;
+                            var passhash = CryptoJS.MD5(doctor.username);
+                            chat.profileimage = "http://www.gravatar.com/avatar/" + passhash;
+                        }
+                        if (chat.fromusername == $rootScope.userObject.username) {
+                            chat.fromName = $rootScope.userObject.name;
+                            var passhash = CryptoJS.MD5($rootScope.userObject.username);
+                            chat.profileimage = "http://www.gravatar.com/avatar/" + passhash;
+                        }
+                        chat.datetime = new Date(chat.datetime);
+
+                    }, this);
+                    $scope.MessageHistory = msgHistory;
+                    $scope.loadingchatdata = false;
+                }).
+                error(function (data, status, headers, config) {
+
+                });
+            /*var msgHistory = [
                 {
                     "_id": "587360233574b415107a5873",
                     "message": "buhahaha",
@@ -41,23 +64,7 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
                     "datetime": "Mon Jan 09 2017 15:33:24 GMT+0530 (Sri Lanka Standard Time)",
                     "__v": 0
                 }
-            ]
-            msgHistory.forEach(function (chat) {
-                if (chat.fromusername == doctor.username) {
-                    chat.fromName = doctor.name;
-                    var passhash = CryptoJS.MD5(doctor.username);
-                    chat.profileimage = "http://www.gravatar.com/avatar/" + passhash;
-                }
-                if (chat.fromusername == $rootScope.userObject.username) {
-                    chat.fromName = $rootScope.userObject.name;
-                    var passhash = CryptoJS.MD5($rootScope.userObject.username);
-                    chat.profileimage = "http://www.gravatar.com/avatar/" + passhash;
-                }
-                chat.datetime = new Date(chat.datetime);
-
-            }, this);
-            $scope.MessageHistory = msgHistory;
-            $scope.loadingchatdata = false;
+            ]*/
         };
 
         var client = User.getClient();
