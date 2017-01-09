@@ -16,7 +16,7 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
         $scope.loadingchatdata = true;
 
         $scope.getChatHistory = function (doctor) {
-            $http.get(AppURLs.APIUrl + '/messages?fromusername__in=ari@gmail.com,eko@gmail.com&tousername__in=eko@gmail.com,ari@gmail.com').
+            $http.get(AppURLs.APIUrl + '/messages?fromusername__in='+doctor.username+','+$rootScope.userObject.username+'&tousername__in='+$rootScope.userObject.username+','+doctor.username).
                 success(function (data, status, headers, config) {
                     var msgHistory = data;
                     msgHistory.forEach(function (chat) {
