@@ -9,7 +9,7 @@ angular.module('myApp.patient.home', ['ngRoute'])
         });
     }])
 
-    .controller('patientHomeControll', ['$scope', '$rootScope', '$location', 'User', 'AppURLs', '$mdDialog', function ($scope, $rootScope, $location, User, AppURLs, $mdDialog) {
+    .controller('patientHomeControll', ['$scope', '$rootScope', '$location', 'User', 'AppURLs', '$mdDialog','$http', function ($scope, $rootScope, $location, User, AppURLs, $mdDialog,$http) {
         /*$rootScope.checkSession();
         */
         $scope.setUserOnline = function (username) {
@@ -47,13 +47,28 @@ angular.module('myApp.patient.home', ['ngRoute'])
         var client = User.getClient();
         client.onComplete(function (data) {
             angular.forEach(data, function (doc) {
-                if (doc.profileimage == "") {
-                    var passhash = CryptoJS.MD5(doc.username);
-                    doc.profileimage = "http://www.gravatar.com/avatar/" + passhash;
-                }
+                var passhash = CryptoJS.MD5(doc.username);
+                doc.profileimage = "http://www.gravatar.com/avatar/" + passhash;
             });
-            $scope.doctors = data;
-            $scope.isLoading = false;
+            var doctors = data;
+            $http.get(AppURLs.connectionStorage + '/status/getall').
+                success(function (data, status, headers, config) {
+
+                    angular.forEach(data, function (status, index) {
+                        angular.forEach(doctors, function (doctor, index) {
+                            if (doctor.username == status.username) {
+                                $scope.$apply(function () {
+                                    doctor.status = status.status;
+                                });
+                            }
+                        });
+                    });
+                    $scope.doctors = doctors;
+                    $scope.isLoading = false;
+                }).
+                error(function (data, status, headers, config) {
+                    console.log("Oops error");
+                });
         });
         client.onError(function (data) {
             alert(data.message);
