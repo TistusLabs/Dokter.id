@@ -52,9 +52,10 @@ angular.module('myApp.patient.home', ['ngRoute'])
             });
             var doctors = data;
             $http.get(AppURLs.connectionStorage + '/status/getall').
-                success(function (data, status, headers, config) {
+                success(function (data.value, status, headers, config) {
 
                     angular.forEach(data, function (status, index) {
+                        status = JSON.parse(status);
                         angular.forEach(doctors, function (doctor, index) {
                             if (doctor.username == status.username) {
                                 $scope.$apply(function () {
