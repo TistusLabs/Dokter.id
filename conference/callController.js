@@ -144,12 +144,12 @@ angular.module('conferenceApp.call', ['ngRoute'])
             if ($scope.isAudioMuted) {
                 //publisher.subscribeToAudio(true);
                 // unmute
-                socket.emit('unmutevoice', $rootScope.userObject.name);
+                socket.emit('unmutevoice', $rootScope.userObject.username);
                 //subsciber.subscribeToAudio(false);
             } else {
                 //publisher.subscribeToAudio(false);
                 // mute voice
-                socket.emit('mutevoice', $rootScope.userObject.name);
+                socket.emit('mutevoice', $rootScope.userObject.username);
                 //subsciber.subscribeToAudio(true);
             }
             $scope.isAudioMuted = !$scope.isAudioMuted;
@@ -161,11 +161,11 @@ angular.module('conferenceApp.call', ['ngRoute'])
             if ($scope.isVideoMuted) {
                 //publisher.subscribeToVideo(false);
                 // un mute video
-                //socket.emit('unmutevideo', $rootScope.userObject.name);
+                socket.emit('unmutevideo', $rootScope.userObject.username);
             } else {
                 //publisher.subscribeToVideo(true);
                 // mute video
-                //socket.emit('mutevideo', $rootScope.userObject.name);
+                socket.emit('mutevideo', $rootScope.userObject.username);
             }
             $scope.isVideoMuted = !$scope.isVideoMuted;
         };
