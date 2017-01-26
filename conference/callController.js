@@ -43,7 +43,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
         $scope.getProfileDetails = function (username, event) {
             var client = User.getClient();
             client.onComplete(function (data) {
-                debugger
+                //debugger
                 $scope.subscriberName = event.stream.name;
                 subsciber = session.subscribe(event.stream, 'subscriber', {
                     insertMode: 'append',
@@ -66,7 +66,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
 
             // Subscribe to a newly created stream
             session.on('streamCreated', function (event) {
-                debugger
+                //debugger
                 // get profile details
                 // $scope.getProfileDetails(event.stream.name,event);
                 $scope.subscriberName = event.stream.name;
@@ -81,8 +81,6 @@ angular.module('conferenceApp.call', ['ngRoute'])
                         buttonDisplayMode: "off"
                     }
                 });
-                subsciber.subscribeToAudio(true);
-                subsciber.subscribeToVideo(true);
             });
 
             session.on('sessionDisconnected', function (event) {
@@ -105,6 +103,8 @@ angular.module('conferenceApp.call', ['ngRoute'])
                     });
 
                     publisher = session.publish(pub);
+                    subsciber.subscribeToAudio(true);
+                    subsciber.subscribeToVideo(true);
                 } else {
                     console.log('There was an error connecting to the session: ', error.code, error.message);
                 }
