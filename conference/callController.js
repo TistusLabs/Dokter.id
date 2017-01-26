@@ -104,7 +104,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
 
                     publisher = session.publish(pub);
                     //subsciber.subscribeToAudio(true);
-                    subsciber.subscribeToVideo(true);
+                    //subsciber.subscribeToVideo(true);
                 } else {
                     console.log('There was an error connecting to the session: ', error.code, error.message);
                 }
@@ -131,12 +131,12 @@ angular.module('conferenceApp.call', ['ngRoute'])
         });
         socket.on('unmutevideo', function (username) {
             if ($scope.subscriberName == username) {
-                subsciber.subscribeToVideo(false);
+                subsciber.subscribeToVideo(true);
             }
         });
         socket.on('mutevideo', function (username) {
             if ($scope.subscriberName == username) {
-                subsciber.subscribeToVideo(true);
+                subsciber.subscribeToVideo(false);
             }
         });
 
