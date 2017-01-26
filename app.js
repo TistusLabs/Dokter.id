@@ -20,7 +20,7 @@ angular.module('myApp', [
         $routeProvider.otherwise({ redirectTo: '/pagenotfound' });
     }])
 
-    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', '$window', 'AppURLs', function ($scope, $rootScope, $location, User, $mdDialog, $window, AppURLs) {
+    .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', '$window', 'AppURLs', '$http', function ($scope, $rootScope, $location, User, $mdDialog, $window, AppURLs, $http) {
 
         var client = User.getAuthClient();
         var securityToken = client.checkSession();
@@ -93,7 +93,7 @@ angular.module('myApp', [
         var onceDisplayed = false;
         $scope.saveInTimeIntervals = function () {
             setInterval(function () {
-                if(!onceDisplayed){
+                if (!onceDisplayed) {
                     $scope.showUpdateProfile(null);
                     onceDisplayed = true;
                 }
@@ -289,6 +289,28 @@ angular.module('myApp', [
             }
         };
 
+        /*$scope.$on('$locationChangeStart', function (event) {
+            var answer = confirm("Do you want to exit the application properly?")
+            if (answer) {
+                $scope.logoutUser(event);
+            }
+            //$scope.logoutUser(event);
+    });*/
+
+        // $scope.$on('$destroy', function (event) {
+        //     $scope.logoutUser(event);
+        // });
+        /* window.onbeforeunload = function (event) {
+             var message = 'Do you want to exit the application the proper way?';
+             if (typeof event == 'undefined') {
+                 event = window.event;
+             }
+             if (event) {
+                 event.returnValue = message;
+             }
+             return message;
+     }*/
+
         $scope.logoutUser = function (ev) {
             // Appending dialog to document.body to cover sidenav in docs app
             var confirm = $mdDialog.confirm()
@@ -306,14 +328,24 @@ angular.module('myApp', [
                     user: $rootScope.userObject.username,
                     status: "unavailable"
                 }
-                socket.emit('statuschange', obj);
-                socket.on('statuschange', function (obj) {
-                    if (obj.user == $rootScope.userObject.username && obj.status == "unavailable") {
-                        var client = new User.getAuthClient();
-                        client.signOut();
-                        $window.location.href = "/Dokter.id/auth";
-                    }
-                });
+                var postData = {
+                    "username": $rootScope.userObject.username,
+                    "status": "unavailable"
+                }
+                $http.post(AppURLs.connectionStorage + '/status/set', postData)
+                    .success(function (data, status, headers, config) {
+                        socket.emit('statuschange', obj);
+                        socket.on('statuschange', function (obj) {
+                            if (obj.user == $rootScope.userObject.username && obj.status == "unavailable") {
+                                var client = new User.getAuthClient();
+                                client.signOut();
+                                $window.location.href = "/Dokter.id/auth";
+                            }
+                        });
+                    })
+                    .error(function (data, status, header, config) {
+                        console.log("errorrrrr");
+                    });
             }, function () {
                 // will do nothing.
             });
@@ -403,13 +435,13 @@ angular.module('myApp', [
             }
             $mdDialog.hide(obj);
         }
-    }]).controller('profileCompleteDialog', ['$scope', '$rootScope', 'data', '$mdDialog', 'AppURLs','$location', function ($scope, $rootScope, data, $mdDialog, AppURLs,$location) {
+    }]).controller('profileCompleteDialog', ['$scope', '$rootScope', 'data', '$mdDialog', 'AppURLs', '$location', function ($scope, $rootScope, data, $mdDialog, AppURLs, $location) {
         $scope.profile = data;
         $scope.close = function () {
             $mdDialog.hide();
         }
 
-        $scope.gotoProfile = function (){
+        $scope.gotoProfile = function () {
             $location.path('/profile');
             $mdDialog.hide();
         }
