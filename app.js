@@ -33,9 +33,18 @@ angular.module('myApp', [
         // default values
         $scope.contextMenu = "--is-hidden";
 
-
         var socket = io.connect(AppURLs.socketServer);
-        socket.emit('useronline', session.username);
+        var postData = {
+                "username": session.username,
+                "status": "available"
+            }
+        $http.post(AppURLs.connectionStorage + '/status/set', postData)
+            .success(function (data, status, headers, config) {
+                socket.emit('useronline', session.username);
+            })
+            .error(function (data, status, header, config) {
+                console.log("errorrrrr");
+            });
 
         socket.on('call', function (broadcast) {
             if (broadcast.to.username == session.username) {
