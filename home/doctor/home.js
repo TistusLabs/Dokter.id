@@ -9,7 +9,7 @@ angular.module('myApp.doctor.home', ['ngRoute'])
         });
     }])
 
-    .controller('dochomeControll', ['$scope', '$rootScope', '$location', 'User','AppURLs', function ($scope, $rootScope, $location, User,AppURLs) {
+    .controller('dochomeControll', ['$scope', '$rootScope', '$location', 'User', 'AppURLs', '$http', function ($scope, $rootScope, $location, User, AppURLs, $http) {
         //$rootScope.checkSession();
 
         /*var client = User.getClient();
@@ -60,13 +60,23 @@ angular.module('myApp.doctor.home', ['ngRoute'])
             peer.socket.send({ type: 'ping' });
         }
 
-        $scope.setStatus = function(code){
+        $scope.setStatus = function (code) {
             var socket = io.connect(AppURLs.socketServer);
             var obj = {
-                user:$rootScope.userObject.username,
-                status:code
+                user: $rootScope.userObject.username,
+                status: code
             }
-            socket.emit('statuschange', obj);
+            var postData = {
+                "username": $rootScope.userObject.username,
+                "status": code
+            }
+            $http.post(AppURLs.connectionStorage + '/status/set', postData)
+                .success(function (data, status, headers, config) {
+                    socket.emit('statuschange', obj);
+                })
+                .error(function (data, status, header, config) {
+                    console.log("");
+                });
         }
 
     }]);

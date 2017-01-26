@@ -58,9 +58,7 @@ angular.module('myApp.patient.home', ['ngRoute'])
                         status = JSON.parse(status);
                         angular.forEach(doctors, function (doctor, index) {
                             if (doctor.username == status.username) {
-                                $scope.$apply(function () {
-                                    doctor.status = status.status;
-                                });
+                                doctor.status = status.status;
                             }
                         });
                     });
