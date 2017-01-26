@@ -103,7 +103,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
                     });
 
                     publisher = session.publish(pub);
-                    subsciber.subscribeToAudio(true);
+                    //subsciber.subscribeToAudio(true);
                     subsciber.subscribeToVideo(true);
                 } else {
                     console.log('There was an error connecting to the session: ', error.code, error.message);
