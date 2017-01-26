@@ -17,7 +17,10 @@ angular.module('myApp', [
     'myApp.topup'
 ]).
     config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.otherwise({ redirectTo: '/pagenotfound' });
+        $routeProvider.when('/', {
+            templateUrl: 'index.html',
+            controller: 'mainController'
+        }).otherwise({ redirectTo: '/pagenotfound' });
     }])
 
     .controller('mainController', ['$scope', '$rootScope', '$location', 'User', '$mdDialog', '$window', 'AppURLs', '$http', function ($scope, $rootScope, $location, User, $mdDialog, $window, AppURLs, $http) {
