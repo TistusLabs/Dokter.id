@@ -81,6 +81,8 @@ angular.module('conferenceApp.call', ['ngRoute'])
                         buttonDisplayMode: "off"
                     }
                 });
+                subsciber.subscribeToAudio(true);
+                subsciber.subscribeToVideo(true);
             });
 
             session.on('sessionDisconnected', function (event) {
