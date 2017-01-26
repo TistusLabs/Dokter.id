@@ -144,13 +144,13 @@ angular.module('conferenceApp.call', ['ngRoute'])
             if ($scope.isAudioMuted) {
                 //publisher.subscribeToAudio(true);
                 // unmute
-                //socket.emit('unmutevoice', $rootScope.userObject.name);
-                subsciber.subscribeToAudio(false);
+                socket.emit('unmutevoice', $rootScope.userObject.name);
+                //subsciber.subscribeToAudio(false);
             } else {
                 //publisher.subscribeToAudio(false);
                 // mute voice
-                //socket.emit('mutevoice', $rootScope.userObject.name);
-                subsciber.subscribeToAudio(true);
+                socket.emit('mutevoice', $rootScope.userObject.name);
+                //subsciber.subscribeToAudio(true);
             }
             $scope.isAudioMuted = !$scope.isAudioMuted;
         };
