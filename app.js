@@ -395,7 +395,6 @@ angular.module('myApp', [
 
                         var client = User.getClient();
                         client.onComplete(function (consultationData) {
-                            $rootScope.currentConsultation = consultationData.object;
                             socket.emit('answercall', data);
                             location.href = "/Dokter.id/conference";
                         });

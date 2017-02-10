@@ -228,6 +228,37 @@ angular.module('myApp.Services', []).
                 }
             ];
 
+            var _cookMan = (function () {
+                function createCookie(name, value, days) {
+                    if (days) {
+                        var date = new Date();
+                        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                        var expires = "; expires=" + date.toGMTString();
+                    } else var expires = "";
+                    var Cpath = '; path=/'
+                    document.cookie = name + "=" + value + expires + Cpath;
+                }
+
+                return {
+                    set: function (name, value, days) {
+                        createCookie(name, value, days);
+                    },
+                    get: function (name) {
+                        var nameEQ = name + "=";
+                        var ca = document.cookie.split(';');
+                        for (var i = 0; i < ca.length; i++) {
+                            var c = ca[i];
+                            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+                        }
+                        return null;
+                    },
+                    delete: function (name) {
+                        createCookie(name, "", -1);
+                    }
+                };
+            })();
+
             function getNewProfile() {
                 var obj = {
                     name: "",
@@ -429,6 +460,7 @@ angular.module('myApp.Services', []).
             function saveConsultation(object) {
                 $http.post(AppURLs.APIUrl + '/consultation', object)
                     .success(function (data, status, headers, config) {
+                        _cookMan.set("consultationID", data._id, 1);
                         if (onComplete) onComplete({ status: true, object: data, message: data });
                     })
                     .error(function (data, status, header, config) {
@@ -437,8 +469,8 @@ angular.module('myApp.Services', []).
             }
 
             function updateConsultation(object) {
-
-                $http.put(AppURLs.APIUrl + '/consultation/' + $rootScope.currentConsultation._id, profileObject)
+                var consultationID = _cookMan.get("consultationID");
+                $http.put(AppURLs.APIUrl + '/consultation/' + consultationID, profileObject)
                     .success(function (data, status, headers, config) {
                         if (onComplete) onComplete({ status: true, object: null, message: data });
                     })
