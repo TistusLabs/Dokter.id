@@ -346,7 +346,6 @@ angular.module('myApp', [
                 }
                 $http.post(AppURLs.connectionStorage + '/status/set', postData)
                     .success(function (data, status, headers, config) {
-                        socket.emit('statuschange', obj);
                         socket.on('statuschange', function (obj) {
                             if (obj.user == $rootScope.userObject.username && obj.status == "unavailable") {
                                 var client = new User.getAuthClient();
@@ -354,6 +353,7 @@ angular.module('myApp', [
                                 $window.location.href = "/Dokter.id/auth";
                             }
                         });
+                        socket.emit('statuschange', obj);
                     })
                     .error(function (data, status, header, config) {
                         console.log("errorrrrr");

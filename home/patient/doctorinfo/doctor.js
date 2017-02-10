@@ -19,6 +19,7 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
             $http.get(AppURLs.APIUrl + '/messages?fromusername__in='+doctor.username+','+$rootScope.userObject.username+'&tousername__in='+$rootScope.userObject.username+','+doctor.username).
                 success(function (data, status, headers, config) {
                     var msgHistory = data;
+                    var unreadMsgs = [];
                     msgHistory.forEach(function (chat) {
                         if (chat.fromusername == doctor.username) {
                             chat.fromName = doctor.name;
@@ -31,6 +32,12 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
                             chat.profileimage = "http://www.gravatar.com/avatar/" + passhash;
                         }
                         chat.datetime = new Date(chat.datetime);
+
+                        // check if unread msgs are there.
+                        if(chat.status == "unread")
+                        {
+                            unreadMsgs.push(chat);
+                        }
 
                     }, this);
                     $scope.MessageHistory = msgHistory;

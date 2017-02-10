@@ -211,6 +211,8 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 fromusername: $rootScope.userObject.username,
                 tousername: $scope.subscriberUsername,
                 datetime: msg.time.toString(),
+                type : "online",
+                status : "read"
             }
             $scope.txtMessage = "";
             session.signal({
