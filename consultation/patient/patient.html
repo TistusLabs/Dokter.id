@@ -15,7 +15,7 @@
                         title="{{doctor.status}}" />
                 </div>
                 <div class="Card__information">
-                    <div class="Card__name">Dr. {{doctor.name}}</div>
+                    <div class="Card__name">{{doctor.name}}</div>
                     <div class="Card__speciality">{{doctor.otherdata.speciality}}</div>
                     <div class="Card__price Price">
                         <span class="Price__currency">{{doctor.otherdata.currency}}</span>
@@ -51,97 +51,10 @@
                 <img src="build/img/form/tab-message-off.png" alt="{}" title="{}" />
                 <span>Message</span>
         </div>
-        <div ng-class="tabs.consultationhistory ? 'ProfileTab__item ProfileTab__item--active' : 'ProfileTab__item'" ng-click="changeTab('tabConsultationHistory')"
-            clickID="#tabConsultationHistory">
-            <img src="build/img/form/tab-consultation-off.png" alt="{}" title="{}" />
-            <span>Consultation History</span>
-    </div>
+        
 </div>
 
 <div class="ProfileTabContent">
-
-    <div id="tabOverview" ng-class="tabs.overview ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
-
-        <div class="Overview">
-
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Biography
-                </div>
-                <div class="Overview__value">
-                    {{doctor.otherdata.shortbiography}}
-                </div>
-            </div>
-
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Location
-                </div>
-                <div class="Overview__value">
-                    {{doctor.city}}, {{doctor.country}}
-                </div>
-            </div>
-
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Registration Number
-                </div>
-                <div class="Overview__value">
-                    31.2.1.100.1.12.135602, Konsil Kedokteran Indonesia
-                </div>
-            </div>
-
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Languages
-                </div>
-                <div class="Overview__value">
-                    {{doctor.languages}}
-                </div>
-            </div>
-
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Profesional Statement
-                </div>
-                <div class="Overview__value">
-                    Always helping others, that's the value of life.
-                </div>
-            </div>
-
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Education
-                </div>
-                <div class="Overview__value">
-                    {{doctor.graduateschool}}
-                </div>
-            </div>
-
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Achievement
-                </div>
-                <div class="Overview__value">
-                    {{doctor.awards}}
-                </div>
-            </div>
-
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Working Experience
-                </div>
-                <div class="Overview__value">
-                    <ul class="Overview__list">
-                        <li>Medical Aesthetic Doctor Manielle Beauty Clinic, 2012 - 2013</li>
-                        <li>Medical Director Genese Clinic, Aesthetic/Wellness, 2013 - Sekarang</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
 
     <div id="tabMessage" ng-class="tabs.message ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
 
@@ -175,9 +88,6 @@
 
     </div>
 
-    <div id="tabConsultationHistory" ng-class="tabs.consultationhistory ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
-
-    </div>
 </div>
 
 <div class="ProfileTab ProfileTab--input-message">

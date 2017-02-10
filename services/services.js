@@ -410,9 +410,9 @@ angular.module('myApp.Services', []).
 
                 $http.get(AppURLs.APIUrl + '/users?username=' + username).
                     success(function (data, status, headers, config) {
-                        debugger
-                        if (data.username == username) {
-                            doctorObject = data;
+                        //debugger
+                        if (data[0].username == username) {
+                            doctorObject = data[0];
                             recordFound = true;
                             message = "Record found!";
                             if (onComplete) onComplete({ status: recordFound, object: doctorObject, message: message });
@@ -470,7 +470,7 @@ angular.module('myApp.Services', []).
 
             function updateConsultation(object) {
                 var consultationID = _cookMan.get("consultationID");
-                $http.put(AppURLs.APIUrl + '/consultation/' + consultationID, profileObject)
+                $http.put(AppURLs.APIUrl + '/consultation/' + consultationID, object)
                     .success(function (data, status, headers, config) {
                         if (onComplete) onComplete({ status: true, object: null, message: data });
                     })
@@ -502,6 +502,20 @@ angular.module('myApp.Services', []).
                             if (doctor.type == "doctor") {
                                 returnList.push(doctor);
                             }
+                        }, this);
+                        if (onComplete) onComplete(returnList);
+                    }).
+                    error(function (data, status, headers, config) {
+                        if (onError) onError(data);
+                    });
+            }
+
+            function getAllMyConsultations(doctorusername){
+                var returnList = [];
+                $http.get(AppURLs.APIUrl + '/consultation?sort=-enddatetime&doctor='+doctorusername).
+                    success(function (data, status, headers, config) {
+                        data.forEach(function (consultationObj) {
+                            returnList.push(consultationObj);
                         }, this);
                         if (onComplete) onComplete(returnList);
                     }).
@@ -568,6 +582,10 @@ angular.module('myApp.Services', []).
                 },
                 GetAllDoctors: function () {
                     getalldocs();
+                    return this;
+                },
+                GetAllMyConsultations: function (doctorusername) {
+                    getAllMyConsultations(doctorusername);
                     return this;
                 },
                 GetUserID: function (id) {

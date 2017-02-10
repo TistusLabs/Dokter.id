@@ -9,9 +9,9 @@ angular.module('myApp.consultations.patientinfo', ['ngRoute'])
         });
     }])
 
-    .controller('doctorControl', ['$scope', '$rootScope', '$routeParams', 'User', '$location','$http','AppURLs', function ($scope, $rootScope, $routeParams, User, $location,$http,AppURLs) {
+    .controller('patientinfoControl', ['$scope', '$rootScope', '$routeParams', 'User', '$location','$http','AppURLs', function ($scope, $rootScope, $routeParams, User, $location,$http,AppURLs) {
         //$rootScope.checkSession();
-        console.log("Recieved id:", $routeParams.doctorID);
+        console.log("Recieved id:", $routeParams.patientID);
 
         $scope.loadingchatdata = true;
 
@@ -78,13 +78,14 @@ angular.module('myApp.consultations.patientinfo', ['ngRoute'])
 
         var client = User.getClient();
         client.onComplete(function (data) {
+            debugger
             var passhash = CryptoJS.MD5(data.object.username);
             data.object.profileimage = "http://www.gravatar.com/avatar/" + passhash;
             $scope.doctor = data.object;
             // get messages from logged in user and this doctor
             $scope.getChatHistory($scope.doctor);
         });
-        client.GetUserID($routeParams.doctorID);
+        client.GetUserByUsername($routeParams.patientID);
 
         $scope.sendMessageOnEnter = function (event) {
             if (event.key == "Enter") {
