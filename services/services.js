@@ -416,20 +416,43 @@ angular.module('myApp.Services', []).
                     });
             }
 
-            function saveMessage(object){
+            function saveMessage(object) {
                 $http.post(AppURLs.APIUrl + '/messages', object)
                     .success(function (data, status, headers, config) {
                         if (onComplete) onComplete({ status: true, object: null, message: data });
                     })
                     .error(function (data, status, header, config) {
-                        if (onError) onError({ status: false, object: doctorObject, message: data });
+                        if (onError) onError({ status: false, object: null, message: data });
                     });
             }
 
+            function saveConsultation(object) {
+                $http.post(AppURLs.APIUrl + '/consultation', object)
+                    .success(function (data, status, headers, config) {
+                        if (onComplete) onComplete({ status: true, object: null, message: data });
+                    })
+                    .error(function (data, status, header, config) {
+                        if (onError) onError({ status: false, object: null, message: data });
+                    });
+            }
+
+            function getConsultation(object) {
+
+                $http.get(AppURLs.APIUrl + '/consultation?doctor__in=' + object.currentUser + ',' + object.participent + '&patient__in=' + object.participent + ',' + object.currentUser + '&sort=-startdatetime').
+                    success(function (data, status, headers, config) {
+
+                        if (onComplete) onComplete({ status: true, object: data, message: data });
+                    }).
+                    error(function (data, status, headers, config) {
+                        if (onError) onError({ status: false, object: null, message: data });
+                    });
+            }
+
+
             function updatePassword(password) {
-                    var ID = $rootScope.userObject._id;
+                var ID = $rootScope.userObject._id;
                 var profileObject = {
-                    "password" : password
+                    "password": password
                 }
                 $http.put(AppURLs.APIUrl + '/users/' + ID, profileObject)
                     .success(function (data, status, headers, config) {
@@ -530,6 +553,14 @@ angular.module('myApp.Services', []).
                 },
                 SaveMessage: function (obj) {
                     saveMessage(obj);
+                    return this;
+                },
+                SaveConsultation: function (obj) {
+                    saveConsultation(obj);
+                    return this;
+                },
+                GetConsultation: function (obj) {
+                    getConsultation(obj);
                     return this;
                 },
                 UpdatePassword: function (pass) {

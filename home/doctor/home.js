@@ -34,31 +34,6 @@ angular.module('myApp.doctor.home', ['ngRoute'])
 
         $scope.onlinestatuses = ['available', 'unavailable', 'maybe'];
 
-        /*var user = $rootScope.userObject;
-        $scope.doctor = user;
-        $scope.currentPeerID = "1";*/
-
-        /*var peer = $rootScope.getPeer();
-        peer.on('connection', function (c) {
-            c.on('open', function () {
-                console.log(c.label +" request is recived.");
-                if(c.label == "chat"){
-                    $rootScope.setPeer(peer);
-                    $scope.redirect(c);
-                }
-            });
-        });
-        peer.on('error', function (err) {
-            alert(err);
-        })*/
-
-        $scope.gotoChatRoom = function () {
-            $location.path("/chat/4/from");
-        }
-
-        $scope.pingserver = function () {
-            peer.socket.send({ type: 'ping' });
-        }
 
         $scope.setStatus = function (code) {
             var socket = io.connect(AppURLs.socketServer);

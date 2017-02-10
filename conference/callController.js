@@ -32,7 +32,24 @@ angular.module('conferenceApp.call', ['ngRoute'])
         var socket = io.connect(AppURLs.socketServer);
         socket.on('callended', function (broadcast) {
             if (broadcast == $scope.sessionId) {
-                location.href = "/Dokter.id/";
+                // get consultation before exit
+
+                debugger
+                var objtoStore = {
+                    currentUser : $rootScope.userObject.username,
+                    participent:$scope.subscriberName
+                }
+
+                var client = User.getClient();
+                client.onComplete(function (consultationData) {
+                     // update consultation before exit
+
+                    location.href = "/Dokter.id/";
+                });
+                client.onError(function (data) {
+                    console.log("error when retriving consultation data.");
+                });
+                client.GetConsultation(objtoStore);
             }
         });
 
@@ -103,8 +120,6 @@ angular.module('conferenceApp.call', ['ngRoute'])
                     });
 
                     publisher = session.publish(pub);
-                    //subsciber.subscribeToAudio(true);
-                    //subsciber.subscribeToVideo(true);
                 } else {
                     console.log('There was an error connecting to the session: ', error.code, error.message);
                 }
@@ -193,7 +208,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
         };
 
         $scope.sendMessageOnEnter = function (event) {
-            if (event.code == "Enter") {
+            if (event.key == "Enter") {
                 $scope.sendMessage();
             }
         }
@@ -211,8 +226,8 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 fromusername: $rootScope.userObject.username,
                 tousername: $scope.subscriberUsername,
                 datetime: msg.time.toString(),
-                type : "online",
-                status : "read"
+                type: "online",
+                status: "read"
             }
             $scope.txtMessage = "";
             session.signal({

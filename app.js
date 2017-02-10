@@ -14,7 +14,9 @@ angular.module('myApp', [
     'myApp.profile',
     'myApp.pagenotfound',
     'myApp.billing',
-    'myApp.topup'
+    'myApp.topup',
+    'myApp.consultation',
+    'myApp.consultations.patientinfo'
 ]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/', {
@@ -35,9 +37,9 @@ angular.module('myApp', [
 
         var socket = io.connect(AppURLs.socketServer);
         var postData = {
-                "username": session.username,
-                "status": "available"
-            }
+            "username": session.username,
+            "status": "available"
+        }
         $http.post(AppURLs.connectionStorage + '/status/set', postData)
             .success(function (data, status, headers, config) {
                 socket.emit('useronline', session.username);
@@ -206,8 +208,8 @@ angular.module('myApp', [
                             "icon": "build/img/navigation/side/dashboard.png"
                         },
                         {
-                            caption: "Consultation",
-                            route: "/consultation",
+                            caption: "Consultations",
+                            route: "/doctor/consultations",
                             icon: "build/img/navigation/side/consultation.png"
                         },
                         {
@@ -382,8 +384,24 @@ angular.module('myApp', [
                     if (!$rootScope.isNullOrEmptyOrUndefined(patient.username)) {
                         $scope.showCallRejectedWindow(patient, ev)
                     } else {
-                        socket.emit('answercall', data);
-                        location.href = "/Dokter.id/conference";
+                        // if the doctor accepts the call the consultation should be created.
+                        debugger
+                        var objtoStore = {
+                            doctor: $rootScope.userObject.username,
+                            patient: data.username,
+                            startdatetime: new Date(),
+                            enddatetime: new Date()
+                        }
+
+                        var client = User.getClient();
+                        client.onComplete(function (data) {
+                            socket.emit('answercall', data);
+                            location.href = "/Dokter.id/conference";
+                        });
+                        client.onError(function (data) {
+                            console.log("error when consultation is stored.");
+                        });
+                        client.SaveConsultation(objtoStore);
                     }
                 }, function () {
                     console.log("OOps");
