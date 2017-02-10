@@ -429,22 +429,21 @@ angular.module('myApp.Services', []).
             function saveConsultation(object) {
                 $http.post(AppURLs.APIUrl + '/consultation', object)
                     .success(function (data, status, headers, config) {
-                        if (onComplete) onComplete({ status: true, object: null, message: data });
+                        if (onComplete) onComplete({ status: true, object: data, message: data });
                     })
                     .error(function (data, status, header, config) {
                         if (onError) onError({ status: false, object: null, message: data });
                     });
             }
 
-            function getConsultation(object) {
+            function updateConsultation(object) {
 
-                $http.get(AppURLs.APIUrl + '/consultation?doctor__in=' + object.currentUser + ',' + object.participent + '&patient__in=' + object.participent + ',' + object.currentUser + '&sort=-startdatetime').
-                    success(function (data, status, headers, config) {
-
-                        if (onComplete) onComplete({ status: true, object: data, message: data });
-                    }).
-                    error(function (data, status, headers, config) {
-                        if (onError) onError({ status: false, object: null, message: data });
+                $http.put(AppURLs.APIUrl + '/consultation/' + $rootScope.currentConsultation._id, profileObject)
+                    .success(function (data, status, headers, config) {
+                        if (onComplete) onComplete({ status: true, object: null, message: data });
+                    })
+                    .error(function (data, status, header, config) {
+                        if (onError) onError({ status: false, object: profileObject, message: data });
                     });
             }
 
@@ -559,8 +558,8 @@ angular.module('myApp.Services', []).
                     saveConsultation(obj);
                     return this;
                 },
-                GetConsultation: function (obj) {
-                    getConsultation(obj);
+                UpdateConsultation: function (obj) {
+                    updateConsultation(obj);
                     return this;
                 },
                 UpdatePassword: function (pass) {

@@ -32,24 +32,21 @@ angular.module('conferenceApp.call', ['ngRoute'])
         var socket = io.connect(AppURLs.socketServer);
         socket.on('callended', function (broadcast) {
             if (broadcast == $scope.sessionId) {
-                // get consultation before exit
+                // update consultation before exit
 
                 debugger
                 var objtoStore = {
-                    currentUser : $rootScope.userObject.username,
-                    participent:$scope.subscriberName
+                    enddatetime: new Date()
                 }
 
                 var client = User.getClient();
                 client.onComplete(function (consultationData) {
-                     // update consultation before exit
-
                     location.href = "/Dokter.id/";
                 });
                 client.onError(function (data) {
-                    console.log("error when retriving consultation data.");
+                    console.log("error when updating the consultation data.");
                 });
-                client.GetConsultation(objtoStore);
+                client.UpdateConsultation(objtoStore);
             }
         });
 
