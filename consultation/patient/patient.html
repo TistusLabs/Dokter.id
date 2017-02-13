@@ -7,12 +7,12 @@
                 <div class="Card__image ProfileImage">
                     <img class="ProfileImage__image" ng-src="{{doctor.profileimage}}?s=250&d=monsterid" alt="{{doctor.name}}" title="{{doctor.name}}"
                     />
-                    <img ng-if="doctor.status == 'maybe'" class="ProfileImage__status" src="build/img/status/maybe.png" alt="{{doctor.status}}"
+                    <!--<img ng-if="doctor.status == 'maybe'" class="ProfileImage__status" src="build/img/status/maybe.png" alt="{{doctor.status}}"
                         title="{{doctor.status}}" />
                     <img ng-if="doctor.status == 'available'" class="ProfileImage__status" src="build/img/status/available.png" alt="{{doctor.status}}"
                         title="{{doctor.status}}" />
                     <img ng-if="doctor.status == 'unavailable'" class="ProfileImage__status" src="build/img/status/unavailable.png" alt="{{doctor.status}}"
-                        title="{{doctor.status}}" />
+                        title="{{doctor.status}}" />-->
                 </div>
                 <div class="Card__information">
                     <div class="Card__name">{{doctor.name}}</div>
@@ -51,49 +51,104 @@
                 <img src="build/img/form/tab-message-off.png" alt="{}" title="{}" />
                 <span>Message</span>
         </div>
-        
-</div>
 
-<div class="ProfileTabContent">
+    </div>
 
-    <div id="tabMessage" ng-class="tabs.message ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
+    <div class="ProfileTabContent">
 
-        <div class="Message">
-            <div ng-show="loadingchatdata" class="Message__item Loader">
-                <div class="Loader">
-                    <img src="build/img/loader/puff.svg" />
-                </div>
-            </div>
+        <div id="tabOverview" ng-class="tabs.overview ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
 
-            <div class="Message__item" ng-repeat="msg in MessageHistory">
-                <div class="Card Card--message">
-                    <div class="Card__image ProfileImage">
-                        <img class="ProfileImage__image ProfileImage--message" ng-src="{{msg.profileimage}}?d=monsterid" alt="{{msg.fromName}}" title="{{msg.fromName}}"
-                        />
+            <div class="Overview">
+
+                <div class="Overview__info">
+                    <div class="Overview__title">
+                        Name
                     </div>
-                    <div class="Card__information">
-                        <div class="Card__name">
-                            {{msg.fromName}} <span class="Card__timestamp">{{msg.datetime | date : "medium"}}</span>
-                            <span ng-if="msg.type == 'offline'" style="color:red;font-size: 14px;">Sent offline</span>
-                        </div>
-                        <div class="Card__message">
-                            {{msg.message}}
-                        </div>
+                    <div class="Overview__value">
+                        {{doctor.name}}
                     </div>
                 </div>
+
+                <div class="Overview__info">
+                    <div class="Overview__title">
+                        Location
+                    </div>
+                    <div class="Overview__value">
+                        {{doctor.city}}, {{doctor.country}}
+                    </div>
+                </div>
+
+                <div class="Overview__info">
+                    <div class="Overview__title">
+                        Date of Birth
+                    </div>
+                    <div class="Overview__value">
+                        {{doctor.dob}}
+                    </div>
+                </div>
+
+                <div class="Overview__info">
+                    <div class="Overview__title">
+                        Languages
+                    </div>
+                    <div class="Overview__value">
+                        {{doctor.languages}}
+                    </div>
+                </div>
+
+                <div class="Overview__info">
+                    <div class="Overview__title">
+                        Gender
+                    </div>
+                    <div class="Overview__value">
+                        {{doctor.gender}}
+                    </div>
+                </div>
+
             </div>
 
+        </div>
+
+        <div id="tabMessage" ng-class="tabs.message ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
+
+            <div class="Message">
+                <div ng-show="loadingchatdata" class="Message__item Loader">
+                    <div class="Loader">
+                        <img src="build/img/loader/puff.svg" />
+                    </div>
+                </div>
+
+                <div class="Message__item" ng-repeat="msg in MessageHistory">
+                    <div class="Card Card--message">
+                        <div class="Card__image ProfileImage">
+                            <img class="ProfileImage__image ProfileImage--message" ng-src="{{msg.profileimage}}?d=monsterid" alt="{{msg.fromName}}" title="{{msg.fromName}}"
+                            />
+                        </div>
+                        <div class="Card__information">
+                            <div class="Card__name">
+                                {{msg.fromName}} <span class="Card__timestamp">{{msg.datetime | date : "medium"}}</span>
+                                <span ng-if="msg.type == 'offline'" style="color:red;font-size: 14px;">Sent offline</span>
+                            </div>
+                            <div class="Card__message">
+                                {{msg.message}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input ng-keypress="sendMessageOnEnter($event)" type="text" ng-model="txtMessage" />
+                <input ng-click="sendMessage()" type="button" value="Send Message" />
+
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
+    <div class="ProfileTab ProfileTab--input-message">
 
-<div class="ProfileTab ProfileTab--input-message">
-    <input ng-keypress="sendMessageOnEnter($event)" type="text" ng-model="txtMessage" />
-    <input ng-click="sendMessage()" type="button" value="Send Message" />
-</div>
+    </div>
 
 </div>
 </div>
