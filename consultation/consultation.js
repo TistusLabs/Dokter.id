@@ -27,6 +27,15 @@ angular.module('myApp.consultation', ['ngRoute'])
 
                 patient.startdatetime = new Date(patient.startdatetime);
                 patient.enddatetime = new Date(patient.enddatetime);
+
+                var duration = patient.enddatetime - patient.startdatetime;
+                var duration = new Date(duration);
+                var seconds = duration.getUTCSeconds();
+                var minutes = duration.getUTCMinutes();
+                var hours = duration.getUTCHours();
+
+                patient.duration = minutes +" : "+seconds;
+
             });
             $scope.myConsultations = data;
             $scope.isloading = false;

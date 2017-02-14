@@ -48,15 +48,15 @@
                     </div>
                     <div class="CardBilling__info-container CardBilling__info-container--half CardBilling__info-container--no-margin">
                         <div class="CardBilling__label">Date</div>
-                        <div class="CardBilling__value">{{ consultation.startdatetime | date : format : 'longDate' }}</div>
+                        <div class="CardBilling__value">{{ consultation.startdatetime | date : 'mediumDate'}}</div>
                     </div>
                     <div class="CardBilling__info-container CardBilling__info-container--half CardBilling__info-container--no-margin">
                         <div class="CardBilling__label">Time</div>
-                        <div class="CardBilling__value">7:25 PM<!--{{ consultation.startdatetime | date : format : 'h:mm a' }}--></div>
+                        <div class="CardBilling__value">{{ consultation.startdatetime | date : 'h:mm a' }}</div>
                     </div>
                     <div class="CardBilling__info-container CardBilling__info-container--no-margin">
                         <div class="CardBilling__label">Length</div>
-                        <div class="CardBilling__value">15 mins<!--{{(consultation.enddatetime - consultation.startdatetime) | date : format : 'H:mm:ss'}}--></div>
+                        <div class="CardBilling__value">{{ consultation.duration}}</div>
                     </div>
                 </div>
             </div>

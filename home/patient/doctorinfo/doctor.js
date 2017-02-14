@@ -51,6 +51,14 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
 
                     patient.startdatetime = new Date(patient.startdatetime);
                     patient.enddatetime = new Date(patient.enddatetime);
+
+                    var duration = patient.enddatetime - patient.startdatetime;
+                    var duration = new Date(duration);
+                    var seconds = duration.getUTCSeconds();
+                    var minutes = duration.getUTCMinutes();
+                    var hours = duration.getUTCHours();
+
+                    patient.duration = minutes + " : " + seconds;
                 });
                 $scope.myConsultations = data;
                 $scope.isloading = false;
@@ -58,7 +66,7 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
             client.onError(function (data) {
                 console.log("There was an error loading the consultations");
             });
-            client.GetAllMyConsultationsWithDoctor($scope.doctor.username,$rootScope.userObject.username);
+            client.GetAllMyConsultationsWithDoctor($scope.doctor.username, $rootScope.userObject.username);
         }
 
         $scope.getChatHistory = function (doctor) {
@@ -225,11 +233,11 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
             }
         }
 
-        if($routeParams.view == "overview"){
+        if ($routeParams.view == "overview") {
             $scope.changeTab("tabOverview");
-        }else if($routeParams.view == "message"){
+        } else if ($routeParams.view == "message") {
             $scope.changeTab("tabMessage");
-        }else if($routeParams.view == "consultations"){
+        } else if ($routeParams.view == "consultations") {
             $scope.changeTab("tabConsultationHistory");
         }
 
