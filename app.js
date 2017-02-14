@@ -209,7 +209,7 @@ angular.module('myApp', [
                         },
                         {
                             caption: "Consultations",
-                            route: "/doctor/consultations",
+                            route: "/consultations",
                             icon: "build/img/navigation/side/consultation.png"
                         },
                         {
@@ -253,6 +253,10 @@ angular.module('myApp', [
                             caption: "Home",
                             route: "/patient/home",
                             icon: "build/img/navigation/side/home.png"
+                        }, {
+                            caption: "Consultations",
+                            route: "/consultations",
+                            icon: "build/img/navigation/side/consultation.png"
                         },
                         {
                             caption: "Billing",

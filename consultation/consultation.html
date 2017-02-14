@@ -20,16 +20,22 @@
 
             <div class="CardBilling" ng-repeat="consultation in myConsultations">
                 <div class="CardBilling__image ProfileImage">
-                    <a href="#/doctor/consultations/patient/{{consultation.patient}}">
+                    <a ng-if="currentuser.type == 'doctor'" href="#/consultations/patient/{{consultation.patient}}">
+                        <img class="ProfileImage__image" ng-src="{{consultation.profileimage}}?s=250&d=monsterid" alt="" title=""
+                        />
+                    </a>
+                    <a ng-if="currentuser.type == 'patient'" href="">
                         <img class="ProfileImage__image" ng-src="{{consultation.profileimage}}?s=250&d=monsterid" alt="" title=""
                         />
                     </a>
                 </div>
                 <div class="CardBilling__information">
                     <div class="CardBilling__info-container">
-                        <div class="CardBilling__label">Patient</div>
+                        <div ng-if="currentuser.type == 'doctor'" class="CardBilling__label">Patient</div>
+                        <div ng-if="currentuser.type == 'patient'" class="CardBilling__label">Doctor</div>
                         <div class="CardBilling__value CardBilling__value--name">
-                            <a href="#/doctor/consultations/patient/{{consultation.patient}}">{{consultation.patient}}</a>
+                            <a ng-if="currentuser.type == 'doctor'" href="#/consultations/patient/{{consultation.patient}}">{{consultation.patient}}</a>
+                            <a ng-if="currentuser.type == 'patient'" href="">{{consultation.doctor}}</a>
                         </div>
                     </div>
                     <div class="CardBilling__info-container">
