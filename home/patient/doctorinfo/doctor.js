@@ -9,14 +9,40 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
         });
     }])
 
-    .controller('doctorControl', ['$scope', '$rootScope', '$routeParams', 'User', '$location','$http','AppURLs', function ($scope, $rootScope, $routeParams, User, $location,$http,AppURLs) {
+    .controller('doctorControl', ['$scope', '$rootScope', '$routeParams', 'User', '$location', '$http', 'AppURLs', function ($scope, $rootScope, $routeParams, User, $location, $http, AppURLs) {
         //$rootScope.checkSession();
         console.log("Recieved id:", $routeParams.doctorID);
 
         $scope.loadingchatdata = true;
 
+        $scope.setUserOnline = function (username) {
+            if ($scope.doctor.username == username) {
+                $scope.$apply(function () {
+                    $scope.doctor.status = "available";
+                });
+            }
+        }
+
+        $scope.setUserStatus = function (data) {
+            if ($scope.doctor.username == data.user) {
+                $scope.$apply(function () {
+                    $scope.doctor.status = data.status;
+                });
+            }
+        }
+        var socket = io.connect(AppURLs.socketServer);
+        socket.on('useronline', function (username) {
+            //make a fd service call and update the user on DB
+            $scope.setUserOnline(username);
+        });
+
+        socket.on('statuschange', function (obj) {
+            //make a fd service call and update the user on DB
+            $scope.setUserStatus(obj);
+        });
+
         $scope.getChatHistory = function (doctor) {
-            $http.get(AppURLs.APIUrl + '/messages?fromusername__in='+doctor.username+','+$rootScope.userObject.username+'&tousername__in='+$rootScope.userObject.username+','+doctor.username).
+            $http.get(AppURLs.APIUrl + '/messages?fromusername__in=' + doctor.username + ',' + $rootScope.userObject.username + '&tousername__in=' + $rootScope.userObject.username + ',' + doctor.username).
                 success(function (data, status, headers, config) {
                     var msgHistory = data;
                     var unreadMsgs = [];
@@ -34,9 +60,8 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
                         chat.datetime = new Date(chat.datetime);
 
                         // check if unread msgs are there in offline messages
-                        if(chat.type == "offline")
-                        {
-                            if(chat.status == "unread"){
+                        if (chat.type == "offline") {
+                            if (chat.status == "unread") {
                                 unreadMsgs.push(chat);
                             }
                         }
@@ -81,6 +106,22 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
             var passhash = CryptoJS.MD5(data.object.username);
             data.object.profileimage = "http://www.gravatar.com/avatar/" + passhash;
             $scope.doctor = data.object;
+
+            // get the current status of the user$http.get(AppURLs.connectionStorage + '/status/getall').
+            $http.get(AppURLs.connectionStorage + '/status/getall').
+                success(function (data, status, headers, config) {
+
+                    angular.forEach(data.value, function (status, index) {
+                        var docObj = JSON.parse(status);
+                        if (docObj.username == $scope.doctor.username) {
+                            $scope.doctor.status = docObj.status;
+                        }
+                    });
+                }).
+                error(function (data, status, headers, config) {
+                    console.log("Oops error");
+                });
+
             // get messages from logged in user and this doctor
             $scope.getChatHistory($scope.doctor);
         });
@@ -94,15 +135,15 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
 
         $scope.sendMessage = function () {
 
-                var time = new Date();
+            var time = new Date();
 
             var objtoStore = {
                 message: $scope.txtMessage,
                 fromusername: $rootScope.userObject.username,
-                tousername:  $scope.doctor.username,
+                tousername: $scope.doctor.username,
                 datetime: time.toString(),
-                type : "offline",
-                status : "unread"
+                type: "offline",
+                status: "unread"
             }
             $scope.txtMessage = "";
 

@@ -170,6 +170,8 @@
                 </div>
             </div>
 
+            <input ng-keypress="sendMessageOnEnter($event)" type="text" ng-model="txtMessage" />
+            <input ng-click="sendMessage()" type="button" value="Send Message" />
 
         </div>
 
@@ -181,8 +183,7 @@
 </div>
 
 <div class="ProfileTab ProfileTab--input-message">
-    <input ng-keypress="sendMessageOnEnter($event)" type="text" ng-model="txtMessage" />
-    <input ng-click="sendMessage()" type="button" value="Send Message" />
+
 </div>
 
 </div>
