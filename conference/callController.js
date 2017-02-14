@@ -46,7 +46,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 client.onError(function (data) {
                     console.log("error when updating the consultation data.");
                 });
-                client.UpdateConsultation(objtoStore, id);
+                client.UpdateConsultation(objtoStore, $scope.consultationObject._id);
             }
         });
 
@@ -253,7 +253,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
             debugger
             var client = User.getClient();
             client.onComplete(function (data) {
-                debugger
+                $scope.consultationObject = data[0];
             });
             client.onError(function (data) {
                 console.log("There was an error loading the consultations");
