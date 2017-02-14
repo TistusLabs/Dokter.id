@@ -95,6 +95,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
                         buttonDisplayMode: "off"
                     }
                 });
+                $scope.getConsultationObject();
             });
 
             session.on('sessionDisconnected', function (event) {
@@ -268,7 +269,6 @@ angular.module('conferenceApp.call', ['ngRoute'])
             }
             client.GetAllMyConsultationsWithDoctor(doctorusername, patientusername);
         }
-        $scope.getConsultationObject();
 
     }]).controller('callcancelling', ['$scope', '$rootScope', '$mdDialog', 'AppURLs', function ($scope, $rootScope, $mdDialog, AppURLs) {
 
