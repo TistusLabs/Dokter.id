@@ -424,7 +424,7 @@ angular.module('myApp', [
                             startdatetime: new Date(),
                             enddatetime: new Date()
                         }
-
+                        debugger
                         var client = User.getClient();
                         client.onComplete(function (consultationData) {
                             // change user status to in call before sending to the call page

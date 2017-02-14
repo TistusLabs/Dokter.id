@@ -372,7 +372,7 @@ angular.module('myApp.Services', []).
                         if (onComplete) onComplete({ status: true, object: null, message: data });
                     })
                     .error(function (data, status, header, config) {
-                        if (onError) onError({ status: false, object: profileObject, message: data });
+                        if (onError) onError({ status: false, object: data, message: data });
                     });
             }
 
