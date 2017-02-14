@@ -46,7 +46,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 client.onError(function (data) {
                     console.log("error when updating the consultation data.");
                 });
-                client.UpdateConsultation(objtoStore);
+                client.UpdateConsultation(objtoStore, id);
             }
         });
 
@@ -247,6 +247,28 @@ angular.module('conferenceApp.call', ['ngRoute'])
             });
             client.SaveMessage(objtoStore);
         };
+
+        $scope.getConsultationObject = function () {
+            debugger
+            var client = User.getClient();
+            client.onComplete(function (data) {
+                debugger
+            });
+            client.onError(function (data) {
+                console.log("There was an error loading the consultations");
+            });
+            var doctorusername = "";
+            var patientusername = "";
+            if ($rootScope.userObject.type == "doctor") {
+                doctorusername = $rootScope.userObject.username;
+                patientusername = $scope.subscriberName;
+            } else {
+                doctorusername = $scope.subscriberName;
+                patientusername = $rootScope.userObject.username;
+            }
+            client.GetAllMyConsultationsWithDoctor(doctorusername, patientusername);
+        }
+        $scope.getConsultationObject();
 
     }]).controller('callcancelling', ['$scope', '$rootScope', '$mdDialog', 'AppURLs', function ($scope, $rootScope, $mdDialog, AppURLs) {
 

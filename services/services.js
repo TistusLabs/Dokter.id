@@ -357,7 +357,7 @@ angular.module('myApp.Services', []).
             function saveConsultation(object) {
                 $http.post(AppURLs.APIUrl + '/consultation', object)
                     .success(function (data, status, headers, config) {
-                        _cookMan.set("consultationID", data._id, 1);
+                        //_cookMan.set("consultationID", data._id, 1);
                         if (onComplete) onComplete({ status: true, object: data, message: data });
                     })
                     .error(function (data, status, header, config) {
@@ -365,8 +365,8 @@ angular.module('myApp.Services', []).
                     });
             }
 
-            function updateConsultation(object) {
-                var consultationID = _cookMan.get("consultationID");
+            function updateConsultation(object,consultationID) {
+                //var consultationID = _cookMan.get("consultationID");
                 $http.put(AppURLs.APIUrl + '/consultation/' + consultationID, object)
                     .success(function (data, status, headers, config) {
                         if (onComplete) onComplete({ status: true, object: null, message: data });
@@ -543,8 +543,8 @@ angular.module('myApp.Services', []).
                     saveConsultation(obj);
                     return this;
                 },
-                UpdateConsultation: function (obj) {
-                    updateConsultation(obj);
+                UpdateConsultation: function (obj,consultationID) {
+                    updateConsultation(obj,consultationID);
                     return this;
                 },
                 UpdatePassword: function (pass) {
