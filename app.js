@@ -35,6 +35,10 @@ angular.module('myApp', [
         // default values
         $scope.contextMenu = "--is-hidden";
 
+        $rootScope.isNullOrEmptyOrUndefined = function (value) {
+            return !value;
+        };
+
         var socket = io.connect(AppURLs.socketServer);
         var postData = {
             "username": session.username,
@@ -310,7 +314,7 @@ angular.module('myApp', [
                 });
         }
 
-        if($rootScope.isNullOrEmptyOrUndefined($rootScope.userObject.username)){
+        if ($rootScope.isNullOrEmptyOrUndefined($rootScope.userObject) == false) {
             debugger
             $rootScope.setStatus("available");
         }
@@ -458,9 +462,7 @@ angular.module('myApp', [
                     console.log("OOps");
                 });
         };
-        $rootScope.isNullOrEmptyOrUndefined = function (value) {
-            return !value;
-        };
+
 
         // temporary cuz login is not yet functioning
         if (session.type == "doctor") {
