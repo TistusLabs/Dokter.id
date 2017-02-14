@@ -524,6 +524,20 @@ angular.module('myApp.Services', []).
                     });
             }
 
+            function getAllMyConsultationsWithDoctor(doctorusername,patientusername){
+                var returnList = [];
+                $http.get(AppURLs.APIUrl + '/consultation?sort=-enddatetime&doctor='+doctorusername+'&patient='+patientusername).
+                    success(function (data, status, headers, config) {
+                        data.forEach(function (consultationObj) {
+                            returnList.push(consultationObj);
+                        }, this);
+                        if (onComplete) onComplete(returnList);
+                    }).
+                    error(function (data, status, headers, config) {
+                        if (onError) onError(data);
+                    });
+            }
+
             function setCurrentuser(user) {
                 currentUser = user;
             }
@@ -586,6 +600,10 @@ angular.module('myApp.Services', []).
                 },
                 GetAllMyConsultations: function (doctorusername) {
                     getAllMyConsultations(doctorusername);
+                    return this;
+                },
+                GetAllMyConsultationsWithDoctor: function (doctorusername,patientusername) {
+                    getAllMyConsultationsWithDoctor(doctorusername,patientusername);
                     return this;
                 },
                 GetUserID: function (id) {

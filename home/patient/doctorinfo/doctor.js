@@ -41,6 +41,25 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
             $scope.setUserStatus(obj);
         });
 
+        $scope.getConsultationHistory = function () {
+            var client = User.getClient();
+            client.onComplete(function (data) {
+                angular.forEach(data, function (patient) {
+                    var passhash = CryptoJS.MD5(patient.doctor);
+                    patient.profileimage = "http://www.gravatar.com/avatar/" + passhash;
+
+                    patient.startdatetime = new Date(patient.startdatetime);
+                    patient.enddatetime = new Date(patient.enddatetime);
+                });
+                $scope.myConsultations = data;
+                $scope.isloading = false;
+            });
+            client.onError(function (data) {
+                console.log("There was an error loading the consultations");
+            });
+            client.GetAllMyConsultationsWithDoctor($scope.doctor.username,$rootScope.userObject.username);
+        }
+
         $scope.getChatHistory = function (doctor) {
             $http.get(AppURLs.APIUrl + '/messages?fromusername__in=' + doctor.username + ',' + $rootScope.userObject.username + '&tousername__in=' + $rootScope.userObject.username + ',' + doctor.username).
                 success(function (data, status, headers, config) {
@@ -124,6 +143,9 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
 
             // get messages from logged in user and this doctor
             $scope.getChatHistory($scope.doctor);
+
+            // get consultation consultation history
+            $scope.getConsultationHistory();
         });
         client.GetUserID($routeParams.doctorID);
 

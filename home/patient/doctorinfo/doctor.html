@@ -178,7 +178,42 @@
     </div>
 
     <div id="tabConsultationHistory" ng-class="tabs.consultationhistory ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
-
+        <div class="CardBilling" ng-repeat="consultation in myConsultations">
+                <div class="CardBilling__image ProfileImage">
+                    <a href="#">
+                        <img class="ProfileImage__image" ng-src="{{consultation.profileimage}}?s=250&d=monsterid" alt="" title=""
+                        />
+                    </a>
+                </div>
+                <div class="CardBilling__information">
+                    <div class="CardBilling__info-container">
+                        <div class="CardBilling__label">Doctor</div>
+                        <div class="CardBilling__value CardBilling__value--name">
+                            <a href="#">{{consultation.doctor}}</a>
+                        </div>
+                    </div>
+                    <div class="CardBilling__info-container">
+                        <div class="CardBilling__label">Billed Amount</div>
+                        <div class="CardBilling__value CardBilling__value--price Price">
+                            <span class="Price__currency">IDR</span>
+                            <span class="Price__amount">75.000</span>
+                            <span class="Price__payment-type">| Credit</span>
+                        </div>
+                    </div>
+                    <div class="CardBilling__info-container CardBilling__info-container--half CardBilling__info-container--no-margin">
+                        <div class="CardBilling__label">Date</div>
+                        <div class="CardBilling__value">{{ consultation.startdatetime | date : format : 'longDate' }}</div>
+                    </div>
+                    <div class="CardBilling__info-container CardBilling__info-container--half CardBilling__info-container--no-margin">
+                        <div class="CardBilling__label">Time</div>
+                        <div class="CardBilling__value">7:25 PM<!--{{ consultation.startdatetime | date : format : 'h:mm a' }}--></div>
+                    </div>
+                    <div class="CardBilling__info-container CardBilling__info-container--no-margin">
+                        <div class="CardBilling__label">Length</div>
+                        <div class="CardBilling__value">15 mins<!--{{(consultation.enddatetime - consultation.startdatetime) | date : format : 'H:mm:ss'}}--></div>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 
