@@ -123,110 +123,6 @@ angular.module('myApp.Services', []).
             var onError;
 
             var currentUser;
-            var doctors = [
-                {
-                    id: "1",
-                    name: "Shehan Tissera",
-                    username: 'shehan@gmail.com',
-                    password: 'shehan',
-                    status: "unavailable",
-                    type: "doctor",
-                    country: "Sri Lanka",
-                    city: "Colombo",
-                    languages: ["English", "Indonesian"],
-                    profileimage: "https://www.gravatar.com/avatar/7272996f825bd268885d6b20484d325c",
-                    otherdata: {
-                        speciality: "Specialist in Angular",
-                        currency: "USD",
-                        rate: "50",
-                        shortbiography: "Pationate in whatever the task is.",
-                        awards: "1st place in all places",
-                        graduateschool: "Cardif Metropolitan",
-                        residenceplace: "Colombo"
-                    }
-                },
-                {
-                    id: "2",
-                    name: "Danushka",
-                    username: 'danushka@gmail.com',
-                    password: 'danushka',
-                    status: "unavailable",
-                    type: "doctor",
-                    country: "Sri Lanka",
-                    city: "Colombo",
-                    languages: ["English", "Indonesian"],
-                    profileimage: "",
-                    peer: {},
-                    otherdata: {
-                        speciality: "Specialist in Nuro",
-                        currency: "IDR",
-                        rate: "1700",
-                        shortbiography: "Pationate in whatever the task is.",
-                        awards: "1st place in all places",
-                        graduateschool: "Cardif Metropolitan",
-                        residenceplace: "Colombo"
-                    }
-                },
-                {
-                    id: "3",
-                    name: "Russel Peters",
-                    username: 'russel@gmail.com',
-                    password: 'russel',
-                    status: "unavailable",
-                    type: "doctor",
-                    country: "India",
-                    city: "Mombai",
-                    languages: ["English", "Indonesian"],
-                    profileimage: "",
-                    peer: {},
-                    otherdata: {
-                        speciality: "Specialist in Nuro",
-                        currency: "IDR",
-                        rate: "8970",
-                        shortbiography: "Pationate in whatever the task is.",
-                        awards: "1st place in all places",
-                        graduateschool: "Cardif Metropolitan",
-                        residenceplace: "Colombo"
-                    }
-                },
-                {
-                    id: "5",
-                    name: "Eshwaran Weerabahu",
-                    username: 'eash@gmail.com',
-                    password: 'eash',
-                    status: "unavailable",
-                    type: "patient",
-                    country: "Sri Lanka",
-                    city: "Mombai",
-                    languages: ["English", "Indonesian"],
-                    profileimage: "",
-                    peer: {},
-                    otherdata: {
-                        speciality: "Specialist in Nuro",
-                        currency: "IDR",
-                        rate: "8970",
-                        shortbiography: "Pationate in whatever the task is.",
-                        awards: "1st place in all places",
-                        graduateschool: "Cardif Metropolitan",
-                        residenceplace: "Colombo"
-                    }
-                },
-                {
-                    id: "4",
-                    name: "John Cena",
-                    username: 'john@gmail.com',
-                    password: 'john',
-                    speciality: "",
-                    status: "unavailable",
-                    type: "patient",
-                    country: "Sri Lanka",
-                    city: "Kelaniya",
-                    languages: ["English", "Indonesian"],
-                    profileimage: "",
-                    peer: {},
-                    otherdata: {}
-                }
-            ];
 
             var _cookMan = (function () {
                 function createCookie(name, value, days) {
@@ -320,6 +216,7 @@ angular.module('myApp.Services', []).
                                         userObject.status = "available";
                                         $rootScope.username = username;
                                         $rootScope.userObject = userObject;
+                                        $rootScope.setStatus("available");
                                         //$rootScope.setTokSession(session);
                                         ResultObj = {
                                             status: resultFound,

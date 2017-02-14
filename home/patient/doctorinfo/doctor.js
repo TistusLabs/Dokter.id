@@ -3,7 +3,7 @@
 angular.module('myApp.home.doctorinfo', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/patient/home/doctor/:doctorID', {
+        $routeProvider.when('/patient/home/doctor/:doctorID/:view', {
             templateUrl: 'home/patient/doctorinfo/doctor.html',
             controller: 'doctorControl'
         });
@@ -12,6 +12,7 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
     .controller('doctorControl', ['$scope', '$rootScope', '$routeParams', 'User', '$location', '$http', 'AppURLs', function ($scope, $rootScope, $routeParams, User, $location, $http, AppURLs) {
         //$rootScope.checkSession();
         console.log("Recieved id:", $routeParams.doctorID);
+        console.log("Recieved View:", $routeParams.view);
 
         $scope.loadingchatdata = true;
 
@@ -222,6 +223,14 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
                     break;
                 }
             }
+        }
+
+        if($routeParams.view == "overview"){
+            $scope.changeTab("tabOverview");
+        }else if($routeParams.view == "message"){
+            $scope.changeTab("tabMessage");
+        }else if($routeParams.view == "consultations"){
+            $scope.changeTab("tabConsultationHistory");
         }
 
     }]);

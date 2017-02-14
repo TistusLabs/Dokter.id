@@ -32,26 +32,6 @@ angular.module('myApp.doctor.home', ['ngRoute'])
             });
         }
 
-        $scope.onlinestatuses = ['available', 'unavailable', 'maybe'];
-
-
-        $scope.setStatus = function (code) {
-            var socket = io.connect(AppURLs.socketServer);
-            var obj = {
-                user: $rootScope.userObject.username,
-                status: code
-            }
-            var postData = {
-                "username": $rootScope.userObject.username,
-                "status": code
-            }
-            $http.post(AppURLs.connectionStorage + '/status/set', postData)
-                .success(function (data, status, headers, config) {
-                    socket.emit('statuschange', obj);
-                })
-                .error(function (data, status, header, config) {
-                    console.log("");
-                });
-        }
+        $scope.onlinestatuses = ['available', 'unavailable', 'maybe', 'call'];
 
     }]);

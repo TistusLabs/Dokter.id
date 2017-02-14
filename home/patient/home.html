@@ -16,13 +16,13 @@
             <!-- doctor card -->
             <div class="Card Card--search-doctor" ng-repeat="doctor in doctors | filter:searchquery | filter:selectedcategories">
                 <div class="Card__image ProfileImage ProfileImage--{{doctor.status}}">
-                    <a href="#/patient/home/doctor/{{doctor._id}}">
+                    <a href="#/patient/home/doctor/{{doctor._id}}/overview">
                         <img class="ProfileImage__image" ng-src="{{doctor.profileimage}}?s=250&d=monsterid" alt="{{doctor.name}}" title="{{doctor.name}}"
                         />
                     </a>
                 </div>
                 <div class="Card__information">
-                    <a href="#/patient/home/doctor/{{doctor._id}}">
+                    <a href="#/patient/home/doctor/{{doctor._id}}/overview">
                         <div class="Card__name">Dr. {{doctor.name}}</div>
                         <div class="Card__speciality">{{doctor.otherdata.speciality}}</div>
                         <div class="Card__rate Rate">
@@ -43,7 +43,7 @@
                     <div class="Card__action">
                         <button ng-click="showCallingWindow(doctor,$event)" ng-if="doctor.status == 'available'" type="button" name="button" class="Button Button--outline-green">CALL NOW</button>
                         <!--button ng-if="doctor.status == 'maybe'" type="button" name="button" class="Button Button--outline-green">SCHEDULE</button-->
-                        <button ng-if="doctor.status != 'unavailable'" type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
+                        <button ng-click="sendtoMessageArea(doctor)" ng-if="doctor.status != 'unavailable'" type="button" name="button" class="Button Button--outline-gray">MESSAGE</button>
                     </div>
                 </div>
             </div>

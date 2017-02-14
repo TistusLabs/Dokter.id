@@ -291,6 +291,30 @@ angular.module('myApp', [
             };
         };
 
+        $rootScope.setStatus = function (code) {
+            var socket = io.connect(AppURLs.socketServer);
+            var obj = {
+                user: $rootScope.userObject.username,
+                status: code
+            }
+            var postData = {
+                "username": $rootScope.userObject.username,
+                "status": code
+            }
+            $http.post(AppURLs.connectionStorage + '/status/set', postData)
+                .success(function (data, status, headers, config) {
+                    socket.emit('statuschange', obj);
+                })
+                .error(function (data, status, header, config) {
+                    console.log("");
+                });
+        }
+
+        if($rootScope.isNullOrEmptyOrUndefined($rootScope.userObject.username)){
+            debugger
+            $rootScope.setStatus("available");
+        }
+
         $scope.popSettings = function () {
             if ($scope.contextMenu == "") {
                 $scope.contextMenu = "--is-hidden";
@@ -399,6 +423,10 @@ angular.module('myApp', [
 
                         var client = User.getClient();
                         client.onComplete(function (consultationData) {
+                            // change user status to in call before sending to the call page
+                            $rootScope.setStatus("call");
+
+                            // send that the user has answered the call
                             socket.emit('answercall', data);
                             location.href = "/Dokter.id/conference";
                         });

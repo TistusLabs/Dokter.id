@@ -88,6 +88,10 @@ angular.module('myApp.patient.home', ['ngRoute'])
             });
         }
 
+        $scope.sendtoMessageArea = function(doctor){
+            $location.path("/patient/home/doctor/"+doctor._id+"/message");
+        };
+
         $scope.showCallingWindow = function (data, ev) {
             $mdDialog.show({
                 controller: 'callingWindowController',
@@ -144,6 +148,9 @@ angular.module('myApp.patient.home', ['ngRoute'])
         });
         socket.on('answercall', function (broadcast) {
             if (broadcast.username == $rootScope.userObject.username) {
+                // change userstatus to in call before sending to the call page
+                $rootScope.setStatus("call");
+                // send to call page
                 location.href = "/Dokter.id/conference";
             }
         });
