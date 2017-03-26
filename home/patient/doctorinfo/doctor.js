@@ -179,6 +179,12 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
             }
             $scope.txtMessage = "";
 
+            var broadcast = {
+                from: $rootScope.userObject.username,
+                to: $scope.doctor.username,
+            }
+            socket.emit('offlineMessage', broadcast);
+
             // storing messages
             var client = User.getClient();
             client.onComplete(function (data) {
@@ -214,6 +220,12 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
                 msgtype: "file"
             }
 
+            var broadcast = {
+                from: $rootScope.userObject.username,
+                to: $scope.doctor.username,
+            }
+            socket.emit('offlineMessage', broadcast);
+
             // storing messages
             var client = User.getClient();
             client.onComplete(function (data) {
@@ -225,6 +237,12 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
             });
             client.SaveMessage(objtoStore);
         };
+
+        socket.on('offlineMessage', function (broadcast) {
+            if (broadcast.to == s$rootScope.userObject.username) {
+                $scope.getChatHistory($scope.doctor);
+            }
+        });
 
         $scope.openChatWindow = function (doctor) {
             // get from cache and set partnerPeer ID

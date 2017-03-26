@@ -15,6 +15,8 @@ angular.module('myApp.consultations.patientinfo', ['ngRoute'])
 
         $scope.loadingchatdata = true;
 
+        var socket = io.connect(AppURLs.socketServer);
+
         $scope.getChatHistory = function (doctor) {
             $http.get(AppURLs.APIUrl + '/messages?fromusername__in=' + doctor.username + ',' + $rootScope.userObject.username + '&tousername__in=' + $rootScope.userObject.username + ',' + doctor.username).
                 success(function (data, status, headers, config) {
@@ -107,6 +109,12 @@ angular.module('myApp.consultations.patientinfo', ['ngRoute'])
             }
             $scope.txtMessage = "";
 
+            var broadcast = {
+                from: $rootScope.userObject.username,
+                to: $scope.doctor.username,
+            }
+            socket.emit('offlineMessage', broadcast);
+
             // storing messages
             var client = User.getClient();
             client.onComplete(function (data) {
@@ -142,6 +150,12 @@ angular.module('myApp.consultations.patientinfo', ['ngRoute'])
                 msgtype: "file"
             }
 
+            var broadcast = {
+                from: $rootScope.userObject.username,
+                to: $scope.doctor.username,
+            }
+            socket.emit('offlineMessage', broadcast);
+
             // storing messages
             var client = User.getClient();
             client.onComplete(function (data) {
@@ -153,6 +167,12 @@ angular.module('myApp.consultations.patientinfo', ['ngRoute'])
             });
             client.SaveMessage(objtoStore);
         };
+        
+        socket.on('offlineMessage', function (broadcast) {
+            if (broadcast.to == s$rootScope.userObject.username) {
+                $scope.getChatHistory($scope.doctor);
+            }
+        });
 
         $scope.openChatWindow = function (doctor) {
             // get from cache and set partnerPeer ID
