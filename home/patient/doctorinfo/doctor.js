@@ -175,7 +175,7 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
                 datetime: time.toString(),
                 type: "offline",
                 status: "unread",
-                msgtype: "file"
+                msgtype: "message"
             }
             $scope.txtMessage = "";
 
