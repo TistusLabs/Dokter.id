@@ -207,7 +207,7 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
             var objtoStore = {
                 message: downloadFileLocation,
                 fromusername: $rootScope.userObject.username,
-                tousername: $scope.subscriberUsername,
+                tousername: $scope.doctor.username,
                 datetime: new Date().toString(),
                 type: "offline",
                 status: "unread",
