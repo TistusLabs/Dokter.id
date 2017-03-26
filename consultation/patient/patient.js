@@ -169,7 +169,7 @@ angular.module('myApp.consultations.patientinfo', ['ngRoute'])
         };
         
         socket.on('offlineMessage', function (broadcast) {
-            if (broadcast.to == s$rootScope.userObject.username) {
+            if (broadcast.to == $rootScope.userObject.username) {
                 $scope.getChatHistory($scope.doctor);
             }
         });
