@@ -33,8 +33,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
         socket.on('callended', function (broadcast) {
             if (broadcast == $scope.sessionId) {
                 // update consultation before exit
-
-                debugger
+                
                 var objtoStore = {
                     enddatetime: new Date()
                 }
