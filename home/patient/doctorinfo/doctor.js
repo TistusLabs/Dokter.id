@@ -217,8 +217,8 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
             // storing messages
             var client = User.getClient();
             client.onComplete(function (data) {
-                $scope.attachedFile = undefined;
-                 $scope.getChatHistory($scope.doctor);
+                document.getElementById("attachedFile").value = "";
+                $scope.getChatHistory($scope.doctor);
             });
             client.onError(function (data) {
                 console.log("error when Message is stored.");

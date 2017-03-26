@@ -326,7 +326,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
             // storing messages
             var client = User.getClient();
             client.onComplete(function (data) {
-                $scope.attachedFile = undefined;
+                document.getElementById("attachedFile").value = "";
                 console.log("Message stored.");
             });
             client.onError(function (data) {
