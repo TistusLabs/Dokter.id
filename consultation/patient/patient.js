@@ -145,7 +145,7 @@ angular.module('myApp.consultations.patientinfo', ['ngRoute'])
             // storing messages
             var client = User.getClient();
             client.onComplete(function (data) {
-                $scope.attachedFile = {};
+                $scope.attachedFile = undefined;
                 $scope.getChatHistory($scope.doctor);
             });
             client.onError(function (data) {
