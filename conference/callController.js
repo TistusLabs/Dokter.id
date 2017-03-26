@@ -289,7 +289,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 name: $rootScope.userObject.name,
                 time: new Date(),
                 image: $rootScope.userObject.profileimage,
-                msgtype: "msg"
+                msgtype: "file"
             };
 
             var objtoStore = {
@@ -299,7 +299,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 datetime: msg.time.toString(),
                 type: "online",
                 status: "read",
-                msgtype: "msg"
+                msgtype: "file"
             }
 
             $scope.msgHistory.push(objtoStore);
