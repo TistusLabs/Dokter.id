@@ -214,6 +214,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
             var msg = {
                 message: $scope.txtMessage,
                 name: $rootScope.userObject.name,
+                from: $rootScope.userObject.username,
                 time: new Date(),
                 image: $rootScope.userObject.profileimage,
                 msgtype: "message"
@@ -286,6 +287,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
             var msg = {
                 message: downloadFileLocation,
                 name: $rootScope.userObject.name,
+                from: $rootScope.userObject.username,
                 time: new Date(),
                 image: $rootScope.userObject.profileimage,
                 msgtype: "file"

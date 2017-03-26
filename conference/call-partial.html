@@ -35,7 +35,7 @@
                         {{message.message}}
                     </div>
                     <div ng-if="message.msgtype == 'file'" class="Card__message">
-                        {{message.name}} has sent you a file. <a ng-href="{{message.message}}" target="_blank">Show file</a>
+                        You <span ng-if="message.from == $root.userObject.username">sent</span><span ng-if="message.from != $root.userObject.username">received</span> a file. <a ng-href="{{message.message}}" target="_blank">Show file</a>
                     </div>
                 </div>
             </div>
