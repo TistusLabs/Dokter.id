@@ -33,7 +33,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
         socket.on('callended', function (broadcast) {
             if (broadcast == $scope.sessionId) {
                 // update consultation before exit
-                
+
                 var objtoStore = {
                     enddatetime: new Date()
                 }
@@ -301,12 +301,14 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 msgtype: "file"
             }
 
-            $scope.msgHistory.push(objtoStore);
+            $scope.$apply(function () {
+                $scope.msgHistory.push(objtoStore);
+            });
 
             var broadcast = {
                 from: $rootScope.userObject.username,
                 to: $scope.subscriberUsername,
-                msg:msg
+                msg: msg
             }
             socket.emit('filetransfer', broadcast);
 
@@ -325,7 +327,9 @@ angular.module('conferenceApp.call', ['ngRoute'])
         socket.on('filetransfer', function (broadcast) {
             debugger
             if (broadcast.to == $rootScope.userObject.username) {
-                $scope.msgHistory.push(broadcast.msg);
+                $scope.$apply(function () {
+                    $scope.msgHistory.push(broadcast.msg);
+                });
             }
         });
 
