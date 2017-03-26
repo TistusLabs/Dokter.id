@@ -45,181 +45,192 @@
                     clickID="#tabOverview">
                     <img src="build/img/form/tab-overview-active.png" alt="{}" title="{}" />
                     <span>Overview</span>
-            </div>
-            <div ng-class="tabs.message ? 'ProfileTab__item ProfileTab__item--active' : 'ProfileTab__item'" ng-click="changeTab('tabMessage')"
-                clickID="#tabMessage">
-                <img src="build/img/form/tab-message-off.png" alt="{}" title="{}" />
-                <span>Message</span>
-        </div>
-        <div ng-class="tabs.consultationhistory ? 'ProfileTab__item ProfileTab__item--active' : 'ProfileTab__item'" ng-click="changeTab('tabConsultationHistory')"
-            clickID="#tabConsultationHistory">
-            <img src="build/img/form/tab-consultation-off.png" alt="{}" title="{}" />
-            <span>Consultation History</span>
-    </div>
-</div>
-
-<div class="ProfileTabContent">
-
-    <div id="tabOverview" ng-class="tabs.overview ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
-
-        <div class="Overview">
-
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Biography
                 </div>
-                <div class="Overview__value">
-                    {{doctor.otherdata.shortbiography}}
+                <div ng-class="tabs.message ? 'ProfileTab__item ProfileTab__item--active' : 'ProfileTab__item'" ng-click="changeTab('tabMessage')"
+                    clickID="#tabMessage">
+                    <img src="build/img/form/tab-message-off.png" alt="{}" title="{}" />
+                    <span>Message</span>
+                </div>
+                <div ng-class="tabs.consultationhistory ? 'ProfileTab__item ProfileTab__item--active' : 'ProfileTab__item'" ng-click="changeTab('tabConsultationHistory')"
+                    clickID="#tabConsultationHistory">
+                    <img src="build/img/form/tab-consultation-off.png" alt="{}" title="{}" />
+                    <span>Consultation History</span>
                 </div>
             </div>
 
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Location
-                </div>
-                <div class="Overview__value">
-                    {{doctor.city}}, {{doctor.country}}
-                </div>
-            </div>
+            <div class="ProfileTabContent">
 
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Registration Number
-                </div>
-                <div class="Overview__value">
-                    31.2.1.100.1.12.135602, Konsil Kedokteran Indonesia
-                </div>
-            </div>
+                <div id="tabOverview" ng-class="tabs.overview ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
 
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Languages
-                </div>
-                <div class="Overview__value">
-                    {{doctor.languages}}
-                </div>
-            </div>
+                    <div class="Overview">
 
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Profesional Statement
-                </div>
-                <div class="Overview__value">
-                    Always helping others, that's the value of life.
-                </div>
-            </div>
-
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Education
-                </div>
-                <div class="Overview__value">
-                    {{doctor.graduateschool}}
-                </div>
-            </div>
-
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Achievement
-                </div>
-                <div class="Overview__value">
-                    {{doctor.awards}}
-                </div>
-            </div>
-
-            <div class="Overview__info">
-                <div class="Overview__title">
-                    Working Experience
-                </div>
-                <div class="Overview__value">
-                    <ul class="Overview__list">
-                        <li>Medical Aesthetic Doctor Manielle Beauty Clinic, 2012 - 2013</li>
-                        <li>Medical Director Genese Clinic, Aesthetic/Wellness, 2013 - Sekarang</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div id="tabMessage" ng-class="tabs.message ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
-
-        <div class="Message">
-            <div ng-show="loadingchatdata" class="Message__item Loader">
-                <div class="Loader">
-                    <img src="build/img/loader/puff.svg" />
-                </div>
-            </div>
-
-            <div class="Message__item" ng-repeat="msg in MessageHistory">
-                <div class="Card Card--message">
-                    <div class="Card__image ProfileImage">
-                        <img class="ProfileImage__image ProfileImage--message" ng-src="{{msg.profileimage}}?d=monsterid" alt="{{msg.fromName}}" title="{{msg.fromName}}"
-                        />
-                    </div>
-                    <div class="Card__information">
-                        <div class="Card__name">
-                            {{msg.fromName}} <span class="Card__timestamp">{{msg.datetime | date : "medium"}}</span>
-                            <span ng-if="msg.type == 'offline'" style="color:red;font-size: 14px;">Sent offline</span>
+                        <div class="Overview__info">
+                            <div class="Overview__title">
+                                Biography
+                            </div>
+                            <div class="Overview__value">
+                                {{doctor.otherdata.shortbiography}}
+                            </div>
                         </div>
-                        <div class="Card__message">
-                            {{msg.message}}
+
+                        <div class="Overview__info">
+                            <div class="Overview__title">
+                                Location
+                            </div>
+                            <div class="Overview__value">
+                                {{doctor.city}}, {{doctor.country}}
+                            </div>
+                        </div>
+
+                        <div class="Overview__info">
+                            <div class="Overview__title">
+                                Registration Number
+                            </div>
+                            <div class="Overview__value">
+                                31.2.1.100.1.12.135602, Konsil Kedokteran Indonesia
+                            </div>
+                        </div>
+
+                        <div class="Overview__info">
+                            <div class="Overview__title">
+                                Languages
+                            </div>
+                            <div class="Overview__value">
+                                {{doctor.languages}}
+                            </div>
+                        </div>
+
+                        <div class="Overview__info">
+                            <div class="Overview__title">
+                                Profesional Statement
+                            </div>
+                            <div class="Overview__value">
+                                Always helping others, that's the value of life.
+                            </div>
+                        </div>
+
+                        <div class="Overview__info">
+                            <div class="Overview__title">
+                                Education
+                            </div>
+                            <div class="Overview__value">
+                                {{doctor.graduateschool}}
+                            </div>
+                        </div>
+
+                        <div class="Overview__info">
+                            <div class="Overview__title">
+                                Achievement
+                            </div>
+                            <div class="Overview__value">
+                                {{doctor.awards}}
+                            </div>
+                        </div>
+
+                        <div class="Overview__info">
+                            <div class="Overview__title">
+                                Working Experience
+                            </div>
+                            <div class="Overview__value">
+                                <ul class="Overview__list">
+                                    <li>Medical Aesthetic Doctor Manielle Beauty Clinic, 2012 - 2013</li>
+                                    <li>Medical Director Genese Clinic, Aesthetic/Wellness, 2013 - Sekarang</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div id="tabMessage" ng-class="tabs.message ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
+
+                    <div class="Message">
+                        <div ng-show="loadingchatdata" class="Message__item Loader">
+                            <div class="Loader">
+                                <img src="build/img/loader/puff.svg" />
+                            </div>
+                        </div>
+
+                        <div class="Message__item" ng-repeat="msg in MessageHistory">
+                            <div class="Card Card--message">
+                                <div class="Card__image ProfileImage">
+                                    <img class="ProfileImage__image ProfileImage--message" ng-src="{{msg.profileimage}}?d=monsterid" alt="{{msg.fromName}}" title="{{msg.fromName}}"
+                                    />
+                                </div>
+                                <div class="Card__information">
+                                    <div class="Card__name">
+                                        {{msg.fromName}} <span class="Card__timestamp">{{msg.datetime | date : "medium"}}</span>
+                                        <span ng-if="msg.type == 'offline'" style="color:red;font-size: 14px;">Sent offline</span>
+                                    </div>
+                                    <div class="Card__name">
+                                        {{msg.name}} <span class="Card__timestamp">{{msg.time}}</span>
+                                    </div>
+                                    <div ng-if="msg.msgtype == 'message'" class="Card__message">
+                                        {{msg.message}}
+                                    </div>
+                                    <div ng-if="msg.msgtype == 'file'" class="Card__message">
+                                        You <span ng-if="msg.from == $root.userObject.username">sent</span><span ng-if="msg.from != $root.userObject.username">received</span>                                        a file. <a ng-href="{{msg.message}}" target="_blank">Show file</a>
+                                    </div>
+
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <input ng-keypress="sendMessageOnEnter($event)" type="text" ng-model="txtMessage" />
+                        <input type="file" file-model="attachedFile">
+                        <input ng-click="sendMessage()" type="button" value="Send Message" />
+                        <input ng-click="sendFile()" type="button" value="Send File" />
+
+                    </div>
+
+                </div>
+
+                <div id="tabConsultationHistory" ng-class="tabs.consultationhistory ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
+                    <div class="CardBilling" ng-repeat="consultation in myConsultations">
+                        <div class="CardBilling__image ProfileImage">
+                            <a href="#">
+                                <img class="ProfileImage__image" ng-src="{{consultation.profileimage}}?s=250&d=monsterid" alt="" title="" />
+                            </a>
+                        </div>
+                        <div class="CardBilling__information">
+                            <div class="CardBilling__info-container">
+                                <div class="CardBilling__label">Doctor</div>
+                                <div class="CardBilling__value CardBilling__value--name">
+                                    <a href="#">{{consultation.doctor}}</a>
+                                </div>
+                            </div>
+                            <div class="CardBilling__info-container">
+                                <div class="CardBilling__label">Billed Amount</div>
+                                <div class="CardBilling__value CardBilling__value--price Price">
+                                    <span class="Price__currency">IDR</span>
+                                    <span class="Price__amount">75.000</span>
+                                    <span class="Price__payment-type">| Credit</span>
+                                </div>
+                            </div>
+                            <div class="CardBilling__info-container CardBilling__info-container--half CardBilling__info-container--no-margin">
+                                <div class="CardBilling__label">Date</div>
+                                <div class="CardBilling__value">{{ consultation.startdatetime | date : 'mediumDate'}}</div>
+                            </div>
+                            <div class="CardBilling__info-container CardBilling__info-container--half CardBilling__info-container--no-margin">
+                                <div class="CardBilling__label">Time</div>
+                                <div class="CardBilling__value">{{ consultation.startdatetime | date : 'h:mm a' }}</div>
+                            </div>
+                            <div class="CardBilling__info-container CardBilling__info-container--no-margin">
+                                <div class="CardBilling__label">Length</div>
+                                <div class="CardBilling__value">{{ consultation.duration}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <input ng-keypress="sendMessageOnEnter($event)" type="text" ng-model="txtMessage" />
-            <input ng-click="sendMessage()" type="button" value="Send Message" />
+            <div class="ProfileTab ProfileTab--input-message">
+
+            </div>
 
         </div>
-
     </div>
-
-    <div id="tabConsultationHistory" ng-class="tabs.consultationhistory ? 'ProfileTabContent--can-scroll' : 'ProfileTabContent--can-scroll ProfileTabContent--hidden'">
-        <div class="CardBilling" ng-repeat="consultation in myConsultations">
-            <div class="CardBilling__image ProfileImage">
-                <a href="#">
-                    <img class="ProfileImage__image" ng-src="{{consultation.profileimage}}?s=250&d=monsterid" alt="" title="" />
-                </a>
-            </div>
-            <div class="CardBilling__information">
-                <div class="CardBilling__info-container">
-                    <div class="CardBilling__label">Doctor</div>
-                    <div class="CardBilling__value CardBilling__value--name">
-                        <a href="#">{{consultation.doctor}}</a>
-                    </div>
-                </div>
-                <div class="CardBilling__info-container">
-                    <div class="CardBilling__label">Billed Amount</div>
-                    <div class="CardBilling__value CardBilling__value--price Price">
-                        <span class="Price__currency">IDR</span>
-                        <span class="Price__amount">75.000</span>
-                        <span class="Price__payment-type">| Credit</span>
-                    </div>
-                </div>
-                <div class="CardBilling__info-container CardBilling__info-container--half CardBilling__info-container--no-margin">
-                    <div class="CardBilling__label">Date</div>
-                    <div class="CardBilling__value">{{ consultation.startdatetime | date : 'mediumDate'}}</div>
-                </div>
-                <div class="CardBilling__info-container CardBilling__info-container--half CardBilling__info-container--no-margin">
-                    <div class="CardBilling__label">Time</div>
-                    <div class="CardBilling__value">{{ consultation.startdatetime | date : 'h:mm a' }}</div>
-                </div>
-                <div class="CardBilling__info-container CardBilling__info-container--no-margin">
-                    <div class="CardBilling__label">Length</div>
-                    <div class="CardBilling__value">{{ consultation.duration}}</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="ProfileTab ProfileTab--input-message">
-
-</div>
-
-</div>
-</div>
 </div>

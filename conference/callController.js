@@ -334,15 +334,6 @@ angular.module('conferenceApp.call', ['ngRoute'])
             client.SaveMessage(objtoStore);
         };
 
-        socket.on('filetransfer', function (broadcast) {
-            debugger
-            if (broadcast.to == $rootScope.userObject.username) {
-                $scope.$apply(function () {
-                    $scope.msgHistory.push(broadcast.msg);
-                });
-            }
-        });
-
     }]).controller('callcancelling', ['$scope', '$rootScope', '$mdDialog', 'AppURLs', function ($scope, $rootScope, $mdDialog, AppURLs) {
 
         $scope.closeCall = function () {

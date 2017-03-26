@@ -174,7 +174,8 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
                 tousername: $scope.doctor.username,
                 datetime: time.toString(),
                 type: "offline",
-                status: "unread"
+                status: "unread",
+                msgtype: "file"
             }
             $scope.txtMessage = "";
 
@@ -183,6 +184,40 @@ angular.module('myApp.home.doctorinfo', ['ngRoute'])
             client.onComplete(function (data) {
                 $scope.getChatHistory($scope.doctor);
                 //alert("The message has been successfully sent!");
+            });
+            client.onError(function (data) {
+                console.log("error when Message is stored.");
+            });
+            client.SaveMessage(objtoStore);
+        };
+
+        $scope.sendFile = function () {
+
+            // sending file to server
+            var file = $scope.attachedFile;
+            var filename = file.name;
+            var stream = ss.createStream();
+            ss(socket).emit('file', stream, { name: filename });
+            ss.createBlobReadStream(file).pipe(stream);
+
+            var downloadFileLocation = FILE_UPLOAD_LOCATION + filename;
+
+            //saving and sending message to other
+
+            var objtoStore = {
+                message: downloadFileLocation,
+                fromusername: $rootScope.userObject.username,
+                tousername: $scope.subscriberUsername,
+                datetime: new Date().toString(),
+                type: "offline",
+                status: "unread",
+                msgtype: "file"
+            }
+
+            // storing messages
+            var client = User.getClient();
+            client.onComplete(function (data) {
+                 $scope.getChatHistory($scope.doctor);
             });
             client.onError(function (data) {
                 console.log("error when Message is stored.");
