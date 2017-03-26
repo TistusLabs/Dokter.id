@@ -31,8 +31,11 @@
                     <div class="Card__name">
                         {{message.name}} <span class="Card__timestamp">{{message.time}}</span>
                     </div>
-                    <div class="Card__message">
+                    <div ng-if="message.msgtype == 'message'" class="Card__message">
                         {{message.message}}
+                    </div>
+                    <div ng-if="message.msgtype == 'file'" class="Card__message">
+                        {{message.name}} has sent you a file. <a ng-href="{{message.message}}" target="_blank">Show file</a>
                     </div>
                 </div>
             </div>

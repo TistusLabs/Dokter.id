@@ -216,7 +216,8 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 message: $scope.txtMessage,
                 name: $rootScope.userObject.name,
                 time: new Date(),
-                image: $rootScope.userObject.profileimage
+                image: $rootScope.userObject.profileimage,
+                msgtype: "message"
             };
 
             var objtoStore = {
@@ -225,7 +226,8 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 tousername: $scope.subscriberUsername,
                 datetime: msg.time.toString(),
                 type: "online",
-                status: "read"
+                status: "read",
+                msgtype: "message"
             }
             $scope.txtMessage = "";
             session.signal({
@@ -271,20 +273,61 @@ angular.module('conferenceApp.call', ['ngRoute'])
         }
 
         $scope.sendFile = function () {
+
+            // sending file to server
             var file = $scope.attachedFile;
+            var filename = file.name;
             var stream = ss.createStream();
-
-            console.log('file is ');
-            console.dir(file);
-
-            ss(socket).emit('file', stream, { name: file.name });
+            ss(socket).emit('file', stream, { name: filename });
             ss.createBlobReadStream(file).pipe(stream);
-            
-            socket.emit('file', stream, { size: file.size });
 
-            // var uploadUrl = "/fileUpload";
-            // fileUpload.uploadFileToUrl(file, uploadUrl);
+            var downloadFileLocation = FILE_UPLOAD_LOCATION + filename;
+
+            //saving and sending message to other
+            var msg = {
+                message: downloadFileLocation,
+                name: $rootScope.userObject.name,
+                time: new Date(),
+                image: $rootScope.userObject.profileimage,
+                msgtype: "message"
+            };
+
+            var objtoStore = {
+                message: downloadFileLocation,
+                fromusername: $rootScope.userObject.username,
+                tousername: $scope.subscriberUsername,
+                datetime: msg.time.toString(),
+                type: "online",
+                status: "read",
+                msgtype: "message"
+            }
+
+            $scope.msgHistory.push(objtoStore);
+
+            var broadcast = {
+                from: $rootScope.userObject.username,
+                to: $scope.subscriberUsername,
+                msg:msg
+            }
+            socket.emit('filetransfer', broadcast);
+
+
+            // storing messages
+            var client = User.getClient();
+            client.onComplete(function (data) {
+                console.log("Message stored.");
+            });
+            client.onError(function (data) {
+                console.log("error when Message is stored.");
+            });
+            client.SaveMessage(objtoStore);
         };
+
+        socket.on('filetransfer', function (broadcast) {
+            if (broadcast.to.username == $rootScope.userObject.username) {
+                $scope.msgHistory.push(broadcast.msg);
+            }
+        });
 
     }]).controller('callcancelling', ['$scope', '$rootScope', '$mdDialog', 'AppURLs', function ($scope, $rootScope, $mdDialog, AppURLs) {
 
