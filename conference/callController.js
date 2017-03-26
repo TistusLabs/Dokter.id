@@ -301,16 +301,24 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 msgtype: "file"
             }
 
-            $scope.$apply(function () {
-                $scope.msgHistory.push(objtoStore);
+            session.signal({
+                type: 'msg',
+                data: msg
+            }, function (error) {
+                if (error == undefined) {
+                    $scope.$apply(function () {
+                    });
+                }
             });
 
-            var broadcast = {
-                from: $rootScope.userObject.username,
-                to: $scope.subscriberUsername,
-                msg: msg
-            }
-            socket.emit('filetransfer', broadcast);
+            // $scope.msgHistory.push(objtoStore);
+
+            // var broadcast = {
+            //     from: $rootScope.userObject.username,
+            //     to: $scope.subscriberUsername,
+            //     msg: msg
+            // }
+            // socket.emit('filetransfer', broadcast);
 
 
             // storing messages
