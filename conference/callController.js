@@ -324,7 +324,8 @@ angular.module('conferenceApp.call', ['ngRoute'])
         };
 
         socket.on('filetransfer', function (broadcast) {
-            if (broadcast.to.username == $rootScope.userObject.username) {
+            debugger
+            if (broadcast.to == $rootScope.userObject.username) {
                 $scope.msgHistory.push(broadcast.msg);
             }
         });
