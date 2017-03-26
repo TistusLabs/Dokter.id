@@ -9,14 +9,14 @@ angular.module('myApp.consultations.patientinfo', ['ngRoute'])
         });
     }])
 
-    .controller('patientinfoControl', ['$scope', '$rootScope', '$routeParams', 'User', '$location','$http','AppURLs', function ($scope, $rootScope, $routeParams, User, $location,$http,AppURLs) {
+    .controller('patientinfoControl', ['$scope', '$rootScope', '$routeParams', 'User', '$location', '$http', 'AppURLs', function ($scope, $rootScope, $routeParams, User, $location, $http, AppURLs) {
         //$rootScope.checkSession();
         console.log("Recieved id:", $routeParams.patientID);
 
         $scope.loadingchatdata = true;
 
         $scope.getChatHistory = function (doctor) {
-            $http.get(AppURLs.APIUrl + '/messages?fromusername__in='+doctor.username+','+$rootScope.userObject.username+'&tousername__in='+$rootScope.userObject.username+','+doctor.username).
+            $http.get(AppURLs.APIUrl + '/messages?fromusername__in=' + doctor.username + ',' + $rootScope.userObject.username + '&tousername__in=' + $rootScope.userObject.username + ',' + doctor.username).
                 success(function (data, status, headers, config) {
                     var msgHistory = data;
                     var unreadMsgs = [];
@@ -34,9 +34,8 @@ angular.module('myApp.consultations.patientinfo', ['ngRoute'])
                         chat.datetime = new Date(chat.datetime);
 
                         // check if unread msgs are there in offline messages
-                        if(chat.type == "offline")
-                        {
-                            if(chat.status == "unread"){
+                        if (chat.type == "offline") {
+                            if (chat.status == "unread") {
                                 unreadMsgs.push(chat);
                             }
                         }
@@ -95,15 +94,16 @@ angular.module('myApp.consultations.patientinfo', ['ngRoute'])
 
         $scope.sendMessage = function () {
 
-                var time = new Date();
+            var time = new Date();
 
             var objtoStore = {
                 message: $scope.txtMessage,
                 fromusername: $rootScope.userObject.username,
-                tousername:  $scope.doctor.username,
+                tousername: $scope.doctor.username,
                 datetime: time.toString(),
-                type : "offline",
-                status : "unread"
+                type: "offline",
+                status: "unread",
+                msgtype: "message"
             }
             $scope.txtMessage = "";
 
@@ -112,6 +112,41 @@ angular.module('myApp.consultations.patientinfo', ['ngRoute'])
             client.onComplete(function (data) {
                 $scope.getChatHistory($scope.doctor);
                 //alert("The message has been successfully sent!");
+            });
+            client.onError(function (data) {
+                console.log("error when Message is stored.");
+            });
+            client.SaveMessage(objtoStore);
+        };
+
+        $scope.sendFile = function () {
+
+            // sending file to server
+            var file = $scope.attachedFile;
+            var filename = file.name;
+            var stream = ss.createStream();
+            ss(socket).emit('file', stream, { name: filename });
+            ss.createBlobReadStream(file).pipe(stream);
+
+            var downloadFileLocation = FILE_UPLOAD_LOCATION + filename;
+
+            //saving and sending message to other
+
+            var objtoStore = {
+                message: downloadFileLocation,
+                fromusername: $rootScope.userObject.username,
+                tousername: $scope.doctor.username,
+                datetime: new Date().toString(),
+                type: "offline",
+                status: "unread",
+                msgtype: "file"
+            }
+
+            // storing messages
+            var client = User.getClient();
+            client.onComplete(function (data) {
+                $scope.attachedFile = {};
+                $scope.getChatHistory($scope.doctor);
             });
             client.onError(function (data) {
                 console.log("error when Message is stored.");
