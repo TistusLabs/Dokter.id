@@ -40,7 +40,9 @@
         <div>
             <hr>
             <input ng-keypress="sendMessageOnEnter($event)" type="text" ng-model="txtMessage" />
+            <input type="file" file-model="attachedFile">
             <input ng-click="sendMessage()" type="button" value="Send Message" />
+            <input ng-click="sendFile()" type="button" value="Send File" />
         </div>
     </div>
 </div>

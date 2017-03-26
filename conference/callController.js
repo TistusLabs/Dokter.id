@@ -270,6 +270,22 @@ angular.module('conferenceApp.call', ['ngRoute'])
             client.GetAllMyConsultationsWithDoctor(doctorusername, patientusername);
         }
 
+        $scope.sendFile = function () {
+            var file = $scope.attachedFile;
+            var stream = ss.createStream();
+
+            console.log('file is ');
+            console.dir(file);
+
+            ss(socket).emit('file', stream, { size: file.size });
+            ss.createBlobReadStream(file).pipe(stream);
+            
+            socket.emit('file', stream, { size: file.size });
+
+            // var uploadUrl = "/fileUpload";
+            // fileUpload.uploadFileToUrl(file, uploadUrl);
+        };
+
     }]).controller('callcancelling', ['$scope', '$rootScope', '$mdDialog', 'AppURLs', function ($scope, $rootScope, $mdDialog, AppURLs) {
 
         $scope.closeCall = function () {
@@ -279,4 +295,18 @@ angular.module('conferenceApp.call', ['ngRoute'])
         $scope.cancelWindow = function () {
             $mdDialog.hide(false);
         };
-    }]);
+    }]).directive('fileModel', ['$parse', function ($parse) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
+
+                element.bind('change', function () {
+                    scope.$apply(function () {
+                        modelSetter(scope, element[0].files[0]);
+                    });
+                });
+            }
+        };
+    }]);;
