@@ -357,4 +357,4 @@ angular.module('conferenceApp.call', ['ngRoute'])
                 });
             }
         };
-    }]);;
+    }]);
