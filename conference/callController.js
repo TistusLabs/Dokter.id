@@ -277,7 +277,7 @@ angular.module('conferenceApp.call', ['ngRoute'])
             console.log('file is ');
             console.dir(file);
 
-            ss(socket).emit('file', stream, { size: file.size });
+            ss(socket).emit('file', stream, { name: file.name });
             ss.createBlobReadStream(file).pipe(stream);
             
             socket.emit('file', stream, { size: file.size });
